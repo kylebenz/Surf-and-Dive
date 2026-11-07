@@ -10,7 +10,9 @@
  *                any further `priority` image is downgraded to `eager` with a build warning.
  *     eager    → above the fold but not the LCP element: eager, normal priority.
  *     default  → lazy, decoded off the main thread.
- * - The dominant colour fills the box while the image loads.
+ * - The dominant colour fills the box while the image loads (color={false} to keep the parent's
+ *   background instead, e.g. a dark hero behind white text).
+ * - Crop focus comes from the photo's sidecar: `focus` (desktop) and `focusMobile` (< 768px).
  */
 import type { ResolvedImage } from '../utils/images';
 
@@ -23,9 +25,11 @@ interface Props {
   class?: string;
   /** Overrides the image's alt text (e.g. decorative use: ""). */
   alt?: string;
+  /** Paint the image's dominant colour while it loads (default true). */
+  color?: boolean;
 }
 
-const { image, sizes, eager = false, class: cls, alt = image.alt } = Astro.props;
+const { image, sizes, eager = false, class: cls, alt = image.alt, color = true } = Astro.props;
 let { priority = false } = Astro.props;
 
 const locals = Astro.locals as Record<string, unknown>;
@@ -38,7 +42,10 @@ if (priority) {
   }
 }
 const loading = priority || eager ? 'eager' : 'lazy';
-const style = [`background-color:${image.color}`, image.focus && `object-position:${image.focus}`].filter(Boolean).join(';');
+const style = [color && `background-color:${image.color}`, image.focus && `--fx:${image.focus}`, image.focusMobile && `--fxm:${image.focusMobile}`]
+  .filter(Boolean)
+  .join(';') || undefined;
+const classes = [cls, (image.focus || image.focusMobile) && 'fx'].filter(Boolean).join(' ') || undefined;
 ---
 <picture>
   {image.sources.map((s) => <source type={s.type} srcset={s.srcset} sizes={sizes} />)}
@@ -50,9 +57,9 @@ const style = [`background-color:${image.color}`, image.focus && `object-positio
     height={image.height}
     alt={alt}
     loading={loading}
-    decoding={priority ? undefined : 'async'}
+    decoding="async"
     fetchpriority={priority ? 'high' : undefined}
-    class={cls}
+    class={classes}
     style={style}
   />
 </picture>

@@ -17,14 +17,23 @@ const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = '
 <section class={`hero dark ${size} ${align}`} aria-labelledby="hero-title">
   <div class="media" aria-hidden={image ? undefined : 'true'}>
     {image ? (
-      <Picture image={image} sizes="100vw" priority />
+      <>
+        {/* Dark teal base: what shows if the photo is slow, so white text never sits on white. */}
+        <div class="art" aria-hidden="true"></div>
+        <Picture image={image} sizes="100vw" priority color={false} />
+        <div class="scrim photo" aria-hidden="true"></div>
+        {/* Brand contour lines, faint and faded out over the photo side. */}
+        <div class="lines" aria-hidden="true"><SwellArt seed={seed} lines={22} /></div>
+      </>
     ) : (
-      <div class="art">
-        <SwellArt seed={seed} lines={22} />
-        <div class="horizon"></div>
-      </div>
+      <>
+        <div class="art">
+          <SwellArt seed={seed} lines={22} />
+          <div class="horizon"></div>
+        </div>
+        <div class="scrim"></div>
+      </>
     )}
-    <div class="scrim"></div>
   </div>
   <div class="container content">
     {eyebrow && <p class="eyebrow hero-in" style="--d:0">{eyebrow}</p>}
@@ -52,7 +61,7 @@ const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = '
   .hero.medium { min-height: min(58svh, 560px); }
   .hero.center { align-items: center; }
   .media { position: absolute; inset: 0; z-index: -1; }
-  .media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .media :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .art {
     position: absolute; inset: 0;
     background:
@@ -63,6 +72,34 @@ const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = '
   .art :global(.swell) { opacity: 0.55; }
   .horizon { position: absolute; left: 0; right: 0; top: 34%; height: 1px; background: linear-gradient(90deg, transparent, rgba(216, 240, 234, 0.35), transparent); }
   .scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 43, 54, 0.15) 0%, rgba(8, 43, 54, 0.25) 45%, rgba(8, 43, 54, 0.82) 100%); }
+
+  /* Photo heroes. Below 1024px the text spans (nearly) the full width, so the photo shows at
+     the top and the brand teal deepens towards the text. From 1024px the text sits left: dark
+     behind the text column, clearing to the photo on the right, with a soft bottom gradient as a
+     solid base for the buttons. Stops are measured, not eyeballed: every text element meets
+     WCAG AA against the brightest pixel behind it (measured at 375-1920px). */
+  .scrim.photo {
+    background: linear-gradient(180deg, rgba(14, 38, 46, 0.35) 0%, rgba(14, 38, 46, 0.78) 24%, rgba(14, 38, 46, 0.88) 45%, rgba(14, 38, 46, 0.92) 100%);
+  }
+  @media (min-width: 1024px) {
+    .scrim.photo {
+      background:
+        linear-gradient(0deg, rgba(14, 38, 46, 0.75) 0%, rgba(14, 38, 46, 0) 32%),
+        linear-gradient(90deg, rgba(14, 38, 46, 0.88) 0%, rgba(14, 38, 46, 0.8) 45%, rgba(14, 38, 46, 0.78) 58%, rgba(14, 38, 46, 0.3) 76%, rgba(14, 38, 46, 0) 100%);
+    }
+  }
+  .lines {
+    position: absolute; inset: 0; opacity: 0.1;
+    -webkit-mask-image: linear-gradient(0deg, #000 0%, #000 45%, transparent 80%);
+    mask-image: linear-gradient(0deg, #000 0%, #000 45%, transparent 80%);
+  }
+  @media (min-width: 1024px) {
+    .lines {
+      -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 30%, transparent 65%);
+      mask-image: linear-gradient(90deg, #000 0%, #000 30%, transparent 65%);
+    }
+  }
+  .lines :global(.swell) { opacity: 1; }
   .content { padding-block: clamp(5rem, 4rem + 6vw, 9rem) clamp(3rem, 2.5rem + 3vw, 5.5rem); }
   h1 { max-width: 17ch; color: var(--on-dark); }
   .medium h1 { font-size: var(--step-4); max-width: 22ch; }

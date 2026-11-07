@@ -79,6 +79,9 @@ body {
 img, svg, video { display: block; max-width: 100%; }
 /* <picture> is only a format switch: the <img> inside lays out as if it were the direct child. */
 picture { display: contents; }
+/* Crop focus set per photo by the media pipeline (Picture adds .fx): desktop, re-centred on phones. */
+img.fx { object-position: var(--fxm, var(--fx, 50% 50%)); }
+@media (min-width: 768px) { img.fx { object-position: var(--fx, 50% 50%); } }
 img { height: auto; }
 input, button, textarea, select { font: inherit; color: inherit; }
 button { cursor: pointer; }

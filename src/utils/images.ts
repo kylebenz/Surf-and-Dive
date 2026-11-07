@@ -21,6 +21,7 @@ type ManifestEntry = {
   caption: string;
   credit: string;
   focus: string;
+  focusMobile?: string;
   width: number;
   height: number;
   aspectRatio: number;
@@ -45,6 +46,8 @@ export type ResolvedImage = {
   color: string;
   /** CSS object-position for crops, e.g. "50% 30%". */
   focus: string;
+  /** object-position below 768px wide, when the crop needs re-centring on phones. */
+  focusMobile: string;
   alt: string;
   altIsSuggestion: boolean;
   title: string;
@@ -99,6 +102,7 @@ export function getImage(
     aspectRatio: e.aspectRatio,
     color: e.color,
     focus: e.focus,
+    focusMobile: e.focusMobile || '',
     alt: explicitAlt || e.alt || e.suggestedAlt,
     altIsSuggestion: !explicitAlt && e.altIsSuggestion,
     title: e.title,

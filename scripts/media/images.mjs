@@ -6,12 +6,14 @@
 //
 //   - detects original dimensions and format, applies EXIF orientation
 //   - never upscales; caps delivery at 2000px wide
-//   - AVIF + WebP + a JPEG (or PNG when the image has transparency) fallback
+//   - AVIF + WebP + a JPEG (or PNG when the image has visible transparency) fallback
 //   - widths 480 / 768 / 1200 / 1600 / 2000, only those the original can support
 //   - strips EXIF/GPS/camera metadata, converts to sRGB
 //   - descriptive filenames: <context>-<title>-<hash>-<width>.<ext>
 //   - stores width, height, aspect ratio and dominant colour
-//   - reads an optional <name>.json sidecar for title / alt / caption / credit / focus
+//   - reads an optional <name>.json sidecar for title / alt / caption / credit / focus /
+//     focusMobile, optional custom `widths` (e.g. a hero with an exact set of sizes) and an
+//     optional per-format `quality` override, e.g. { "avif": 50 } for an LCP hero
 //
 // Results are cached by content hash, so unchanged originals are never re-encoded.
 
@@ -21,7 +23,7 @@ import crypto from 'node:crypto';
 import os from 'node:os';
 import sharp from 'sharp';
 
-export const PIPELINE_VERSION = 2;
+export const PIPELINE_VERSION = 3;
 export const WIDTHS = [480, 768, 1200, 1600, 2000];
 export const MAX_WIDTH = WIDTHS[WIDTHS.length - 1];
 /**
@@ -119,8 +121,16 @@ export function readDefaults(file, mediaRoot) {
   return Object.assign({}, ...dirs.map((d) => readJson(path.join(d, '_defaults.json'))));
 }
 
-/** Widths to generate for an original of width `w`: standard steps it can fill, plus its own width if smaller than the cap. */
-export function widthsFor(w) {
+/**
+ * Widths to generate for an original of width `w`: standard steps it can fill, plus its own
+ * width if smaller than the cap. A sidecar can ask for an exact set instead (`"widths": [...]`);
+ * widths larger than the original are always dropped (never upscale).
+ */
+export function widthsFor(w, custom) {
+  if (Array.isArray(custom) && custom.length) {
+    const exact = [...new Set(custom.map(Number).filter((x) => x > 0 && x <= w))].sort((a, b) => a - b);
+    return exact.length ? exact : [w];
+  }
   const out = WIDTHS.filter((x) => x <= w);
   if (w < MAX_WIDTH && !out.some((x) => Math.abs(x - w) / w < 0.1)) out.push(w);
   return out.length ? out : [w];
@@ -128,25 +138,27 @@ export function widthsFor(w) {
 
 const hex = (c) => '#' + [c.r, c.g, c.b].map((v) => v.toString(16).padStart(2, '0')).join('');
 
-async function encode(file, cacheDir) {
+async function encode(file, cacheDir, customWidths, customQuality = {}) {
   const input = sharp(file, { failOn: 'none', limitInputPixels: 268402689 }).rotate();
   const meta = await sharp(file, { failOn: 'none' }).metadata();
   // Dimensions after EXIF orientation is applied.
   const swap = (meta.orientation ?? 1) >= 5;
   const width = swap ? meta.height : meta.width;
   const height = swap ? meta.width : meta.height;
-  const hasAlpha = Boolean(meta.hasAlpha);
-  const fallback = hasAlpha ? 'png' : 'jpeg';
   const stats = await input.clone().stats();
+  // An alpha channel that is fully opaque (common in exported PNGs) still gets a JPEG fallback.
+  const hasAlpha = Boolean(meta.hasAlpha) && !stats.isOpaque;
+  const fallback = hasAlpha ? 'png' : 'jpeg';
   const variants = { avif: [], webp: [], [fallback]: [] };
 
   fs.mkdirSync(cacheDir, { recursive: true });
-  for (const w of widthsFor(width)) {
+  for (const w of widthsFor(width, customWidths)) {
     const resized = input.clone().resize({ width: w, withoutEnlargement: true }).toColourspace('srgb');
     await Promise.all(
       Object.keys(variants).map(async (fmt) => {
         const out = path.join(cacheDir, `${w}.${fmt === 'jpeg' ? 'jpg' : fmt}`);
-        const info = await resized.clone()[fmt](QUALITY[fmt]).toFile(out);
+        const q = Number(customQuality[fmt]) > 0 ? { ...QUALITY[fmt], quality: Number(customQuality[fmt]) } : QUALITY[fmt];
+        const info = await resized.clone()[fmt](q).toFile(out);
         variants[fmt].push({ w: info.width, h: info.height, file: path.basename(out), bytes: info.size });
       }),
     );
@@ -206,7 +218,11 @@ export async function processImages({ root = process.cwd(), writeSidecars = fals
       const buf = fs.readFileSync(job.file);
       job.bytes = buf.length;
       if (buf.length > LARGE_ORIGINAL) warnings.push(`media/${job.rel} is ${(buf.length / 1048576).toFixed(0)} MB. It will be optimised, but originals over 25 MB slow down the repository; a 6000px high-quality JPEG is plenty.`);
-      job.hash = crypto.createHash('sha1').update(buf).update(`v${PIPELINE_VERSION}`).digest('hex').slice(0, 10);
+      const side = readSidecar(job.file);
+      job.widths = side.widths;
+      job.quality = side.quality && typeof side.quality === 'object' ? side.quality : undefined;
+      const variant = JSON.stringify([job.widths ?? null, job.quality ?? null]);
+      job.hash = crypto.createHash('sha1').update(buf).update(`v${PIPELINE_VERSION}${variant === '[null,null]' ? '' : variant}`).digest('hex').slice(0, 10);
       job.cacheDir = path.join(p.cache, job.hash);
       try {
         job.rec = JSON.parse(fs.readFileSync(path.join(job.cacheDir, 'meta.json'), 'utf8'));
@@ -214,7 +230,7 @@ export async function processImages({ root = process.cwd(), writeSidecars = fals
       } catch {}
       if (job.rec) { reused++; continue; }
       try {
-        job.rec = await encode(job.file, job.cacheDir);
+        job.rec = await encode(job.file, job.cacheDir, job.widths, job.quality);
         encoded++;
         log(`[media] optimised media/${job.rel} (${job.rec.width}×${job.rec.height} ${job.rec.format})`);
       } catch (e) {
@@ -269,6 +285,7 @@ export async function processImages({ root = process.cwd(), writeSidecars = fals
       caption: side.caption || '',
       credit: side.credit || '',
       focus: side.focus || '',
+      focusMobile: side.focusMobile || '',
       width: rec.width,
       height: rec.height,
       aspectRatio: +(rec.width / rec.height).toFixed(4),

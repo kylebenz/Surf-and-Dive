@@ -37,6 +37,11 @@ AI-generated images to depict real resorts, waves, reefs or wildlife encounters.
    }
    ```
 
+   Optional fields for special cases (e.g. a hero): `"focusMobile": "64% 55%"` (crop position
+   on screens under 768px), `"widths": [640, 1024, 1440, 1672]` (exact sizes to generate instead
+   of the standard set, never larger than the original) and `"quality": { "avif": 50 }`
+   (per-format quality, used for the Maldives hero to keep its mobile LCP under 2.5 s).
+
    Running `npm run dev` or `npm run media` creates this file automatically with a
    suggested title and alt text. Replace the alt with a description of what the photo
    actually shows. `focus` (optional) keeps the important part in view when the photo is
