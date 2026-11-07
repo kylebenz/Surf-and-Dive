@@ -50,8 +50,8 @@ Content lives in data, not components:
 
 - **Destinations**, one file per destination in `src/data/destinations/`. Scores, spots,
   seasons, itineraries, FAQs, SEO, related content and the ten image slots are all there.
-- **Guides**: Markdown with front matter in `src/content/guides/`. The filename is the URL slug.
-  Front matter holds SEO title, meta description, keywords, related destinations/guides,
+- **Blog posts**: Markdown with front matter in `src/content/guides/`. The filename is the URL slug (`/blog/<filename>/`).
+  Front matter holds SEO title, meta description, keywords, related destinations/posts,
   the image guide, FAQs and source notes (schema in `src/content.config.ts`).
 - **Months**: `src/data/seasonal.ts` (the seasonal matrix from the master spec).
 - **Comparisons**: `src/data/comparisons.ts` (twelve criteria per pair; no universal winners).
