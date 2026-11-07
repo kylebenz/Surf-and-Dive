@@ -10,7 +10,8 @@ import CTA from '../../components/CTA.astro';
 import Notice from '../../components/Notice.astro';
 import { comparisons } from '../../data/comparisons';
 import { getDestination } from '../../data/destinations';
-import { faqLd } from '../../utils/seo';
+import { faqLd, articleLd, absoluteUrl } from '../../utils/seo';
+import { SITE } from '../../config/site';
 import type { Comparison } from '../../data/types';
 
 export function getStaticPaths() {
@@ -30,12 +31,23 @@ const scoreRows = [
   ['Luxury', a.luxury.score, b.luxury.score],
   ['Scenery', a.scenery.score, b.scenery.score],
 ] as const;
+const site = Astro.site!;
+const compareLd = articleLd({
+  site,
+  url: absoluteUrl(`/compare/${c.slug}/`, site),
+  headline: c.h1,
+  description: c.seo.meta,
+  image: absoluteUrl(SITE.ogImage, site),
+  published: new Date(SITE.published),
+  modified: new Date(SITE.lastReviewed),
+  section: 'Comparison',
+});
 ---
 <BaseLayout
   title={c.seo.title}
   description={c.seo.meta}
   crumbs={[{ label: 'Compare', href: '/compare/' }, { label: c.title, href: `/compare/${c.slug}/` }]}
-  jsonLd={[faqLd(c.faqs)]}
+  jsonLd={[compareLd, faqLd(c.faqs)]}
 >
   <Hero size="medium" eyebrow="Comparison" title={c.h1} subtitle={c.short_answer} seed={`cmp-${c.slug}`}>
     <a class="btn" href="#table">See the comparison <span class="arrow" aria-hidden="true">→</span></a>

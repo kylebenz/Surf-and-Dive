@@ -1,17 +1,27 @@
 ---
 import TextPage from '../layouts/TextPage.astro';
+import { ANALYTICS } from '../config/site';
+const analytics = Boolean(ANALYTICS.ga4Id);
 ---
 <TextPage title="Privacy Policy" seoTitle="Privacy Policy | Surf and Dive" description="How Surf and Dive handles personal data, cookies and contact-form enquiries." eyebrow="Legal" lede="A plain-language summary of what this website collects and why." path="/privacy/">
   <p><em>This policy describes the website as currently built. It should be reviewed by a qualified adviser, and updated with the operator’s legal entity and contact details, before public launch, particularly to meet UK GDPR and EU GDPR requirements.</em></p>
   <h2>What we collect</h2>
-  <p><strong>Browsing.</strong> The website does not currently use analytics, advertising trackers or third-party cookies. Fonts and scripts are served from this website. Your browser may store technical data locally (for example, cached files); this is not shared with us.</p>
+  {analytics ? (
+    <>
+      <p><strong>Browsing.</strong> We do not use advertising trackers. Fonts and our own scripts are served from this website. Your browser may store technical data locally (for example, cached files and your cookie choice); this is not shared with us.</p>
+      <p><strong>Analytics (only with your consent).</strong> If you click “Accept” on the cookie banner, we use Google Analytics 4, provided by Google, to understand how the website is used: pages viewed, approximate location (country or city), device and browser type, and how you arrived. Google Analytics sets cookies named <code>_ga</code> and <code>_ga_*</code>, which last up to two years. Google Analytics 4 does not log or store IP addresses. Data may be processed by Google outside the UK and EU under its standard contractual clauses. We do not use this data for advertising, and Google signals and ad personalisation are not enabled. If you decline, Google Analytics is not loaded and no analytics cookies are set.</p>
+      <p><strong>Changing your mind.</strong> Use “Cookie settings” in the website footer at any time to accept or withdraw consent. Withdrawing consent stops analytics and removes the analytics cookies from this website.</p>
+    </>
+  ) : (
+    <p><strong>Browsing.</strong> The website does not currently use analytics, advertising trackers or third-party cookies. Fonts and scripts are served from this website. Your browser may store technical data locally (for example, cached files); this is not shared with us.</p>
+  )}
   <p><strong>Contact form.</strong> If you send an enquiry, we receive the details you choose to provide (typically your name, email address, travel interests and message) solely to reply to you.</p>
   <h2>How we use it</h2>
-  <p>We use enquiry details only to respond and to improve our content. We do not sell personal data and we do not use it for unsolicited marketing.</p>
+  <p>We use enquiry details only to respond and to improve our content.{analytics && ' We use analytics data, where you have consented, only in aggregate to improve the website.'} We do not sell personal data and we do not use it for unsolicited marketing.</p>
   <h2>Retention</h2>
   <p>Enquiries are kept only as long as needed to respond and for reasonable record-keeping, then deleted.</p>
   <h2>Your rights</h2>
   <p>Depending on where you live, you may have the right to access, correct, delete or restrict the use of your personal data, and to complain to your data-protection authority. To exercise these rights, use the <a href="/contact/">contact page</a>.</p>
   <h2>Future changes</h2>
-  <p>If we add analytics, newsletters or other services, we will update this policy first and ask for consent where required.</p>
+  <p>If we add {analytics ? 'newsletters' : 'analytics, newsletters'} or other services, we will update this policy first and ask for consent where required.</p>
 </TextPage>

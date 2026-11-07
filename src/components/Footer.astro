@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { SITE, NAV } from '../config/site';
+import { SITE, NAV, ANALYTICS } from '../config/site';
 import { destinations } from '../data/destinations';
 import { MONTHS } from '../data/seasonal';
 const year = new Date().getFullYear();
@@ -46,6 +46,7 @@ const year = new Date().getFullYear();
             <li><a href="/ocean-safety/">Ocean safety</a></li>
             <li><a href="/privacy/">Privacy</a></li>
             <li><a href="/terms/">Terms</a></li>
+            {ANALYTICS.ga4Id && <li><button type="button" class="link-btn" data-cookie-settings>Cookie settings</button></li>}
           </ul>
         </div>
       </nav>
@@ -68,5 +69,8 @@ const year = new Date().getFullYear();
   ul.two { grid-template-columns: 1fr; }
   a { color: var(--on-dark-muted); text-decoration: none; }
   a:hover { color: var(--on-dark); text-decoration: underline; }
+  .link-btn { all: unset; cursor: pointer; color: var(--on-dark-muted); }
+  .link-btn:hover { color: var(--on-dark); text-decoration: underline; }
+  .link-btn:focus-visible { outline: 2px solid var(--seafoam); outline-offset: 2px; }
   .bottom { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line-dark); font-size: 0.78rem; color: var(--on-dark-muted); max-width: 90ch; }
 </style>

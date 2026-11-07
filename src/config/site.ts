@@ -11,6 +11,17 @@ export const SITE = {
   lastReviewed: '2026-11-06',
   published: '2026-11-06',
   ogImage: '/og/surf-and-dive-default.png',
+  /** Square raster logo for structured data (Google prefers PNG over SVG). */
+  logo: '/logo.png',
+} as const;
+
+/**
+ * Google Analytics 4. Set PUBLIC_GA4_ID (e.g. G-XXXXXXXXXX) in the build
+ * environment. When empty, no analytics code or cookie banner is output.
+ * GA only loads after the visitor accepts analytics cookies.
+ */
+export const ANALYTICS = {
+  ga4Id: ((import.meta.env.PUBLIC_GA4_ID as string | undefined) ?? '').trim(),
 } as const;
 
 export const NAV = [
