@@ -8,7 +8,7 @@ export const costaRica: Destination = {
   region: 'Central America',
   slug: 'costa-rica',
 
-  positioning: 'Pacific surf framed by rainforest, wildlife and wellness — the destination where the land is as rich as the waves.',
+  positioning: 'Pacific surf framed by rainforest, wildlife and wellness, in a destination where the land is as rich as the waves.',
   hero_headline: 'Costa Rica: Pacific Surf, Rainforest and Wellness',
   hero_subheadline: 'Consistent Pacific beach and point breaks, howler monkeys at dawn, eco-luxury lodges and a wellness culture built around the rhythm of the tides.',
   overview:
@@ -16,7 +16,7 @@ export const costaRica: Destination = {
   why_visit: [
     'Surf and nature are inseparable here. Few destinations let you surf in the morning and walk through rainforest with a naturalist guide in the afternoon.',
     'There is suitable surf for every level, with plenty of established schools around beginner-friendly beaches.',
-    'Wellness culture — yoga, spa, nutrition — is deeply woven into the surf towns, especially around Nosara and Santa Teresa.',
+    'Wellness culture (yoga, spa, nutrition) is deeply woven into the surf towns, especially around Nosara and Santa Teresa.',
   ],
 
   surf: {
@@ -24,9 +24,9 @@ export const costaRica: Destination = {
     spots: ['Witch’s Rock (Santa Rosa National Park, boat access)', 'Ollie’s Point', 'Tamarindo (beginner)', 'Playa Grande', 'Nosara / Playa Guiones', 'Santa Teresa and Mal País', 'Pavones (long left point)', 'Dominical'],
     best_for: ['Beginners', 'Intermediate surfers', 'Advanced point-break surfers', 'Surf and wellness retreats'],
     levels: ['beginner', 'intermediate', 'advanced'],
-    season: 'The Pacific coast typically receives larger south swells in the green season (roughly May to October). The dry season (roughly December to April) often brings cleaner, smaller conditions with offshore winds in Guanacaste — friendly for learning and improving.',
+    season: 'The Pacific coast typically receives larger south swells in the green season (roughly May to October). The dry season (roughly December to April) often brings cleaner, smaller conditions with offshore winds in Guanacaste: friendly for learning and improving.',
     notes:
-      'Beach breaks dominate much of the coast, making Costa Rica one of the more forgiving long-haul surf destinations. Point breaks such as Pavones and boat-access waves like Witch’s Rock suit experienced surfers. River mouths and estuaries carry crocodile warnings in some areas — follow local advice.',
+      'Beach breaks dominate much of the coast, making Costa Rica one of the more forgiving long-haul surf destinations. Point breaks such as Pavones and boat-access waves like Witch’s Rock suit experienced surfers. River mouths and estuaries carry crocodile warnings in some areas. Follow local advice.',
   },
 
   diving: {
@@ -72,7 +72,7 @@ export const costaRica: Destination = {
   european_seasonal_angle:
     'Costa Rica’s dry season aligns well with the European winter, making it one of the stronger long-haul winter-sun options for surfers who also want rainforest and wellness.',
   season_types: ['winter-sun', 'year-round'],
-  recommended_duration: '10–14 nights, combining one surf town with a rainforest stay.',
+  recommended_duration: '10-14 nights, combining one surf town with a rainforest stay.',
 
   traveller_profiles: ['couples', 'family', 'active-luxury', 'winter-sun', 'solo'],
   best_audience: 'Surf + rainforest + wildlife + wellness.',
@@ -84,16 +84,16 @@ export const costaRica: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–2', title: 'Arrive in Guanacaste', detail: 'Fly into Liberia, transfer to a Papagayo or Tamarindo base and take an easy first session.' },
-    { days: 'Days 3–5', title: 'Surf and coaching', detail: 'Daily coached sessions; one boat day to Witch’s Rock if your level and the conditions allow.' },
-    { days: 'Days 6–8', title: 'Nicoya wellness', detail: 'Move to Nosara or Santa Teresa for beach breaks, yoga and slow afternoons.' },
-    { days: 'Days 9–11', title: 'Rainforest', detail: 'A rainforest or volcano lodge with naturalist-guided walks, hot springs and wildlife.' },
+    { days: 'Days 1-2', title: 'Arrive in Guanacaste', detail: 'Fly into Liberia, transfer to a Papagayo or Tamarindo base and take an easy first session.' },
+    { days: 'Days 3-5', title: 'Surf and coaching', detail: 'Daily coached sessions; one boat day to Witch’s Rock if your level and the conditions allow.' },
+    { days: 'Days 6-8', title: 'Nicoya wellness', detail: 'Move to Nosara or Santa Teresa for beach breaks, yoga and slow afternoons.' },
+    { days: 'Days 9-11', title: 'Rainforest', detail: 'A rainforest or volcano lodge with naturalist-guided walks, hot springs and wildlife.' },
     { days: 'Day 12', title: 'Depart', detail: 'Return via Liberia or San José.' },
   ],
 
   planning_notes: [
     'Roads can be slow and unpaved in places; minimise moves and consider domestic flights.',
-    'Rip currents are common on Pacific beach breaks — surf at lifeguarded or guided spots when learning.',
+    'Rip currents are common on Pacific beach breaks. Surf at lifeguarded or guided spots when learning.',
     'Heed crocodile warnings near river mouths in some areas.',
     'Follow responsible viewing rules for nesting turtles and whales.',
     'Check current entry and health requirements before travel.',

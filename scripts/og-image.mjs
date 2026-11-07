@@ -18,7 +18,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
 <text x="80" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="74" fill="#F3F7F5">Luxury Ocean Holidays,</text>
 <text x="80" y="385" font-family="Georgia, 'Times New Roman', serif" font-size="74" fill="#F3F7F5">Curated Around the Water</text>
 <text x="80" y="170" font-family="Helvetica, Arial, sans-serif" font-size="24" letter-spacing="6" fill="#D8F0EA">SURF AND DIVE</text>
-<text x="80" y="520" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#A9C3C4">Surf · Dive · Freedive — for European travellers</text>
+<text x="80" y="520" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#A9C3C4">Surf · Dive · Freedive, for European travellers</text>
 </svg>`;
 mkdirSync('public/og', { recursive: true });
 await sharp(Buffer.from(svg)).png().toFile('public/og/surf-and-dive-default.png');

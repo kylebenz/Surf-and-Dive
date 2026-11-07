@@ -11,7 +11,7 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
       <div>
         <span class="eyebrow">Contact</span>
         <h1>Plan Your Ocean Escape</h1>
-        <p class="lede">Questions about a destination, a correction to a guide, or an idea for something we should cover — the editorial team reads every message.</p>
+        <p class="lede">Questions about a destination, a correction to a guide, or an idea for something we should cover. The editorial team reads every message.</p>
         <div class="mt-2">
           <Notice kind="tip" title="Please note">
             <p>Surf and Dive is an independent editorial guide. We do not currently sell holidays, hold availability or quote prices. We will reply with editorial guidance, usually within a few working days.</p>
@@ -126,7 +126,7 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
       const data = new FormData(form);
       if (String(data.get('website') ?? '')) return; // honeypot
       if (!endpoint) {
-        status.textContent = 'Thank you. Our enquiry service is being connected — please try again shortly. Your message has not been sent.';
+        status.textContent = 'Thank you. Our enquiry service is being connected. Please try again shortly. Your message has not been sent.';
         status.classList.add('error');
         return;
       }
@@ -142,7 +142,7 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
         const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
         if (!res.ok) throw new Error(String(res.status));
         form.reset();
-        status.textContent = 'Thank you — your message has been sent. The editorial team will reply by email.';
+        status.textContent = 'Thank you. Your message has been sent. The editorial team will reply by email.';
       } catch {
         status.textContent = 'Sorry, your message could not be sent. Please check your connection and try again.';
         status.classList.add('error');

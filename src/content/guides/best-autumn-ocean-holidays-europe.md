@@ -17,11 +17,11 @@ images:
   - { label: "Hero", brief: "Autumn Atlantic surf with warm light." }
   - { label: "Portugal", brief: "Dramatic wave." }
   - { label: "Madeira", brief: "Cliff and coastline." }
-  - { label: "Tropical", brief: "Palm and clear water — the tropical transition." }
+  - { label: "Tropical", brief: "Palm and clear water, marking the tropical transition." }
   - { label: "Crowds", kind: graphic, brief: "Crowd comparison graphic using careful, non-quantified language." }
 sources:
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche and Nazaré." }
-  - { name: "Visit Madeira — Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/" }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche and Nazaré." }
+  - { name: "Visit Madeira: Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/" }
   - { name: "Visit Maldives", url: "https://visitmaldives.com/" }
   - { name: "Sri Lanka Tourism", url: "https://www.srilanka.travel/adventure_and_sports" }
 ---

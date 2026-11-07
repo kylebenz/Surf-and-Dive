@@ -8,14 +8,14 @@ export const madeira: Destination = {
   region: 'Atlantic Europe',
   slug: 'madeira',
 
-  positioning: 'A dramatic volcanic island with powerful Atlantic surf, year-round diving and a refined hotel scene — Europe’s most polished island ocean escape.',
+  positioning: 'A dramatic volcanic island with powerful Atlantic surf, year-round diving and a refined hotel scene: Europe’s most polished island ocean escape.',
   hero_headline: 'Madeira: Atlantic Surf Beneath Volcanic Cliffs',
   hero_subheadline: 'Boulder-point waves at Jardim do Mar and Paul do Mar, a marine reserve at Garajau, levada walks above the clouds and historic hotels in Funchal.',
   overview:
     'Madeira feels dramatic and mountainous, with established tourism infrastructure and a strong luxury-hotel scene. Visit Madeira highlights surf locations including Jardim do Mar, Paul do Mar, Porto da Cruz and Ribeira da Janela, with suitability ranging from improving surfers to experienced riders on powerful north and south-west coast breaks. The island’s tourism board also describes diving as possible year-round, highlighting sites including Caniçal, Santa Cruz, Garajau, Madalena do Mar and Porto Santo. Add mild winters, outstanding hiking and a compact geography, and Madeira becomes one of the most complete short-haul ocean destinations for Europeans.',
   why_visit: [
     'Year-round potential: surf season is strongest in the European autumn and winter, while diving is possible throughout the year.',
-    'It is ideal for a mixed-interest couple — surf, hiking, food, viewpoints and comfortable hotels all fit together.',
+    'It is ideal for a mixed-interest couple. Surf, hiking, food, viewpoints and comfortable hotels all fit together.',
     'Short-haul access from much of Europe makes a five- to seven-night trip genuinely worthwhile.',
   ],
 
@@ -26,7 +26,7 @@ export const madeira: Destination = {
     levels: ['intermediate', 'advanced'],
     season: 'Visit Madeira describes year-round surf potential; the most powerful swells typically arrive roughly from October to March.',
     notes:
-      'Madeira’s best-known waves break over boulders and reef beneath steep cliffs, and many are suited to experienced surfers — Jardim do Mar and Paul do Mar can be powerful and heavy in winter. Visit Madeira highlights Porto da Cruz as more suitable for improving surfers. Beginners should look for lessons in smaller conditions with local schools.',
+      'Madeira’s best-known waves break over boulders and reef beneath steep cliffs, and many are suited to experienced surfers: Jardim do Mar and Paul do Mar can be powerful and heavy in winter. Visit Madeira highlights Porto da Cruz as more suitable for improving surfers. Beginners should look for lessons in smaller conditions with local schools.',
   },
 
   diving: {
@@ -72,12 +72,12 @@ export const madeira: Destination = {
   european_seasonal_angle:
     'Madeira is one of Europe’s strongest winter-sun ocean escapes: mild air, powerful winter surf for experienced riders and year-round diving, all without a long-haul flight. A four- or five-night escape can feel worthwhile.',
   season_types: ['winter-sun', 'year-round', 'shoulder'],
-  recommended_duration: '5–8 nights.',
+  recommended_duration: '5-8 nights.',
 
   traveller_profiles: ['couples', 'active-luxury', 'winter-sun', 'diver', 'family'],
   best_audience: 'European luxury + surf + diving + hiking.',
   audience_notes: [
-    { profile: 'Active couples', detail: 'One surfs or dives while the other hikes, swims or explores — then dinner in Funchal.' },
+    { profile: 'Active couples', detail: 'One surfs or dives while the other hikes, swims or explores, then dinner in Funchal.' },
     { profile: 'Experienced surfers', detail: 'Powerful boulder and reef waves in winter.' },
     { profile: 'Winter-sun travellers', detail: 'Short flights, mild weather and a refined hotel scene.' },
     { profile: 'Not ideal for', detail: 'Beginners wanting long sandy beaches (consider Porto Santo or the Canaries), or anyone seeking tropical water.' },
@@ -85,16 +85,16 @@ export const madeira: Destination = {
 
   itinerary: [
     { days: 'Day 1', title: 'Funchal', detail: 'Arrive, check into a Funchal or south-coast hotel, dinner in the old town.' },
-    { days: 'Days 2–3', title: 'South-west surf', detail: 'Jardim do Mar or Paul do Mar for experienced surfers; Porto da Cruz for improvers. Afternoon viewpoints and a wine tasting.' },
+    { days: 'Days 2-3', title: 'South-west surf', detail: 'Jardim do Mar or Paul do Mar for experienced surfers; Porto da Cruz for improvers. Afternoon viewpoints and a wine tasting.' },
     { days: 'Day 4', title: 'Dive Garajau', detail: 'Two dives in the reserve and a long seafood lunch.' },
     { days: 'Day 5', title: 'Mountains', detail: 'A guided ridge or levada hike above the clouds.' },
-    { days: 'Days 6–7', title: 'Porto Santo or slow coast', detail: 'A day trip to Porto Santo’s beach and wreck, or a final surf and spa day.' },
+    { days: 'Days 6-7', title: 'Porto Santo or slow coast', detail: 'A day trip to Porto Santo’s beach and wreck, or a final surf and spa day.' },
   ],
 
   planning_notes: [
-    'Winter surf at Madeira’s famous breaks can be heavy — match spots to your ability.',
+    'Winter surf at Madeira’s famous breaks can be heavy: match spots to your ability.',
     'Mountain weather changes fast; hike with guides or check conditions carefully.',
-    'Wind can affect flights in and out of Madeira — allow some buffer.',
+    'Wind can affect flights in and out of Madeira: allow some buffer.',
     'Respect Garajau reserve regulations; no fishing or feeding.',
     'A car or private driver is useful; roads are steep and winding.',
   ],

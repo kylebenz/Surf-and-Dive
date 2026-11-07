@@ -23,7 +23,7 @@ const descriptor = (s: number) => (s >= 10 ? 'Exceptional' : s >= 9 ? 'Outstandi
         <dd class="meter">
           <span class="bar" aria-hidden="true"><span style={`width:${r.score * 10}%`}></span></span>
           <span class="val"><strong>{r.score}</strong><span class="of">/10</span></span>
-          <span class="desc">{descriptor(r.score)} — {r.context}</span>
+          <span class="desc">{descriptor(r.score)}: {r.context}</span>
         </dd>
       </div>
     ))}

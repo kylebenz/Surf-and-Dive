@@ -21,7 +21,7 @@ images:
   - { label: "Stay", brief: "Hotel or spa with an ocean view." }
   - { label: "Island map", kind: graphic, brief: "Map showing island options." }
 sources:
-  - { name: "Visit Madeira — Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/", note: "Year-round surf potential across the island." }
+  - { name: "Visit Madeira: Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/", note: "Year-round surf potential across the island." }
 ---
 
 ## Two excellent winter escapes

@@ -20,8 +20,8 @@ images:
   - { label: "Indonesia", brief: "Tropical reef break." }
   - { label: "Guide", brief: "Local surf guide or coach briefing a surfer." }
 sources:
-  - { name: "Tourism Fiji — Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "Cloudbreak described as intermediate to advanced with boat access." }
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Peniche, Ericeira and Nazaré." }
+  - { name: "Tourism Fiji: Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "Cloudbreak described as intermediate to advanced with boat access." }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Peniche, Ericeira and Nazaré." }
   - { name: "Indonesia official tourism information", note: "Uluwatu and other locations for experienced surfers." }
 ---
 
@@ -49,4 +49,4 @@ Cloudbreak is the obvious name, but the Mamanuca Islands contain several other b
 
 ## The rule: respect the ocean
 
-Advanced ability is not immunity. Reef breaks, currents, changing tides and large surf deserve local knowledge. The smartest luxury surf trip is one where you know when to paddle out — and when to stay on the beach. Read [Ocean Safety: What Every Luxury Surf Traveller Should Know](/guides/ocean-safety-luxury-surf-travellers/).
+Advanced ability is not immunity. Reef breaks, currents, changing tides and large surf deserve local knowledge. The smartest luxury surf trip is one where you know when to paddle out, and when to stay on the beach. Read [Ocean Safety: What Every Luxury Surf Traveller Should Know](/guides/ocean-safety-luxury-surf-travellers/).

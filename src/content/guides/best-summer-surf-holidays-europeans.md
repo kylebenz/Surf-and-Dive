@@ -19,10 +19,10 @@ images:
   - { label: "Portugal", brief: "Surf town, board and local street scene." }
   - { label: "Island", brief: "Volcanic cliffs and turquoise water." }
   - { label: "Fiji / Indonesia", brief: "Powerful reef wave and luxury island stay." }
-  - { label: "Calendar", kind: graphic, brief: "Calendar graphic showing June–August options." }
+  - { label: "Calendar", kind: graphic, brief: "Calendar graphic showing June-August options." }
 sources:
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche, Nazaré and the Algarve." }
-  - { name: "Tourism Fiji — Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "The Mamanuca Islands' reef breaks and other waves." }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche, Nazaré and the Algarve." }
+  - { name: "Tourism Fiji: Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "The Mamanuca Islands' reef breaks and other waves." }
 ---
 
 ## Summer does not have to mean the same beach every year
@@ -45,6 +45,6 @@ These trips work well for couples because the holiday does not depend on everyon
 
 ## Go long-haul when you want the ocean to dominate
 
-Indonesia — [Bali](/destinations/bali-nusa-penida/) and the [Mentawai Islands](/destinations/mentawai-islands/) — [Fiji](/destinations/fiji/) and [Hawaii](/destinations/hawaii/) can make sense for experienced surfers who want the destination itself to be the story. Fiji's Mamanuca Islands, for example, combine world-class reef breaks with a range of other waves and water activities.
+Indonesia, [Bali](/destinations/bali-nusa-penida/) and the [Mentawai Islands](/destinations/mentawai-islands/), [Fiji](/destinations/fiji/) and [Hawaii](/destinations/hawaii/) can make sense for experienced surfers who want the destination itself to be the story. Fiji's Mamanuca Islands, for example, combine world-class reef breaks with a range of other waves and water activities.
 
 For Europeans, the longer flight means the trip should justify itself. Stay longer, plan fewer transfers and build in recovery time.

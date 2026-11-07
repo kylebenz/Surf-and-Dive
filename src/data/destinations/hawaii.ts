@@ -26,7 +26,7 @@ export const hawaii: Destination = {
     levels: ['beginner', 'intermediate', 'advanced'],
     season: 'North-facing shores typically receive powerful swells in winter (roughly October to April). South-facing shores, including Waikiki, are generally at their best in summer (roughly May to September).',
     notes:
-      'The North Shore’s famous winter breaks are for experts, with strong currents, shallow reef and serious consequences. Spectating is safe and rewarding from the beach. Beginners are well served at Waikiki and other gentle south-shore spots, especially in summer. Always respect local surf etiquette — it carries real weight in Hawaii.',
+      'The North Shore’s famous winter breaks are for experts, with strong currents, shallow reef and serious consequences. Spectating is safe and rewarding from the beach. Beginners are well served at Waikiki and other gentle south-shore spots, especially in summer. Always respect local surf etiquette. It carries real weight in Hawaii.',
   },
 
   diving: {
@@ -35,7 +35,7 @@ export const hawaii: Destination = {
     marine_life: ['Manta rays', 'Green sea turtles (honu)', 'Humpback whales (winter, regulated)', 'Hawaiian monk seals (protected)', 'Endemic reef fish', 'Spinner dolphins (strictly regulated distance)'],
     season: 'Diving is possible year-round. Calmer conditions often occur on leeward coasts. Humpback whale season is typically associated with winter (roughly December to April).',
     notes:
-      'Hawaiian diving is defined by volcanic structure: lava arches, tubes and ledges, with a high proportion of endemic fish species. The Kona manta night experience is well known. Hawaiian spinner dolphins, monk seals and turtles are protected by specific regulations — keep the required distance and use licensed operators.',
+      'Hawaiian diving is defined by volcanic structure: lava arches, tubes and ledges, with a high proportion of endemic fish species. The Kona manta night experience is well known. Hawaiian spinner dolphins, monk seals and turtles are protected by specific regulations. Keep the required distance and use licensed operators.',
   },
 
   freediving: {
@@ -46,7 +46,7 @@ export const hawaii: Destination = {
   },
 
   marine_life_notes:
-    'Green sea turtles and endemic reef fish are commonly seen; manta rays and humpback whales are seasonal or site-specific highlights. Hawaii enforces wildlife-distance regulations for several protected species — check current guidance before entering the water.',
+    'Green sea turtles and endemic reef fish are commonly seen; manta rays and humpback whales are seasonal or site-specific highlights. Hawaii enforces wildlife-distance regulations for several protected species. Check current guidance before entering the water.',
 
   luxury: {
     score: 9,
@@ -72,29 +72,29 @@ export const hawaii: Destination = {
   european_seasonal_angle:
     'Hawaii can work in two very different ways for Europeans: a summer trip built around friendlier south-shore surf, or a winter and festive trip to watch the North Shore and the humpback season. The long journey suits stays of ten nights or more.',
   season_types: ['summer', 'winter-sun', 'year-round'],
-  recommended_duration: '10–14 nights, ideally across two islands.',
+  recommended_duration: '10-14 nights, ideally across two islands.',
 
   traveller_profiles: ['serious-surfer', 'active-luxury', 'family', 'couples', 'diver'],
   best_audience: 'Surf culture lovers, experienced surfers and active luxury travellers.',
   audience_notes: [
-    { profile: 'Experienced surfers', detail: 'Some of the most storied waves in the world — approached with humility and local respect.' },
+    { profile: 'Experienced surfers', detail: 'Some of the most storied waves in the world, to be approached with humility and local respect.' },
     { profile: 'Learners and families', detail: 'Gentle south-shore waves, excellent surf schools and easy logistics.' },
     { profile: 'Active luxury travellers', detail: 'Resorts with outstanding service, plus hiking, volcanoes and diving on the same trip.' },
     { profile: 'Not ideal for', detail: 'Travellers seeking remote, low-density islands or a short trip from Europe.' },
   ],
 
   itinerary: [
-    { days: 'Days 1–2', title: 'Oahu arrival', detail: 'Arrive in Honolulu, recover with an easy Waikiki session or a beach walk.' },
-    { days: 'Days 3–5', title: 'Oahu surf and culture', detail: 'North Shore in winter (to watch or surf within your level) or south-shore sessions in summer; local food and surf history.' },
-    { days: 'Days 6–9', title: 'Second island', detail: 'Fly to the Big Island for the Kona coast and manta night experience, or to Maui for Molokini, Honolua Bay and resort time.' },
-    { days: 'Days 10–12', title: 'Slow finish', detail: 'Hike, snorkel or spa — leave the pre-flight interval after diving before the flight home.' },
+    { days: 'Days 1-2', title: 'Oahu arrival', detail: 'Arrive in Honolulu, recover with an easy Waikiki session or a beach walk.' },
+    { days: 'Days 3-5', title: 'Oahu surf and culture', detail: 'North Shore in winter (to watch or surf within your level) or south-shore sessions in summer; local food and surf history.' },
+    { days: 'Days 6-9', title: 'Second island', detail: 'Fly to the Big Island for the Kona coast and manta night experience, or to Maui for Molokini, Honolua Bay and resort time.' },
+    { days: 'Days 10-12', title: 'Slow finish', detail: 'Hike, snorkel or spa. Leave the pre-flight interval after diving before the flight home.' },
   ],
 
   planning_notes: [
     'Respect local surf etiquette and avoid heavy breaks beyond your ability.',
-    'Wildlife regulations apply to spinner dolphins, monk seals, turtles and whales — keep required distances.',
+    'Wildlife regulations apply to spinner dolphins, monk seals, turtles and whales. Keep required distances.',
     'Check entry requirements for the United States, including electronic travel authorisation where applicable.',
-    'Winter swells can close beaches and create dangerous shorebreak — follow lifeguard advice.',
+    'Winter swells can close beaches and create dangerous shorebreak. Follow lifeguard advice.',
     'Some popular natural sites require reservations; check before you travel.',
     'Use reef-safe sunscreen; Hawaii restricts certain sunscreen ingredients.',
   ],

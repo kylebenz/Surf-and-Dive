@@ -8,13 +8,13 @@ export const mozambique: Destination = {
   region: 'Africa',
   slug: 'mozambique',
 
-  positioning: 'Manta rays and whale sharks off Tofo, the protected Bazaruto Archipelago and private-island lodges — Africa’s great marine-life coast.',
+  positioning: 'Manta rays and whale sharks off Tofo, the protected Bazaruto Archipelago and private-island lodges: Africa’s great marine-life coast.',
   hero_headline: 'Mozambique: Megafauna, Islands and Indian Ocean Solitude',
   hero_subheadline: 'Dive with manta rays off Tofo, sail the dunes and seagrass of the Bazaruto Archipelago and stay on private islands where the ocean is the only neighbour.',
   overview:
     'Mozambique’s long Indian Ocean coastline is one of Africa’s most rewarding marine environments. Tofo, in Inhambane province, is widely associated with manta rays and whale sharks; the Bazaruto Archipelago, a national park, protects seagrass beds, dunes and reefs and is one of the region’s best-known homes for dugongs, though sightings are rare. Humpback whales migrate along the coast in the southern winter. Surf is a secondary but real attraction, with right-hand points such as Tofinho and Ponta do Ouro. The luxury model is private-island lodges and small beach retreats where privacy and space are the defining features.',
   why_visit: [
-    'Marine megafauna is the reason most travellers come — manta rays, whale sharks and humpbacks in season.',
+    'Marine megafauna is the reason most travellers come: manta rays, whale sharks and humpbacks in season.',
     'Private-island lodges in the Bazaruto Archipelago offer exceptional privacy.',
     'It pairs naturally with a safari elsewhere in southern Africa for a once-in-a-decade trip.',
   ],
@@ -42,7 +42,7 @@ export const mozambique: Destination = {
     score: 7,
     locations: ['Ocean safaris off Tofo (snorkel-based)', 'Bazaruto reefs'],
     notes:
-      'Snorkel ocean safaris can offer whale shark encounters on good days. Follow encounter codes — no touching, no blocking the animal’s path, limited swimmers in the water.',
+      'Snorkel ocean safaris can offer whale shark encounters on good days. Follow encounter codes: no touching, no blocking the animal’s path, limited swimmers in the water.',
   },
 
   marine_life_notes:
@@ -70,9 +70,9 @@ export const mozambique: Destination = {
     { label: 'European calendar', detail: 'Strong for summer and autumn; pairs well with a safari in the southern-hemisphere dry season.' },
   ],
   european_seasonal_angle:
-    'The dry season overlaps the European summer and autumn, aligning with humpback season and classic safari months — ideal for a combined bush-and-beach trip.',
+    'The dry season overlaps the European summer and autumn, aligning with humpback season and classic safari months: ideal for a combined bush-and-beach trip.',
   season_types: ['summer', 'shoulder'],
-  recommended_duration: '7–10 nights at the coast, longer with a safari.',
+  recommended_duration: '7-10 nights at the coast, longer with a safari.',
 
   traveller_profiles: ['diver', 'couples', 'honeymoon', 'active-luxury'],
   best_audience: 'Diving, reef life and private-island luxury.',
@@ -83,15 +83,15 @@ export const mozambique: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–3', title: 'Tofo', detail: 'Ocean safaris and dives at offshore reefs with a responsible operator; surf Tofinho if the swell is running.' },
-    { days: 'Days 4–7', title: 'Bazaruto Archipelago', detail: 'A private-island lodge: dhow sailing, reef snorkelling, dune walks and complete quiet.' },
-    { days: 'Days 8–10', title: 'Safari extension', detail: 'Connect to a safari in a neighbouring country or region.' },
+    { days: 'Days 1-3', title: 'Tofo', detail: 'Ocean safaris and dives at offshore reefs with a responsible operator; surf Tofinho if the swell is running.' },
+    { days: 'Days 4-7', title: 'Bazaruto Archipelago', detail: 'A private-island lodge: dhow sailing, reef snorkelling, dune walks and complete quiet.' },
+    { days: 'Days 8-10', title: 'Safari extension', detail: 'Connect to a safari in a neighbouring country or region.' },
   ],
 
   planning_notes: [
     'Flight connections are typically via Johannesburg or Maputo; allow buffer time.',
     'Seek current health advice, including on malaria prevention.',
-    'Ocean launches through the surf at Tofo can be bumpy — not ideal for those with back issues.',
+    'Ocean launches through the surf at Tofo can be bumpy, not ideal for those with back issues.',
     'Check current travel advisories for the region you plan to visit.',
     'Follow marine-encounter codes for whale sharks and mantas.',
   ],

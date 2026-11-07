@@ -6,7 +6,7 @@ description: "Learn which luxury upgrades genuinely improve a surf, dive or isla
 category: Planning
 primaryKeyword: luxury ocean travel
 keywords: ["luxury ocean travel", "worth paying for luxury resort", "premium surf holiday"]
-dek: "On an ocean holiday, the best upgrades improve your relationship with the water — not the square metres of your room."
+dek: "On an ocean holiday, the best upgrades improve your relationship with the water, not the square metres of your room."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["maldives", "fiji", "mentawai-islands", "seychelles"]
@@ -32,7 +32,7 @@ If a private boat gets you to the right surf or dive site when conditions are go
 
 ## Pay for expertise
 
-A great surf coach or dive guide can turn a good day into a memorable one — and help you avoid the mistakes that can ruin one.
+A great surf coach or dive guide can turn a good day into a memorable one, and help you avoid the mistakes that can ruin one.
 
 ## Pay for recovery
 

@@ -46,12 +46,12 @@ The best surf trips make the good sessions easy and the rest of the day comforta
 
 Ability → month → wave type → water → travel time → accommodation → guide/operator → non-surf activities → safety. If all nine make sense, you probably have a good trip.
 
-1. **Ability** — be honest; famous does not mean suitable.
-2. **Month** — match the coast to the season.
-3. **Wave type** — beach, point or reef.
-4. **Water** — temperature and wetsuit needs.
-5. **Travel time** — how much journey you will accept.
-6. **Accommodation** — location before star rating.
-7. **Guide or operator** — local knowledge improves safety and timing.
-8. **Non-surf activities** — what makes a flat day worthwhile.
-9. **Safety** — read our [surf safety guide](/guides/ocean-safety-luxury-surf-travellers/).
+1. **Ability**: be honest; famous does not mean suitable.
+2. **Month**: match the coast to the season.
+3. **Wave type**: beach, point or reef.
+4. **Water**: temperature and wetsuit needs.
+5. **Travel time**: how much journey you will accept.
+6. **Accommodation**: location before star rating.
+7. **Guide or operator**: local knowledge improves safety and timing.
+8. **Non-surf activities**: what makes a flat day worthwhile.
+9. **Safety**: read our [surf safety guide](/guides/ocean-safety-luxury-surf-travellers/).

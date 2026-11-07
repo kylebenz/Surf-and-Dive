@@ -8,11 +8,11 @@ export const seychelles: Destination = {
   region: 'Indian Ocean',
   slug: 'seychelles',
 
-  positioning: 'Granite islands, private-island luxury and calm-season diving — the Indian Ocean at its most sculptural.',
+  positioning: 'Granite islands, private-island luxury and calm-season diving: the Indian Ocean at its most sculptural.',
   hero_headline: 'The Seychelles: Granite Islands and Private-Island Calm',
   hero_subheadline: 'Sculpted granite boulders, reef dives around Mahé and Praslin, a handful of surf spots in the right season and private islands where nature leads.',
   overview:
-    'The Seychelles combine some of the most distinctive island landscapes in the world — granite boulders, palm forests, powder-white beaches — with a conservation-led approach to luxury. Diving and snorkelling are the main ocean activities, with granite reefs, wrecks and seasonal pelagic life around Mahé and Praslin. Surf exists but is a minor attraction, with a handful of reef and beach breaks on Mahé that work in specific seasons. The transitional months between the monsoons often bring the calmest seas and clearest water. Private islands and low-density resorts make this one of the most refined ocean destinations in the Indian Ocean.',
+    'The Seychelles combine some of the most distinctive island landscapes in the world (granite boulders, palm forests, powder-white beaches) with a conservation-led approach to luxury. Diving and snorkelling are the main ocean activities, with granite reefs, wrecks and seasonal pelagic life around Mahé and Praslin. Surf exists but is a minor attraction, with a handful of reef and beach breaks on Mahé that work in specific seasons. The transitional months between the monsoons often bring the calmest seas and clearest water. Private islands and low-density resorts make this one of the most refined ocean destinations in the Indian Ocean.',
   why_visit: [
     'Scenery unlike anywhere else: granite boulder beaches and lush peaks rising from turquoise water.',
     'Diving and snorkelling in calm transitional months can be excellent, with turtles, rays and seasonal whale sharks.',
@@ -33,9 +33,9 @@ export const seychelles: Destination = {
     score: 9,
     sites: ['Shark Bank (Mahé)', 'Ennerdale wreck (Mahé)', 'Brissare Rocks (Mahé)', 'St Pierre and Ile Cocos (Praslin/La Digue area)', 'Outer islands (via liveaboard or specialist stays)'],
     marine_life: ['Hawksbill and green turtles', 'Eagle rays', 'Whale sharks (seasonal)', 'Reef sharks', 'Napoleon wrasse'],
-    season: 'The transitional months (roughly April to May and October to November) often bring calm seas and good visibility. Whale shark sightings are most often associated with the latter period around Mahé — never guaranteed.',
+    season: 'The transitional months (roughly April to May and October to November) often bring calm seas and good visibility. Whale shark sightings are most often associated with the latter period around Mahé, never guaranteed.',
     notes:
-      'Granite reef structures — boulders, swim-throughs and overhangs — make Seychelles diving distinctive. Outer islands such as Aldabra are highly protected and access is limited.',
+      'Granite reef structures (boulders, swim-throughs and overhangs) make Seychelles diving distinctive. Outer islands such as Aldabra are highly protected and access is limited.',
   },
 
   freediving: {
@@ -66,13 +66,13 @@ export const seychelles: Destination = {
   seasonal_conditions: [
     { label: 'Weather', detail: 'Warm year-round. The south-east trades (roughly May to October) bring breezier, drier weather; the north-west monsoon (roughly December to March) brings warmer, more humid conditions.' },
     { label: 'Surf', detail: 'Limited; south-facing Mahé spots typically during the south-east trades.' },
-    { label: 'Diving', detail: 'Transitional months (roughly April–May, October–November) often calmest and clearest.' },
+    { label: 'Diving', detail: 'Transitional months (roughly April-May, October-November) often calmest and clearest.' },
     { label: 'European calendar', detail: 'Strong for Easter, autumn breaks and the festive season.' },
   ],
   european_seasonal_angle:
     'The calm transitional months align with Easter and the late-autumn break, and the islands are a classic festive-season escape for Europeans seeking warmth and privacy.',
   season_types: ['winter-sun', 'shoulder'],
-  recommended_duration: '8–12 nights across two islands.',
+  recommended_duration: '8-12 nights across two islands.',
 
   traveller_profiles: ['couples', 'honeymoon', 'diver', 'freediver', 'family'],
   best_audience: 'Luxury islands, diving, nature and couples.',
@@ -83,13 +83,13 @@ export const seychelles: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–3', title: 'Mahé', detail: 'Arrive, recover, dive Shark Bank or the Ennerdale wreck with a good operator.' },
-    { days: 'Days 4–7', title: 'Praslin and La Digue', detail: 'Ferry or short flight; Vallée de Mai, Ile Cocos snorkel, cycling on La Digue.' },
-    { days: 'Days 8–10', title: 'Private island', detail: 'Finish on a private island for conservation programmes, turtles and quiet.' },
+    { days: 'Days 1-3', title: 'Mahé', detail: 'Arrive, recover, dive Shark Bank or the Ennerdale wreck with a good operator.' },
+    { days: 'Days 4-7', title: 'Praslin and La Digue', detail: 'Ferry or short flight; Vallée de Mai, Ile Cocos snorkel, cycling on La Digue.' },
+    { days: 'Days 8-10', title: 'Private island', detail: 'Finish on a private island for conservation programmes, turtles and quiet.' },
   ],
 
   planning_notes: [
-    'Marine parks charge entry fees and have rules — follow them.',
+    'Marine parks charge entry fees and have rules. Follow them.',
     'Inter-island ferries depend on sea state; allow buffer.',
     'Some beaches have strong currents in certain seasons; heed local advice.',
     'Check current entry requirements, including any travel authorisation.',
@@ -97,7 +97,7 @@ export const seychelles: Destination = {
 
   faqs: [
     { question: 'Is the Seychelles good for surfing?', answer: 'Surf is limited and secondary. A few Mahé beaches can work during the south-east trade-wind season, but the islands are better suited to diving and snorkelling.' },
-    { question: 'When is the best time to dive in the Seychelles?', answer: 'The transitional months — roughly April to May and October to November — often bring the calmest seas and best visibility.' },
+    { question: 'When is the best time to dive in the Seychelles?', answer: 'The transitional months, roughly April to May and October to November, often bring the calmest seas and best visibility.' },
   ],
 
   seo: {

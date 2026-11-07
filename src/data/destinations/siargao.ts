@@ -8,15 +8,15 @@ export const siargao: Destination = {
   region: 'Southeast Asia',
   slug: 'siargao',
 
-  positioning: 'Cloud 9’s reef, island-hopping lagoons and a relaxed boutique scene — tropical surf lifestyle with room to grow.',
+  positioning: 'Cloud 9’s reef, island-hopping lagoons and a relaxed boutique scene: tropical surf lifestyle with room to grow.',
   hero_headline: 'Siargao: Cloud 9, Lagoons and the Tropical Surf Lifestyle',
   hero_subheadline: 'A teardrop-shaped Philippine island built around one famous reef break, with mangrove lagoons, island-hopping days and a boutique stay scene that favours character over scale.',
   overview:
-    'Siargao has grown from a remote surf outpost into one of Southeast Asia’s most talked-about island escapes, yet it retains a relaxed, palm-shaded character. Cloud 9, the island’s famous right-hand reef break near General Luna, gives the island its identity, but there are softer waves for learners and a wider ocean world beyond: mangrove lagoons, sandbar islands and clear water for snorkelling and freediving. Luxury here is boutique — design-led villas, small resorts, good coffee and private boat days — rather than polished mega-resort service.',
+    'Siargao has grown from a remote surf outpost into one of Southeast Asia’s most talked-about island escapes, yet it retains a relaxed, palm-shaded character. Cloud 9, the island’s famous right-hand reef break near General Luna, gives the island its identity, but there are softer waves for learners and a wider ocean world beyond: mangrove lagoons, sandbar islands and clear water for snorkelling and freediving. Luxury here is boutique (design-led villas, small resorts, good coffee and private boat days) rather than polished mega-resort service.',
   why_visit: [
     'It combines a serious surf reputation with genuinely beginner-friendly waves nearby, making it work for mixed-ability groups.',
     'Island-hopping trips to sandbars, lagoons and mangroves give the non-surf days real substance.',
-    'The atmosphere — relaxed, young and creative — suits couples and friends who want a tropical surf lifestyle more than a formal resort.',
+    'The atmosphere (relaxed, young and creative) suits couples and friends who want a tropical surf lifestyle more than a formal resort.',
   ],
 
   surf: {
@@ -26,7 +26,7 @@ export const siargao: Destination = {
     levels: ['beginner', 'intermediate', 'advanced'],
     season: 'The strongest swells typically arrive roughly August to November, overlapping with the regional typhoon season. Smaller, cleaner days occur outside that window.',
     notes:
-      'Cloud 9 breaks over shallow reef and can be crowded and powerful on bigger days. Jacking Horse and similar inside spots are commonly used for lessons. Boat access is required for several outer reefs. Typhoon season can bring both good swell and serious disruption — monitor forecasts closely.',
+      'Cloud 9 breaks over shallow reef and can be crowded and powerful on bigger days. Jacking Horse and similar inside spots are commonly used for lessons. Boat access is required for several outer reefs. Typhoon season can bring both good swell and serious disruption: monitor forecasts closely.',
   },
 
   diving: {
@@ -70,9 +70,9 @@ export const siargao: Destination = {
     { label: 'European calendar', detail: 'Autumn suits surfers; Easter and spring suit couples and lagoon-focused trips.' },
   ],
   european_seasonal_angle:
-    'Siargao’s best surf aligns with the European autumn, making it an interesting alternative to Atlantic autumn trips — with the caveat that typhoon season requires flexibility and good insurance.',
+    'Siargao’s best surf aligns with the European autumn, making it an interesting alternative to Atlantic autumn trips, with the caveat that typhoon season requires flexibility and good insurance.',
   season_types: ['shoulder'],
-  recommended_duration: '8–12 nights; combine with Palawan or Cebu for a broader Philippines trip.',
+  recommended_duration: '8-12 nights; combine with Palawan or Cebu for a broader Philippines trip.',
 
   traveller_profiles: ['couples', 'solo', 'serious-surfer', 'freediver', 'active-luxury'],
   best_audience: 'Tropical surf lifestyle seekers, couples and younger luxury travellers.',
@@ -83,18 +83,18 @@ export const siargao: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–2', title: 'Arrive in General Luna', detail: 'Domestic connection to Siargao, check into a boutique stay and take an easy first session or a beach walk.' },
-    { days: 'Days 3–5', title: 'Surf mornings', detail: 'Lessons or guided sessions matched to your level; afternoons for yoga, cafés and recovery.' },
+    { days: 'Days 1-2', title: 'Arrive in General Luna', detail: 'Domestic connection to Siargao, check into a boutique stay and take an easy first session or a beach walk.' },
+    { days: 'Days 3-5', title: 'Surf mornings', detail: 'Lessons or guided sessions matched to your level; afternoons for yoga, cafés and recovery.' },
     { days: 'Day 6', title: 'Island-hopping', detail: 'Private boat to Naked, Daku and Guyam islands for snorkelling and lunch.' },
-    { days: 'Days 7–8', title: 'Lagoons', detail: 'Sugba Lagoon or Sohoton Cove for paddling, freediving with an instructor and quiet water.' },
-    { days: 'Days 9–10', title: 'Final sessions', detail: 'Last surfs, sunset at the boardwalk and onward travel.' },
+    { days: 'Days 7-8', title: 'Lagoons', detail: 'Sugba Lagoon or Sohoton Cove for paddling, freediving with an instructor and quiet water.' },
+    { days: 'Days 9-10', title: 'Final sessions', detail: 'Last surfs, sunset at the boardwalk and onward travel.' },
   ],
 
   planning_notes: [
-    'Domestic flights connect via Manila or Cebu — allow buffer for weather delays.',
+    'Domestic flights connect via Manila or Cebu: allow buffer for weather delays.',
     'Typhoon season (roughly July to November) requires flexible bookings and good insurance.',
     'Cloud 9 can be crowded; a local guide helps with timing and etiquette.',
-    'Protected lagoons may have entry fees and rules — follow them.',
+    'Protected lagoons may have entry fees and rules. Follow them.',
     'Cash may be needed in some areas; check current banking options.',
   ],
 

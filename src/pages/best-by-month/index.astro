@@ -9,7 +9,7 @@ import { itemListLd } from '../../utils/seo';
 ---
 <BaseLayout
   title="Best Ocean Destinations by Month | Surf and Dive"
-  description="Where to surf, dive and freedive in every month of the year — seasonal planning guidance for European travellers, from winter sun to autumn swell."
+  description="Where to surf, dive and freedive in every month of the year: seasonal planning guidance for European travellers, from winter sun to autumn swell."
   crumbs={[{ label: 'Best by Month', href: '/best-by-month/' }]}
   jsonLd={[itemListLd(seasons.map((s) => ({ name: s.headline, href: `/best-by-month/${s.month}/` })), Astro.site!)]}
 >
@@ -38,7 +38,7 @@ import { itemListLd } from '../../utils/seo';
         ))}
       </ol>
       <div class="mt-3" style="max-width:820px">
-        <Notice kind="seasonal"><p>Seasonal information is planning guidance, not a guarantee. Conditions generally follow these patterns but vary by region, coast and year — always check current local conditions.</p></Notice>
+        <Notice kind="seasonal"><p>Seasonal information is planning guidance, not a guarantee. Conditions generally follow these patterns but vary by region, coast and year. Always check current local conditions.</p></Notice>
       </div>
     </div>
   </section>

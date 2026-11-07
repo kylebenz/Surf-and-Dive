@@ -3,7 +3,7 @@
 **Luxury Ocean Holidays, Curated Around the Water.**
 
 A premium editorial travel publication for European travellers who want exceptional surf,
-diving and freediving — and an exceptional place to stay around it. Built with
+diving and freediving, and an exceptional place to stay around it. Built with
 [Astro](https://astro.build) as a fully static site: near-zero JavaScript, fast, accessible
 and search-friendly.
 
@@ -48,33 +48,33 @@ tells visitors the enquiry service is not yet connected. See `.env.example`.
 
 Content lives in data, not components:
 
-- **Destinations** — one file per destination in `src/data/destinations/`. Scores, spots,
+- **Destinations**, one file per destination in `src/data/destinations/`. Scores, spots,
   seasons, itineraries, FAQs, SEO, related content and the ten image slots are all there.
-- **Guides** — Markdown with front matter in `src/content/guides/`. The filename is the URL slug.
+- **Guides**: Markdown with front matter in `src/content/guides/`. The filename is the URL slug.
   Front matter holds SEO title, meta description, keywords, related destinations/guides,
   the image guide, FAQs and source notes (schema in `src/content.config.ts`).
-- **Months** — `src/data/seasonal.ts` (the seasonal matrix from the master spec).
-- **Comparisons** — `src/data/comparisons.ts` (twelve criteria per pair; no universal winners).
-- **European markets** — `src/data/countries.ts`.
-- **Site-wide** — `src/config/site.ts` (brand, navigation, locales, review date).
+- **Months**: `src/data/seasonal.ts` (the seasonal matrix from the master spec).
+- **Comparisons**: `src/data/comparisons.ts` (twelve criteria per pair; no universal winners).
+- **European markets**: `src/data/countries.ts`.
+- **Site-wide**: `src/config/site.ts` (brand, navigation, locales, review date).
 
 ## Photography
 
 All 200 destination image slots (20 × 10) and every guide image slot start **empty** and render
-as intentional, labelled placeholders — never stock or AI imagery. Drop correctly named files
+as intentional, labelled placeholders, never stock or AI imagery. Drop correctly named files
 into `public/images/…` and they appear automatically. See `public/images/README.md`.
 
 ## Languages
 
 English launches first. `/de/`, `/fr/`, `/es/`, `/it/` are reserved in `src/config/site.ts`
-(`LOCALES`). hreflang is only emitted for enabled locales — enable one only after native-language
+(`LOCALES`). hreflang is only emitted for enabled locales: enable one only after native-language
 editorial review.
 
 ## Design system
 
 Tokens in `src/styles/global.css`: Deep Ocean `#082B36`, Ocean Teal `#087F8C`, Emerald `#10A878`,
 Seafoam `#D8F0EA`, Sand `#F4EFE6`, Shell `#FAFAF7`, Navy `#102A43`, Slate `#62727A`, Coral `#E8896B`
-(used sparingly). Cormorant Garamond for display, Inter for text — both self-hosted.
+(used sparingly). Cormorant Garamond for display, Inter for text, both self-hosted.
 Motion is subtle, progressive (content is visible without JS) and disabled under
 `prefers-reduced-motion`.
 

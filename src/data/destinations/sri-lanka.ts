@@ -8,13 +8,13 @@ export const sriLanka: Destination = {
   region: 'Indian Ocean',
   slug: 'sri-lanka',
 
-  positioning: 'Two surf coasts with opposite seasons, boutique heritage hotels and wildlife safaris — luxury that feels considered rather than excessive.',
+  positioning: 'Two surf coasts with opposite seasons, boutique heritage hotels and wildlife safaris, and luxury that feels considered rather than excessive.',
   hero_headline: 'Sri Lanka: Two Coasts, Two Seasons, One Island',
-  hero_subheadline: 'Point breaks and reef waves on the south coast in the European winter, Arugam Bay in the summer — with boutique villas, tea country and safaris in between.',
+  hero_subheadline: 'Point breaks and reef waves on the south coast in the European winter, Arugam Bay in the summer, with boutique villas, tea country and safaris in between.',
   overview:
-    'Sri Lanka is one of the most useful ocean destinations for European travellers because its two coasts run on different seasons. Sri Lanka Tourism lists extensive coastal water-sport areas and identifies Hikkaduwa as a surfing and diving location with a November to March surf season, while the east coast around Arugam Bay comes into its own during the European summer. The south coast — Weligama, Mirissa, Ahangama, Midigama — offers waves for every level, with some of the most appealing boutique villas and heritage hotels in Asia nearby. Add tea country, cultural sites and national-park safaris, and you have a trip with remarkable depth for its size.',
+    'Sri Lanka is one of the most useful ocean destinations for European travellers because its two coasts run on different seasons. Sri Lanka Tourism lists extensive coastal water-sport areas and identifies Hikkaduwa as a surfing and diving location with a November to March surf season, while the east coast around Arugam Bay comes into its own during the European summer. The south coast (Weligama, Mirissa, Ahangama, Midigama) offers waves for every level, with some of the most appealing boutique villas and heritage hotels in Asia nearby. Add tea country, cultural sites and national-park safaris, and you have a trip with remarkable depth for its size.',
   why_visit: [
-    'Opposite coastal seasons mean Sri Lanka can work for both winter-sun and summer trips — provided you choose the right coast.',
+    'Opposite coastal seasons mean Sri Lanka can work for both winter-sun and summer trips: provided you choose the right coast.',
     'Surf variety along the south coast suits beginners, improvers and experienced surfers within short distances.',
     'Boutique luxury is a real strength: colonial-era villas, design hotels around Galle and Tangalle, and excellent value relative to many long-haul destinations.',
   ],
@@ -70,9 +70,9 @@ export const sriLanka: Destination = {
     { label: 'European calendar', detail: 'Excellent for winter sun (south) and for European summer (east coast).' },
   ],
   european_seasonal_angle:
-    'Sri Lanka is one of the few long-haul destinations that serves both European winter (south coast) and summer (east coast) — choose the coast first and the hotel second.',
+    'Sri Lanka is one of the few long-haul destinations that serves both European winter (south coast) and summer (east coast). Choose the coast first and the hotel second.',
   season_types: ['winter-sun', 'summer', 'year-round'],
-  recommended_duration: '10–14 nights, combining a surf base with Galle, tea country or a safari.',
+  recommended_duration: '10-14 nights, combining a surf base with Galle, tea country or a safari.',
 
   traveller_profiles: ['couples', 'family', 'active-luxury', 'winter-sun', 'solo'],
   best_audience: 'Value-conscious luxury travellers wanting surf, culture and wildlife.',
@@ -84,16 +84,16 @@ export const sriLanka: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–2', title: 'Galle', detail: 'Arrive in Colombo, transfer south to a heritage hotel near Galle Fort and recover.' },
-    { days: 'Days 3–6', title: 'South-coast surf', detail: 'Base in Ahangama or Weligama: coached sessions, reef breaks for experienced surfers, long lunches by the sea.' },
-    { days: 'Days 7–8', title: 'Ocean and wildlife', detail: 'A responsible whale-watching trip from Mirissa in season, or a dive day off Unawatuna.' },
-    { days: 'Days 9–11', title: 'Safari or tea country', detail: 'A safari lodge near Yala or Udawalawe, or the hill country for tea estates and cool air.' },
+    { days: 'Days 1-2', title: 'Galle', detail: 'Arrive in Colombo, transfer south to a heritage hotel near Galle Fort and recover.' },
+    { days: 'Days 3-6', title: 'South-coast surf', detail: 'Base in Ahangama or Weligama: coached sessions, reef breaks for experienced surfers, long lunches by the sea.' },
+    { days: 'Days 7-8', title: 'Ocean and wildlife', detail: 'A responsible whale-watching trip from Mirissa in season, or a dive day off Unawatuna.' },
+    { days: 'Days 9-11', title: 'Safari or tea country', detail: 'A safari lodge near Yala or Udawalawe, or the hill country for tea estates and cool air.' },
     { days: 'Day 12', title: 'Depart', detail: 'Return to Colombo for the flight home.' },
   ],
 
   planning_notes: [
     'Choose the coast by season: south/west for European winter, east for European summer.',
-    'Road journeys take longer than distances suggest — plan fewer, longer stays.',
+    'Road journeys take longer than distances suggest. Plan fewer, longer stays.',
     'Dress respectfully at temples and cultural sites.',
     'Check current entry requirements, including electronic travel authorisation.',
     'Choose whale-watching operators that follow responsible-distance practices.',
@@ -102,7 +102,7 @@ export const sriLanka: Destination = {
   faqs: [
     { question: 'When is surf season in Sri Lanka?', answer: 'The south and west coasts typically work from roughly November to April (Sri Lanka Tourism highlights November to March for Hikkaduwa). The east coast around Arugam Bay typically works from roughly May to October.' },
     { question: 'Is Sri Lanka good for beginner surfers?', answer: 'Yes. Weligama Bay and other sandy-bottom spots on the south coast are among the most popular places in Asia to learn, in season.' },
-    { question: 'Can I combine surf and safari in Sri Lanka?', answer: 'Yes — it is one of the island’s strengths. South-coast surf bases are within reach of national parks such as Yala and Udawalawe.' },
+    { question: 'Can I combine surf and safari in Sri Lanka?', answer: 'Yes. It is one of the island’s strengths. South-coast surf bases are within reach of national parks such as Yala and Udawalawe.' },
   ],
 
   seo: {

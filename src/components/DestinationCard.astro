@@ -9,7 +9,7 @@ const hero = d.images.find((i) => i.type === 'hero')!;
 const image = resolveImage({ src: hero.src, dir: `/images/destinations/${d.slug}`, base: 'hero', alt: hero.alt });
 const H = headingLevel;
 const months = d.best_months;
-const monthLabel = months.length >= 10 ? 'Year-round' : `${monthName(months[0]).slice(0, 3)} – ${monthName(months[months.length - 1]).slice(0, 3)}`;
+const monthLabel = months.length >= 10 ? 'Year-round' : `${monthName(months[0]).slice(0, 3)} to ${monthName(months[months.length - 1]).slice(0, 3)}`;
 const activities = [
   { key: 'Surf', v: d.surf.score },
   { key: 'Dive', v: d.diving.score },

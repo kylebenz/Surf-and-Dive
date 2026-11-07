@@ -6,7 +6,7 @@ description: "Escape the European winter with warm-water surf, island scenery an
 category: Seasonal
 primaryKeyword: winter sun surf holidays
 keywords: ["winter sun surf holidays", "warm water surf Europe", "luxury winter sun"]
-dek: "When Europe is cold, different coastlines come into season. How to match the month to the coast — short-haul or long."
+dek: "When Europe is cold, different coastlines come into season. How to match the month to the coast, short-haul or long."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["madeira", "canary-islands", "maldives", "sri-lanka", "costa-rica"]
@@ -22,10 +22,10 @@ images:
   - { label: "Route map", kind: graphic, brief: "Map-style graphic: Europe to winter-sun destinations." }
 faqs:
   - { question: "Where can Europeans find warm-water surf in winter?", answer: "The Maldives, Sri Lanka, parts of Indonesia, Costa Rica, the Canary Islands, Mauritius and other Indian Ocean or tropical destinations can be considered depending on the month and desired surf conditions." }
-  - { question: "Is the water warm in the Canaries or Madeira in winter?", answer: "The air is mild, but the Atlantic is temperate rather than tropical — most surfers wear a wetsuit. For boardshort-warm water, look to the Indian Ocean or Central America." }
+  - { question: "Is the water warm in the Canaries or Madeira in winter?", answer: "The air is mild, but the Atlantic is temperate rather than tropical. Most surfers wear a wetsuit. For boardshort-warm water, look to the Indian Ocean or Central America." }
 sources:
-  - { name: "Visit Madeira — Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/", note: "Surf zones from Porto da Cruz to the north and south-west coasts." }
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0" }
+  - { name: "Visit Madeira: Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/", note: "Surf zones from Porto da Cruz to the north and south-west coasts." }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0" }
   - { name: "Visit Maldives", url: "https://visitmaldives.com/", note: "Surf season and stronger periods." }
   - { name: "Sri Lanka Tourism", url: "https://www.srilanka.travel/adventure_and_sports", note: "Water-sport regions and operators." }
 ---
@@ -54,4 +54,4 @@ For surfers, winter is especially interesting because different coastlines come 
 
 Do not book purely for heat. Book for the combination of water, waves, atmosphere and the kind of days you actually want to have. If the surf is average one morning, what else will make the trip worth it? That question usually separates a good surf destination from a great holiday destination.
 
-Browse the winter months in the [Best by Month](/best-by-month/) planner — start with [January](/best-by-month/january/) and [February](/best-by-month/february/).
+Browse the winter months in the [Best by Month](/best-by-month/) planner: start with [January](/best-by-month/january/) and [February](/best-by-month/february/).

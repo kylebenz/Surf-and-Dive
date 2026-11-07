@@ -24,7 +24,7 @@ faqs:
 sources:
   - { name: "Visit Maldives", url: "https://visitmaldives.com/" }
   - { name: "Indonesia official tourism information", note: "Surf areas for different abilities." }
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0" }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0" }
 ---
 
 ## The best couples' trip is not a compromise
@@ -47,7 +47,7 @@ A luxury coastal stay around Ericeira, Comporta, the Algarve or [Madeira](/desti
 
 ## For a once-in-a-decade trip
 
-[French Polynesia](/destinations/french-polynesia/) and the [Seychelles](/destinations/seychelles/) are worth the distance when the landscape and romance should dominate — lagoons, overwater villas and very low-density islands.
+[French Polynesia](/destinations/french-polynesia/) and the [Seychelles](/destinations/seychelles/) are worth the distance when the landscape and romance should dominate: lagoons, overwater villas and very low-density islands.
 
 ## The question to ask
 

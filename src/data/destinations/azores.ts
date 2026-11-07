@@ -8,11 +8,11 @@ export const azores: Destination = {
   region: 'Atlantic Europe',
   slug: 'azores',
 
-  positioning: 'Volcanic mid-Atlantic islands with wild surf, blue-water diving and whale encounters — Europe’s most nature-led ocean escape.',
+  positioning: 'Volcanic mid-Atlantic islands with wild surf, blue-water diving and whale encounters: Europe’s most nature-led ocean escape.',
   hero_headline: 'The Azores: Wild Atlantic Islands in the Middle of the Ocean',
-  hero_subheadline: 'Volcanic beaches, offshore seamounts where mobula rays gather in summer, resident sperm whales and boutique quintas — all within a European flight.',
+  hero_subheadline: 'Volcanic beaches, offshore seamounts where mobula rays gather in summer, resident sperm whales and boutique quintas, all within a European flight.',
   overview:
-    'The Azores feel more remote and volcanic than any other European ocean destination. Nine islands sit in the mid-Atlantic, surrounded by deep water that brings oceanic life close to shore: sperm whales are frequently seen year-round, migrating baleen whales pass in spring, and in summer offshore seamounts attract mobula rays and blue sharks. Surf is raw and Atlantic, with black-sand beach breaks on São Miguel and the remote reef at Fajã da Caldeira de Santo Cristo on São Jorge. The appeal is less about a single iconic wave and more about the entire Atlantic environment — crater lakes, hot springs, hiking and very good seafood included.',
+    'The Azores feel more remote and volcanic than any other European ocean destination. Nine islands sit in the mid-Atlantic, surrounded by deep water that brings oceanic life close to shore: sperm whales are frequently seen year-round, migrating baleen whales pass in spring, and in summer offshore seamounts attract mobula rays and blue sharks. Surf is raw and Atlantic, with black-sand beach breaks on São Miguel and the remote reef at Fajã da Caldeira de Santo Cristo on São Jorge. The appeal is less about a single iconic wave and more about the entire Atlantic environment: crater lakes, hot springs, hiking and very good seafood included.',
   why_visit: [
     'Blue-water diving is the standout: offshore banks and seamounts can offer pelagic encounters that are very unusual for Europe.',
     'The islands combine ocean adventure with hiking, crater lakes, thermal pools and a slow, green landscape.',
@@ -26,7 +26,7 @@ export const azores: Destination = {
     levels: ['beginner', 'intermediate', 'advanced'],
     season: 'Atlantic swells typically peak roughly from autumn to spring. Autumn often offers a good balance of swell, milder weather and warmer water; summer is smaller and suits learners on the right days.',
     notes:
-      'São Miguel’s north-coast beach breaks are the most accessible, with surf schools for beginners in smaller conditions. Reefs and points around the islands suit experienced surfers. Weather changes quickly in the mid-Atlantic — local knowledge matters.',
+      'São Miguel’s north-coast beach breaks are the most accessible, with surf schools for beginners in smaller conditions. Reefs and points around the islands suit experienced surfers. Weather changes quickly in the mid-Atlantic, so local knowledge matters.',
   },
 
   diving: {
@@ -35,7 +35,7 @@ export const azores: Destination = {
     marine_life: ['Mobula rays (seasonal)', 'Blue sharks (seasonal)', 'Sperm whales (frequently seen year-round)', 'Dolphins', 'Groupers and Atlantic reef fish', 'Turtles (occasional)'],
     season: 'Offshore pelagic diving is typically concentrated roughly July to September, when the water is warmest and seas calmest. Coastal diving is possible for a longer season depending on conditions.',
     notes:
-      'Azorean diving is about blue water and volcanic topography rather than coral reefs. Offshore banks involve long boat rides and open-ocean conditions; they suit experienced divers. In-water whale encounters are regulated and licence-dependent — use authorised operators only.',
+      'Azorean diving is about blue water and volcanic topography rather than coral reefs. Offshore banks involve long boat rides and open-ocean conditions; they suit experienced divers. In-water whale encounters are regulated and licence-dependent. Use authorised operators only.',
   },
 
   freediving: {
@@ -70,9 +70,9 @@ export const azores: Destination = {
     { label: 'European calendar', detail: 'Ideal for summer and early-autumn trips; a contrast to busy Mediterranean coasts.' },
   ],
   european_seasonal_angle:
-    'The Azores suit the European summer and early autumn, when the water is warmest and diving peaks — and when the islands offer a cool, green alternative to crowded southern beaches.',
+    'The Azores suit the European summer and early autumn, when the water is warmest and diving peaks, and when the islands offer a cool, green alternative to crowded southern beaches.',
   season_types: ['summer', 'shoulder'],
-  recommended_duration: '7–10 nights, ideally across two islands.',
+  recommended_duration: '7-10 nights, ideally across two islands.',
 
   traveller_profiles: ['active-luxury', 'diver', 'couples', 'family', 'solo'],
   best_audience: 'European ocean adventure, nature and diving.',
@@ -84,15 +84,15 @@ export const azores: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–3', title: 'São Miguel', detail: 'Fly into Ponta Delgada; surf the north coast, hike crater lakes and soak in thermal pools.' },
+    { days: 'Days 1-3', title: 'São Miguel', detail: 'Fly into Ponta Delgada; surf the north coast, hike crater lakes and soak in thermal pools.' },
     { days: 'Day 4', title: 'Whales', detail: 'A licensed whale-watching trip, conditions permitting.' },
-    { days: 'Days 5–7', title: 'Santa Maria or Pico', detail: 'Hop to Santa Maria for summer offshore diving, or Pico for blue-water experiences and vineyard landscapes.' },
-    { days: 'Days 8–9', title: 'Slow finish', detail: 'Coastal walks and seafood — keep a buffer for weather-related flight changes.' },
+    { days: 'Days 5-7', title: 'Santa Maria or Pico', detail: 'Hop to Santa Maria for summer offshore diving, or Pico for blue-water experiences and vineyard landscapes.' },
+    { days: 'Days 8-9', title: 'Slow finish', detail: 'Coastal walks and seafood. Keep a buffer for weather-related flight changes.' },
   ],
 
   planning_notes: [
     'Inter-island flights and ferries depend on weather; build flexibility into the itinerary.',
-    'Offshore dives require experience and good sea conditions — they are frequently weather-dependent.',
+    'Offshore dives require experience and good sea conditions. They are frequently weather-dependent.',
     'Whale and dolphin encounters are regulated; use licensed operators.',
     'Pack layers and rain gear even in summer.',
     'Check the current rules for vehicle access to protected areas such as Fajã da Caldeira de Santo Cristo.',

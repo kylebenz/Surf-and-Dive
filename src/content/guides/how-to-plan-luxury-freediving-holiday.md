@@ -6,7 +6,7 @@ description: "Plan a safe, responsible freediving holiday with qualified instruc
 category: Freediving
 primaryKeyword: freediving holiday safety
 keywords: ["freediving holiday safety", "freediving travel guide", "responsible freediving"]
-dek: "Your holiday should make you a better, calmer freediver — not push you into a depth or breath-hold you are not trained for."
+dek: "Your holiday should make you a better, calmer freediver, not push you into a depth or breath-hold you are not trained for."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["philippines", "bali-nusa-penida", "french-polynesia", "maldives"]
@@ -26,13 +26,13 @@ faqs:
 
 The ocean rewards patience. The biggest mistake is arriving at a beautiful destination and deciding you need to prove something.
 
-Your holiday should make you a better, calmer freediver — not push you into a depth or breath-hold that you are not trained for.
+Your holiday should make you a better, calmer freediver, not push you into a depth or breath-hold that you are not trained for.
 
 ## Choose qualified support
 
 Book instructors or guides with appropriate credentials and local knowledge. Follow the safety system used by your training organisation and the local operator. Never freedive alone.
 
-Destinations with established schools — [the Philippines](/destinations/philippines/) around Panglao and Moalboal, [Bali's](/destinations/bali-nusa-penida/) Amed coast — make this easier.
+Destinations with established schools ([the Philippines](/destinations/philippines/) around Panglao and Moalboal, [Bali's](/destinations/bali-nusa-penida/) Amed coast) make this easier.
 
 ## Conditions come first
 

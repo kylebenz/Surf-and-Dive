@@ -154,7 +154,7 @@ const articleLd = {
             <h2 id="src-t" class="mini-title">Source notes</h2>
             <ul role="list">
               {data.sources.map((s) => (
-                <li>{s.url ? <a href={s.url} rel="noopener" target="_blank">{s.name}<span class="sr-only"> (opens in a new tab)</span></a> : <span>{s.name}</span>}{s.note && <span class="muted"> — {s.note}</span>}</li>
+                <li>{s.url ? <a href={s.url} rel="noopener" target="_blank">{s.name}<span class="sr-only"> (opens in a new tab)</span></a> : <span>{s.name}</span>}{s.note && <span class="muted">: {s.note}</span>}</li>
               ))}
             </ul>
             <p class="note-small">Official sources are cited for broad patterns. They are not a substitute for current, local verification.</p>

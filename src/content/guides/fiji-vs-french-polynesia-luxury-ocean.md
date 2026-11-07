@@ -20,7 +20,7 @@ images:
   - { label: "Underwater", brief: "Underwater comparison." }
   - { label: "Stays", brief: "Luxury bungalow or private-island image." }
 sources:
-  - { name: "Tourism Fiji — Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "The Mamanuca Islands, Cloudbreak and other breaks." }
+  - { name: "Tourism Fiji: Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "The Mamanuca Islands, Cloudbreak and other breaks." }
   - { name: "Tahiti Tourisme", note: "Moorea's lagoons, coral and marine life." }
 ---
 
@@ -38,7 +38,7 @@ If the trip is built around surfing, Fiji has a very strong case.
 
 Moorea offers clear lagoons, coral ecosystems and marine life including rays, turtles and sharks.
 
-The combination of mountains, lagoons and luxury accommodation creates a different kind of ocean holiday — slower and more cinematic.
+The combination of mountains, lagoons and luxury accommodation creates a different kind of ocean holiday: slower and more cinematic.
 
 ## For couples
 

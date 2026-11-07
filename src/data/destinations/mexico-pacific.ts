@@ -10,7 +10,7 @@ export const mexicoPacific: Destination = {
 
   positioning: 'Warm-water Pacific surf from gentle points to the Mexican Pipeline, with some of the Americas’ most polished beach resorts.',
   hero_headline: 'Mexico’s Pacific Coast: Easy Luxury, Serious Surf',
-  hero_subheadline: 'Point breaks around Punta Mita, the heavy beach break at Puerto Escondido, Baja’s desert coast and protected islands — paired with resorts that make the luxury effortless.',
+  hero_subheadline: 'Point breaks around Punta Mita, the heavy beach break at Puerto Escondido, Baja’s desert coast and protected islands, paired with resorts that make the luxury effortless.',
   overview:
     'Mexico’s Pacific coast stretches from the desert shores of Baja California to the jungle-backed beaches of Oaxaca, and it offers some of the most varied warm-water surf in the Americas. Around Punta Mita and the Riviera Nayarit, gentle points and reefs sit beside high-end resorts; Sayulita is a lively learning hub; Puerto Escondido’s Zicatela is one of the heaviest beach breaks in the world. Baja Sur adds desert-meets-ocean scenery and access to protected areas such as Cabo Pulmo on the Sea of Cortez side. For European travellers, it combines surf, food culture and easy luxury in a single, well-connected trip.',
   why_visit: [
@@ -21,12 +21,12 @@ export const mexicoPacific: Destination = {
 
   surf: {
     score: 9,
-    spots: ['Punta Mita points (Nayarit)', 'La Lancha (Nayarit)', 'Sayulita (beginner to intermediate)', 'Puerto Escondido – Zicatela (expert)', 'Puerto Escondido – La Punta (intermediate)', 'Barra de la Cruz (Oaxaca)', 'Todos Santos area (Baja Sur)'],
+    spots: ['Punta Mita points (Nayarit)', 'La Lancha (Nayarit)', 'Sayulita (beginner to intermediate)', 'Zicatela, Puerto Escondido (expert)', 'La Punta, Puerto Escondido (intermediate)', 'Barra de la Cruz (Oaxaca)', 'Todos Santos area (Baja Sur)'],
     best_for: ['Beginners around Sayulita and Punta Mita', 'Intermediate surfers', 'Advanced and expert surfers in Oaxaca'],
     levels: ['beginner', 'intermediate', 'advanced'],
     season: 'South swells typically run roughly April to October, with the most powerful conditions in the middle of that window. Winter brings smaller, cleaner waves in many areas, plus north swells for some Baja and Nayarit spots.',
     notes:
-      'Zicatela is one of the heaviest beach breaks anywhere and suited to experts only; La Punta, at the other end of the bay, is far friendlier. Nayarit’s points and reefs are well suited to learning and longboarding. Riptides and shorebreak can be strong — surf with local guidance.',
+      'Zicatela is one of the heaviest beach breaks anywhere and suited to experts only; La Punta, at the other end of the bay, is far friendlier. Nayarit’s points and reefs are well suited to learning and longboarding. Riptides and shorebreak can be strong. Surf with local guidance.',
   },
 
   diving: {
@@ -35,7 +35,7 @@ export const mexicoPacific: Destination = {
     marine_life: ['Humpback whales (winter, regulated)', 'Manta rays', 'Sea lions (Baja)', 'Schooling fish (Cabo Pulmo)', 'Giant oceanic mantas and sharks (Revillagigedo)'],
     season: 'Diving varies by region. Whale season along the Pacific coast typically runs in winter (roughly December to March). Revillagigedo liveaboards typically operate roughly November to May.',
     notes:
-      'Coastal diving is good rather than world-class, but protected areas such as Cabo Pulmo — a widely cited marine recovery story — and the remote Revillagigedo islands, a UNESCO World Heritage site reached by liveaboard, are exceptional for experienced divers.',
+      'Coastal diving is good rather than world-class, but protected areas such as Cabo Pulmo, a widely cited marine recovery story, and the remote Revillagigedo islands, a UNESCO World Heritage site reached by liveaboard, are exceptional for experienced divers.',
   },
 
   freediving: {
@@ -46,7 +46,7 @@ export const mexicoPacific: Destination = {
   },
 
   marine_life_notes:
-    'Humpback whales visit in winter, and protected areas host rays, sea lions and dense fish life. Whale watching and access to protected islands are regulated — use licensed operators.',
+    'Humpback whales visit in winter, and protected areas host rays, sea lions and dense fish life. Whale watching and access to protected islands are regulated. Use licensed operators.',
 
   luxury: {
     score: 9,
@@ -72,7 +72,7 @@ export const mexicoPacific: Destination = {
   european_seasonal_angle:
     'Mexico’s Pacific coast can serve both a late-summer surf trip and a winter escape focused on resort luxury and whale season. Hurricane season (roughly June to November, peaking later) requires flexibility.',
   season_types: ['winter-sun', 'summer', 'shoulder'],
-  recommended_duration: '8–12 nights.',
+  recommended_duration: '8-12 nights.',
 
   traveller_profiles: ['couples', 'family', 'active-luxury', 'serious-surfer', 'winter-sun'],
   best_audience: 'Surf plus high-end resorts and easy luxury.',
@@ -83,14 +83,14 @@ export const mexicoPacific: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–2', title: 'Punta Mita', detail: 'Arrive via Puerto Vallarta, settle into a resort or villa, first session on a gentle point.' },
-    { days: 'Days 3–5', title: 'Nayarit surf and coast', detail: 'Guided sessions at points and reefs; Sayulita for a lively afternoon; a regulated boat trip to the Marietas.' },
-    { days: 'Days 6–9', title: 'Oaxaca (optional)', detail: 'Experienced surfers can fly to Puerto Escondido for the south-swell season; others extend resort time.' },
+    { days: 'Days 1-2', title: 'Punta Mita', detail: 'Arrive via Puerto Vallarta, settle into a resort or villa, first session on a gentle point.' },
+    { days: 'Days 3-5', title: 'Nayarit surf and coast', detail: 'Guided sessions at points and reefs; Sayulita for a lively afternoon; a regulated boat trip to the Marietas.' },
+    { days: 'Days 6-9', title: 'Oaxaca (optional)', detail: 'Experienced surfers can fly to Puerto Escondido for the south-swell season; others extend resort time.' },
     { days: 'Day 10', title: 'Depart', detail: 'Return via Mexico City or Puerto Vallarta.' },
   ],
 
   planning_notes: [
-    'Zicatela is for experts only — check conditions and surf with local guidance.',
+    'Zicatela is for experts only. Check conditions and surf with local guidance.',
     'Hurricane season requires flexible bookings and good insurance.',
     'Access to Islas Marietas is regulated with limited daily visitors.',
     'Check current travel advice for the specific regions you plan to visit.',

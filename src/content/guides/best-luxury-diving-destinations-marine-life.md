@@ -6,7 +6,7 @@ description: "Compare luxury dive destinations for sharks, rays, turtles, reef f
 category: Diving
 primaryKeyword: best diving destinations marine life
 keywords: ["best diving destinations marine life", "luxury shark diving", "luxury marine life holidays"]
-dek: "Start with the encounter you hope to have — then remember the ocean does not operate on a timetable."
+dek: "Start with the encounter you hope to have, then remember the ocean does not operate on a timetable."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["maldives", "french-polynesia", "mozambique", "philippines", "azores", "fernando-de-noronha"]
@@ -39,10 +39,10 @@ Tahiti Tourisme describes Moorea's lagoons as rich in marine life, with stingray
 
 ## Other encounters worth planning around
 
-- **Manta rays and whale sharks** — [Mozambique](/destinations/mozambique/) (Tofo) and [the Maldives](/destinations/maldives/).
-- **Mobula rays and blue sharks** — [the Azores](/destinations/azores/) in summer.
-- **Sardine shoals and thresher sharks** — [the Philippines](/destinations/philippines/).
-- **Turtles and dolphins in a protected park** — [Fernando de Noronha](/destinations/fernando-de-noronha/).
+- **Manta rays and whale sharks**: [Mozambique](/destinations/mozambique/) (Tofo) and [the Maldives](/destinations/maldives/).
+- **Mobula rays and blue sharks**: [the Azores](/destinations/azores/) in summer.
+- **Sardine shoals and thresher sharks**: [the Philippines](/destinations/philippines/).
+- **Turtles and dolphins in a protected park**: [Fernando de Noronha](/destinations/fernando-de-noronha/).
 
 ## What makes a marine-life trip memorable
 

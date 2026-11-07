@@ -12,7 +12,7 @@ export const mauritius: Destination = {
   hero_headline: 'Mauritius: Lagoons, Le Morne and Polished Resort Luxury',
   hero_subheadline: 'A reef-ringed island with sheltered lagoons, a celebrated left beneath Le Morne mountain, kite and wing foiling, diving off the north and west, and some of the Indian Ocean’s most accomplished resorts.',
   overview:
-    'Mauritius is a resort-led island where the lagoon is the playground. A barrier reef encloses much of the coast, creating calm water for swimming, snorkelling and learning water sports, while passes in the reef produce surf — most famously the powerful left-hander beneath Le Morne on the south-west tip. The island is also a major kitesurfing destination. Diving around the north islets and the west coast adds variety. Luxury is polished and service-driven, with an exceptional depth of five-star resorts, spas and dining.',
+    'Mauritius is a resort-led island where the lagoon is the playground. A barrier reef encloses much of the coast, creating calm water for swimming, snorkelling and learning water sports, while passes in the reef produce surf, most famously the powerful left-hander beneath Le Morne on the south-west tip. The island is also a major kitesurfing destination. Diving around the north islets and the west coast adds variety. Luxury is polished and service-driven, with an exceptional depth of five-star resorts, spas and dining.',
   why_visit: [
     'Resort quality and service are among the strongest in the Indian Ocean.',
     'Calm lagoons suit mixed groups, families and couples, with real surf and kite options for the experienced.',
@@ -72,7 +72,7 @@ export const mauritius: Destination = {
   european_seasonal_angle:
     'Mauritius suits the European winter and festive season, with the shoulder months often a sweet spot for weather and value. Surfers and kiters favour the southern-winter months.',
   season_types: ['winter-sun', 'year-round'],
-  recommended_duration: '8–12 nights.',
+  recommended_duration: '8-12 nights.',
 
   traveller_profiles: ['couples', 'honeymoon', 'family', 'winter-sun', 'active-luxury'],
   best_audience: 'Resort luxury, couples and mixed water activities.',
@@ -83,20 +83,20 @@ export const mauritius: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–3', title: 'West coast', detail: 'Resort base near Le Morne or Tamarin; lagoon swims and a kite lesson.' },
-    { days: 'Days 4–6', title: 'Water days', detail: 'Dive Cathedral or the north islets; experienced surfers check One Eye with local guidance.' },
-    { days: 'Days 7–9', title: 'Land and lagoon', detail: 'Hike Le Morne, catamaran day, Creole food and spa.' },
+    { days: 'Days 1-3', title: 'West coast', detail: 'Resort base near Le Morne or Tamarin; lagoon swims and a kite lesson.' },
+    { days: 'Days 4-6', title: 'Water days', detail: 'Dive Cathedral or the north islets; experienced surfers check One Eye with local guidance.' },
+    { days: 'Days 7-9', title: 'Land and lagoon', detail: 'Hike Le Morne, catamaran day, Creole food and spa.' },
   ],
 
   planning_notes: [
-    'Cyclone season typically runs roughly November to April — check insurance and forecasts.',
+    'Cyclone season typically runs roughly November to April. Check insurance and forecasts.',
     'One Eye is a heavy reef wave shared with kiters; for experienced surfers only.',
     'Choose dolphin operators that keep distance and limit swimmers.',
     'Check current entry requirements before travel.',
   ],
 
   faqs: [
-    { question: 'Is Mauritius good for surfing?', answer: 'For experienced surfers, yes — particularly One Eye at Le Morne in the southern winter. Beginners will find lagoon activities more suitable.' },
+    { question: 'Is Mauritius good for surfing?', answer: 'For experienced surfers, yes, particularly One Eye at Le Morne in the southern winter. Beginners will find lagoon activities more suitable.' },
     { question: 'When is the best time to visit Mauritius?', answer: 'Many travellers favour the shoulder months (roughly April to June and September to December). The southern winter (roughly May to October) suits surfers and kiters.' },
   ],
 

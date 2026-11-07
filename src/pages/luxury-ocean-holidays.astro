@@ -33,7 +33,7 @@ const faqs = [
   crumbs={[{ label: 'Luxury', href: '/luxury-ocean-holidays/' }]}
   jsonLd={[faqLd(faqs), itemListLd(best.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
 >
-  <Hero size="medium" eyebrow="Luxury" title="Luxury Ocean Holidays" subtitle="Private islands, lagoon villas, boats at your disposal and the quiet to recover — luxury that brings you closer to the water, not further from it." seed="luxury-hub">
+  <Hero size="medium" eyebrow="Luxury" title="Luxury Ocean Holidays" subtitle="Private islands, lagoon villas, boats at your disposal and the quiet to recover. This is luxury that brings you closer to the water, not further from it." seed="luxury-hub">
     <a class="btn" href="#luxury-dest">Explore luxury destinations <span class="arrow" aria-hidden="true">→</span></a>
     <a class="btn btn-ghost" href="/guides/luxury-ocean-travel-worth-paying-for/">What is worth paying for?</a>
   </Hero>
@@ -43,7 +43,7 @@ const faqs = [
       <div><span class="eyebrow">Luxury, defined by the water</span><h2 id="lux-intro-title">Adventure by day, restoration by evening</h2></div>
       <div class="prose">
         <p class="lede">There are beach holidays, and then there are holidays built around the water. On an ocean-first trip, the beach is not just scenery. It determines where you stay, when you travel, how long you stay and what you do each day.</p>
-        <p>Add a beautiful villa, a good dinner, a spa treatment and a little privacy, and you get something better than a luxury beach holiday. You get a luxury ocean holiday — where accommodation, food, design and wellness exist to enhance the time you spend in the sea.</p>
+        <p>Add a beautiful villa, a good dinner, a spa treatment and a little privacy, and you get something better than a luxury beach holiday. You get a luxury ocean holiday, where accommodation, food, design and wellness exist to enhance the time you spend in the sea.</p>
       </div>
     </div>
   </section>
@@ -63,14 +63,14 @@ const faqs = [
     </ol>
   </EditorialSection>
 
-  <EditorialSection id="luxury-dest" eyebrow="Top-rated for luxury" title="The most refined ocean destinations" intro="Destinations our editors rate as exceptional for the quality of the stay — always alongside the quality of the water." split>
+  <EditorialSection id="luxury-dest" eyebrow="Top-rated for luxury" title="The most refined ocean destinations" intro="Destinations our editors rate as exceptional for the quality of the stay, always alongside the quality of the water." split>
     <DestinationGrid destinations={best} />
   </EditorialSection>
 
   <EditorialSection id="couples" eyebrow="Couples and honeymoons" title="Romance with real ocean experiences" tone="seafoam" split>
     <DestinationList activity="luxury" label="Luxury" items={[
       pick('french-polynesia', 'Overwater villas, lagoons and the most cinematic scenery in the Pacific.'),
-      pick('maldives', 'Privacy, polish and reef immersion — easy to divide the day.'),
+      pick('maldives', 'Privacy, polish and reef immersion, and an easy place to divide the day.'),
       pick('seychelles', 'Granite islands and private-island seclusion.'),
       pick('mauritius', 'Polished resorts, calm lagoons and service-led luxury.'),
       pick('bali-nusa-penida', 'Villas, wellness and variety for mixed-interest couples.'),

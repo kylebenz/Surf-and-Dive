@@ -6,7 +6,7 @@ description: "Discover luxury warm-water diving destinations for February, with 
 category: Seasonal
 primaryKeyword: where to dive in February
 keywords: ["where to dive in February", "February diving holidays", "luxury dive destinations"]
-dek: "Leave winter behind and build the month around warm water — then let your dive priorities shorten the list."
+dek: "Leave winter behind and build the month around warm water, then let your dive priorities shorten the list."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["maldives", "french-polynesia", "seychelles", "philippines", "mauritius"]
@@ -40,7 +40,7 @@ Moorea offers a different experience. Tahiti Tourisme highlights clear lagoons, 
 
 ## Also worth considering
 
-[The Philippines](/destinations/philippines/) is typically in its drier months, the [Seychelles](/destinations/seychelles/) and [Mauritius](/destinations/mauritius/) offer warm lagoons and resort comfort — check cyclone forecasts for the southern Indian Ocean.
+[The Philippines](/destinations/philippines/) is typically in its drier months, the [Seychelles](/destinations/seychelles/) and [Mauritius](/destinations/mauritius/) offer warm lagoons and resort comfort. Check cyclone forecasts for the southern Indian Ocean.
 
 ## Build the trip around your dive priorities
 

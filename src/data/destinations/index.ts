@@ -54,7 +54,7 @@ export function topFor(a: Activity, min = 9): Destination[] {
     .sort((x, y) => score(y, a) - score(x, a) || x.name.localeCompare(y.name));
 }
 
-/** Featured on the homepage — a deliberate spread of regions and activities. */
+/** Featured on the homepage, a deliberate spread of regions and activities. */
 export const featuredSlugs = ['maldives', 'fiji', 'bali-nusa-penida', 'french-polynesia', 'madeira', 'philippines'];
 
 export const REGIONS = [

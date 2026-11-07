@@ -1,5 +1,5 @@
 /**
- * Deterministic "swell line" artwork — a quiet, bathymetric-style pattern used
+ * Deterministic "swell line" artwork, a quiet, bathymetric-style pattern used
  * where photography has not yet been supplied (cards, heroes). It is abstract
  * graphic design, never a depiction of a real place.
  */

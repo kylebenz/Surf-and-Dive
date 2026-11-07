@@ -18,7 +18,7 @@ export const MONTHS: { slug: Month; name: string; short: string }[] = [
 export const monthName = (m: Month) => MONTHS.find((x) => x.slug === m)!.name;
 
 /**
- * Seasonal matrix — from the master specification ("Best Destinations by Month").
+ * Seasonal matrix, from the master specification ("Best Destinations by Month").
  * Every note is planning guidance, not a guarantee. Conditions vary by coast,
  * swell, wind and year; always check current local conditions.
  */
@@ -29,7 +29,7 @@ export const seasons: Season[] = [
     campaign: 'Winter sun',
     headline: 'Where to Go in January for Surf, Diving and Warm Water',
     angle: 'Escape European winter with warm water and refined stays.',
-    intro: 'January is one of the easiest months to make the case for an ocean escape. Europe has surf — the question is whether you want cold-water adventure or warm-water recovery. The Indian Ocean is typically in its drier monsoon, Atlantic islands offer mild winter sun close to home, and parts of Southeast Asia enter their dry season.',
+    intro: 'January is one of the easiest months to make the case for an ocean escape. Europe has surf. The question is whether you want cold-water adventure or warm-water recovery. The Indian Ocean is typically in its drier monsoon, Atlantic islands offer mild winter sun close to home, and parts of Southeast Asia enter their dry season.',
     climate_note: 'The north-east monsoon generally brings drier weather to the Maldives and Sri Lanka’s south and west coasts. Atlantic islands are mild but changeable, with powerful winter swell.',
     european_angle: 'Post-festive January is often quieter and better value than Christmas, and a one-week escape is enough for short-haul islands. For long-haul, aim for ten nights.',
     picks: [
@@ -40,9 +40,9 @@ export const seasons: Season[] = [
       { slug: 'philippines', note: 'The drier season generally begins; good for reef diving and island-hopping.', activities: ['dive', 'freedive'] },
       { slug: 'costa-rica', note: 'Dry season on the Pacific coast; clean, friendly surf for learning.', activities: ['surf', 'luxury'] },
     ],
-    also_note: 'Selected areas of Thailand and Indonesia can also work in January depending on the coast — check regional conditions carefully.',
+    also_note: 'Selected areas of Thailand and Indonesia can also work in January depending on the coast. Check regional conditions carefully.',
     guides: ['where-to-surf-january-luxury-ocean-escapes', 'best-winter-sun-surf-holidays-europe', 'canary-islands-vs-madeira-winter-sun'],
-    seo: { title: 'Where to Surf and Dive in January | Surf and Dive', meta: 'Where to go in January for warm-water surf, diving and luxury: the Maldives, Sri Lanka, Madeira, the Canaries and more — planning guidance for European travellers.' },
+    seo: { title: 'Where to Surf and Dive in January | Surf and Dive', meta: 'Where to go in January for warm-water surf, diving and luxury: the Maldives, Sri Lanka, Madeira, the Canaries and more: planning guidance for European travellers.' },
   },
   {
     month: 'february',
@@ -52,13 +52,13 @@ export const seasons: Season[] = [
     angle: 'Valentine’s and half-term winter ocean escapes.',
     intro: 'If February means grey skies and a wetsuit at home, there is another option: build the month around warm water. February is particularly attractive for diving and for couples, with Indian Ocean islands typically settled and Central America in its dry season.',
     climate_note: 'The Indian Ocean’s north-east monsoon generally continues; Costa Rica’s Pacific coast is in its dry season. Atlantic islands remain mild with winter swell.',
-    european_angle: 'Half-term holidays in many European countries make February busy for families — book early. Valentine’s trips suit the Maldives, Seychelles and Mauritius.',
+    european_angle: 'Half-term holidays in many European countries make February busy for families. Book early. Valentine’s trips suit the Maldives, Seychelles and Mauritius.',
     picks: [
       { slug: 'maldives', note: 'A natural candidate for reef-focused diving and couples’ escapes.', activities: ['dive', 'luxury', 'freedive'] },
       { slug: 'sri-lanka', note: 'South-coast surf season generally continues, with safari add-ons.', activities: ['surf', 'luxury'] },
       { slug: 'seychelles', note: 'Warm, humid north-west monsoon months; calm days suit snorkelling.', activities: ['luxury', 'dive'] },
       { slug: 'mauritius', note: 'Warm summer lagoons and five-star resorts; monitor cyclone forecasts.', activities: ['luxury', 'dive'] },
-      { slug: 'costa-rica', note: 'Dry season — surf, rainforest and wellness.', activities: ['surf', 'luxury'] },
+      { slug: 'costa-rica', note: 'Dry season, for surf, rainforest and wellness.', activities: ['surf', 'luxury'] },
       { slug: 'canary-islands', note: 'Short-haul winter sun and consistent swell.', activities: ['surf'] },
     ],
     guides: ['where-to-dive-february-warm-water-luxury', 'best-ocean-destinations-for-couples', 'best-winter-sun-surf-holidays-europe'],
@@ -72,7 +72,7 @@ export const seasons: Season[] = [
     angle: 'Longer days and premium shoulder-season positioning.',
     intro: 'March is a transition month. The Indian Ocean is typically still settled, Central America remains dry, and Atlantic islands start to feel spring-like. It is a good month for travellers who want winter-sun conditions without peak-holiday crowds.',
     climate_note: 'The Maldives and Sri Lanka’s south coast are generally still in their drier season; Costa Rica’s dry season continues. Madeira’s winter swell is typically still active.',
-    european_angle: 'Outside school holidays, March can offer a premium experience with fewer crowds. Easter sometimes falls late in March — check your dates.',
+    european_angle: 'Outside school holidays, March can offer a premium experience with fewer crowds. Easter sometimes falls late in March. Check your dates.',
     picks: [
       { slug: 'maldives', note: 'Typically calm, clear conditions and the start of a stronger surf window.', activities: ['dive', 'surf', 'luxury'] },
       { slug: 'sri-lanka', note: 'The end of the south-coast season; good for surf and culture.', activities: ['surf'] },
@@ -82,7 +82,7 @@ export const seasons: Season[] = [
     ],
     also_note: 'Selected regions of Indonesia can also work in March; conditions vary significantly by coast.',
     guides: ['best-luxury-diving-holidays-world', 'best-luxury-surf-holidays-europeans'],
-    seo: { title: 'Where to Surf and Dive in March | Surf and Dive', meta: 'Where to go in March for shoulder-season surf, diving and luxury ocean travel — the Maldives, Sri Lanka, Costa Rica, Madeira and the Philippines.' },
+    seo: { title: 'Where to Surf and Dive in March | Surf and Dive', meta: 'Where to go in March for shoulder-season surf, diving and luxury ocean travel: the Maldives, Sri Lanka, Costa Rica, Madeira and the Philippines.' },
   },
   {
     month: 'april',
@@ -118,11 +118,11 @@ export const seasons: Season[] = [
       { slug: 'mentawai-islands', note: 'The main season typically gets under way, often with quieter line-ups.', activities: ['surf'] },
       { slug: 'fiji', note: 'Surf season and improving dive visibility.', activities: ['surf', 'dive'] },
       { slug: 'french-polynesia', note: 'The drier season typically begins; south swells start to arrive.', activities: ['dive', 'freedive', 'luxury'] },
-      { slug: 'maldives', note: 'Transition month — often good value with manta activity starting on some atolls.', activities: ['dive', 'surf'] },
+      { slug: 'maldives', note: 'Transition month, often good value with manta activity starting on some atolls.', activities: ['dive', 'surf'] },
       { slug: 'portugal', note: 'Quiet beaches and spring swell.', activities: ['surf'] },
     ],
     guides: ['best-summer-surf-holidays-europeans', 'fiji-vs-french-polynesia-luxury-ocean', 'luxury-surf-resorts-vs-surf-charters'],
-    seo: { title: 'Where to Surf and Dive in May | Surf and Dive', meta: 'Where to go in May for pre-summer surf and diving: Bali, the Mentawais, Fiji, French Polynesia, the Maldives and Portugal — before the European summer rush.' },
+    seo: { title: 'Where to Surf and Dive in May | Surf and Dive', meta: 'Where to go in May for pre-summer surf and diving: Bali, the Mentawais, Fiji, French Polynesia, the Maldives and Portugal, before the European summer rush.' },
   },
   {
     month: 'june',
@@ -150,9 +150,9 @@ export const seasons: Season[] = [
     campaign: 'Peak summer',
     headline: 'Where to Go in July: Peak-Summer Ocean Holidays',
     angle: 'European surf and long-haul premium escapes.',
-    intro: 'July is peak holiday season for most of Europe. You can stay close — Portugal, Spain and France offer summer surf for learners — or go long-haul to destinations in their prime season.',
+    intro: 'July is peak holiday season for most of Europe. You can stay close (Portugal, Spain and France offer summer surf for learners) or go long-haul to destinations in their prime season.',
     climate_note: 'Southern-hemisphere winter swells typically peak in the Pacific and Indian Oceans; European Atlantic surf is usually smaller in summer.',
-    european_angle: 'School holidays drive demand and prices — book early, or choose destinations where July is the dry season.',
+    european_angle: 'School holidays drive demand and prices. Book early, or choose destinations where July is the dry season.',
     picks: [
       { slug: 'portugal', note: 'Summer surf for learners and families, with outstanding food and hotels.', activities: ['surf', 'luxury'] },
       { slug: 'bali-nusa-penida', note: 'Peak dry season; sunfish season around Nusa Penida often begins.', activities: ['surf', 'dive', 'freedive'] },
@@ -162,7 +162,7 @@ export const seasons: Season[] = [
       { slug: 'mentawai-islands', note: 'Core season.', activities: ['surf'] },
       { slug: 'sri-lanka', note: 'East-coast season at Arugam Bay.', activities: ['surf'] },
     ],
-    also_note: 'Spain’s and France’s Atlantic coasts also offer summer surf, especially for learners — these will be covered in future Surf and Dive guides.',
+    also_note: 'Spain’s and France’s Atlantic coasts also offer summer surf, especially for learners. These will be covered in future Surf and Dive guides.',
     guides: ['best-summer-surf-holidays-europeans', 'portugal-vs-indonesia-luxury-surf', 'luxury-surf-resorts-vs-surf-charters'],
     seo: { title: 'Where to Surf and Dive in July | Surf and Dive', meta: 'Where to go in July for summer surf and diving: Portugal, Bali, Fiji, Hawaii, the Azores, the Mentawais and Sri Lanka’s east coast.' },
   },
@@ -172,7 +172,7 @@ export const seasons: Season[] = [
     campaign: 'Peak summer',
     headline: 'Where to Go in August: Luxury Summer Ocean Holidays',
     angle: 'Luxury summer ocean holiday.',
-    intro: 'August combines peak European holidays with prime conditions in several long-haul destinations — and the start of the best season for Atlantic island diving.',
+    intro: 'August combines peak European holidays with prime conditions in several long-haul destinations, and the start of the best season for Atlantic island diving.',
     climate_note: 'Atlantic island water is typically warmest from late summer; southern-hemisphere swells continue in Indonesia and Fiji.',
     european_angle: 'The busiest month for European travel. Atlantic islands offer an alternative to crowded Mediterranean coasts.',
     picks: [
@@ -194,7 +194,7 @@ export const seasons: Season[] = [
     angle: 'Late-summer and early-autumn premium travel.',
     intro: 'September is one of the best months for European ocean travel. Atlantic swells start to return, the water is at its warmest, beaches empty after the school holidays and several long-haul seasons are still running.',
     climate_note: 'Atlantic swells typically become more meaningful; Azores and Madeira water is often at its warmest. Fiji and Indonesia remain in season.',
-    european_angle: 'After school holidays, prices and crowds typically ease — a premium window for couples and surfers.',
+    european_angle: 'After school holidays, prices and crowds typically ease, a premium window for couples and surfers.',
     picks: [
       { slug: 'portugal', note: 'Often a sweet spot of swell, warmth and space.', activities: ['surf', 'luxury'] },
       { slug: 'azores', note: 'Warm water and the end of offshore dive season.', activities: ['dive', 'surf'] },
@@ -256,7 +256,7 @@ export const seasons: Season[] = [
     angle: 'Christmas and New Year ocean escapes.',
     intro: 'If your ideal Christmas is warm sand, an early surf and dinner outside, December offers plenty of alternatives to the European winter. Indian Ocean islands, Central America and the South Pacific all make strong festive cases.',
     climate_note: 'Indian Ocean destinations are typically entering their drier monsoon; Costa Rica’s dry season begins; South Pacific islands are in their warmer, wetter season.',
-    european_angle: 'Christmas and New Year are the most expensive weeks of the year — book well ahead and make the premium spend count on experiences.',
+    european_angle: 'Christmas and New Year are the most expensive weeks of the year. Book well ahead and make the premium spend count on experiences.',
     picks: [
       { slug: 'maldives', note: 'Pure island luxury and reef activities.', activities: ['luxury', 'dive', 'surf'] },
       { slug: 'seychelles', note: 'Private-island festive escapes.', activities: ['luxury', 'dive'] },
@@ -264,7 +264,7 @@ export const seasons: Season[] = [
       { slug: 'french-polynesia', note: 'A cinematic New Year, accepting wetter weather.', activities: ['luxury', 'dive', 'freedive'] },
       { slug: 'fiji', note: 'Active festive travel; outside peak surf season.', activities: ['luxury', 'dive'] },
       { slug: 'hawaii', note: 'North Shore winter spectacle and whale season.', activities: ['surf', 'luxury'] },
-      { slug: 'costa-rica', note: 'Dry season begins — surf, rainforest and wellness.', activities: ['surf', 'luxury'] },
+      { slug: 'costa-rica', note: 'Dry season begins, for surf, rainforest and wellness.', activities: ['surf', 'luxury'] },
     ],
     guides: ['luxury-ocean-escapes-christmas-new-year', 'best-winter-sun-surf-holidays-europe'],
     seo: { title: 'Where to Go in December for Surf, Diving & Festive Luxury', meta: 'Where to go in December for Christmas and New Year ocean escapes: the Maldives, Seychelles, Mauritius, French Polynesia, Fiji, Hawaii and Costa Rica.' },

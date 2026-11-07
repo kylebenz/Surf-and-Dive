@@ -8,7 +8,7 @@ const criteria = ['Surf', 'Diving', 'Freediving', 'Luxury', 'Water', 'Weather', 
 ---
 <BaseLayout
   title="Compare Luxury Ocean Destinations | Surf and Dive"
-  description="Side-by-side comparisons of luxury surf and dive destinations across twelve criteria — Maldives vs Bali, Fiji vs French Polynesia, Azores vs Madeira and more."
+  description="Side-by-side comparisons of luxury surf and dive destinations across twelve criteria: Maldives vs Bali, Fiji vs French Polynesia, Azores vs Madeira and more."
   crumbs={[{ label: 'Compare', href: '/compare/' }]}
   jsonLd={[itemListLd(comparisons.map((c) => ({ name: c.title, href: `/compare/${c.slug}/` })), Astro.site!)]}
 >
@@ -16,7 +16,7 @@ const criteria = ['Surf', 'Diving', 'Freediving', 'Luxury', 'Water', 'Weather', 
     <div class="container">
       <span class="eyebrow">Decision support</span>
       <h1>Compare Ocean Escapes</h1>
-      <p class="lede">Comparisons should be genuinely useful rather than keyword-stuffed. Every pairing uses the same twelve criteria — and none declares a universal winner. Instead, each explains which destination is better for which traveller.</p>
+      <p class="lede">Comparisons should be genuinely useful rather than keyword-stuffed. Every pairing uses the same twelve criteria, and none declares a universal winner. Instead, each explains which destination is better for which traveller.</p>
       <ul role="list" class="tag-list crit">{criteria.map((c) => <li class="tag">{c}</li>)}</ul>
     </div>
   </header>

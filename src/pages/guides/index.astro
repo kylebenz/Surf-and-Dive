@@ -20,7 +20,7 @@ const slug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
     <div class="container">
       <span class="eyebrow">The Surf and Dive journal</span>
       <h1>Guides for Ocean-First Travel</h1>
-      <p class="lede">Each guide answers a real traveller question — where to go, when, how to choose and how to do it well — with honest trade-offs and careful, qualified advice.</p>
+      <p class="lede">Each guide answers a real traveller question (where to go, when, how to choose and how to do it well) with honest trade-offs and careful, qualified advice.</p>
       <nav aria-label="Guide categories" class="cats">
         <ul role="list" class="tag-list">
           {groups.map((g) => <li><a class="tag" href={`#${slug(g.cat)}`}>{g.cat} <span class="muted">({g.items.length})</span></a></li>)}

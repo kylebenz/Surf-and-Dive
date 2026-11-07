@@ -23,11 +23,11 @@ const faqs = [
 ---
 <BaseLayout
   title="Freediving Holidays | Surf and Dive"
-  description="Freediving holidays with clear water, calm conditions and qualified local support. Destinations, training, safety and responsible freediving — never alone, never competing."
+  description="Freediving holidays with clear water, calm conditions and qualified local support. Destinations, training, safety and responsible freediving, never alone, never competing."
   crumbs={[{ label: 'Freedive', href: '/freediving/' }]}
   jsonLd={[faqLd(faqs), itemListLd(best.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
 >
-  <Hero size="medium" eyebrow="Freedive" title="Freediving Holidays" subtitle="Clear water, calm mornings and qualified instruction — breath-hold exploration approached with patience and respect." seed="freedive-hub">
+  <Hero size="medium" eyebrow="Freedive" title="Freediving Holidays" subtitle="Clear water, calm mornings and qualified instruction, for breath-hold exploration approached with patience and respect." seed="freedive-hub">
     <a class="btn" href="#destinations-free">Freediving destinations <span class="arrow" aria-hidden="true">→</span></a>
     <a class="btn btn-ghost" href="#safety">Safety first</a>
   </Hero>
@@ -36,7 +36,7 @@ const faqs = [
     <div class="container split-layout">
       <div><span class="eyebrow">Ocean clarity, responsible exploration</span><h2 id="free-intro-title">Freediving rewards calm</h2></div>
       <div class="prose">
-        <p class="lede">Freediving rewards calm, preparation and respect for the ocean. We focus on destinations with appropriate conditions and qualified local support — and we clearly discourage solo diving, unsupervised breath-hold competition, reef contact and overconfidence.</p>
+        <p class="lede">Freediving rewards calm, preparation and respect for the ocean. We focus on destinations with appropriate conditions and qualified local support, and we clearly discourage solo diving, unsupervised breath-hold competition, reef contact and overconfidence.</p>
         <p>Scuba diving lets you stay underwater. Freediving asks you to slow down enough to become part of the environment without turning the ocean into a contest. We never present a depth, visibility figure or wildlife encounter as guaranteed.</p>
       </div>
     </div>
@@ -48,7 +48,7 @@ const faqs = [
       <ol role="list" class="rules">
         <li><strong>Never freedive alone.</strong> A trained buddy watches every dive from the surface, one up, one down.</li>
         <li><strong>Use qualified instruction.</strong> Learn and progress with recognised training organisations and local instructors.</li>
-        <li><strong>Do not compete</strong> with depth or breath-hold — not with your buddy, your previous best or anyone online.</li>
+        <li><strong>Do not compete</strong> with depth or breath-hold, not with your buddy, your previous best or anyone online.</li>
         <li><strong>Do not hyperventilate.</strong> Use only the breathing techniques your instructor teaches.</li>
         <li><strong>Respect local conditions.</strong> Current, wind, boat traffic and temperature decide whether you dive today.</li>
         <li><strong>Leave wildlife alone.</strong> Keep your distance, never touch coral, never chase an encounter.</li>
@@ -56,7 +56,7 @@ const faqs = [
     </div>
   </section>
 
-  <EditorialSection id="destinations-free" eyebrow="Destination selection" title="Clear-water freediving destinations" intro="Destinations our editors rate highly for freediving — chosen for water clarity, calm conditions and the presence of qualified local support. The exact site matters more than the country." tone="sand" split>
+  <EditorialSection id="destinations-free" eyebrow="Destination selection" title="Clear-water freediving destinations" intro="Destinations our editors rate highly for freediving, chosen for water clarity, calm conditions and the presence of qualified local support. The exact site matters more than the country." tone="sand" split>
     <DestinationGrid destinations={best} />
   </EditorialSection>
 
@@ -64,13 +64,13 @@ const faqs = [
     <DestinationList activity="freedive" label="Freediving" items={[
       pick('philippines', 'Panglao and Moalboal are established freediving training hubs.'),
       pick('bali-nusa-penida', 'Amed’s calm mornings and depth near shore.'),
-      pick('french-polynesia', 'Exceptionally clear lagoons — pass currents demand caution.'),
+      pick('french-polynesia', 'Exceptionally clear lagoons, though pass currents demand caution.'),
       pick('maldives', 'House reefs and lagoons for practice with instructors.'),
       pick('fernando-de-noronha', 'Clear water inside a strictly managed marine park.'),
     ]} />
   </EditorialSection>
 
-  <EditorialSection id="marine" eyebrow="Marine life" title="Encounters on a single breath" intro="Freediving can bring you remarkably close to marine life — precisely because it is quiet. Keep it that way." tone="seafoam" split>
+  <EditorialSection id="marine" eyebrow="Marine life" title="Encounters on a single breath" intro="Freediving can bring you remarkably close to marine life, precisely because it is quiet. Keep it that way." tone="seafoam" split>
     <div class="cols-2">
       <div class="prose"><p>Turtles, rays and reef fish often tolerate a calm freediver better than a bubbling scuba diver. In places such as <a href="/destinations/mozambique/">Mozambique</a> and <a href="/destinations/maldives/">the Maldives</a>, snorkel-based encounters with whale sharks or manta rays are governed by codes of conduct: limited swimmers, minimum distances, no touching.</p></div>
       <div><Notice kind="responsible"><p>Respect marine life, keep your distance, avoid touching coral and follow protected-area rules. Responsible freediving is not just safer; it is more rewarding.</p></Notice></div>

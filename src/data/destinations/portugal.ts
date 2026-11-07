@@ -10,9 +10,9 @@ export const portugal: Destination = {
 
   positioning: 'Europe’s densest surf coastline, with surf towns, seafood, wine and design hotels a short flight from home.',
   hero_headline: 'Portugal: Europe’s Atlantic Surf Coast',
-  hero_subheadline: 'Ericeira’s World Surfing Reserve, Peniche’s Supertubos, the spectacle of Nazaré and the quiet coves of the Algarve — paired with design hotels, wine and long seafood lunches.',
+  hero_subheadline: 'Ericeira’s World Surfing Reserve, Peniche’s Supertubos, the spectacle of Nazaré and the quiet coves of the Algarve: paired with design hotels, wine and long seafood lunches.',
   overview:
-    'Portugal packs a remarkable amount of surf into one coastline. Visit Portugal describes more than 850 km of coast and highlights Ericeira, Peniche, Nazaré, Costa da Caparica, the Algarve, Madeira and the Azores among its surf areas, with very different wave environments and skill requirements. For a premium trip, the surrounding culture matters as much as the waves: surf towns with cafés and seafood, design hotels in Comporta and the Alentejo, Lisbon an hour away and wine regions inland. It is the European wildcard — a serious surf trip without a long-haul flight. (Madeira and the Azores have their own guides on Surf and Dive.)',
+    'Portugal packs a remarkable amount of surf into one coastline. Visit Portugal describes more than 850 km of coast and highlights Ericeira, Peniche, Nazaré, Costa da Caparica, the Algarve, Madeira and the Azores among its surf areas, with very different wave environments and skill requirements. For a premium trip, the surrounding culture matters as much as the waves: surf towns with cafés and seafood, design hotels in Comporta and the Alentejo, Lisbon an hour away and wine regions inland. It is the European wildcard, a serious surf trip without a long-haul flight. (Madeira and the Azores have their own guides on Surf and Dive.)',
   why_visit: [
     'Density of options: within a short drive you can usually find a coast facing the right way for the swell and wind.',
     'It works for every level, from gentle summer beach breaks to some of Europe’s most powerful waves.',
@@ -26,7 +26,7 @@ export const portugal: Destination = {
     levels: ['beginner', 'intermediate', 'advanced'],
     season: 'Surf is possible year-round. Autumn (roughly September to November) is often considered a sweet spot of swell, warmth and fewer crowds; summer is smaller and suits learners; winter brings big, powerful swell.',
     notes:
-      'Visit Portugal describes Ericeira as a recognised surfing reserve and highlights Peniche and Nazaré among major surf areas. Peniche’s peninsula offers coasts facing different directions, which makes it very flexible. Nazaré’s giant winter waves are for elite big-wave teams only — but watching from the lighthouse is a memorable experience. Beginners should stay at sandy beaches with schools, especially in summer.',
+      'Visit Portugal describes Ericeira as a recognised surfing reserve and highlights Peniche and Nazaré among major surf areas. Peniche’s peninsula offers coasts facing different directions, which makes it very flexible. Nazaré’s giant winter waves are for elite big-wave teams only, but watching from the lighthouse is a memorable experience. Beginners should stay at sandy beaches with schools, especially in summer.',
   },
 
   diving: {
@@ -46,7 +46,7 @@ export const portugal: Destination = {
   },
 
   marine_life_notes:
-    'Temperate Atlantic life — octopus, nudibranchs, groupers — and frequent dolphin sightings offshore. Respect the Berlengas’ protected status and local fishing rules.',
+    'Temperate Atlantic life (octopus, nudibranchs, groupers) and frequent dolphin sightings offshore. Respect the Berlengas’ protected status and local fishing rules.',
 
   luxury: {
     score: 8,
@@ -72,7 +72,7 @@ export const portugal: Destination = {
   european_seasonal_angle:
     'Portugal suits almost every European holiday window. Summer is ideal for learners and families; September and October often deliver the best balance of swell, warmth and space.',
   season_types: ['summer', 'shoulder', 'year-round'],
-  recommended_duration: '4–8 nights. Short trips work well because travel time from much of Europe is short.',
+  recommended_duration: '4-8 nights. Short trips work well because travel time from much of Europe is short.',
 
   traveller_profiles: ['couples', 'family', 'serious-surfer', 'active-luxury', 'solo'],
   best_audience: 'Broad surf choice and European accessibility.',
@@ -84,18 +84,18 @@ export const portugal: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–3', title: 'Ericeira', detail: 'Boutique hotel in Ericeira; coached sessions matched to the swell, seafood lunches and a Sintra afternoon.' },
-    { days: 'Days 4–5', title: 'Peniche', detail: 'Surf whichever side of the peninsula is working; boat to the Berlengas for diving or snorkelling on a calm day.' },
-    { days: 'Day 6', title: 'Nazaré', detail: 'Watch the waves from the lighthouse in season — a spectator’s day.' },
-    { days: 'Days 7–8', title: 'Comporta', detail: 'Finish with design-hotel calm, rice fields, long beaches and slow dinners.' },
+    { days: 'Days 1-3', title: 'Ericeira', detail: 'Boutique hotel in Ericeira; coached sessions matched to the swell, seafood lunches and a Sintra afternoon.' },
+    { days: 'Days 4-5', title: 'Peniche', detail: 'Surf whichever side of the peninsula is working; boat to the Berlengas for diving or snorkelling on a calm day.' },
+    { days: 'Day 6', title: 'Nazaré', detail: 'Watch the waves from the lighthouse in season, a spectator’s day.' },
+    { days: 'Days 7-8', title: 'Comporta', detail: 'Finish with design-hotel calm, rice fields, long beaches and slow dinners.' },
   ],
 
   planning_notes: [
     'Match beaches to ability; Portugal’s Atlantic can be powerful even in summer.',
-    'Wetsuit thickness varies by season — check before packing.',
+    'Wetsuit thickness varies by season. Check before packing.',
     'Nazaré’s big waves are for spectating only for nearly all travellers.',
     'Lifeguarded beaches operate in the bathing season; follow flags.',
-    'Berlengas visits may be subject to visitor limits — check current rules.',
+    'Berlengas visits may be subject to visitor limits. Check current rules.',
   ],
 
   faqs: [

@@ -1,9 +1,9 @@
-# Surf and Dive — photography
+# Surf and Dive: photography
 
 Every destination has exactly ten image slots (20 × 10 = 200). All start empty and
 render as labelled placeholders until real, licensed photography is supplied.
 
-## Destinations — `/public/images/destinations/<slug>/`
+## Destinations: `/public/images/destinations/<slug>/`
 
 | Slot | File | Purpose |
 | --- | --- | --- |
@@ -28,17 +28,17 @@ images: destinationImages('maldives', { ...briefs }, {
 }),
 ```
 
-## Guides — `/public/images/guides/<guide-slug>/image-<n>.webp`
+## Guides: `/public/images/guides/<guide-slug>/image-<n>.webp`
 
 `image-1` is the guide hero; `image-2` … follow the image guide in the article's front
 matter (`src/content/guides/<slug>.md`). Add `alt`, `caption` and `credit` there.
 
-## Homepage — `/public/images/home/hero.webp`
+## Homepage: `/public/images/home/hero.webp`
 
 ## Tooling
 
-- `npm run images:report` — lists every slot, whether it is filled and whether alt text is missing, plus the art-direction brief.
-- `npm run images:optimize` — creates responsive `-640/-1280/-1920.webp` variants; they are added to `srcset` automatically.
+- `npm run images:report`: lists every slot, whether it is filled and whether alt text is missing, plus the art-direction brief.
+- `npm run images:optimize`: creates responsive `-640/-1280/-1920.webp` variants; they are added to `srcset` automatically.
 
 Rules: authentic, licensed photography only. The ocean is the protagonist. Never use
 AI-generated images to depict real resorts, waves, reefs or wildlife encounters.

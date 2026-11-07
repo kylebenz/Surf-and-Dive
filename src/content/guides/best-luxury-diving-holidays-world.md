@@ -47,11 +47,11 @@ The landscape above water matters too. Diving beside dramatic mountains and retu
 
 ## Also on the shortlist
 
-- **[Fiji](/destinations/fiji/)** — soft-coral reefs, walls and channel dives across several regions.
-- **[The Philippines](/destinations/philippines/)** — wrecks, macro, sardine shoals and protected atolls in one country.
-- **[The Seychelles](/destinations/seychelles/)** — granite reef structures, turtles and calm transitional-month seas.
-- **[Mozambique](/destinations/mozambique/)** — marine megafauna and private-island lodges.
-- **[Fernando de Noronha](/destinations/fernando-de-noronha/)** — clear water inside a protected marine park.
+- **[Fiji](/destinations/fiji/)**: soft-coral reefs, walls and channel dives across several regions.
+- **[The Philippines](/destinations/philippines/)**: wrecks, macro, sardine shoals and protected atolls in one country.
+- **[The Seychelles](/destinations/seychelles/)**: granite reef structures, turtles and calm transitional-month seas.
+- **[Mozambique](/destinations/mozambique/)**: marine megafauna and private-island lodges.
+- **[Fernando de Noronha](/destinations/fernando-de-noronha/)**: clear water inside a protected marine park.
 
 ## How to choose a dive destination
 

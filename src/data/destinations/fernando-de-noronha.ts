@@ -8,11 +8,11 @@ export const fernandoDeNoronha: Destination = {
   region: 'South America',
   slug: 'fernando-de-noronha',
 
-  positioning: 'A protected Atlantic archipelago with clear water, spinner dolphins and reef-break surf — a remote island escape with strict limits that keep it special.',
+  positioning: 'A protected Atlantic archipelago with clear water, spinner dolphins and reef-break surf, a remote island escape with strict limits that keep it special.',
   hero_headline: 'Fernando de Noronha: Brazil’s Protected Ocean Sanctuary',
   hero_subheadline: 'Clear South Atlantic water, a marine national park, northern-hemisphere-winter surf and boutique pousadas on an island where visitor numbers are deliberately managed.',
   overview:
-    'Fernando de Noronha is a volcanic archipelago off north-east Brazil, much of it protected as a marine national park and recognised alongside Atol das Rocas as a UNESCO World Heritage site. Visitor numbers and environmental fees are managed to protect the islands, which keeps the atmosphere quiet and the water exceptional. It is best known for diving and snorkelling in clear water, spinner dolphins in a protected bay and beaches that regularly appear on lists of Brazil’s most beautiful. Less known is the surf: reef and beach breaks on the northern coast come alive in the southern summer. Luxury here is boutique — small pousadas, guided experiences and a sense of privilege at being somewhere so carefully protected.',
+    'Fernando de Noronha is a volcanic archipelago off north-east Brazil, much of it protected as a marine national park and recognised alongside Atol das Rocas as a UNESCO World Heritage site. Visitor numbers and environmental fees are managed to protect the islands, which keeps the atmosphere quiet and the water exceptional. It is best known for diving and snorkelling in clear water, spinner dolphins in a protected bay and beaches that regularly appear on lists of Brazil’s most beautiful. Less known is the surf: reef and beach breaks on the northern coast come alive in the southern summer. Luxury here is boutique: small pousadas, guided experiences and a sense of privilege at being somewhere so carefully protected.',
   why_visit: [
     'Water clarity and marine life are the headline, with diving and snorkelling inside a protected marine park.',
     'Managed visitor numbers mean the islands feel genuinely low-density.',
@@ -70,9 +70,9 @@ export const fernandoDeNoronha: Destination = {
     { label: 'European calendar', detail: 'Works for winter sun (surf season) and autumn (often calm, clear water).' },
   ],
   european_seasonal_angle:
-    'Noronha’s surf season aligns with the European winter, while autumn can bring calm, clear water for diving — a remote alternative to Indian Ocean winter-sun trips.',
+    'Noronha’s surf season aligns with the European winter, while autumn can bring calm, clear water for diving, a remote alternative to Indian Ocean winter-sun trips.',
   season_types: ['winter-sun', 'shoulder'],
-  recommended_duration: '6–9 nights on the island, as part of a longer Brazil trip.',
+  recommended_duration: '6-9 nights on the island, as part of a longer Brazil trip.',
 
   traveller_profiles: ['diver', 'freediver', 'couples', 'active-luxury'],
   best_audience: 'Wildlife, diving and remote island escapes.',
@@ -85,15 +85,15 @@ export const fernandoDeNoronha: Destination = {
 
   itinerary: [
     { days: 'Day 1', title: 'Arrive', detail: 'Fly via Recife or Natal, settle into a pousada and watch the sunset from a viewpoint.' },
-    { days: 'Days 2–3', title: 'Dive the park', detail: 'Guided boat dives at Pedras Secas or the Ipiranga wreck; snorkel in designated bays.' },
-    { days: 'Days 4–5', title: 'Surf season', detail: 'In season, morning sessions at Cacimba do Padre; afternoons on park trails.' },
-    { days: 'Days 6–7', title: 'Dolphins and coast', detail: 'Early morning at the Baía dos Golfinhos lookout and a private boat around the archipelago.' },
+    { days: 'Days 2-3', title: 'Dive the park', detail: 'Guided boat dives at Pedras Secas or the Ipiranga wreck; snorkel in designated bays.' },
+    { days: 'Days 4-5', title: 'Surf season', detail: 'In season, morning sessions at Cacimba do Padre; afternoons on park trails.' },
+    { days: 'Days 6-7', title: 'Dolphins and coast', detail: 'Early morning at the Baía dos Golfinhos lookout and a private boat around the archipelago.' },
   ],
 
   planning_notes: [
     'An environmental preservation fee and a national park fee apply; check current amounts and rules before travel.',
     'Visitor numbers and access to some beaches and trails are managed; book activities in advance.',
-    'Domestic flights connect via mainland Brazil — check schedules and baggage rules.',
+    'Domestic flights connect via mainland Brazil. Check schedules and baggage rules.',
     'Never approach spinner dolphins in the water; viewing is from land.',
     'Respect all park restrictions on access times and areas.',
   ],

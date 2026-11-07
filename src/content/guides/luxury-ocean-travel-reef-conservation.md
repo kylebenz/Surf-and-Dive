@@ -17,7 +17,7 @@ images:
   - { label: "Observation", brief: "Diver observing without touching." }
   - { label: "Local crew", brief: "Local guide or boat crew." }
   - { label: "Community", brief: "Community, local food or craft." }
-  - { label: "Conservation graphic", kind: graphic, brief: "Before/after-style conservation graphic — only if factual and sourced." }
+  - { label: "Conservation graphic", kind: graphic, brief: "Before/after-style conservation graphic, only if factual and sourced." }
 ---
 
 ## Luxury should not mean taking more from the ocean
@@ -35,7 +35,7 @@ Do not touch coral. Do not chase wildlife. Keep appropriate distance from animal
 - Do not feed fish, sharks, rays or turtles.
 - Avoid operators that crowd, bait or touch wildlife.
 - Choose reef-safe sun protection and cover up with a rash guard.
-- Reduce single-use plastic — bring a refillable bottle.
+- Reduce single-use plastic. Bring a refillable bottle.
 
 ## Choose operators carefully
 

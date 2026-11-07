@@ -28,13 +28,13 @@ faqs:
 
 Every surf trip begins in unfamiliar water. Before you paddle out, spend fifteen minutes watching. Where are surfers paddling out? Where does the water move back out to sea? How big are the sets compared with the waves you just watched? How shallow is it at the current tide?
 
-None of this is about fear. It is about making good decisions — the same skill that separates a great surf trip from a forgettable one.
+None of this is about fear. It is about making good decisions, the same skill that separates a great surf trip from a forgettable one.
 
 ## Be honest about your level
 
 Most surf travel incidents begin with a mismatch between surfer and wave. Famous does not mean suitable. A wave that looks perfect on video can be fast, hollow and shallow in person.
 
-- **Beginners** should surf sandy-bottom beach breaks with qualified instruction — see our [beginner guide](/guides/best-luxury-surf-destinations-beginners/).
+- **Beginners** should surf sandy-bottom beach breaks with qualified instruction: see our [beginner guide](/guides/best-luxury-surf-destinations-beginners/).
 - **Intermediate surfers** should progress gradually and use local guides before trying reef breaks.
 - **Advanced surfers** should still respect local conditions, especially on heavy reefs such as Hawaii's North Shore or the [Mentawai Islands](/destinations/mentawai-islands/).
 
@@ -49,7 +49,7 @@ Reef breaks produce some of the best waves in the world, but they come with spec
 
 ## Currents
 
-Rip currents are common on beach breaks; channels next to reef breaks can carry strong currents too. Watch for darker, calmer-looking water, foam moving seaward and gaps in breaking waves. If you are caught, do not paddle directly against the current — move parallel to the beach before returning.
+Rip currents are common on beach breaks; channels next to reef breaks can carry strong currents too. Watch for darker, calmer-looking water, foam moving seaward and gaps in breaking waves. If you are caught, do not paddle directly against the current: move parallel to the beach before returning.
 
 ## Local conditions and etiquette
 
@@ -62,12 +62,12 @@ Where lifeguards are present, follow their flags and advice. Many beaches in [Po
 ## Equipment
 
 - A leash in good condition (and a spare).
-- Fins and a board appropriate to the waves — not just the board you use at home.
+- Fins and a board appropriate to the waves, not just the board you use at home.
 - Reef boots and a basic first-aid kit for reef destinations.
 - Sun protection: rash guard, hat and reef-safe sunscreen.
 
 ## When to stay on the beach
 
-If the waves are beyond your ability, if you are unwell or exhausted, if storms are forecast or if local advice says no — stay on the beach. The ocean will be there tomorrow. The smartest luxury surf trip is one where you know when to paddle out, and when not to.
+If the waves are beyond your ability, if you are unwell or exhausted, if storms are forecast or if local advice says no. Stay on the beach. The ocean will be there tomorrow. The smartest luxury surf trip is one where you know when to paddle out, and when not to.
 
 *This guide is general information, not a substitute for local advice, qualified instruction or official safety guidance.*

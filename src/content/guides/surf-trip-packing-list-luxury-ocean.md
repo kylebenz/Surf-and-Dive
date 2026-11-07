@@ -34,7 +34,7 @@ Board or rental plan, leash, fins, wax suited to water temperature, rash guard, 
 - Leash, fins and wax suited to the water temperature
 - Rash guard and, where needed, a wetsuit of the right thickness
 - Reef-safe sunscreen and a hat
-- Reef boots for shallow reef breaks — for example in [Bali](/destinations/bali-nusa-penida/) or [the Mentawai Islands](/destinations/mentawai-islands/)
+- Reef boots for shallow reef breaks, for example in [Bali](/destinations/bali-nusa-penida/) or [the Mentawai Islands](/destinations/mentawai-islands/)
 - A small first-aid kit for reef cuts
 - A compact changing towel or poncho
 

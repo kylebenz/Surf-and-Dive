@@ -6,7 +6,7 @@ description: "Responsible freediving safety for travellers: never freedive alone
 category: Safety
 primaryKeyword: freediving safety
 keywords: ["freediving safety", "freediving buddy system", "freediving holiday safety", "responsible freediving"]
-dek: "Freediving rewards calm, preparation and respect. The principles that matter most — and why the best freediving holiday is the one without a dramatic story."
+dek: "Freediving rewards calm, preparation and respect. The principles that matter most, and why the best freediving holiday is the one without a dramatic story."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["philippines", "bali-nusa-penida", "french-polynesia", "maldives"]
@@ -26,7 +26,7 @@ faqs:
 
 ## The principle behind everything
 
-Freediving is a beautiful way to experience the ocean — quiet, unhurried and close to marine life. It is also an activity where small mistakes can have serious consequences. The answer is not fear; it is training, a trained buddy and conservative decisions.
+Freediving is a beautiful way to experience the ocean: quiet, unhurried and close to marine life. It is also an activity where small mistakes can have serious consequences. The answer is not fear; it is training, a trained buddy and conservative decisions.
 
 This guide does not replace instruction. It explains the principles you will hear from every good instructor, so you can recognise a responsible operator and plan a safer trip.
 
@@ -36,11 +36,11 @@ This is the rule that matters most. Freedivers can lose consciousness, often clo
 
 - Dive **one up, one down**: one person dives while the other watches from the surface.
 - Your buddy should watch you through the whole dive and for a period after you surface.
-- Your buddy must be trained in freediving rescue — a friend who is "keeping an eye out" is not enough.
+- Your buddy must be trained in freediving rescue, a friend who is "keeping an eye out" is not enough.
 
 ## Use qualified instruction
 
-Learn with a recognised training organisation and qualified local instructors. Good schools teach breathing, equalisation, recovery breathing, rescue and conservative progression. Many of the best freediving destinations — [the Philippines](/destinations/philippines/), [Bali's](/destinations/bali-nusa-penida/) Amed coast — have established schools.
+Learn with a recognised training organisation and qualified local instructors. Good schools teach breathing, equalisation, recovery breathing, rescue and conservative progression. Many of the best freediving destinations ([the Philippines](/destinations/philippines/), [Bali's](/destinations/bali-nusa-penida/) Amed coast) have established schools.
 
 ## Do not compete with depth or breath-hold
 
@@ -52,11 +52,11 @@ Hyperventilating before a dive is widely discouraged because it can mask the bod
 
 ## Respect local conditions
 
-Wind, current, swell, visibility, temperature and boat traffic all affect safety. Channels and passes — such as the atoll passes of [French Polynesia](/destinations/french-polynesia/) or [the Maldives](/destinations/maldives/) — can carry strong currents.
+Wind, current, swell, visibility, temperature and boat traffic all affect safety. Channels and passes, such as the atoll passes of [French Polynesia](/destinations/french-polynesia/) or [the Maldives](/destinations/maldives/), can carry strong currents.
 
 - Always use a surface buoy and a dive flag where required.
 - Stay away from boat channels and follow local rules.
-- Cancel if conditions are poor — there is no shame in a rest day.
+- Cancel if conditions are poor. There is no shame in a rest day.
 
 ## Look after your body
 
@@ -68,6 +68,6 @@ Keep your distance from animals, never touch coral or wildlife and never chase e
 
 ## The best freediving holiday
 
-The best freediving holiday is the one where you come home with better technique and better memories — not a dramatic story about how close you came to trouble.
+The best freediving holiday is the one where you come home with better technique and better memories, not a dramatic story about how close you came to trouble.
 
 *This guide is general information, not a substitute for training, a qualified instructor or local safety advice.*

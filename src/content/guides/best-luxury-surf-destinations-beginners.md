@@ -6,7 +6,7 @@ description: "Find beginner-friendly luxury surf destinations with suitable wave
 category: Surf
 primaryKeyword: luxury surf destinations beginners
 keywords: ["luxury surf destinations beginners", "best beginner surf holidays", "surf resorts beginners"]
-dek: "Your first surf holiday should not be an endurance test. Manageable waves, good instruction — and somewhere comfortable to recover."
+dek: "Your first surf holiday should not be an endurance test. Manageable waves, good instruction, and somewhere comfortable to recover."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["portugal", "bali-nusa-penida", "fiji", "costa-rica", "sri-lanka"]
@@ -22,8 +22,8 @@ faqs:
   - { question: "Is Fiji suitable for beginner surfers?", answer: "Cloudbreak is not a beginner wave, but Tourism Fiji lists options such as Swimming Pools and Tavarua Rights that can suit a wider range of abilities under certain conditions. Always surf with qualified guidance." }
   - { question: "What makes a good beginner surf destination?", answer: "Sandy-bottom beach breaks, consistent small waves, qualified instructors, warm or manageable water and accommodation close enough to the beach that sessions are easy." }
 sources:
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche and spots for different abilities." }
-  - { name: "Tourism Fiji — Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "Swimming Pools and Tavarua Rights." }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche and spots for different abilities." }
+  - { name: "Tourism Fiji: Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "Swimming Pools and Tavarua Rights." }
   - { name: "Indonesia official tourism information", note: "Kuta, Seminyak, Legian and Sanur as beginner-oriented areas." }
 ---
 

@@ -20,13 +20,13 @@ images:
   - { label: "Food & culture", brief: "Food or culture image from each destination." }
   - { label: "Travel time", kind: graphic, brief: "Travel-time comparison graphic (no fabricated figures)." }
 sources:
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "More than 850 km of coast; Ericeira, Peniche, Nazaré." }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "More than 850 km of coast; Ericeira, Peniche, Nazaré." }
   - { name: "Indonesia official tourism information", note: "Kuta, Sanur and Uluwatu." }
 ---
 
 ## The real difference is the kind of trip
 
-[Portugal](/destinations/portugal/) is the easy European surf escape: Atlantic coastline, surf towns, seafood, wine and short internal transfers. Indonesia — [Bali](/destinations/bali-nusa-penida/) and the [Mentawai Islands](/destinations/mentawai-islands/) — is the tropical immersion: warm water, reef breaks, villas, culture and a much bigger sense of distance.
+[Portugal](/destinations/portugal/) is the easy European surf escape: Atlantic coastline, surf towns, seafood, wine and short internal transfers. Indonesia ([Bali](/destinations/bali-nusa-penida/) and the [Mentawai Islands](/destinations/mentawai-islands/)) is the tropical immersion: warm water, reef breaks, villas, culture and a much bigger sense of distance.
 
 Both can be luxurious. They simply feel different.
 

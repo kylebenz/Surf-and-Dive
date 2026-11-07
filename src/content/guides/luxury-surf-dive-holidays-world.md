@@ -6,7 +6,7 @@ description: "Discover the world's best luxury surf and dive destinations, from 
 category: Destinations
 primaryKeyword: luxury surf holidays
 keywords: ["luxury surf holidays", "luxury diving holidays", "luxury surf and dive destinations"]
-dek: "What separates a luxury ocean holiday from a beach holiday — and a shortlist of the destinations where the water and the stay are equally exceptional."
+dek: "What separates a luxury ocean holiday from a beach holiday, and a shortlist of the destinations where the water and the stay are equally exceptional."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["maldives", "fiji", "bali-nusa-penida", "portugal", "french-polynesia"]
@@ -24,9 +24,9 @@ faqs:
   - { question: "Can I combine surfing and diving on one holiday?", answer: "Yes. Destinations with multiple coasts, reefs or nearby islands can work especially well. Build the itinerary around the strongest seasonal window for each activity rather than assuming both will be ideal every day." }
 sources:
   - { name: "Visit Maldives", url: "https://visitmaldives.com/", note: "Reef surfing, warm water, surf areas and Fuvahmulah pelagic diving." }
-  - { name: "Tourism Fiji — Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "Cloudbreak, the Mamanuca Islands and the range of ability levels." }
+  - { name: "Tourism Fiji: Surfing", url: "https://www.fiji.travel/things-to-do/surfing", note: "Cloudbreak, the Mamanuca Islands and the range of ability levels." }
   - { name: "Indonesia official tourism information", note: "Beginner areas such as Kuta and Sanur; advanced areas including Uluwatu." }
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche and Nazaré." }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche and Nazaré." }
 ---
 
 ## The ocean should be the reason you go
@@ -75,4 +75,4 @@ Before booking, answer five questions:
 4. How much travel time am I willing to accept?
 5. What kind of luxury do I actually value?
 
-Once you answer those, the world's map becomes much smaller — and your next ocean holiday becomes much easier to choose. Use the [Best by Month](/best-by-month/) planner to check timing, and the [destination finder](/destinations/) to filter by activity and season.
+Once you answer those, the world's map becomes much smaller, and your next ocean holiday becomes much easier to choose. Use the [Best by Month](/best-by-month/) planner to check timing, and the [destination finder](/destinations/) to filter by activity and season.

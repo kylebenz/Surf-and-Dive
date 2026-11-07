@@ -8,11 +8,11 @@ export const mentawaiIslands: Destination = {
   region: 'Southeast Asia',
   slug: 'mentawai-islands',
 
-  positioning: 'A remote archipelago of tropical reef passes — the benchmark for serious surf travel, by resort or by boat.',
+  positioning: 'A remote archipelago of tropical reef passes, and the benchmark for serious surf travel, by resort or by boat.',
   hero_headline: 'The Mentawai Islands: Remote Reef Passes for Serious Surfers',
   hero_subheadline: 'Consistent Indian Ocean swell, uncrowded tropical reef breaks and a choice between a surf resort with a fixed base or a charter that chases the forecast.',
   overview:
-    'For many experienced surfers, the Mentawai Islands are the reference point: a chain of islands off the west coast of Sumatra, exposed to Indian Ocean swell and fringed with reef passes that produce long, high-quality waves. This is not a destination for casual beach time or a mixed itinerary in the way Bali is. It is a place to surf — usually twice a day — and recover in between. Luxury here means small-group surf resorts, well-run charter boats, good food, a comfortable bed and a guide who knows which reef will be best on the tide.',
+    'For many experienced surfers, the Mentawai Islands are the reference point: a chain of islands off the west coast of Sumatra, exposed to Indian Ocean swell and fringed with reef passes that produce long, high-quality waves. This is not a destination for casual beach time or a mixed itinerary in the way Bali is. It is a place to surf, usually twice a day, and recover in between. Luxury here means small-group surf resorts, well-run charter boats, good food, a comfortable bed and a guide who knows which reef will be best on the tide.',
   why_visit: [
     'Wave quality and consistency are the reason to come. The region holds a high density of reef breaks within boat range.',
     'Small-group resorts and charters keep numbers manageable compared with mainland surf hubs.',
@@ -67,12 +67,12 @@ export const mentawaiIslands: Destination = {
     { label: 'Weather', detail: 'Tropical and humid year-round, with rain possible in any month.' },
     { label: 'Surf', detail: 'Main season typically roughly April to October; shoulder months often quieter.' },
     { label: 'Diving', detail: 'Limited and swell-dependent; snorkelling on calm days.' },
-    { label: 'European calendar', detail: 'Aligns with the European summer — a classic long-haul summer surf trip.' },
+    { label: 'European calendar', detail: 'Aligns with the European summer, a classic long-haul summer surf trip.' },
   ],
   european_seasonal_angle:
     'The prime Mentawai season overlaps the European summer, which is why it remains one of the most coveted summer surf trips for experienced European surfers. Shoulder months (April, May, September, October) can offer quieter line-ups.',
   season_types: ['summer', 'shoulder'],
-  recommended_duration: '10–14 nights. The journey is long and multi-stage, and you need enough days to catch more than one swell.',
+  recommended_duration: '10-14 nights. The journey is long and multi-stage, and you need enough days to catch more than one swell.',
 
   traveller_profiles: ['serious-surfer', 'solo', 'active-luxury'],
   best_audience: 'Serious surfers, surf charters and remote escapes.',
@@ -83,18 +83,18 @@ export const mentawaiIslands: Destination = {
   ],
 
   itinerary: [
-    { days: 'Days 1–2', title: 'Getting there', detail: 'International flight to Indonesia, onward to Padang, then a boat transfer to the islands. Treat this as part of the trip.' },
-    { days: 'Days 3–9', title: 'Surf, eat, sleep', detail: 'Two sessions a day where conditions allow, chosen by your guide around tide and wind. Rest, massage and snorkel in between.' },
-    { days: 'Days 10–11', title: 'Recovery', detail: 'Plan at least one easier day — reef cuts and fatigue add up.' },
-    { days: 'Days 12–13', title: 'Return', detail: 'Boat and flights back, allowing buffer for weather-related delays.' },
+    { days: 'Days 1-2', title: 'Getting there', detail: 'International flight to Indonesia, onward to Padang, then a boat transfer to the islands. Treat this as part of the trip.' },
+    { days: 'Days 3-9', title: 'Surf, eat, sleep', detail: 'Two sessions a day where conditions allow, chosen by your guide around tide and wind. Rest, massage and snorkel in between.' },
+    { days: 'Days 10-11', title: 'Recovery', detail: 'Plan at least one easier day: reef cuts and fatigue add up.' },
+    { days: 'Days 12-13', title: 'Return', detail: 'Boat and flights back, allowing buffer for weather-related delays.' },
   ],
 
   planning_notes: [
-    'Access is remote and multi-stage — build in buffer days for weather and transfer delays.',
+    'Access is remote and multi-stage: build in buffer days for weather and transfer delays.',
     'Medical facilities are limited; choose operators with clear first-aid and evacuation protocols, and check travel insurance cover.',
     'Seek current health advice for the region before travel, including recommendations on mosquito-borne illness.',
     'Reef boots, a well-stocked first-aid kit and spare fins and leashes are worth packing.',
-    'A surf levy or local fee may apply — confirm current rules with your operator.',
+    'A surf levy or local fee may apply: confirm current rules with your operator.',
     'Respect local communities and ask before photographing people or villages.',
   ],
 

@@ -2,7 +2,7 @@ export const SITE = {
   name: 'Surf and Dive',
   tagline: 'Luxury Ocean Holidays, Curated Around the Water',
   description:
-    "Discover the world's most compelling ocean escapes for surfing, diving and freediving — curated for travellers who want extraordinary water and exceptional places to stay.",
+    "Discover the world's most compelling ocean escapes for surfing, diving and freediving, curated for travellers who want extraordinary water and exceptional places to stay.",
   footerLine: 'Luxury ocean travel for travellers who care about the water.',
   locale: 'en_GB',
   lang: 'en',
@@ -27,7 +27,7 @@ export const NAV = [
 /**
  * Locale architecture. English launches first. The other locales are reserved
  * routes (/de/, /fr/, /es/, /it/) that must only be enabled once native-language
- * editorial review is complete — set `enabled: true` and add the localised
+ * editorial review is complete: set `enabled: true` and add the localised
  * pages under src/pages/<code>/. hreflang tags are only emitted for enabled locales.
  */
 export const LOCALES = [

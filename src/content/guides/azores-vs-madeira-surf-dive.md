@@ -20,7 +20,7 @@ images:
   - { label: "Underwater", brief: "Diver with volcanic underwater landscape." }
   - { label: "Stay", brief: "Luxury hotel with a dramatic ocean view." }
 sources:
-  - { name: "Visit Madeira — Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/", note: "Surf areas from Porto da Cruz to Paul do Mar." }
+  - { name: "Visit Madeira: Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/", note: "Surf areas from Porto da Cruz to Paul do Mar." }
 ---
 
 ## Same country, completely different feeling
@@ -39,7 +39,7 @@ The Azores work particularly well for travellers who want ocean adventure combin
 
 ## Which is better for diving?
 
-Madeira is the simpler choice if you want established tourism infrastructure around a compact island. The Azores can appeal to travellers looking for a more nature-led trip — including summer blue-water diving at offshore banks. Always verify local conditions and operators for the exact island and season.
+Madeira is the simpler choice if you want established tourism infrastructure around a compact island. The Azores can appeal to travellers looking for a more nature-led trip, including summer blue-water diving at offshore banks. Always verify local conditions and operators for the exact island and season.
 
 ## The verdict
 

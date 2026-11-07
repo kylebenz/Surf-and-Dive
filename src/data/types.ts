@@ -1,9 +1,9 @@
 /**
- * Surf and Dive — content model.
+ * Surf and Dive: content model.
  *
  * Every page is rendered from these structured types. Edit the data files in
  * /src/data (destinations, comparisons, seasonal, countries) and the Markdown
- * guides in /src/content/guides — not the components.
+ * guides in /src/content/guides, not the components.
  */
 
 export type Month =

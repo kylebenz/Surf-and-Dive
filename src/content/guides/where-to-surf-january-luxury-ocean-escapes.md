@@ -42,7 +42,7 @@ That variety is useful for a longer January trip, especially when you want to co
 
 ## Costa Rica for surf and nature
 
-[Costa Rica's](/destinations/costa-rica/) Pacific coast is typically in its dry season in January, with cleaner, often smaller conditions that suit learning and improving — and rainforest, wildlife and wellness for the rest of the day.
+[Costa Rica's](/destinations/costa-rica/) Pacific coast is typically in its dry season in January, with cleaner, often smaller conditions that suit learning and improving, and rainforest, wildlife and wellness for the rest of the day.
 
 ## The luxury decision
 

@@ -8,11 +8,11 @@ export const philippines: Destination = {
   region: 'Southeast Asia',
   slug: 'philippines',
 
-  positioning: 'More than 7,000 islands and some of the world’s richest reefs — island-hopping, wreck diving, freediving schools and surf on the Pacific edge.',
+  positioning: 'More than 7,000 islands and some of the world’s richest reefs: island-hopping, wreck diving, freediving schools and surf on the Pacific edge.',
   hero_headline: 'The Philippines: Reefs, Wrecks and Endless Islands',
-  hero_subheadline: 'Palawan’s limestone lagoons, Coron’s wrecks, Tubbataha’s protected atolls, Moalboal’s sardine shoals and the surf of Siargao — an archipelago built for ocean exploration.',
+  hero_subheadline: 'Palawan’s limestone lagoons, Coron’s wrecks, Tubbataha’s protected atolls, Moalboal’s sardine shoals and the surf of Siargao, an archipelago built for ocean exploration.',
   overview:
-    'The Philippines sits in the heart of the Coral Triangle, and its diving and snorkelling are among the most diverse anywhere. Palawan offers limestone lagoons around El Nido and Second World War wrecks in Coron Bay; Tubbataha Reefs Natural Park, a UNESCO World Heritage site, is reached only by liveaboard in a short seasonal window; Cebu and Bohol are known for sardine shoals, turtles and established freediving schools; and Anilao is a macro-photography favourite. Siargao, covered in its own guide, adds surf. Luxury is boutique and island-based — small resorts and private islands rather than mega-resorts.',
+    'The Philippines sits in the heart of the Coral Triangle, and its diving and snorkelling are among the most diverse anywhere. Palawan offers limestone lagoons around El Nido and Second World War wrecks in Coron Bay; Tubbataha Reefs Natural Park, a UNESCO World Heritage site, is reached only by liveaboard in a short seasonal window; Cebu and Bohol are known for sardine shoals, turtles and established freediving schools; and Anilao is a macro-photography favourite. Siargao, covered in its own guide, adds surf. Luxury is boutique and island-based: small resorts and private islands rather than mega-resorts.',
   why_visit: [
     'Marine biodiversity and variety: reefs, wrecks, walls, macro and pelagics across one country.',
     'Freediving has a strong scene, with schools around Panglao and Moalboal.',
@@ -70,35 +70,35 @@ export const philippines: Destination = {
     { label: 'European calendar', detail: 'Strong for winter sun, February half-term and Easter.' },
   ],
   european_seasonal_angle:
-    'The drier months align with the European winter and spring, making the Philippines a strong winter-sun dive destination — with Tubbataha’s short season a special draw around Easter.',
+    'The drier months align with the European winter and spring, making the Philippines a strong winter-sun dive destination, with Tubbataha’s short season a special draw around Easter.',
   season_types: ['winter-sun', 'shoulder'],
-  recommended_duration: '12–16 nights across two or three island regions.',
+  recommended_duration: '12-16 nights across two or three island regions.',
 
   traveller_profiles: ['diver', 'freediver', 'couples', 'active-luxury', 'solo'],
   best_audience: 'Island-hopping, diving and tropical exploration.',
   audience_notes: [
-    { profile: 'Divers', detail: 'Unrivalled variety — wrecks, macro, pelagics, reefs.' },
+    { profile: 'Divers', detail: 'Unrivalled variety: wrecks, macro, pelagics, reefs.' },
     { profile: 'Freedivers', detail: 'Established schools and calm deep water.' },
     { profile: 'Not ideal for', detail: 'Travellers wanting polished five-star service everywhere or minimal domestic flights.' },
   ],
 
   itinerary: [
-    { days: 'Days 1–4', title: 'Palawan', detail: 'El Nido lagoons by private boat and reef dives.' },
-    { days: 'Days 5–7', title: 'Coron', detail: 'Wreck diving for appropriately trained divers; lakes and lagoons.' },
-    { days: 'Days 8–11', title: 'Cebu or Bohol', detail: 'Moalboal sardine shoals, freediving with a school in Panglao, turtles at Balicasag.' },
-    { days: 'Days 12–13', title: 'Unwind', detail: 'A final quiet island, respecting the no-fly interval.' },
+    { days: 'Days 1-4', title: 'Palawan', detail: 'El Nido lagoons by private boat and reef dives.' },
+    { days: 'Days 5-7', title: 'Coron', detail: 'Wreck diving for appropriately trained divers; lakes and lagoons.' },
+    { days: 'Days 8-11', title: 'Cebu or Bohol', detail: 'Moalboal sardine shoals, freediving with a school in Panglao, turtles at Balicasag.' },
+    { days: 'Days 12-13', title: 'Unwind', detail: 'A final quiet island, respecting the no-fly interval.' },
   ],
 
   planning_notes: [
-    'Domestic flights are essential — allow buffer for weather.',
+    'Domestic flights are essential: allow buffer for weather.',
     'Typhoon season typically runs roughly June to November; check forecasts.',
     'Avoid whale shark tours involving feeding.',
-    'Marine sanctuary fees are common — carry cash.',
+    'Marine sanctuary fees are common: carry cash.',
     'Wreck penetration requires appropriate training.',
   ],
 
   faqs: [
-    { question: 'Is the Philippines good for diving?', answer: 'Yes — it is one of the most diverse dive countries in the world, with wrecks, reefs, macro and pelagic encounters across many regions.' },
+    { question: 'Is the Philippines good for diving?', answer: 'Yes. It is one of the most diverse dive countries in the world, with wrecks, reefs, macro and pelagic encounters across many regions.' },
     { question: 'Is the Philippines good for freediving?', answer: 'Yes. Panglao and Moalboal have established freediving schools and calm, deep water close to shore.' },
   ],
 

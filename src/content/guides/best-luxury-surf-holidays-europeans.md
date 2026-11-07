@@ -6,7 +6,7 @@ description: "Compare premium surf destinations for European travellers, includi
 category: Surf
 primaryKeyword: luxury surf holidays Europe
 keywords: ["luxury surf holidays Europe", "best surf holidays Europe", "winter sun surf holidays"]
-dek: "Atlantic surf close to home or warm water far away? How European surfers can choose by season first — and destination second."
+dek: "Atlantic surf close to home or warm water far away? How European surfers can choose by season first, and destination second."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["portugal", "canary-islands", "madeira", "bali-nusa-penida", "fiji", "maldives", "costa-rica"]
@@ -23,8 +23,8 @@ faqs:
   - { question: "Where can Europeans find warm-water surf in winter?", answer: "The Maldives, Sri Lanka, parts of Indonesia, Costa Rica, the Canary Islands, Mauritius and other Indian Ocean or tropical destinations can be considered depending on the month and desired surf conditions." }
   - { question: "Is Portugal good for a luxury surf holiday?", answer: "Yes. Portugal combines a wide choice of surf environments with design hotels, seafood and wine, and short travel times from most of Europe." }
 sources:
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche, Nazaré, the Algarve and other surf areas." }
-  - { name: "Visit Madeira — Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/", note: "Jardim do Mar, Paul do Mar, Ribeira da Janela and Porto da Cruz." }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira, Peniche, Nazaré, the Algarve and other surf areas." }
+  - { name: "Visit Madeira: Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/", note: "Jardim do Mar, Paul do Mar, Ribeira da Janela and Porto da Cruz." }
 ---
 
 ## Start with the season, not the destination
@@ -49,14 +49,14 @@ That makes these islands useful for couples where one person surfs and the other
 
 [Bali](/destinations/bali-nusa-penida/) is one of the strongest all-round choices when you want surf plus food, culture, villas and diving. [Fiji](/destinations/fiji/) is the choice when the wave is the centrepiece. [The Maldives](/destinations/maldives/) is ideal when you want surf days wrapped inside a resort-and-reef holiday. [Costa Rica](/destinations/costa-rica/) works particularly well if you want to combine surf with rainforest, wildlife and wellness.
 
-The key is to choose the destination around the trip you want — not around an Instagram photo.
+The key is to choose the destination around the trip you want, not around an Instagram photo.
 
 ### A simple way to decide
 
 | If you have… | Consider… |
 | --- | --- |
 | A long weekend | Portugal, the Canaries or Madeira |
-| A week in winter | The Canaries, Madeira — or Sri Lanka and the Maldives if you can stretch to ten nights |
+| A week in winter | The Canaries, Madeira, or Sri Lanka and the Maldives if you can stretch to ten nights |
 | Ten to fourteen nights in summer | Bali, Fiji or the Mentawai Islands |
 | A mixed-interest couple | Bali, Madeira or Portugal |
 

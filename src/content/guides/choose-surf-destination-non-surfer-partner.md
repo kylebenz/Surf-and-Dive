@@ -20,8 +20,8 @@ images:
   - { label: "Sunset", brief: "Couple sunset scene." }
 sources:
   - { name: "Indonesia official tourism information" }
-  - { name: "Visit Portugal — Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira as a recognised surfing reserve." }
-  - { name: "Visit Madeira — Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/" }
+  - { name: "Visit Portugal: Surfing", url: "https://www.visitportugal.com/en/content/surfing-0", note: "Ericeira as a recognised surfing reserve." }
+  - { name: "Visit Madeira: Sea activities", url: "https://visitmadeira.com/en/what-to-do/sea-lovers/activities/" }
 ---
 
 ## The best surf trip is one you both enjoy

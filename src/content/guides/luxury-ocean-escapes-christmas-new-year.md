@@ -6,7 +6,7 @@ description: "Plan a premium Christmas or New Year ocean escape with surf, divin
 category: Seasonal
 primaryKeyword: Christmas luxury beach holiday
 keywords: ["Christmas luxury beach holiday", "New Year surf holiday", "luxury tropical Christmas"]
-dek: "Warm sand, an early surf and dinner outside. Where to spend the festive season by the ocean — and how to make the premium count."
+dek: "Warm sand, an early surf and dinner outside. Where to spend the festive season by the ocean, and how to make the premium count."
 publishDate: 2026-11-06
 updatedDate: 2026-11-06
 relatedDestinations: ["maldives", "fiji", "french-polynesia", "seychelles", "mauritius", "costa-rica"]
@@ -21,7 +21,7 @@ images:
   - { label: "Fireworks", brief: "Fireworks only if genuinely available and current." }
 sources:
   - { name: "Visit Maldives", url: "https://visitmaldives.com/", note: "Surf season across much of the year." }
-  - { name: "Tourism Fiji — Surfing", url: "https://www.fiji.travel/things-to-do/surfing" }
+  - { name: "Tourism Fiji: Surfing", url: "https://www.fiji.travel/things-to-do/surfing" }
   - { name: "Tahiti Tourisme", note: "Clear lagoon diving and marine encounters around Moorea." }
 ---
 

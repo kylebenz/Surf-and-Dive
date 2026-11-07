@@ -228,7 +228,7 @@ const touristDestination = {
             <li class:list={[{ good }]} data-month={m.slug}>
               <a href={`/best-by-month/${m.slug}/`}>
                 <span class="mname">{m.short}</span>
-                <span class="mstate">{good ? 'Favoured' : '—'}</span>
+                <span class="mstate">{good ? 'Favoured' : '·'}</span>
                 <span class="sr-only">{good ? `${m.name}: typically a favoured month` : `${m.name}: not among the typically favoured months`}</span>
               </a>
             </li>
@@ -240,7 +240,7 @@ const touristDestination = {
         {d.seasonal_conditions.map((c) => <div><dt>{c.label}</dt><dd>{c.detail}</dd></div>)}
       </dl>
       <Notice kind="seasonal">
-        <p>Seasonal patterns are planning guidance, not guarantees. Conditions vary by coast, swell, wind, tide and year — always check current local conditions and operator advice before you book.</p>
+        <p>Seasonal patterns are planning guidance, not guarantees. Conditions vary by coast, swell, wind, tide and year. Always check current local conditions and operator advice before you book.</p>
       </Notice>
     </div>
   </section>
@@ -263,7 +263,7 @@ const touristDestination = {
     <div class="container narrowish">
       <span class="eyebrow">Sample itinerary</span>
       <h2 id="itin-title" class="mt">A sample ocean itinerary</h2>
-      <p class="muted itin-note">An illustrative shape for a first trip — adjust around swell, visibility and your own pace. Always leave flexibility for the ocean.</p>
+      <p class="muted itin-note">An illustrative shape for a first trip. Adjust around swell, visibility and your own pace. Always leave flexibility for the ocean.</p>
       <ol role="list" class="itinerary">
         {d.itinerary.map((day) => (
           <li class="reveal">
@@ -294,7 +294,7 @@ const touristDestination = {
     <div class="container">
       <div class="section-head split">
         <div><span class="eyebrow">Image storytelling</span><h2 id="gallery-title" class="mt">{d.name} in pictures</h2></div>
-        <p class="muted">Coastline, people, culture and the moment that defines the destination — the ocean as protagonist.</p>
+        <p class="muted">Coastline, people, culture and the moment that defines the destination, with the ocean always at the centre.</p>
       </div>
       <div class="gallery">
         <div class="g1 reveal"><DestinationImagePlaceholder destination={d} type="landscape" aspect="16 / 10" sizes="(min-width: 1000px) 66vw, 100vw" /></div>
@@ -345,7 +345,7 @@ const touristDestination = {
     secondary={{ label: 'Explore Destinations', href: '/destinations/' }}
   />
 
-  <p class="container updated note-small">Last reviewed {new Date(SITE.lastReviewed).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })} by the {SITE.editor}. Operational details change — please verify access rules, regulations and conditions before travel. See our <a href="/editorial-standards/">editorial standards</a>.</p>
+  <p class="container updated note-small">Last reviewed {new Date(SITE.lastReviewed).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })} by the {SITE.editor}. Operational details change. Please verify access rules, regulations and conditions before travel. See our <a href="/editorial-standards/">editorial standards</a>.</p>
 </BaseLayout>
 
 <style>

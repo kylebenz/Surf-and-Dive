@@ -22,7 +22,7 @@ faqs:
   - { question: "How long should a luxury surf and dive holiday be?", answer: "Seven to ten nights works well for a focused escape; longer trips make more sense when travel is complex or the itinerary combines multiple islands or regions." }
 ---
 
-## Short trips work — if the destination is close
+## Short trips work, if the destination is close
 
 A four-night surf escape can be excellent when you are travelling a few hours. It becomes much less attractive when you spend two days getting there and back.
 
@@ -30,7 +30,7 @@ The longer the journey, the more important it is to stay longer.
 
 ## Five to seven nights
 
-This is a good range for European Atlantic destinations and short-haul island trips — [Portugal](/destinations/portugal/), [Madeira](/destinations/madeira/), the [Canary Islands](/destinations/canary-islands/). You have enough time for several surf windows without feeling like every morning is a mission.
+This is a good range for European Atlantic destinations and short-haul island trips: [Portugal](/destinations/portugal/), [Madeira](/destinations/madeira/), the [Canary Islands](/destinations/canary-islands/). You have enough time for several surf windows without feeling like every morning is a mission.
 
 ## Seven to ten nights
 
@@ -38,7 +38,7 @@ For long-haul destinations, this is where the trip starts to make sense. You can
 
 ## Ten to fourteen nights
 
-Use this when the destination itself is part of the experience or when you are combining regions. [Bali](/destinations/bali-nusa-penida/), Indonesia, the Pacific — including [Fiji](/destinations/fiji/) — and multi-island itineraries can justify longer stays.
+Use this when the destination itself is part of the experience or when you are combining regions. [Bali](/destinations/bali-nusa-penida/), Indonesia, the Pacific, including [Fiji](/destinations/fiji/), and multi-island itineraries can justify longer stays.
 
 ## Our rule
 

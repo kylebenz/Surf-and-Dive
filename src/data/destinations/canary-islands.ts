@@ -8,14 +8,14 @@ export const canaryIslands: Destination = {
   region: 'Atlantic Europe',
   slug: 'canary-islands',
 
-  positioning: 'Europe’s winter-sun surf archipelago — volcanic reefs, varied islands and marine reserves within a short flight.',
+  positioning: 'Europe’s winter-sun surf archipelago: volcanic reefs, varied islands and marine reserves within a short flight.',
   hero_headline: 'The Canary Islands: Volcanic Reefs and Winter Sun',
-  hero_subheadline: 'Fuerteventura’s north shore, Lanzarote’s volcanic reefs, Tenerife’s south coast and El Hierro’s marine reserve — surf and dive choice across seven islands.',
+  hero_subheadline: 'Fuerteventura’s north shore, Lanzarote’s volcanic reefs, Tenerife’s south coast and El Hierro’s marine reserve, with surf and dive choice across seven islands.',
   overview:
     'The Canary Islands offer multiple islands and a strong surf culture, making them useful when you want to choose your coastline around conditions and travel style. Fuerteventura and Lanzarote hold some of Europe’s most respected volcanic reef breaks alongside learner-friendly beaches; Tenerife and Gran Canaria add more developed resort infrastructure; and El Hierro, the smallest and most remote, is known for its marine reserve. For European travellers, the islands are one of the easiest winter-sun answers: mild temperatures, short flights and the option of a four- or five-night ocean escape.',
   why_visit: [
     'Surf variety across islands lets you pick a coast to match swell, wind and ability.',
-    'Winter sun without long-haul travel — the shortest route to warm air and Atlantic surf for much of Europe.',
+    'Winter sun without long-haul travel, and the shortest route to warm air and Atlantic surf for much of Europe.',
     'A wide range of stays, from design-led rural hotels on Lanzarote to large luxury resorts on Tenerife.',
   ],
 
@@ -26,7 +26,7 @@ export const canaryIslands: Destination = {
     levels: ['beginner', 'intermediate', 'advanced'],
     season: 'Surf is possible year-round, with the most consistent North Atlantic swells typically arriving roughly October to March.',
     notes:
-      'The archipelago’s volcanic reefs can be sharp, shallow and powerful; several are firmly expert territory. Long sandy beaches such as Famara and parts of Fuerteventura suit lessons and improvers. Wind is a constant factor — the islands are also a major kitesurf and windsurf destination — so early sessions are often best.',
+      'The archipelago’s volcanic reefs can be sharp, shallow and powerful; several are firmly expert territory. Long sandy beaches such as Famara and parts of Fuerteventura suit lessons and improvers. Wind is a constant factor (the islands are also a major kitesurf and windsurf destination), so early sessions are often best.',
   },
 
   diving: {
@@ -35,7 +35,7 @@ export const canaryIslands: Destination = {
     marine_life: ['Angel sharks (seasonal, protected)', 'Rays', 'Groupers', 'Turtles (Tenerife)', 'Atlantic reef fish'],
     season: 'Diving is possible year-round; water is typically warmest in late summer and autumn.',
     notes:
-      'El Hierro’s La Restinga area is the archipelago’s best-known dive region. The Museo Atlántico off Lanzarote offers a distinctive dive among underwater sculptures designed to become an artificial reef. Angel sharks are critically endangered — observe only, at distance.',
+      'El Hierro’s La Restinga area is the archipelago’s best-known dive region. The Museo Atlántico off Lanzarote offers a distinctive dive among underwater sculptures designed to become an artificial reef. Angel sharks are critically endangered: observe only, at distance.',
   },
 
   freediving: {
@@ -70,9 +70,9 @@ export const canaryIslands: Destination = {
     { label: 'European calendar', detail: 'Ideal for winter sun, Christmas, half-term and long weekends.' },
   ],
   european_seasonal_angle:
-    'The Canaries are Europe’s most accessible winter-sun ocean destination — warm air and consistent surf in the months when mainland Europe is coldest, all within a short-haul flight.',
+    'The Canaries are Europe’s most accessible winter-sun ocean destination: warm air and consistent surf in the months when mainland Europe is coldest, all within a short-haul flight.',
   season_types: ['winter-sun', 'year-round'],
-  recommended_duration: '5–8 nights; longer if combining two islands.',
+  recommended_duration: '5-8 nights; longer if combining two islands.',
 
   traveller_profiles: ['couples', 'family', 'winter-sun', 'active-luxury', 'solo'],
   best_audience: 'European winter sun, surf and short-haul luxury.',
@@ -85,13 +85,13 @@ export const canaryIslands: Destination = {
 
   itinerary: [
     { days: 'Day 1', title: 'Arrive in Lanzarote', detail: 'Check into a design-led rural hotel or villa; sunset over the volcanic landscape.' },
-    { days: 'Days 2–3', title: 'Surf Famara and the north', detail: 'Lessons or guided sessions matched to your level; volcanic landscape tour in the afternoon.' },
+    { days: 'Days 2-3', title: 'Surf Famara and the north', detail: 'Lessons or guided sessions matched to your level; volcanic landscape tour in the afternoon.' },
     { days: 'Day 4', title: 'Dive Museo Atlántico', detail: 'A guided dive among the underwater sculptures; Canarian wine tasting later.' },
-    { days: 'Days 5–7', title: 'Fuerteventura', detail: 'Short ferry across for north-shore reefs or El Cotillo’s beaches, plus dunes and quiet beaches.' },
+    { days: 'Days 5-7', title: 'Fuerteventura', detail: 'Short ferry across for north-shore reefs or El Cotillo’s beaches, plus dunes and quiet beaches.' },
   ],
 
   planning_notes: [
-    'Wind affects surf quality — early mornings are often cleanest.',
+    'Wind affects surf quality: early mornings are often cleanest.',
     'Volcanic reefs are sharp; reef boots and a first-aid kit are useful.',
     'Inter-island ferries make two-island trips easy; check schedules in advance.',
     'Respect marine reserves and protected species such as angel sharks.',

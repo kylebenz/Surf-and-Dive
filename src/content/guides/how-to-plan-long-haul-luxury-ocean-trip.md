@@ -42,4 +42,4 @@ The first day should not always be a major surf or dive day. Sleep, hydrate, exp
 
 ## And at the end
 
-Divers should respect the no-fly interval recommended by their training agency before the flight home. Plan the last ocean day accordingly — a lagoon swim or a final surf rather than a deep dive.
+Divers should respect the no-fly interval recommended by their training agency before the flight home. Plan the last ocean day accordingly, a lagoon swim or a final surf rather than a deep dive.

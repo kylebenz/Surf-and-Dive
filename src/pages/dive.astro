@@ -34,11 +34,11 @@ const faqs = [
 ---
 <BaseLayout
   title="Luxury Diving Holidays | Surf and Dive"
-  description="Luxury diving holidays compared by reefs, marine life, visibility, water conditions, resort diving and liveaboards — the Maldives, Fiji, French Polynesia, the Philippines and more."
+  description="Luxury diving holidays compared by reefs, marine life, visibility, water conditions, resort diving and liveaboards, from the Maldives and Fiji to French Polynesia and the Philippines."
   crumbs={[{ label: 'Dive', href: '/dive/' }]}
   jsonLd={[faqLd(faqs), itemListLd(best.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
 >
-  <Hero size="medium" eyebrow="Dive" title="Luxury Diving Holidays" subtitle="Walls, channels, wrecks and reef life — with the boats, guides and comfort that make repeated dives a pleasure." seed="dive-hub">
+  <Hero size="medium" eyebrow="Dive" title="Luxury Diving Holidays" subtitle="Walls, channels, wrecks and reef life, with the boats, guides and comfort that make repeated dives a pleasure." seed="dive-hub">
     <a class="btn" href="#reefs">Best dive destinations <span class="arrow" aria-hidden="true">→</span></a>
     <a class="btn btn-ghost" href="#marine-life">Marine life</a>
   </Hero>
@@ -47,7 +47,7 @@ const faqs = [
     <div class="container split-layout">
       <div><span class="eyebrow">Diving, then everything else</span><h2 id="dive-intro-title">Dive deeper, stay better</h2></div>
       <div class="prose">
-        <p class="lede">The best luxury diving holidays combine exceptional underwater environments with the comfort and logistics that make repeated dives enjoyable. Compare reefs, walls, wrecks, marine life, visibility, water conditions, dive access and the quality of the stay — not just the name of the destination.</p>
+        <p class="lede">The best luxury diving holidays combine exceptional underwater environments with the comfort and logistics that make repeated dives enjoyable. Compare reefs, walls, wrecks, marine life, visibility, water conditions, dive access and the quality of the stay, not just the name of the destination.</p>
         <p>A great dive is only part of a great diving holiday. Boat time, operator quality, guide ratios and what you do between dives all shape the trip. That is why island destinations work so well: the water is close, the accommodation can be exceptional and the day revolves around the sea.</p>
       </div>
     </div>
@@ -57,7 +57,7 @@ const faqs = [
     <DestinationGrid destinations={best} />
   </EditorialSection>
 
-  <EditorialSection id="marine-life" eyebrow="Marine life" title="Choose the encounter, then the destination" intro="Sharks, rays, turtles and pelagics need different environments and seasons. None is guaranteed — the ocean does not run to a timetable." split>
+  <EditorialSection id="marine-life" eyebrow="Marine life" title="Choose the encounter, then the destination" intro="Sharks, rays, turtles and pelagics need different environments and seasons. None is guaranteed. The ocean does not run to a timetable." split>
     <dl class="encounters">
       {encounters.map((e) => (
         <div>
@@ -78,7 +78,7 @@ const faqs = [
         </div>
         <div class="prose">
           <h3>Tropical or temperate</h3>
-          <p>Indian Ocean, Pacific and Southeast Asian destinations offer warm tropical water year-round. Atlantic destinations — <a href="/destinations/azores/">the Azores</a>, <a href="/destinations/madeira/">Madeira</a>, <a href="/destinations/canary-islands/">the Canaries</a> and <a href="/destinations/portugal/">Portugal</a> — are temperate, with wetsuits needed and the warmest water typically in late summer and early autumn. Check current temperatures with your operator rather than relying on averages.</p>
+          <p>Indian Ocean, Pacific and Southeast Asian destinations offer warm tropical water year-round. Atlantic destinations (<a href="/destinations/azores/">the Azores</a>, <a href="/destinations/madeira/">Madeira</a>, <a href="/destinations/canary-islands/">the Canaries</a> and <a href="/destinations/portugal/">Portugal</a>) are temperate, with wetsuits needed and the warmest water typically in late summer and early autumn. Check current temperatures with your operator rather than relying on averages.</p>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@ const faqs = [
     <div class="cols-2">
       <div class="prose">
         <h3>Resort diving</h3>
-        <p>The best dive resort is not automatically the most expensive. Look for a strong dive centre, good boat logistics, appropriate guide-to-guest ratios and access to the sites that match your interests — plus room to stop. Four dives a day sounds exciting until day three.</p>
+        <p>The best dive resort is not automatically the most expensive. Look for a strong dive centre, good boat logistics, appropriate guide-to-guest ratios and access to the sites that match your interests, plus room to stop. Four dives a day sounds exciting until day three.</p>
       </div>
       <div class="prose">
         <h3>Liveaboards</h3>

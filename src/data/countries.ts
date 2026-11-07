@@ -3,7 +3,7 @@ import type { Market } from './types';
 /**
  * European market landing pages (/europe/[country]/). English at launch.
  * Localised versions (/de/, /fr/, /es/, /it/) must only be published after
- * native-language editorial review — never machine-translated.
+ * native-language editorial review, never machine-translated.
  *
  * Copy avoids exact flight times, prices and school-holiday dates, which vary
  * by year and region; always direct readers to verify before booking.
@@ -20,7 +20,7 @@ export const markets: Market[] = [
     intro: 'British surfers know cold water. The case for travelling is warmth, consistency and a holiday that feels genuinely different from a weekend in Cornwall. Winter sun is the big opportunity: the Canary Islands and Madeira are close enough for a long weekend, while the Maldives, Sri Lanka and Costa Rica come into season when UK winter is at its greyest.',
     seasonal_intent: [
       { label: 'Winter sun', detail: 'November to March is the strongest window for warm-water surf and diving from the UK.' },
-      { label: 'February half-term', detail: 'Popular for family winter sun — book early for Indian Ocean and Atlantic island trips.' },
+      { label: 'February half-term', detail: 'Popular for family winter sun. Book early for Indian Ocean and Atlantic island trips.' },
       { label: 'Summer', detail: 'Portugal and the Atlantic islands for shorter trips; Indonesia and Fiji for long-haul surf.' },
       { label: 'Autumn', detail: 'October half-term pairs well with Portugal’s autumn swell or the Maldives’ autumn surf window.' },
     ],
@@ -44,11 +44,11 @@ export const markets: Market[] = [
     hreflang: 'de-DE',
     landing_concept: 'Luxus Surf- und Tauchreisen',
     editorial_angle: 'Quality, planning, nature and wellness.',
-    intro: 'German travellers tend to plan carefully and value quality over status — which suits ocean travel well. The best trips match a destination’s season to your holiday window, then add wellness and nature. Diving holidays (Tauchurlaub) are a particular strength: the Maldives, the Philippines and French Polynesia for reef life, the Azores for summer blue water.',
+    intro: 'German travellers tend to plan carefully and value quality over status, which suits ocean travel well. The best trips match a destination’s season to your holiday window, then add wellness and nature. Diving holidays (Tauchurlaub) are a particular strength: the Maldives, the Philippines and French Polynesia for reef life, the Azores for summer blue water.',
     seasonal_intent: [
       { label: 'Winter', detail: 'Indian Ocean and Southeast Asian dive seasons; the Canaries for short winter-sun surf.' },
       { label: 'Easter and Pentecost', detail: 'Strong windows for the Maldives, Fiji and Bali’s dry season.' },
-      { label: 'Summer holidays', detail: 'Regional school-holiday dates vary — Portugal, the Azores, Bali and Fiji all work.' },
+      { label: 'Summer holidays', detail: 'Regional school-holiday dates vary: Portugal, the Azores, Bali and Fiji all work.' },
       { label: 'Autumn', detail: 'Portugal, Madeira and the Canaries as Atlantic swell returns.' },
     ],
     destinations: [
@@ -71,7 +71,7 @@ export const markets: Market[] = [
     hreflang: 'fr-FR',
     landing_concept: 'Voyages surf & plongée de luxe',
     editorial_angle: 'Ocean lifestyle, gastronomy and design.',
-    intro: 'France has its own surf heartland on the Atlantic coast, so French travellers often look abroad for warm water, reef breaks and a different culture — without giving up good food and design. French Polynesia, a French overseas collectivity, is a natural long-haul dream; the Maldives, Mauritius and the Seychelles are classic winter-sun choices.',
+    intro: 'France has its own surf heartland on the Atlantic coast, so French travellers often look abroad for warm water, reef breaks and a different culture, without giving up good food and design. French Polynesia, a French overseas collectivity, is a natural long-haul dream; the Maldives, Mauritius and the Seychelles are classic winter-sun choices.',
     seasonal_intent: [
       { label: 'Winter', detail: 'Mauritius, the Seychelles, the Maldives and the Canaries.' },
       { label: 'Spring', detail: 'Easter for the Maldives and Bali’s dry season.' },
@@ -88,7 +88,7 @@ export const markets: Market[] = [
     months: ['february', 'april', 'july', 'october', 'december'],
     guides: ['fiji-vs-french-polynesia-luxury-ocean', 'best-ocean-destinations-for-couples', 'luxury-ocean-travel-worth-paying-for'],
     search_terms: ['voyages surf et plongée de luxe', 'vacances surf luxe', 'séjour plongée luxe'],
-    seo: { title: 'Luxury Surf & Dive Holidays from France | Surf and Dive', meta: 'Luxury surf and dive holidays for French travellers: French Polynesia, Mauritius, the Seychelles, the Maldives and Portugal — with seasons and planning advice.' },
+    seo: { title: 'Luxury Surf & Dive Holidays from France | Surf and Dive', meta: 'Luxury surf and dive holidays for French travellers in French Polynesia, Mauritius, the Seychelles, the Maldives and Portugal, with seasons and planning advice.' },
   },
   {
     slug: 'spain',
@@ -115,7 +115,7 @@ export const markets: Market[] = [
     months: ['january', 'march', 'april', 'august', 'october'],
     guides: ['best-winter-sun-surf-holidays-europe', 'best-luxury-surf-destinations-beginners', 'maldives-vs-bali-luxury-surf-dive'],
     search_terms: ['vacaciones de surf y buceo de lujo', 'viajes de surf de lujo', 'vacaciones buceo lujo'],
-    seo: { title: 'Luxury Surf & Dive Holidays from Spain | Surf and Dive', meta: 'Luxury surf and dive holidays for travellers from Spain: Canary Islands winter sun, Costa Rica, Mexico, Bali and the Maldives — when to go and what to expect.' },
+    seo: { title: 'Luxury Surf & Dive Holidays from Spain | Surf and Dive', meta: 'Luxury surf and dive holidays for travellers from Spain, from Canary Islands winter sun to Costa Rica, Mexico, Bali and the Maldives, with when to go and what to expect.' },
   },
   {
     slug: 'italy',
@@ -125,7 +125,7 @@ export const markets: Market[] = [
     hreflang: 'it-IT',
     landing_concept: 'Vacanze surf e diving di lusso',
     editorial_angle: 'Style, food and island escapes.',
-    intro: 'Italian travellers know island life and beautiful water. Ocean travel abroad is about different seas — the Indian Ocean’s atolls, the Pacific’s lagoons, the Atlantic’s swell — paired with the food and style that make a holiday feel complete. The Maldives and the Seychelles are perennial favourites; Portugal and Madeira offer surf with excellent food closer to home.',
+    intro: 'Italian travellers know island life and beautiful water. Ocean travel abroad is about different seas (the Indian Ocean’s atolls, the Pacific’s lagoons, the Atlantic’s swell) paired with the food and style that make a holiday feel complete. The Maldives and the Seychelles are perennial favourites; Portugal and Madeira offer surf with excellent food closer to home.',
     seasonal_intent: [
       { label: 'Winter', detail: 'The Maldives, Seychelles and Mauritius.' },
       { label: 'Spring', detail: 'Easter for the Maldives and Bali.' },
@@ -142,7 +142,7 @@ export const markets: Market[] = [
     months: ['january', 'february', 'april', 'august', 'november'],
     guides: ['best-ocean-destinations-for-couples', 'luxury-ocean-escapes-christmas-new-year', 'azores-vs-madeira-surf-dive'],
     search_terms: ['vacanze surf e diving di lusso', 'viaggi oceanici di lusso', 'vacanze surf lusso'],
-    seo: { title: 'Luxury Surf & Dive Holidays from Italy | Surf and Dive', meta: 'Luxury surf and dive holidays for Italian travellers: the Maldives, Seychelles, Portugal, Madeira and French Polynesia, with seasons and planning advice.' },
+    seo: { title: 'Luxury Surf & Dive Holidays from Italy | Surf and Dive', meta: 'Luxury surf and dive holidays for Italian travellers in the Maldives, the Seychelles, Portugal, Madeira and French Polynesia, with seasons and planning advice.' },
   },
   {
     slug: 'netherlands',
@@ -152,7 +152,7 @@ export const markets: Market[] = [
     hreflang: 'nl-NL',
     landing_concept: 'Luxury surf & dive holidays',
     editorial_angle: 'Winter sun, active travel and practical planning.',
-    intro: 'Dutch travellers combine an active streak with practical planning — and a North Sea surf scene that makes warm water feel like a reward. Winter sun is the obvious opportunity: the Canaries and Madeira for short escapes, Sri Lanka, the Maldives and Costa Rica for longer trips.',
+    intro: 'Dutch travellers combine an active streak with practical planning, and a North Sea surf scene that makes warm water feel like a reward. Winter sun is the obvious opportunity: the Canaries and Madeira for short escapes, Sri Lanka, the Maldives and Costa Rica for longer trips.',
     seasonal_intent: [
       { label: 'Winter', detail: 'The Canaries, Madeira, Sri Lanka, the Maldives and Costa Rica.' },
       { label: 'Spring break', detail: 'Bali’s dry season begins; the Maldives’ surf window.' },
@@ -179,7 +179,7 @@ export const markets: Market[] = [
     hreflang: 'nl-BE',
     landing_concept: 'Luxury surf & dive holidays from Belgium',
     editorial_angle: 'Food, comfort and winter escapes.',
-    intro: 'Belgian travellers tend to value comfort and good food as much as adventure — a combination that suits luxury ocean travel. Mauritius and the Seychelles offer French-speaking warmth in winter; Portugal and Madeira bring surf and seafood within short reach.',
+    intro: 'Belgian travellers tend to value comfort and good food as much as adventure, a combination that suits luxury ocean travel. Mauritius and the Seychelles offer French-speaking warmth in winter; Portugal and Madeira bring surf and seafood within short reach.',
     seasonal_intent: [
       { label: 'Winter', detail: 'Mauritius, the Seychelles, the Maldives and the Canaries.' },
       { label: 'Easter', detail: 'The Maldives and Bali.' },
@@ -195,7 +195,7 @@ export const markets: Market[] = [
     months: ['january', 'february', 'april', 'august', 'october'],
     guides: ['best-ocean-destinations-for-couples', 'choose-surf-destination-non-surfer-partner', 'canary-islands-vs-madeira-winter-sun'],
     search_terms: ['luxury surf holidays', 'luxury diving holidays'],
-    seo: { title: 'Luxury Surf & Dive Holidays from Belgium | Surf and Dive', meta: 'Luxury surf and dive holidays for Belgian travellers: Mauritius, the Seychelles, Madeira and Portugal — when to travel and how to choose.' },
+    seo: { title: 'Luxury Surf & Dive Holidays from Belgium | Surf and Dive', meta: 'Luxury surf and dive holidays for Belgian travellers in Mauritius, the Seychelles, Madeira and Portugal, with advice on when to travel and how to choose.' },
   },
   {
     slug: 'switzerland',
@@ -205,9 +205,9 @@ export const markets: Market[] = [
     hreflang: 'de-CH',
     landing_concept: 'Luxury surf holidays from Switzerland',
     editorial_angle: 'Premium service and long-haul planning.',
-    intro: 'For Swiss travellers, every surf or dive trip involves travel to the ocean — so the trip should justify itself. That favours longer stays, premium service and destinations where the water is genuinely exceptional: French Polynesia, the Maldives, Fiji and the Seychelles, with Portugal and Madeira for shorter escapes.',
+    intro: 'For Swiss travellers, every surf or dive trip involves travel to the ocean, so the trip should justify itself. That favours longer stays, premium service and destinations where the water is genuinely exceptional: French Polynesia, the Maldives, Fiji and the Seychelles, with Portugal and Madeira for shorter escapes.',
     seasonal_intent: [
-      { label: 'Winter', detail: 'Ski season and winter sun can share the calendar — the Maldives, Seychelles and Mauritius.' },
+      { label: 'Winter', detail: 'Ski season and winter sun can share the calendar. The Maldives, Seychelles and Mauritius.' },
       { label: 'Spring', detail: 'Fiji’s surf season begins; the Maldives’ surf window.' },
       { label: 'Summer', detail: 'Fiji, French Polynesia and Bali.' },
       { label: 'Autumn', detail: 'Portugal and Madeira.' },
@@ -235,7 +235,7 @@ export const markets: Market[] = [
     intro: 'Austria is a mountain country, and ocean travel from here is about contrast: warmth, water and a different kind of active holiday. The Canary Islands and Madeira make short winter escapes possible, while the Maldives, Costa Rica and Sri Lanka suit longer winter-sun trips.',
     seasonal_intent: [
       { label: 'Winter', detail: 'The Canaries, Madeira, the Maldives, Costa Rica and Sri Lanka.' },
-      { label: 'Semester holidays', detail: 'Popular for family winter sun — book early.' },
+      { label: 'Semester holidays', detail: 'Popular for family winter sun. Book early.' },
       { label: 'Summer', detail: 'Portugal, the Azores and Bali.' },
       { label: 'Autumn', detail: 'Portugal and Madeira.' },
     ],
@@ -258,7 +258,7 @@ export const markets: Market[] = [
     hreflang: 'sv-SE',
     landing_concept: 'Winter sun surf & dive holidays',
     editorial_angle: 'Warmth, wellness, nature and contrast.',
-    intro: 'For Swedish travellers, long dark winters make winter sun a priority — and ocean travel offers both light and warmth. Sri Lanka, the Maldives, Costa Rica and the Philippines suit longer trips; the Canary Islands are the short-haul answer.',
+    intro: 'For Swedish travellers, long dark winters make winter sun a priority, and ocean travel offers both light and warmth. Sri Lanka, the Maldives, Costa Rica and the Philippines suit longer trips; the Canary Islands are the short-haul answer.',
     seasonal_intent: [
       { label: 'Winter', detail: 'Sri Lanka, the Maldives, Costa Rica, the Philippines and the Canaries.' },
       { label: 'Sportlov', detail: 'Winter sports week can double as a winter-sun window.' },
@@ -274,7 +274,7 @@ export const markets: Market[] = [
     months: ['january', 'february', 'march', 'november', 'december'],
     guides: ['best-winter-sun-surf-holidays-europe', 'where-to-surf-january-luxury-ocean-escapes', 'where-to-dive-february-warm-water-luxury'],
     search_terms: ['winter sun surf holidays', 'luxury diving holidays', 'premium ocean escapes'],
-    seo: { title: 'Winter Sun Surf & Dive Holidays from Sweden | Surf and Dive', meta: 'Winter-sun surf and dive holidays for Swedish travellers: Sri Lanka, the Maldives, the Philippines and the Canary Islands — when to go and how to plan.' },
+    seo: { title: 'Winter Sun Surf & Dive Holidays from Sweden | Surf and Dive', meta: 'Winter-sun surf and dive holidays for Swedish travellers in Sri Lanka, the Maldives, the Philippines and the Canary Islands, with advice on when to go and how to plan.' },
   },
   {
     slug: 'norway',
@@ -287,7 +287,7 @@ export const markets: Market[] = [
     intro: 'Norway has cold-water surf of its own, so Norwegian surfers often travel for warmth and consistency rather than novelty. Winter sun is the clear opportunity: the Canary Islands for short escapes, the Maldives, Sri Lanka and Costa Rica for longer ones.',
     seasonal_intent: [
       { label: 'Winter', detail: 'The Canaries, the Maldives, Sri Lanka and Costa Rica.' },
-      { label: 'Winter holidays', detail: 'Popular for family winter sun — book early.' },
+      { label: 'Winter holidays', detail: 'Popular for family winter sun. Book early.' },
       { label: 'Summer', detail: 'Portugal and the Azores for Atlantic adventure.' },
       { label: 'Autumn', detail: 'Madeira and Portugal.' },
     ],
@@ -300,7 +300,7 @@ export const markets: Market[] = [
     months: ['january', 'february', 'march', 'november', 'december'],
     guides: ['best-winter-sun-surf-holidays-europe', 'canary-islands-vs-madeira-winter-sun', 'how-to-plan-long-haul-luxury-ocean-trip'],
     search_terms: ['winter sun surf holidays', 'luxury diving holidays', 'premium ocean escapes'],
-    seo: { title: 'Winter Sun Surf & Dive Holidays from Norway | Surf and Dive', meta: 'Winter-sun surf and dive holidays for Norwegian travellers: the Canary Islands, the Maldives, Costa Rica and the Azores — with timing and planning advice.' },
+    seo: { title: 'Winter Sun Surf & Dive Holidays from Norway | Surf and Dive', meta: 'Winter-sun surf and dive holidays for Norwegian travellers in the Canary Islands, the Maldives, Costa Rica and the Azores, with timing and planning advice.' },
   },
   {
     slug: 'denmark',
@@ -313,7 +313,7 @@ export const markets: Market[] = [
     intro: 'Danish travellers value design, nature and well-planned trips. Ocean travel offers warmth in winter and a different sea in summer: the Canaries and Madeira for short escapes, Sri Lanka and the Maldives for longer winter trips, and Portugal’s design hotels and surf towns year-round.',
     seasonal_intent: [
       { label: 'Winter', detail: 'The Canaries, Madeira, Sri Lanka and the Maldives.' },
-      { label: 'Winter holidays', detail: 'Family winter sun — book early.' },
+      { label: 'Winter holidays', detail: 'Family winter sun. Book early.' },
       { label: 'Summer', detail: 'Portugal and the Azores.' },
       { label: 'Autumn', detail: 'Portugal and Madeira.' },
     ],
@@ -326,7 +326,7 @@ export const markets: Market[] = [
     months: ['january', 'february', 'june', 'september', 'october'],
     guides: ['best-winter-sun-surf-holidays-europe', 'portugal-vs-indonesia-luxury-surf', 'best-autumn-ocean-holidays-europe'],
     search_terms: ['winter sun surf holidays', 'luxury diving holidays', 'premium ocean escapes'],
-    seo: { title: 'Winter Sun Surf & Dive Holidays from Denmark | Surf and Dive', meta: 'Winter-sun surf and dive holidays for Danish travellers: Portugal, Madeira, Sri Lanka and the Maldives — when to go and how to plan.' },
+    seo: { title: 'Winter Sun Surf & Dive Holidays from Denmark | Surf and Dive', meta: 'Winter-sun surf and dive holidays for Danish travellers in Portugal, Madeira, Sri Lanka and the Maldives, with advice on when to go and how to plan.' },
   },
 ];
 

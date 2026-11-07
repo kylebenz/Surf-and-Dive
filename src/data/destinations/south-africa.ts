@@ -8,20 +8,20 @@ export const southAfrica: Destination = {
   region: 'Africa',
   slug: 'south-africa',
 
-  positioning: 'Jeffreys Bay’s point, Cape Town’s cold-water coast, KwaZulu-Natal’s shark-rich reefs — with food, wine and safari built in.',
+  positioning: 'Jeffreys Bay’s point, Cape Town’s cold-water coast, KwaZulu-Natal’s shark-rich reefs, with food, wine and safari built in.',
   hero_headline: 'South Africa: Point Breaks, Kelp Forests and Safari',
   hero_subheadline: 'Long right-hand points on the Eastern Cape, Cape Town’s dramatic coastline, warm-water diving on the KwaZulu-Natal reefs and some of the world’s best food, wine and wildlife.',
   overview:
-    'South Africa’s coastline runs from the cold Atlantic around Cape Town to the warm Indian Ocean reefs of KwaZulu-Natal, and the variety is extraordinary. Jeffreys Bay is one of the world’s most celebrated right-hand point breaks; Cape Town offers surf from beginner beaches to big-wave reefs; and the KwaZulu-Natal coast holds Aliwal Shoal and Sodwana Bay, known for sharks and coral respectively. Around the water sit the Cape Winelands, the Garden Route and the possibility of a safari — making this one of the most complete ocean-and-land trips available.',
+    'South Africa’s coastline runs from the cold Atlantic around Cape Town to the warm Indian Ocean reefs of KwaZulu-Natal, and the variety is extraordinary. Jeffreys Bay is one of the world’s most celebrated right-hand point breaks; Cape Town offers surf from beginner beaches to big-wave reefs; and the KwaZulu-Natal coast holds Aliwal Shoal and Sodwana Bay, known for sharks and coral respectively. Around the water sit the Cape Winelands, the Garden Route and the possibility of a safari: making this one of the most complete ocean-and-land trips available.',
   why_visit: [
-    'World-class point surf, especially in the southern winter.',
+    'Long, high-quality point waves, especially in the southern winter.',
     'Distinctive diving: kelp forests in the Cape, sharks at Aliwal Shoal, coral at Sodwana Bay.',
     'Food, wine, design hotels and safari give the trip a land component few ocean destinations can match.',
   ],
 
   surf: {
     score: 9,
-    spots: ['Jeffreys Bay – Supertubes (advanced)', 'Muizenberg, Cape Town (beginner)', 'Long Beach, Kommetjie', 'Llandudno', 'Durban beaches', 'Garden Route breaks'],
+    spots: ['Supertubes, Jeffreys Bay (advanced)', 'Muizenberg, Cape Town (beginner)', 'Long Beach, Kommetjie', 'Llandudno', 'Durban beaches', 'Garden Route breaks'],
     best_for: ['Beginners in Cape Town', 'Intermediate surfers', 'Advanced point-break surfers'],
     levels: ['beginner', 'intermediate', 'advanced'],
     season: 'The most consistent swells typically arrive in the southern winter (roughly April to September).',
@@ -35,7 +35,7 @@ export const southAfrica: Destination = {
     marine_life: ['Ragged-tooth (sand tiger) sharks (seasonal)', 'Coral reef fish (Sodwana)', 'Cape fur seals', 'Kelp-forest life', 'Dolphins and whales (seasonal)'],
     season: 'Aliwal Shoal’s ragged-tooth sharks are typically associated with roughly June to November; the Sardine Run typically occurs roughly June to July. Sodwana diving is possible year-round.',
     notes:
-      'The diving is varied and often demanding — cold water and surge in the Cape, ocean launches through the surf in KwaZulu-Natal. Choose experienced operators and dive within your training.',
+      'The diving is varied and often demanding: cold water and surge in the Cape, ocean launches through the surf in KwaZulu-Natal. Choose experienced operators and dive within your training.',
   },
 
   freediving: {
@@ -70,27 +70,27 @@ export const southAfrica: Destination = {
     { label: 'European calendar', detail: 'Surf trips in the European summer; Cape Town’s summer suits the European winter.' },
   ],
   european_seasonal_angle:
-    'South Africa offers a useful counter-season: serious surf during the European summer, and a sunny Cape summer during the European winter — with minimal time-zone change for most of Europe.',
+    'South Africa offers a useful counter-season: serious surf during the European summer, and a sunny Cape summer during the European winter, with minimal time-zone change for most of Europe.',
   season_types: ['summer', 'winter-sun', 'year-round'],
-  recommended_duration: '10–14 nights including a safari or Winelands stay.',
+  recommended_duration: '10-14 nights including a safari or Winelands stay.',
 
   traveller_profiles: ['serious-surfer', 'active-luxury', 'couples', 'family', 'diver'],
   best_audience: 'Surf + food + safari + adventure.',
   audience_notes: [
-    { profile: 'Surfers', detail: 'World-class points and a strong surf culture.' },
+    { profile: 'Surfers', detail: 'Long right-hand points such as Jeffreys Bay and a strong surf culture.' },
     { profile: 'Active luxury couples', detail: 'Surf, wine, food and safari in one trip.' },
     { profile: 'Not ideal for', detail: 'Travellers wanting warm, clear tropical water throughout.' },
   ],
 
   itinerary: [
-    { days: 'Days 1–3', title: 'Cape Town', detail: 'Surf Muizenberg or Long Beach with a guide, explore the peninsula and dine in the city.' },
-    { days: 'Days 4–5', title: 'Winelands', detail: 'Estate stays and tastings.' },
-    { days: 'Days 6–8', title: 'Jeffreys Bay', detail: 'For experienced surfers when the swell runs; otherwise Garden Route coast walks.' },
-    { days: 'Days 9–12', title: 'Safari', detail: 'A private reserve in the Eastern Cape or further north.' },
+    { days: 'Days 1-3', title: 'Cape Town', detail: 'Surf Muizenberg or Long Beach with a guide, explore the peninsula and dine in the city.' },
+    { days: 'Days 4-5', title: 'Winelands', detail: 'Estate stays and tastings.' },
+    { days: 'Days 6-8', title: 'Jeffreys Bay', detail: 'For experienced surfers when the swell runs; otherwise Garden Route coast walks.' },
+    { days: 'Days 9-12', title: 'Safari', detail: 'A private reserve in the Eastern Cape or further north.' },
   ],
 
   planning_notes: [
-    'Water in the Cape is cold year-round — pack or rent a suitable wetsuit.',
+    'Water in the Cape is cold year-round: pack or rent a suitable wetsuit.',
     'Follow local shark-safety programmes and beach advice.',
     'Distances are large; combine internal flights with scenic drives.',
     'Check current travel advice for the areas you visit.',

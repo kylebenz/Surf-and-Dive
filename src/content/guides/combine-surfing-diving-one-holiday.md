@@ -21,13 +21,13 @@ images:
   - { label: "Itinerary", kind: graphic, brief: "Seven-day sample itinerary graphic." }
 faqs:
   - { question: "Can I combine surfing and diving on one holiday?", answer: "Yes. Destinations with multiple coasts, reefs or nearby islands can work especially well. Build the itinerary around the strongest seasonal window for each activity rather than assuming both will be ideal every day." }
-  - { question: "Can I surf after diving?", answer: "Surfing is generally considered compatible with diving on the same day, but avoid strenuous exertion immediately after deep or repetitive dives and always follow your training agency's guidance — particularly the no-fly interval before travelling." }
+  - { question: "Can I surf after diving?", answer: "Surfing is generally considered compatible with diving on the same day, but avoid strenuous exertion immediately after deep or repetitive dives and always follow your training agency's guidance, particularly the no-fly interval before travelling." }
 sources:
   - { name: "Indonesia official tourism information" }
   - { name: "Visit Maldives", url: "https://visitmaldives.com/" }
 ---
 
-## It sounds perfect — until you plan it badly
+## It sounds perfect until you plan it badly
 
 Surfing and diving are both ocean sports, but they do not automatically share the same ideal conditions. The best trip starts by identifying which activity is primary.
 
@@ -45,12 +45,12 @@ You do not need two ocean sessions every day. Alternate hard surf days, dive day
 
 ### A simple seven-day pattern
 
-- **Day 1** — Arrive, rest, easy snorkel.
-- **Days 2–3** — Surf mornings, quiet afternoons.
-- **Day 4** — Dive day.
-- **Day 5** — Recovery: spa, walk, long lunch.
-- **Day 6** — Follow the conditions: surf if it is working, dive if it is not.
-- **Day 7** — Gentle final surf; no diving within the pre-flight interval.
+- **Day 1**: Arrive, rest, easy snorkel.
+- **Days 2-3**: Surf mornings, quiet afternoons.
+- **Day 4**: Dive day.
+- **Day 5**: Recovery: spa, walk, long lunch.
+- **Day 6**: Follow the conditions: surf if it is working, dive if it is not.
+- **Day 7**: Gentle final surf; no diving within the pre-flight interval.
 
 ## Build the luxury around recovery
 
