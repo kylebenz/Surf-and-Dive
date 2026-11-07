@@ -39,7 +39,7 @@ tells visitors the enquiry service is not yet connected. See `.env.example`.
 | `/surf/`, `/dive/`, `/freediving/`, `/luxury-ocean-holidays/` | `src/pages/*.astro` |
 | `/best-by-month/` + 12 months | `src/data/seasonal.ts` |
 | `/compare/` + 5 comparisons | `src/data/comparisons.ts` |
-| `/guides/` (labelled "Blog") + 32 blog posts | `src/content/guides/*.md` |
+| `/blog/` + 32 blog posts | `src/content/guides/*.md` |
 | `/europe/` + 12 markets | `src/data/countries.ts` |
 | `/about/`, `/contact/`, `/editorial-standards/`, `/responsible-travel/`, `/ocean-safety/`, `/privacy/`, `/terms/`, `404` | `src/pages/` |
 | `/sitemap.xml`, `/robots.txt` | `src/pages/*.ts` |
@@ -57,6 +57,16 @@ Content lives in data, not components:
 - **Comparisons**: `src/data/comparisons.ts` (twelve criteria per pair; no universal winners).
 - **European markets**: `src/data/countries.ts`.
 - **Site-wide**: `src/config/site.ts` (brand, navigation, locales, review date).
+
+## Redirects
+
+The blog moved from `/guides/` to `/blog/`. Every old address is redirected:
+
+- Astro generates a redirect page at each `/guides/…` URL (configured in `astro.config.mjs`),
+  so links keep working on any static host.
+- `public/_redirects` (Netlify, Cloudflare Pages) and `vercel.json` (Vercel) send a permanent
+  301 on hosts that support them. For other hosts, add an equivalent rule:
+  `/guides/*` → `/blog/:splat` (301).
 
 ## Photography
 

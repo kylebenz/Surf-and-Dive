@@ -1,0 +1,3 @@
+# Blog moved from /guides/ to /blog/ (Netlify, Cloudflare Pages)
+/guides     /blog/         301
+/guides/*   /blog/:splat   301

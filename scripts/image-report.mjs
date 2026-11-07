@@ -38,6 +38,6 @@ for (const f of fs.readdirSync(gDir).filter((x) => x.endsWith('.md'))) {
   const slug = f.replace(/\.md$/, '');
   const fm = fs.readFileSync(path.join(gDir, f), 'utf8').split('---')[1];
   const n = (fm.match(/- \{ label:/g) || []).length;
-  for (let i = 1; i <= n; i++) { gTotal++; if (find(path.join(pub, 'images/guides', slug), `image-${i}`)) gFilled++; }
+  for (let i = 1; i <= n; i++) { gTotal++; if (find(path.join(pub, 'images/blog', slug), `image-${i}`)) gFilled++; }
 }
 console.log(`Guides: ${gFilled}/${gTotal} image slots filled.\n`);

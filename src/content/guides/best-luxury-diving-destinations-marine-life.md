@@ -48,4 +48,4 @@ Tahiti Tourisme describes Moorea's lagoons as rich in marine life, with stingray
 
 The best encounter is not necessarily the rarest animal. It is the one where the conditions are right, the guide knows how to behave around wildlife and you have enough time to watch rather than chase.
 
-Choose operators that prioritise animal welfare and local conservation rules. Read our guide to [reef conservation](/guides/luxury-ocean-travel-reef-conservation/).
+Choose operators that prioritise animal welfare and local conservation rules. Read our guide to [reef conservation](/blog/luxury-ocean-travel-reef-conservation/).

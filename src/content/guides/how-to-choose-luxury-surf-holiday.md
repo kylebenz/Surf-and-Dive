@@ -24,7 +24,7 @@ images:
 
 The most expensive room in the wrong surf destination is still the wrong surf holiday.
 
-Be honest about your level. A destination with world-class waves may be a terrible choice for a beginner, while a mellow beach break may be perfect for someone learning. Our blog posts for [beginners](/guides/best-luxury-surf-destinations-beginners/) and [advanced surfers](/guides/best-luxury-surf-destinations-advanced-surfers/) are a good place to start.
+Be honest about your level. A destination with world-class waves may be a terrible choice for a beginner, while a mellow beach break may be perfect for someone learning. Our blog posts for [beginners](/blog/best-luxury-surf-destinations-beginners/) and [advanced surfers](/blog/best-luxury-surf-destinations-advanced-surfers/) are a good place to start.
 
 ## Then choose the month
 
@@ -54,4 +54,4 @@ Ability → month → wave type → water → travel time → accommodation → 
 6. **Accommodation**: location before star rating.
 7. **Guide or operator**: local knowledge improves safety and timing.
 8. **Non-surf activities**: what makes a flat day worthwhile.
-9. **Safety**: read our [surf safety blog post](/guides/ocean-safety-luxury-surf-travellers/).
+9. **Safety**: read our [surf safety blog post](/blog/ocean-safety-luxury-surf-travellers/).

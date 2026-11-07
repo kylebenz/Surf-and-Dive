@@ -1,0 +1,7 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/guides", "destination": "/blog/", "permanent": true },
+    { "source": "/guides/:path*", "destination": "/blog/:path*", "permanent": true }
+  ]
+}

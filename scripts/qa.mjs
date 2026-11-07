@@ -14,10 +14,16 @@ const exists = (href) => {
   const p = path.join(dist, clean);
   return fs.existsSync(p) && (fs.statSync(p).isFile() || fs.existsSync(path.join(p, 'index.html')));
 };
-let links = 0;
+let links = 0, redirects = 0;
 for (const file of pages) {
   const rel = '/' + path.relative(dist, file).replace(/index\.html$/, '');
   const html = fs.readFileSync(file, 'utf8');
+  const refresh = /<meta http-equiv="refresh" content="0;url=([^"]+)"/.exec(html);
+  if (refresh) {
+    redirects++;
+    if (!exists(refresh[1])) problems.push(`${rel}: redirect target missing ${refresh[1]}`);
+    continue;
+  }
   const title = /<title>([^<]*)<\/title>/.exec(html)?.[1];
   const desc = /<meta name="description" content="([^"]*)"/.exec(html)?.[1];
   const h1s = (html.match(/<h1[\s>]/g) || []).length;
@@ -36,5 +42,5 @@ for (const file of pages) {
 }
 for (const [t, ps] of titles) if (ps.length > 1) problems.push(`Duplicate title "${t}": ${ps.join(', ')}`);
 for (const [d, ps] of descs) if (ps.length > 1) problems.push(`Duplicate description on: ${ps.join(', ')}`);
-console.log(`Checked ${pages.length} pages and ${links} internal links.`);
+console.log(`Checked ${pages.length - redirects} pages, ${redirects} redirects and ${links} internal links.`);
 if (problems.length) { console.log(problems.join('\n')); process.exitCode = 1; } else console.log('No problems found.');

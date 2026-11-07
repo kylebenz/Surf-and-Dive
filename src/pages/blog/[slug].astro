@@ -36,7 +36,7 @@ const activityMeta = {
 } as const;
 const mins = readingTime(guide.body ?? '');
 const [heroSlot, ...restSlots] = data.images;
-const heroImg = heroSlot ? resolveImage({ src: heroSlot.src, dir: `/images/guides/${guide.id}`, base: 'image-1', alt: heroSlot.alt }) : null;
+const heroImg = heroSlot ? resolveImage({ src: heroSlot.src, dir: `/images/blog/${guide.id}`, base: 'image-1', alt: heroSlot.alt }) : null;
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -46,7 +46,7 @@ const articleLd = {
   datePublished: data.publishDate.toISOString(),
   dateModified: data.updatedDate.toISOString(),
   inLanguage: 'en',
-  mainEntityOfPage: absoluteUrl(`/guides/${guide.id}/`, site),
+  mainEntityOfPage: absoluteUrl(`/blog/${guide.id}/`, site),
   author: { '@type': 'Organization', name: data.author, url: absoluteUrl('/about/', site) },
   publisher: { '@type': 'Organization', name: SITE.name, url: absoluteUrl('/', site), logo: { '@type': 'ImageObject', url: absoluteUrl('/favicon.svg', site) } },
   keywords: data.keywords.join(', '),
@@ -60,7 +60,7 @@ const articleLd = {
   ogType="article"
   ogImage={heroImg?.src}
   ogImageAlt={heroImg?.alt || undefined}
-  crumbs={[{ label: 'Blog', href: '/guides/' }, { label: data.title, href: `/guides/${guide.id}/` }]}
+  crumbs={[{ label: 'Blog', href: '/blog/' }, { label: data.title, href: `/blog/${guide.id}/` }]}
   jsonLd={[articleLd, faqLd(data.faqs)]}
   article={{ published: data.publishDate, modified: data.updatedDate, section: data.category }}
 >
@@ -139,10 +139,10 @@ const articleLd = {
 
         <div class="notices">
           {(data.category === 'Freediving' || data.activities.includes('freediving')) && data.category !== 'Safety' && (
-            <Notice kind="safety"><p>Never freedive alone. Train with qualified instructors, use a trained buddy, avoid hyperventilation and never compete with depth or breath-hold. <a href="/guides/ocean-safety-freediving-buddy-systems/">Freediving safety</a>.</p></Notice>
+            <Notice kind="safety"><p>Never freedive alone. Train with qualified instructors, use a trained buddy, avoid hyperventilation and never compete with depth or breath-hold. <a href="/blog/ocean-safety-freediving-buddy-systems/">Freediving safety</a>.</p></Notice>
           )}
           {data.activities.includes('surf') && data.category !== 'Safety' && data.category !== 'Freediving' && (
-            <Notice kind="safety"><p>Surf within your ability, ask local guides about reefs, currents and tides, and follow lifeguard advice where available. <a href="/guides/ocean-safety-luxury-surf-travellers/">Surf safety</a>.</p></Notice>
+            <Notice kind="safety"><p>Surf within your ability, ask local guides about reefs, currents and tides, and follow lifeguard advice where available. <a href="/blog/ocean-safety-luxury-surf-travellers/">Surf safety</a>.</p></Notice>
           )}
           <Notice kind="seasonal" title="Editorial note">
             <p>Facts about ocean conditions, seasonal patterns, wildlife, access and operators should be verified before travel. The ocean is dynamic, and no blog post can promise waves, visibility or wildlife encounters.</p>

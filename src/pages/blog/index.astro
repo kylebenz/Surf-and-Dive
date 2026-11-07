@@ -13,8 +13,8 @@ const slug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
 <BaseLayout
   title="Surf, Dive & Ocean Travel Blog | Surf and Dive"
   description="The Surf and Dive blog: practical, editorial advice on luxury surf, diving and freediving holidays: where to go, when to travel, how to choose and how to stay safe and responsible."
-  crumbs={[{ label: 'Blog', href: '/guides/' }]}
-  jsonLd={[itemListLd(guides.map((g) => ({ name: g.data.title, href: `/guides/${g.id}/` })), Astro.site!)]}
+  crumbs={[{ label: 'Blog', href: '/blog/' }]}
+  jsonLd={[itemListLd(guides.map((g) => ({ name: g.data.title, href: `/blog/${g.id}/` })), Astro.site!)]}
 >
   <header class="page-intro">
     <div class="container">

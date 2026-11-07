@@ -44,4 +44,4 @@ Freediving can be physically and mentally demanding. Give yourself rest days, hy
 
 ## Leave the ocean better
 
-Respect marine life, keep your distance, avoid touching coral and follow protected-area rules. Responsible freediving is not just safer; it is more rewarding. Before you travel, read [Ocean Safety: Freediving, Buddy Systems and Local Conditions](/guides/ocean-safety-freediving-buddy-systems/).
+Respect marine life, keep your distance, avoid touching coral and follow protected-area rules. Responsible freediving is not just safer; it is more rewarding. Before you travel, read [Ocean Safety: Freediving, Buddy Systems and Local Conditions](/blog/ocean-safety-freediving-buddy-systems/).

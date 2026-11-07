@@ -34,7 +34,7 @@ const activities = [
   { title: 'Diving Holidays', text: 'Walls, channels, wrecks and marine life, with the logistics that make repeated dives a pleasure.', href: '/dive/', seed: 'act-dive' },
   { title: 'Freediving Escapes', text: 'Clear, calm water and qualified local support for responsible breath-hold exploration.', href: '/freediving/', seed: 'act-free' },
   { title: 'Luxury Island Holidays', text: 'Private islands, overwater villas and lagoon-side spas where the ocean stays centre stage.', href: '/luxury-ocean-holidays/', seed: 'act-lux' },
-  { title: 'Winter Sun', text: 'Warm water and settled weather when Europe is at its coldest, short-haul or long.', href: '/guides/best-winter-sun-surf-holidays-europe/', seed: 'act-winter' },
+  { title: 'Winter Sun', text: 'Warm water and settled weather when Europe is at its coldest, short-haul or long.', href: '/blog/best-winter-sun-surf-holidays-europe/', seed: 'act-winter' },
   { title: 'European Ocean Escapes', text: 'Portugal, Madeira, the Azores and the Canaries: serious ocean time without a long-haul flight.', href: '/europe/', seed: 'act-europe' },
 ];
 ---
@@ -107,7 +107,7 @@ const activities = [
     <ul role="list" class="grid grid-3">
       {featuredGuides.map((g) => <li class="reveal"><ArticleCard guide={g} /></li>)}
     </ul>
-    <div class="after reveal"><a class="text-link" href="/guides/">All {guides.length} blog posts <span aria-hidden="true">→</span></a></div>
+    <div class="after reveal"><a class="text-link" href="/blog/">All {guides.length} blog posts <span aria-hidden="true">→</span></a></div>
   </EditorialSection>
 
   <EditorialSection id="compare" eyebrow="Decision support" title="Compare Ocean Escapes" intro="Side-by-side comparisons across twelve criteria, from surf and diving to privacy, families and value. There are no universal winners, just a clearer choice." tone="seafoam" split>

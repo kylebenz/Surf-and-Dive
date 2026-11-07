@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 
 /**
  * Editorial guides. One Markdown file per article in src/content/guides/.
- * The filename (without .md) is the URL slug: /guides/<slug>/.
+ * The filename (without .md) is the URL slug: /blog/<slug>/.
  */
 const guides = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/guides' }),

@@ -34,7 +34,7 @@ None of this is about fear. It is about making good decisions, the same skill th
 
 Most surf travel incidents begin with a mismatch between surfer and wave. Famous does not mean suitable. A wave that looks perfect on video can be fast, hollow and shallow in person.
 
-- **Beginners** should surf sandy-bottom beach breaks with qualified instruction: see our [beginner surf blog post](/guides/best-luxury-surf-destinations-beginners/).
+- **Beginners** should surf sandy-bottom beach breaks with qualified instruction: see our [beginner surf blog post](/blog/best-luxury-surf-destinations-beginners/).
 - **Intermediate surfers** should progress gradually and use local guides before trying reef breaks.
 - **Advanced surfers** should still respect local conditions, especially on heavy reefs such as Hawaii's North Shore or the [Mentawai Islands](/destinations/mentawai-islands/).
 

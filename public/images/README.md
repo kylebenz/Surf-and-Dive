@@ -28,7 +28,7 @@ images: destinationImages('maldives', { ...briefs }, {
 }),
 ```
 
-## Guides: `/public/images/guides/<guide-slug>/image-<n>.webp`
+## Guides: `/public/images/blog/<guide-slug>/image-<n>.webp`
 
 `image-1` is the guide hero; `image-2` … follow the image guide in the article's front
 matter (`src/content/guides/<slug>.md`). Add `alt`, `caption` and `credit` there.

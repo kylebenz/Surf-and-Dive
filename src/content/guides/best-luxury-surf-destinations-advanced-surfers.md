@@ -49,4 +49,4 @@ Cloudbreak is the obvious name, but the Mamanuca Islands contain several other b
 
 ## The rule: respect the ocean
 
-Advanced ability is not immunity. Reef breaks, currents, changing tides and large surf deserve local knowledge. The smartest luxury surf trip is one where you know when to paddle out, and when to stay on the beach. Read [Ocean Safety: What Every Luxury Surf Traveller Should Know](/guides/ocean-safety-luxury-surf-travellers/).
+Advanced ability is not immunity. Reef breaks, currents, changing tides and large surf deserve local knowledge. The smartest luxury surf trip is one where you know when to paddle out, and when to stay on the beach. Read [Ocean Safety: What Every Luxury Surf Traveller Should Know](/blog/ocean-safety-luxury-surf-travellers/).

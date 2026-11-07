@@ -41,7 +41,7 @@ In Moorea, Tahiti Tourisme highlights clear lagoons and diverse marine life, ill
 
 Never treat a freediving holiday as a chance to test your limits alone. Use qualified instructors, follow local conditions and use a buddy system appropriate to your training. Avoid breath-hold challenges, hyperventilation and competitive depth targets unless you are in a properly supervised training environment.
 
-The best freediving holiday is the one where you come home with better technique and better memories, not a dramatic story about how close you came to trouble. Read our [freediving safety blog post](/guides/ocean-safety-freediving-buddy-systems/) before you go.
+The best freediving holiday is the one where you come home with better technique and better memories, not a dramatic story about how close you came to trouble. Read our [freediving safety blog post](/blog/ocean-safety-freediving-buddy-systems/) before you go.
 
 ## Choose the water, then choose the hotel
 

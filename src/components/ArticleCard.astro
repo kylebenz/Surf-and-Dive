@@ -7,11 +7,11 @@ interface Props { guide: CollectionEntry<'guides'>; headingLevel?: 'h2' | 'h3'; 
 const { guide, headingLevel = 'h3', layout = 'stacked' } = Astro.props;
 const H = headingLevel;
 const first = guide.data.images[0];
-const image = first ? resolveImage({ src: first.src, dir: `/images/guides/${guide.id}`, base: 'image-1', alt: first.alt }) : null;
+const image = first ? resolveImage({ src: first.src, dir: `/images/blog/${guide.id}`, base: 'image-1', alt: first.alt }) : null;
 const mins = readingTime(guide.body ?? '');
 ---
 <article class={`acard ${layout}`}>
-  <a href={`/guides/${guide.id}/`}>
+  <a href={`/blog/${guide.id}/`}>
     <div class="visual">
       {image
         ? <img src={image.src} srcset={image.srcset} sizes="(min-width: 1000px) 33vw, 100vw" alt={image.alt} loading="lazy" decoding="async" />

@@ -12,12 +12,12 @@ export const GET: APIRoute = async ({ site }) => {
   const lastmod = SITE.lastReviewed;
   const entries: { path: string; lastmod: string; priority: string; changefreq: string }[] = [
     { path: '/', lastmod, priority: '1.0', changefreq: 'weekly' },
-    ...['/destinations/', '/surf/', '/dive/', '/freediving/', '/luxury-ocean-holidays/', '/best-by-month/', '/guides/', '/compare/', '/europe/']
+    ...['/destinations/', '/surf/', '/dive/', '/freediving/', '/luxury-ocean-holidays/', '/best-by-month/', '/blog/', '/compare/', '/europe/']
       .map((path) => ({ path, lastmod, priority: '0.9', changefreq: 'weekly' })),
     ...destinations.map((d) => ({ path: `/destinations/${d.slug}/`, lastmod, priority: '0.8', changefreq: 'monthly' })),
     ...seasons.map((s) => ({ path: `/best-by-month/${s.month}/`, lastmod, priority: '0.7', changefreq: 'monthly' })),
     ...comparisons.map((c) => ({ path: `/compare/${c.slug}/`, lastmod, priority: '0.7', changefreq: 'monthly' })),
-    ...guides.map((g) => ({ path: `/guides/${g.id}/`, lastmod: g.data.updatedDate.toISOString().slice(0, 10), priority: '0.7', changefreq: 'monthly' })),
+    ...guides.map((g) => ({ path: `/blog/${g.id}/`, lastmod: g.data.updatedDate.toISOString().slice(0, 10), priority: '0.7', changefreq: 'monthly' })),
     ...markets.map((m) => ({ path: `/europe/${m.slug}/`, lastmod, priority: '0.6', changefreq: 'monthly' })),
     ...['/about/', '/contact/', '/editorial-standards/', '/responsible-travel/', '/ocean-safety/', '/privacy/', '/terms/']
       .map((path) => ({ path, lastmod, priority: '0.4', changefreq: 'yearly' })),
