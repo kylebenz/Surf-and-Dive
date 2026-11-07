@@ -12,6 +12,8 @@
  * Usage: <Gallery title="Fiji in pictures" folder="gallery/fiji" />  (every image in media/gallery/fiji)
  *    or: <Gallery title="..." items={['destinations/fiji/surf', { key: 'gallery/fiji/03', caption: '...' }]} />
  *    or: <Gallery title="..." items={[...]} trigger="View all 10 photos" />  (a button instead of thumbnails)
+ *    or: <Gallery title="..." items={[...]} layout="justified" />  (uncropped: rows of equal height,
+ *        each photo at its own aspect ratio, like a photo book)
  */
 import Picture from './Picture.astro';
 import { getImage, listMedia, type ResolvedImage } from '../utils/images';
@@ -23,9 +25,11 @@ interface Props {
   items?: Item[];
   /** Show one button with this label instead of a thumbnail grid (for photos already on the page). */
   trigger?: string;
+  /** "grid": square thumbnails (cropped). "justified": every photo uncropped, rows of equal height. */
+  layout?: 'grid' | 'justified';
   class?: string;
 }
-const { title, folder, items = [], trigger, class: cls = '' } = Astro.props;
+const { title, folder, items = [], trigger, layout = 'grid', class: cls = '' } = Astro.props;
 const list: Item[] = folder ? [...listMedia(folder), ...items] : items;
 const images = list
   .map((it) => (typeof it === 'string' ? getImage(it) : getImage(it.key, it)))
@@ -45,11 +49,15 @@ const full = images.map((img) => ({
     {trigger ? (
       <button type="button" class="thumb open-all btn btn-ghost" data-i="0" aria-haspopup="dialog">{trigger}</button>
     ) : (
-      <ul role="list" class="grid">
+      <ul role="list" class={layout === 'justified' ? 'justified' : 'grid'}>
         {images.map((img, i) => (
-          <li>
+          <li style={layout === 'justified' ? `--r:${img.aspectRatio}` : undefined}>
             <button type="button" class="thumb" data-i={i} aria-label={`Open photo ${i + 1} of ${images.length}: ${img.alt}`}>
-              <Picture image={img} sizes="(min-width: 1000px) 25vw, (min-width: 640px) 33vw, 50vw" alt="" />
+              <Picture
+                image={img}
+                sizes={layout === 'justified' ? '(min-width: 1000px) 45vw, (min-width: 640px) 60vw, 100vw' : '(min-width: 1000px) 25vw, (min-width: 640px) 33vw, 50vw'}
+                alt=""
+              />
             </button>
           </li>
         ))}
@@ -144,6 +152,13 @@ const full = images.map((img) => ({
   .grid { display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (min-width: 640px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (min-width: 1000px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  /* Justified rows: each item grows in proportion to its aspect ratio (--r), so every photo in a
+     row ends up the same height and nothing is cropped. The ::after spacer stops a short last
+     row from stretching into giant photos. */
+  .justified { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .justified li { flex: var(--r) 1 calc(var(--r) * clamp(150px, 20vw, 260px)); }
+  .justified::after { content: ''; flex: 1000 1 0; }
+  .justified .thumb:not(.open-all) { aspect-ratio: var(--r); }
   .open-all { width: auto; aspect-ratio: auto; cursor: pointer; }
   .thumb:not(.open-all) { display: block; width: 100%; aspect-ratio: 1; padding: 0; border: 0; cursor: zoom-in; overflow: hidden; background: var(--sand-deep); }
   .thumb :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }

@@ -9,7 +9,7 @@ import type { ResolvedImage } from '../utils/images';
 interface Props {
   image: ResolvedImage | null;
   label: string;
-  /** CSS aspect-ratio, e.g. "4 / 3" */
+  /** Shape of the empty placeholder, e.g. "4 / 3". Photographs always keep their own shape (never cropped). */
   aspect?: string;
   /** The page's LCP image: eager + fetchpriority=high (one per page). */
   priority?: boolean;
@@ -34,7 +34,7 @@ const {
 ---
 {image ? (
   <figure class={`slot has-image ${cls}`}>
-    <div class="frame" style={`aspect-ratio:${aspect}`}>
+    <div class="frame" style={`aspect-ratio:${image.width} / ${image.height}`}>
       <Picture image={image} sizes={sizes} priority={priority} eager={eager} />
     </div>
     {showCaption && (image.caption || image.credit) && (

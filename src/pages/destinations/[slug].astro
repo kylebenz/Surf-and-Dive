@@ -12,13 +12,13 @@ import Notice from '../../components/Notice.astro';
 import { destinations, getDestination } from '../../data/destinations';
 import { MONTHS } from '../../data/seasonal';
 import { comparisons } from '../../data/comparisons';
-import { slotLabel } from '../../data/destinations/_images';
+import { slotLabel, slotFile } from '../../data/destinations/_images';
 import { resolveImage, getImage, listMedia } from '../../utils/images';
 import Gallery from '../../components/Gallery.astro';
 import { IMAGE_SLOTS } from '../../data/destinations/_images';
 import { faqLd, absoluteUrl, organizationRef } from '../../utils/seo';
 import { SITE } from '../../config/site';
-import type { Destination } from '../../data/types';
+import type { Destination, ImageSlotType } from '../../data/types';
 
 export function getStaticPaths() {
   return destinations.map((d) => ({ params: { slug: d.slug }, props: { d } }));
@@ -28,6 +28,18 @@ const { d } = Astro.props as { d: Destination };
 const site = Astro.site!;
 const heroSlot = d.images.find((i) => i.type === 'hero')!;
 const heroImage = resolveImage({ src: heroSlot.src, dir: `destinations/${d.slug}`, base: 'hero', alt: heroSlot.alt });
+
+// Photos are never cropped: a feature section whose photo is landscape gives the photo the wider
+// column, so the text flows beside it at a comfortable width.
+const slotPhoto = (type: ImageSlotType) => getImage(`destinations/${d.slug}/${slotFile(type)}`);
+const shape = (type: ImageSlotType) => ((slotPhoto(type)?.aspectRatio ?? 0) >= 1.15 ? ' landscape' : '');
+
+// Gallery section: the four gallery slots plus any extras in media/destinations/<slug>/more/,
+// shown uncropped in justified rows. Destinations without photos keep the placeholder grid.
+const galleryPhotos = [
+  ...(['landscape', 'human-experience', 'culture', 'signature'] as ImageSlotType[]).map((t) => `destinations/${d.slug}/${slotFile(t)}`).filter((k) => getImage(k)),
+  ...listMedia(`destinations/${d.slug}/more`),
+];
 
 // Every photo of this destination (the ten slots, then any extras in media/destinations/<slug>/more/),
 // browsable full screen from the gallery section.
@@ -125,7 +137,7 @@ const touristDestination = {
 
   <!-- Surf -->
   <section id="surf" class="section bg-sand" aria-labelledby="surf-title">
-    <div class="container feature">
+    <div class={`container feature${shape('surf')}`}>
       <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="surf" aspect="4 / 5" /></div>
       <div class="feature-text">
         <span class="eyebrow">Surf · {d.surf.score}/10</span>
@@ -144,7 +156,7 @@ const touristDestination = {
 
   <!-- Diving -->
   <section id="diving" class="section" aria-labelledby="diving-title">
-    <div class="container feature reverse">
+    <div class={`container feature reverse${shape('dive')}`}>
       <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="dive" aspect="4 / 5" /></div>
       <div class="feature-text">
         <span class="eyebrow">Diving · {d.diving.score}/10</span>
@@ -161,7 +173,7 @@ const touristDestination = {
 
   <!-- Freediving -->
   <section id="freediving" class="section bg-sand" aria-labelledby="freediving-title">
-    <div class="container feature">
+    <div class={`container feature${shape('freedive')}`}>
       <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="freedive" aspect="4 / 5" /></div>
       <div class="feature-text">
         <span class="eyebrow">Freediving · {d.freediving.score}/10</span>
@@ -180,7 +192,7 @@ const touristDestination = {
 
   <!-- Marine life -->
   <section id="marine-life" class="section" aria-labelledby="marine-title">
-    <div class="container feature reverse">
+    <div class={`container feature reverse${shape('marine-life')}`}>
       <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="marine-life" aspect="4 / 5" /></div>
       <div class="feature-text">
         <span class="eyebrow">Marine life</span>
@@ -198,7 +210,7 @@ const touristDestination = {
 
   <!-- Luxury -->
   <section id="luxury" class="section dark" aria-labelledby="luxury-title">
-    <div class="container feature">
+    <div class={`container feature${shape('luxury-stay')}`}>
       <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="luxury-stay" aspect="4 / 5" /></div>
       <div class="feature-text">
         <span class="eyebrow">Luxury · {d.luxury.score}/10</span>
@@ -305,12 +317,16 @@ const touristDestination = {
         <div><span class="eyebrow">Image storytelling</span><h2 id="gallery-title" class="mt">{d.name} in pictures</h2></div>
         <p class="muted">Coastline, people, culture and the moment that defines the destination, with the ocean always at the centre.</p>
       </div>
+      {galleryPhotos.length > 0 ? (
+        <Gallery title={`${d.name} in pictures`} items={galleryPhotos} layout="justified" />
+      ) : (
       <div class="gallery">
         <div class="g1 reveal"><DestinationImagePlaceholder destination={d} type="landscape" aspect="16 / 10" sizes="(min-width: 1000px) 66vw, 100vw" /></div>
         <div class="g2 reveal"><DestinationImagePlaceholder destination={d} type="human-experience" aspect="4 / 5" sizes="(min-width: 1000px) 33vw, 100vw" /></div>
         <div class="g3 reveal"><DestinationImagePlaceholder destination={d} type="culture" aspect="4 / 5" sizes="(min-width: 1000px) 33vw, 100vw" /></div>
         <div class="g4 reveal"><DestinationImagePlaceholder destination={d} type="signature" aspect="16 / 10" sizes="(min-width: 1000px) 66vw, 100vw" /></div>
       </div>
+      )}
       {allPhotos.length >= 4 && (
         <div class="all-photos">
           <Gallery title={`${d.name}: all photos`} items={allPhotos} trigger={`View all ${allPhotos.length} photos`} />
@@ -390,6 +406,8 @@ const touristDestination = {
   @media (min-width: 900px) {
     .feature { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 4.5rem; }
     .feature.reverse .feature-media { order: 2; }
+    /* Landscape photo (uncropped): the photo takes the wider column, the text the narrower one. */
+    .feature.landscape:not(.reverse) { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
     .feature-media { position: sticky; top: calc(var(--header-h) + 5rem); }
   }
   .feature-text { display: grid; gap: 1.5rem; align-content: start; justify-items: start; }
