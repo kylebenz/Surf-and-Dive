@@ -30,7 +30,7 @@ Optionally set `PUBLIC_CONTACT_ENDPOINT` to any service that accepts JSON POSTs
 (Formspree, Basin, a serverless function…). Without it, the contact form validates but
 tells visitors the enquiry service is not yet connected. See `.env.example`.
 
-Analytics: Google Tag Manager container `GTM-PN3PMB7H` is built in (override with
+Analytics: Google Tag Manager container `GTM-NWN96HQ3` is built in (override with
 `PUBLIC_GTM_ID`, or set it empty to disable). `PUBLIC_GA4_ID` adds a direct GA4 tag;
 leave it empty when GA4 is configured inside GTM, or page views are counted twice.
 
