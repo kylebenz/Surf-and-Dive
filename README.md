@@ -43,6 +43,22 @@ tells visitors the enquiry service is not yet connected. See `.env.example`.
 | `/europe/` + 12 markets | `src/data/countries.ts` |
 | `/about/`, `/contact/`, `/editorial-standards/`, `/responsible-travel/`, `/ocean-safety/`, `/privacy/`, `/terms/`, `404` | `src/pages/` |
 | `/sitemap.xml`, `/robots.txt` | `src/pages/*.ts` |
+| `/google741b8f7b798a5098.html` (Search Console verification) | `public/` |
+
+## Google Search Console
+
+Ownership is verified two ways, so either method works in Search Console:
+
+- **HTML file**: `public/google741b8f7b798a5098.html`, served at `/google741b8f7b798a5098.html`.
+- **Meta tag**: `<meta name="google-site-verification">` in `src/layouts/BaseLayout.astro`.
+
+Keep both in place after verification; removing them un-verifies the property.
+
+The sitemap at `/sitemap.xml` is generated at build time and lists every indexable page
+(home, hubs, destinations, months, comparisons, blog posts, Europe markets, info pages).
+New destinations, posts or comparisons are added automatically. After verifying, submit
+`https://<your-domain>/sitemap.xml` under **Sitemaps**. Its URLs use `SITE_URL`, which
+must match the verified property exactly (including `www` or not).
 
 ## Editing content
 
@@ -95,5 +111,6 @@ Motion is subtle, progressive (content is visible without JS) and disabled under
 - [ ] Connect `PUBLIC_CONTACT_ENDPOINT`.
 - [ ] Have privacy and terms reviewed and completed with the operator's legal details.
 - [ ] Re-verify seasonal, access and regulatory details (see guide source notes).
-- [ ] Configure analytics and Search Console only after consent requirements are handled.
+- [ ] Verify the domain in Search Console and submit `/sitemap.xml`.
+- [ ] Configure analytics only after consent requirements are handled.
 - [ ] Final human editorial review.
