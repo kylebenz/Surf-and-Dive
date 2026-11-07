@@ -1,0 +1,79 @@
+---
+import SwellArt from './SwellArt.astro';
+import type { ResolvedImage } from '../utils/images';
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  image?: ResolvedImage | null;
+  seed?: string;
+  size?: 'full' | 'large' | 'medium';
+  slotLabel?: string;
+  align?: 'bottom' | 'center';
+}
+const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = 'large', slotLabel, align = 'bottom' } = Astro.props;
+---
+<section class={`hero dark ${size} ${align}`} aria-labelledby="hero-title">
+  <div class="media" aria-hidden={image ? undefined : 'true'}>
+    {image ? (
+      <img src={image.src} srcset={image.srcset} sizes="100vw" alt={image.alt} fetchpriority="high" decoding="sync" />
+    ) : (
+      <div class="art">
+        <SwellArt seed={seed} lines={22} />
+        <div class="horizon"></div>
+      </div>
+    )}
+    <div class="scrim"></div>
+  </div>
+  <div class="container content">
+    {eyebrow && <p class="eyebrow hero-in" style="--d:0">{eyebrow}</p>}
+    <h1 id="hero-title" class="hero-in" style="--d:1">{title}</h1>
+    {subtitle && <p class="sub hero-in" style="--d:2">{subtitle}</p>}
+    <div class="actions hero-in" style="--d:3"><slot /></div>
+  </div>
+  {!image && slotLabel && (
+    <p class="slot-note container"><span>Image slot · {slotLabel} · Photography to be added</span></p>
+  )}
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    align-items: end;
+    background: var(--deep-ocean);
+  }
+  .hero.full { min-height: min(92svh, 920px); }
+  .hero.large { min-height: min(78svh, 760px); }
+  .hero.medium { min-height: min(58svh, 560px); }
+  .hero.center { align-items: center; }
+  .media { position: absolute; inset: 0; z-index: -1; }
+  .media img { width: 100%; height: 100%; object-fit: cover; }
+  .art {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(120% 80% at 75% 10%, rgba(16, 168, 120, 0.16), transparent 60%),
+      radial-gradient(90% 70% at 15% 100%, rgba(8, 127, 140, 0.35), transparent 70%),
+      linear-gradient(180deg, #0a3240 0%, var(--deep-ocean) 55%, #061f28 100%);
+  }
+  .art :global(.swell) { opacity: 0.55; }
+  .horizon { position: absolute; left: 0; right: 0; top: 34%; height: 1px; background: linear-gradient(90deg, transparent, rgba(216, 240, 234, 0.35), transparent); }
+  .scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 43, 54, 0.15) 0%, rgba(8, 43, 54, 0.25) 45%, rgba(8, 43, 54, 0.82) 100%); }
+  .content { padding-block: clamp(5rem, 4rem + 6vw, 9rem) clamp(3rem, 2.5rem + 3vw, 5.5rem); }
+  h1 { max-width: 17ch; color: var(--on-dark); }
+  .medium h1 { font-size: var(--step-4); max-width: 22ch; }
+  .eyebrow { margin-bottom: 1.25rem; }
+  .sub { margin-top: 1.5rem; max-width: 58ch; font-size: var(--step-1); line-height: 1.6; color: #dbe8e6; }
+  .actions { margin-top: 2.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .actions:empty { display: none; }
+  .slot-note { position: absolute; left: 0; right: 0; top: 1.25rem; margin-inline: auto; text-align: right; }
+  .slot-note span { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(216, 240, 234, 0.55); }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-in { animation: hero-rise 1.1s var(--ease) both; animation-delay: calc(var(--d) * 110ms + 80ms); }
+    .art :global(.swell) { animation: swell-fade 2.4s var(--ease) both; }
+  }
+  @keyframes hero-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes swell-fade { from { opacity: 0; } to { opacity: 0.55; } }
+</style>

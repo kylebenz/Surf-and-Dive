@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import EditorialSection from '../components/EditorialSection.astro';
+import DestinationGrid from '../components/DestinationGrid.astro';
+import DestinationList from '../components/DestinationList.astro';
+import SeasonTable from '../components/SeasonTable.astro';
+import GuideList from '../components/GuideList.astro';
+import Notice from '../components/Notice.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import { topFor, getDestination } from '../data/destinations';
+import { faqLd, itemListLd } from '../utils/seo';
+
+const best = topFor('dive', 10);
+const pick = (slug: string, note: string) => ({ d: getDestination(slug), note });
+
+const encounters = [
+  { animal: 'Manta rays', where: ['maldives', 'mozambique', 'bali-nusa-penida', 'hawaii'] },
+  { animal: 'Whale sharks', where: ['maldives', 'mozambique', 'seychelles'] },
+  { animal: 'Reef sharks', where: ['french-polynesia', 'fiji', 'maldives', 'fernando-de-noronha'] },
+  { animal: 'Turtles', where: ['seychelles', 'hawaii', 'fernando-de-noronha', 'philippines'] },
+  { animal: 'Pelagics and blue water', where: ['azores', 'maldives', 'french-polynesia'] },
+  { animal: 'Wrecks', where: ['philippines', 'bali-nusa-penida', 'fernando-de-noronha'] },
+  { animal: 'Soft coral and macro', where: ['fiji', 'philippines', 'bali-nusa-penida'] },
+];
+
+const faqs = [
+  { question: 'What is the best luxury diving destination?', answer: 'For reef diversity and premium island stays, destinations such as the Maldives, French Polynesia, Fiji, the Red Sea and parts of the Indian Ocean can be compelling. Conditions and operator quality should be checked for the specific trip.' },
+  { question: 'Is a liveaboard or a resort better for a luxury dive holiday?', answer: 'A liveaboard maximises dives and reaches remote sites such as Tubbataha or Cocos Island. A resort offers more space, privacy and non-dive activities. Many travellers prefer a resort with a strong dive centre and good boat logistics.' },
+  { question: 'Are marine-life encounters guaranteed?', answer: 'No. Encounters depend on season, location, conditions and luck. Choose operators who follow local regulations and keep a respectful distance from wildlife.' },
+  { question: 'How should I choose a dive operator?', answer: 'Look for qualified staff, appropriate safety procedures, well-maintained equipment, sensible guide-to-diver ratios and clear communication about conditions and local rules.' },
+];
+---
+<BaseLayout
+  title="Luxury Diving Holidays | Surf and Dive"
+  description="Luxury diving holidays compared by reefs, marine life, visibility, water conditions, resort diving and liveaboards — the Maldives, Fiji, French Polynesia, the Philippines and more."
+  crumbs={[{ label: 'Dive', href: '/dive/' }]}
+  jsonLd={[faqLd(faqs), itemListLd(best.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
+>
+  <Hero size="medium" eyebrow="Dive" title="Luxury Diving Holidays" subtitle="Walls, channels, wrecks and reef life — with the boats, guides and comfort that make repeated dives a pleasure." seed="dive-hub">
+    <a class="btn" href="#reefs">Best dive destinations <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="#marine-life">Marine life</a>
+  </Hero>
+
+  <section class="section" aria-labelledby="dive-intro-title">
+    <div class="container split-layout">
+      <div><span class="eyebrow">Diving, then everything else</span><h2 id="dive-intro-title">Dive deeper, stay better</h2></div>
+      <div class="prose">
+        <p class="lede">The best luxury diving holidays combine exceptional underwater environments with the comfort and logistics that make repeated dives enjoyable. Compare reefs, walls, wrecks, marine life, visibility, water conditions, dive access and the quality of the stay — not just the name of the destination.</p>
+        <p>A great dive is only part of a great diving holiday. Boat time, operator quality, guide ratios and what you do between dives all shape the trip. That is why island destinations work so well: the water is close, the accommodation can be exceptional and the day revolves around the sea.</p>
+      </div>
+    </div>
+  </section>
+
+  <EditorialSection id="reefs" eyebrow="Reef destinations" title="The best luxury dive destinations" intro="Destinations our editors rate as exceptional for diving. Each guide covers signature sites, marine life, experience level and season." tone="sand" split>
+    <DestinationGrid destinations={best} />
+  </EditorialSection>
+
+  <EditorialSection id="marine-life" eyebrow="Marine life" title="Choose the encounter, then the destination" intro="Sharks, rays, turtles and pelagics need different environments and seasons. None is guaranteed — the ocean does not run to a timetable." split>
+    <dl class="encounters">
+      {encounters.map((e) => (
+        <div>
+          <dt>{e.animal}</dt>
+          <dd>{e.where.map((s, i) => <>{i > 0 && ' · '}<a href={`/destinations/${s}/`}>{getDestination(s).name}</a></>)}</dd>
+        </div>
+      ))}
+    </dl>
+  </EditorialSection>
+
+  <section class="section bg-seafoam" aria-labelledby="conditions-title">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Conditions</span><h2 id="conditions-title" class="mt-1">Visibility and water temperature</h2></div>
+      <div class="cols-2">
+        <div class="prose">
+          <h3>Think beyond visibility</h3>
+          <p>Visibility gets too much attention. Current, marine life, reef structure, water temperature, boat time and seasonal conditions can matter just as much. Plankton-rich water that lowers visibility is often what attracts manta rays and whale sharks.</p>
+        </div>
+        <div class="prose">
+          <h3>Tropical or temperate</h3>
+          <p>Indian Ocean, Pacific and Southeast Asian destinations offer warm tropical water year-round. Atlantic destinations — <a href="/destinations/azores/">the Azores</a>, <a href="/destinations/madeira/">Madeira</a>, <a href="/destinations/canary-islands/">the Canaries</a> and <a href="/destinations/portugal/">Portugal</a> — are temperate, with wetsuits needed and the warmest water typically in late summer and early autumn. Check current temperatures with your operator rather than relying on averages.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <EditorialSection id="resorts" eyebrow="How to dive in comfort" title="Luxury dive resorts and liveaboards" split>
+    <div class="cols-2">
+      <div class="prose">
+        <h3>Resort diving</h3>
+        <p>The best dive resort is not automatically the most expensive. Look for a strong dive centre, good boat logistics, appropriate guide-to-guest ratios and access to the sites that match your interests — plus room to stop. Four dives a day sounds exciting until day three.</p>
+      </div>
+      <div class="prose">
+        <h3>Liveaboards</h3>
+        <p>For remote, protected reefs, a liveaboard is often the only way in: Tubbataha in <a href="/destinations/philippines/">the Philippines</a>, Cocos Island off <a href="/destinations/costa-rica/">Costa Rica</a>, Revillagigedo off <a href="/destinations/mexico-pacific/">Mexico</a>, the outer atolls of <a href="/destinations/maldives/">the Maldives</a>. Expect more dives and less space.</p>
+      </div>
+    </div>
+  </EditorialSection>
+
+  <EditorialSection id="seasons" eyebrow="Best seasons" title="When to dive where" intro="Typical windows from our seasonal matrix. Diving is possible year-round in many destinations; these are months when conditions are often favourable." tone="sand" split>
+    <SeasonTable activity="dive" caption="Dive destinations typically worth considering, by month" />
+  </EditorialSection>
+
+  <EditorialSection id="european" eyebrow="From Europe" title="Short-haul and long-haul diving" split>
+    <DestinationList activity="dive" label="Diving" items={[
+      pick('madeira', 'Year-round volcanic diving and a marine reserve a short flight away.'),
+      pick('azores', 'Summer blue-water diving with seasonal pelagic encounters.'),
+      pick('canary-islands', 'Marine reserves, El Hierro and winter-sun convenience.'),
+      pick('maldives', 'The classic long-haul winter dive escape.'),
+      pick('philippines', 'Unmatched variety in the drier European winter months.'),
+    ]} />
+    <div class="mt-3">
+      <Notice kind="safety"><p>Dive with certified operators, within your training and limits. Plan dives conservatively, respect weather and current, follow local regulations and respect the no-fly interval before travelling home.</p></Notice>
+    </div>
+  </EditorialSection>
+
+  <EditorialSection id="dive-guides" eyebrow="Guides" title="Dive planning guides" tone="sand">
+    <GuideList ids={['best-luxury-diving-holidays-world', 'how-to-choose-luxury-diving-holiday', 'best-luxury-diving-destinations-marine-life', 'where-to-dive-february-warm-water-luxury', 'combine-surfing-diving-one-holiday', 'luxury-ocean-travel-reef-conservation']} />
+  </EditorialSection>
+
+  <section class="section"><div class="container narrow"><FAQ faqs={faqs} title="Diving holiday questions" /></div></section>
+  <CTA seed="dive-cta" />
+</BaseLayout>
+<style>
+  .encounters { border-top: 1px solid var(--line); }
+  .encounters div { display: grid; gap: 0.4rem; padding-block: 1.1rem; border-bottom: 1px solid var(--line); }
+  @media (min-width: 760px) { .encounters div { grid-template-columns: 16rem 1fr; gap: 2rem; align-items: baseline; } }
+  .encounters dt { font-family: var(--font-display); font-size: var(--step-2); }
+  .encounters a { color: var(--navy); }
+</style>

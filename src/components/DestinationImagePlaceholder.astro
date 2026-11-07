@@ -1,0 +1,29 @@
+---
+/**
+ * One of the ten image slots on a destination page. Resolves the slot to
+ * /public/images/destinations/<slug>/<file>.(webp|avif|jpg|png) when present.
+ */
+import ImageSlot from './ImageSlot.astro';
+import type { Destination, ImageSlotType } from '../data/types';
+import { slotFile, slotLabel } from '../data/destinations/_images';
+import { resolveImage } from '../utils/images';
+interface Props {
+  destination: Destination;
+  type: ImageSlotType;
+  aspect?: string;
+  eager?: boolean;
+  sizes?: string;
+  class?: string;
+}
+const { destination, type, aspect, eager, sizes, class: cls } = Astro.props;
+const slot = destination.images.find((i) => i.type === type)!;
+const image = resolveImage({
+  src: slot.src,
+  dir: `/images/destinations/${destination.slug}`,
+  base: slotFile(type),
+  alt: slot.alt,
+  caption: slot.caption,
+  credit: slot.credit,
+});
+---
+<ImageSlot image={image} label={slotLabel(type)} aspect={aspect} eager={eager} sizes={sizes} class={cls} />

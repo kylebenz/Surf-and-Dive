@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import CTA from '../../components/CTA.astro';
+import { itemListLd } from '../../utils/seo';
+
+const guides = (await getCollection('guides')).sort((a, b) => a.data.number - b.data.number);
+const order = ['Destinations', 'Surf', 'Diving', 'Freediving', 'Seasonal', 'Comparison', 'Planning', 'Safety', 'Responsible Travel'] as const;
+const groups = order.map((cat) => ({ cat, items: guides.filter((g) => g.data.category === cat) })).filter((g) => g.items.length);
+const slug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
+---
+<BaseLayout
+  title="Luxury Surf, Dive & Ocean Travel Guides | Surf and Dive"
+  description="Practical editorial guides to luxury surf, diving and freediving holidays: where to go, when to travel, how to choose and how to stay safe and responsible."
+  crumbs={[{ label: 'Guides', href: '/guides/' }]}
+  jsonLd={[itemListLd(guides.map((g) => ({ name: g.data.title, href: `/guides/${g.id}/` })), Astro.site!)]}
+>
+  <header class="page-intro">
+    <div class="container">
+      <span class="eyebrow">The Surf and Dive journal</span>
+      <h1>Guides for Ocean-First Travel</h1>
+      <p class="lede">Each guide answers a real traveller question — where to go, when, how to choose and how to do it well — with honest trade-offs and careful, qualified advice.</p>
+      <nav aria-label="Guide categories" class="cats">
+        <ul role="list" class="tag-list">
+          {groups.map((g) => <li><a class="tag" href={`#${slug(g.cat)}`}>{g.cat} <span class="muted">({g.items.length})</span></a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </header>
+  {groups.map((g, i) => (
+    <section id={slug(g.cat)} class:list={['section-tight', { 'bg-sand': i % 2 === 0 }]} aria-labelledby={`${slug(g.cat)}-t`}>
+      <div class="container">
+        <h2 id={`${slug(g.cat)}-t`} class="cat-title">{g.cat}</h2>
+        <ul role="list" class="grid grid-3">
+          {g.items.map((guide) => <li class="reveal"><ArticleCard guide={guide} /></li>)}
+        </ul>
+      </div>
+    </section>
+  ))}
+  <CTA seed="guides-cta" />
+</BaseLayout>
+<style>
+  .cats { margin-top: 2rem; }
+  .cats a { text-decoration: none; min-height: 36px; padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+  .cats a:hover { border-color: var(--navy); }
+  .cat-title { font-size: var(--step-3); margin-bottom: 2rem; }
+</style>

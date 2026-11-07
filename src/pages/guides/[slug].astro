@@ -1,0 +1,220 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleImagePlaceholder from '../../components/ArticleImagePlaceholder.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import DestinationCard from '../../components/DestinationCard.astro';
+import Notice from '../../components/Notice.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTA from '../../components/CTA.astro';
+import { getDestination } from '../../data/destinations';
+import { getComparison } from '../../data/comparisons';
+import { monthName } from '../../data/seasonal';
+import { faqLd, absoluteUrl, formatDate, readingTime } from '../../utils/seo';
+import { resolveImage } from '../../utils/images';
+import { SITE } from '../../config/site';
+import type { Month } from '../../data/types';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((g) => ({ params: { slug: g.id }, props: { guide: g } }));
+}
+const { guide } = Astro.props as { guide: CollectionEntry<'guides'> };
+const { data } = guide;
+const { Content } = await render(guide);
+const site = Astro.site!;
+
+const all = await getCollection('guides');
+const related = data.relatedGuides.map((id) => all.find((g) => g.id === id)).filter((g): g is NonNullable<typeof g> => Boolean(g));
+const dests = data.relatedDestinations.map(getDestination);
+const comparison = data.comparison ? getComparison(data.comparison) : null;
+const activityMeta = {
+  surf: { label: 'Luxury Surf Holidays', href: '/surf/' },
+  dive: { label: 'Luxury Diving Holidays', href: '/dive/' },
+  freediving: { label: 'Freediving Holidays', href: '/freediving/' },
+  'luxury-ocean-holidays': { label: 'Luxury Ocean Holidays', href: '/luxury-ocean-holidays/' },
+} as const;
+const mins = readingTime(guide.body ?? '');
+const [heroSlot, ...restSlots] = data.images;
+const heroImg = heroSlot ? resolveImage({ src: heroSlot.src, dir: `/images/guides/${guide.id}`, base: 'image-1', alt: heroSlot.alt }) : null;
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.publishDate.toISOString(),
+  dateModified: data.updatedDate.toISOString(),
+  inLanguage: 'en',
+  mainEntityOfPage: absoluteUrl(`/guides/${guide.id}/`, site),
+  author: { '@type': 'Organization', name: data.author, url: absoluteUrl('/about/', site) },
+  publisher: { '@type': 'Organization', name: SITE.name, url: absoluteUrl('/', site), logo: { '@type': 'ImageObject', url: absoluteUrl('/favicon.svg', site) } },
+  keywords: data.keywords.join(', '),
+  articleSection: data.category,
+  ...(heroImg && heroSlot.alt ? { image: [absoluteUrl(heroImg.src, site)] } : {}),
+};
+---
+<BaseLayout
+  title={data.seoTitle}
+  description={data.description}
+  ogType="article"
+  ogImage={heroImg?.src}
+  ogImageAlt={heroImg?.alt || undefined}
+  crumbs={[{ label: 'Guides', href: '/guides/' }, { label: data.title, href: `/guides/${guide.id}/` }]}
+  jsonLd={[articleLd, faqLd(data.faqs)]}
+  article={{ published: data.publishDate, modified: data.updatedDate, section: data.category }}
+>
+  <article class="article">
+    <header class="a-head">
+      <div class="container narrow-head">
+        <p class="eyebrow">{data.category} · Guide {String(data.number).padStart(2, '0')}</p>
+        <h1>{data.title}</h1>
+        <p class="dek">{data.dek}</p>
+        <div class="meta-row byline">
+          <span>By <a href="/about/">{data.author}</a></span>
+          <span>Published <time datetime={data.publishDate.toISOString()}>{formatDate(data.publishDate)}</time></span>
+          <span>Updated <time datetime={data.updatedDate.toISOString()}>{formatDate(data.updatedDate)}</time></span>
+          <span>{mins} min read</span>
+        </div>
+      </div>
+      <div class="container hero-img">
+        {heroSlot && <ArticleImagePlaceholder slug={guide.id} index={0} slot={heroSlot} aspect="16 / 8" eager sizes="(min-width: 1320px) 1320px, 100vw" />}
+      </div>
+    </header>
+
+    <div class="container a-body">
+      <aside class="a-aside" aria-label="About this guide">
+        <div class="sticky">
+          <p class="mini-h">About this guide</p>
+          <p class="note-small">Written for a European traveller who wants the ocean to be more than scenery: understand the destination, understand the trade-offs, then choose the experience that actually fits the trip.</p>
+          <p class="mini-h mt">Destinations</p>
+          <ul role="list" class="aside-links">{dests.map((d) => <li><a href={`/destinations/${d.slug}/`}>{d.name}</a></li>)}</ul>
+          <p class="mini-h mt">Activity guides</p>
+          <ul role="list" class="aside-links">{data.activities.map((a) => <li><a href={activityMeta[a].href}>{activityMeta[a].label}</a></li>)}</ul>
+          {data.months.length > 0 && <>
+            <p class="mini-h mt">Months</p>
+            <ul role="list" class="aside-links inline">{(data.months as Month[]).map((m) => <li><a href={`/best-by-month/${m}/`}>{monthName(m)}</a></li>)}</ul>
+          </>}
+        </div>
+      </aside>
+
+      <div class="a-main">
+        <div class="prose">
+          <Content />
+        </div>
+
+        {restSlots.length > 0 && (
+          <section class="a-gallery" aria-labelledby="gallery-t">
+            <h2 id="gallery-t" class="mini-title">In pictures</h2>
+            <div class="ag-grid">
+              {restSlots.map((slot, i) => (
+                <div class:list={['ag', { wide: i === 0 || i === 3 }]}>
+                  <ArticleImagePlaceholder slug={guide.id} index={i + 1} slot={slot} aspect={i === 0 || i === 3 ? '16 / 9' : '4 / 5'} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {data.showChecklist && (
+          <section class="checklist-box" aria-labelledby="qc-t">
+            <h2 id="qc-t" class="mini-title">Quick planning checklist</h2>
+            <ul role="list">
+              <li>Check the exact season for your travel dates and the specific coast or island you plan to visit.</li>
+              <li>Match the activity to your experience level; famous does not mean beginner-friendly.</li>
+              <li>Verify current transport, access rules, marine regulations and operator availability.</li>
+              <li>Choose accommodation for location and experience quality, not just star rating.</li>
+              <li>Leave flexible time in the itinerary because ocean conditions can change.</li>
+            </ul>
+          </section>
+        )}
+
+        {comparison && (
+          <a class="compare-link" href={`/compare/${comparison.slug}/`}>
+            <span class="eyebrow">Compare</span>
+            <span class="cl-title">{comparison.title}: twelve criteria, side by side</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        )}
+
+        <div class="notices">
+          {(data.category === 'Freediving' || data.activities.includes('freediving')) && data.category !== 'Safety' && (
+            <Notice kind="safety"><p>Never freedive alone. Train with qualified instructors, use a trained buddy, avoid hyperventilation and never compete with depth or breath-hold. <a href="/guides/ocean-safety-freediving-buddy-systems/">Freediving safety</a>.</p></Notice>
+          )}
+          {data.activities.includes('surf') && data.category !== 'Safety' && data.category !== 'Freediving' && (
+            <Notice kind="safety"><p>Surf within your ability, ask local guides about reefs, currents and tides, and follow lifeguard advice where available. <a href="/guides/ocean-safety-luxury-surf-travellers/">Surf safety</a>.</p></Notice>
+          )}
+          <Notice kind="seasonal" title="Editorial note">
+            <p>Facts about ocean conditions, seasonal patterns, wildlife, access and operators should be verified before travel. The ocean is dynamic, and no guide can promise waves, visibility or wildlife encounters.</p>
+          </Notice>
+        </div>
+
+        {data.sources.length > 0 && (
+          <section class="sources" aria-labelledby="src-t">
+            <h2 id="src-t" class="mini-title">Source notes</h2>
+            <ul role="list">
+              {data.sources.map((s) => (
+                <li>{s.url ? <a href={s.url} rel="noopener" target="_blank">{s.name}<span class="sr-only"> (opens in a new tab)</span></a> : <span>{s.name}</span>}{s.note && <span class="muted"> — {s.note}</span>}</li>
+              ))}
+            </ul>
+            <p class="note-small">Official sources are cited for broad patterns. They are not a substitute for current, local verification.</p>
+          </section>
+        )}
+      </div>
+    </div>
+  </article>
+
+  {data.faqs.length > 0 && <section class="section bg-sand"><div class="container narrow"><FAQ faqs={data.faqs} /></div></section>}
+
+  <section class="section" aria-labelledby="rd-t">
+    <div class="container">
+      <h2 id="rd-t" class="r-title">Destinations in this guide</h2>
+      <ul role="list" class="grid grid-3">{dests.slice(0, 3).map((d) => <li class="reveal"><DestinationCard destination={d} /></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section bg-sand" aria-labelledby="rg-t">
+    <div class="container">
+      <h2 id="rg-t" class="r-title">Related guides</h2>
+      <ul role="list" class="grid grid-3">{related.map((g) => <li class="reveal"><ArticleCard guide={g} /></li>)}</ul>
+    </div>
+  </section>
+
+  <CTA seed={`cta-${guide.id}`} />
+</BaseLayout>
+<style>
+  .a-head { padding-top: clamp(2.5rem, 2rem + 3vw, 5rem); }
+  .narrow-head { max-width: 1000px; }
+  .a-head h1 { margin-top: 1rem; font-size: var(--step-5); max-width: 20ch; }
+  .dek { margin-top: 1.5rem; font-family: var(--font-display); font-size: var(--step-2); line-height: 1.35; color: #2c4256; max-width: 40ch; }
+  .byline { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  .byline a { color: var(--navy); }
+  .hero-img { margin-top: 2.5rem; }
+  .a-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 3rem; padding-block: clamp(3rem, 2rem + 3vw, 5rem); }
+  .a-aside { order: 2; }
+  @media (min-width: 1040px) { .a-body { grid-template-columns: 15rem minmax(0, 1fr); gap: 5rem; } .a-aside { order: 0; } }
+  .sticky { position: sticky; top: calc(var(--header-h) + 2rem); }
+  .mini-h { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--teal-ink); margin-bottom: 0.6rem; }
+  .mini-h.mt { margin-top: 1.75rem; }
+  .aside-links { display: grid; gap: 0.35rem; font-size: 0.92rem; }
+  .aside-links.inline { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; }
+  .aside-links a { color: var(--navy); }
+  .a-main { min-width: 0; }
+  .a-main > * + * { margin-top: 3rem; }
+  .mini-title { font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-body); font-weight: 600; margin-bottom: 1.25rem; color: var(--navy); }
+  .ag-grid { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+  .ag.wide { grid-column: 1 / -1; }
+  .checklist-box { padding: 1.75rem; background: var(--sand); border-top: 2px solid var(--ocean-teal); max-width: var(--measure); }
+  .checklist-box li { position: relative; padding: 0.6rem 0 0.6rem 1.75rem; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+  .checklist-box li:last-child { border-bottom: 0; }
+  .checklist-box li::before { content: ''; position: absolute; left: 0; top: 0.95rem; width: 11px; height: 6px; border-left: 1.5px solid var(--ocean-teal); border-bottom: 1.5px solid var(--ocean-teal); transform: rotate(-45deg); }
+  .compare-link { display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 1rem; padding: 1.5rem 1.75rem; background: var(--deep-ocean); color: var(--on-dark); text-decoration: none; max-width: var(--measure); align-items: center; }
+  .compare-link .eyebrow { grid-column: 1 / -1; color: var(--seafoam); }
+  .cl-title { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.15; }
+  .compare-link:hover { background: var(--ocean-2); color: var(--on-dark); }
+  .notices { display: grid; gap: 1rem; max-width: var(--measure); }
+  .sources { max-width: var(--measure); border-top: 1px solid var(--line); padding-top: 1.5rem; }
+  .sources li { font-size: 0.9rem; padding-block: 0.35rem; }
+  .sources .note-small { margin-top: 1rem; }
+  .r-title { font-size: var(--step-3); margin-bottom: 2rem; }
+</style>

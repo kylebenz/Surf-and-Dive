@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ActivityCard from '../components/ActivityCard.astro';
+import DestinationGrid from '../components/DestinationGrid.astro';
+import SeasonalGrid from '../components/SeasonalGrid.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import DiscoverForm from '../components/DiscoverForm.astro';
+import CTA from '../components/CTA.astro';
+import EditorialSection from '../components/EditorialSection.astro';
+import { SITE } from '../config/site';
+import { destinations, featuredSlugs, getDestination } from '../data/destinations';
+import { comparisons } from '../data/comparisons';
+import { markets } from '../data/countries';
+import { resolveImage } from '../utils/images';
+import { itemListLd } from '../utils/seo';
+
+const heroImage = resolveImage({ dir: '/images/home', base: 'hero', alt: '' });
+const featured = featuredSlugs.map(getDestination);
+const guides = (await getCollection('guides')).sort((a, b) => a.data.number - b.data.number);
+const featuredGuideIds = [
+  'luxury-surf-dive-holidays-world',
+  'best-luxury-diving-holidays-world',
+  'best-freediving-destinations-clear-water',
+  'best-winter-sun-surf-holidays-europe',
+  'combine-surfing-diving-one-holiday',
+  'luxury-ocean-travel-worth-paying-for',
+];
+const featuredGuides = featuredGuideIds.map((id) => guides.find((g) => g.id === id)!);
+
+const activities = [
+  { title: 'Surf Holidays', text: 'Reef passes, Atlantic points and warm beach breaks — matched to your level and season.', href: '/surf/', seed: 'act-surf' },
+  { title: 'Diving Holidays', text: 'Walls, channels, wrecks and marine life, with the logistics that make repeated dives a pleasure.', href: '/dive/', seed: 'act-dive' },
+  { title: 'Freediving Escapes', text: 'Clear, calm water and qualified local support for responsible breath-hold exploration.', href: '/freediving/', seed: 'act-free' },
+  { title: 'Luxury Island Holidays', text: 'Private islands, overwater villas and lagoon-side spas where the ocean stays centre stage.', href: '/luxury-ocean-holidays/', seed: 'act-lux' },
+  { title: 'Winter Sun', text: 'Warm water and settled weather when Europe is at its coldest — short-haul or long.', href: '/guides/best-winter-sun-surf-holidays-europe/', seed: 'act-winter' },
+  { title: 'European Ocean Escapes', text: 'Portugal, Madeira, the Azores and the Canaries: serious ocean time without a long-haul flight.', href: '/europe/', seed: 'act-europe' },
+];
+---
+<BaseLayout
+  title={`Surf and Dive | ${SITE.tagline}`}
+  description="Discover exceptional surf, diving and freediving destinations paired with beautiful places to stay, thoughtful experiences and the best seasons to travel from Europe."
+  jsonLd={[itemListLd(featured.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
+>
+  <Hero
+    size="full"
+    eyebrow="Surf · Dive · Freedive"
+    title="Luxury Ocean Holidays, Curated Around the Water"
+    subtitle="Discover exceptional surf, diving and freediving destinations paired with beautiful places to stay, thoughtful experiences and the best seasons to travel from Europe."
+    image={heroImage}
+    seed="home-hero"
+    slotLabel="Homepage hero / Ocean"
+  >
+    <a class="btn" href="/destinations/">Explore Ocean Destinations <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="#discover">Find Your Ideal Surf &amp; Dive Escape</a>
+  </Hero>
+
+  <section class="section intro" aria-labelledby="intro-title">
+    <div class="container intro-grid">
+      <div class="reveal">
+        <span class="eyebrow">The Surf and Dive approach</span>
+        <h2 id="intro-title">Where Extraordinary Water Meets Exceptional Travel</h2>
+      </div>
+      <div class="intro-copy reveal">
+        <p class="lede">From powerful reef breaks and warm tropical lagoons to volcanic Atlantic coastlines and remote island reefs, explore destinations selected for the quality of the ocean experience — and the quality of the holiday around it.</p>
+        <ol role="list" class="principles">
+          <li><span class="pn">01</span><div><h3>The water leads</h3><p>We start with wave quality, reef structure, marine life and visibility — then look at where to stay.</p></div></li>
+          <li><span class="pn">02</span><div><h3>Season before destination</h3><p>The same coastline can be perfect in one month and wrong in another. Timing comes first.</p></div></li>
+          <li><span class="pn">03</span><div><h3>Honest, careful guidance</h3><p>No fake reviews, no invented prices, no guaranteed waves or wildlife. Just useful judgement.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <EditorialSection id="experiences" eyebrow="Choose your ocean experience" title="Choose Your Ocean Experience" intro="Six ways into the same idea: a holiday built around exceptional water." tone="sand" split>
+    <ul role="list" class="grid grid-3">
+      {activities.map((a, i) => <li class="reveal"><ActivityCard {...a} index={i + 1} /></li>)}
+    </ul>
+  </EditorialSection>
+
+  <EditorialSection id="destinations" eyebrow="Featured destinations" title="The World's Most Compelling Ocean Destinations" intro="A curated collection of destinations where the ocean is the reason to travel — with the accommodation, food, wellness and local experiences to make the journey worth taking." split>
+    <DestinationGrid destinations={featured} />
+    <div class="after reveal">
+      <a class="btn btn-ghost" href="/destinations/">See all {destinations.length} destinations <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </EditorialSection>
+
+  <section id="discover" class="section dark discover-sec" aria-labelledby="discover-title">
+    <div class="container discover-grid">
+      <div class="reveal">
+        <span class="eyebrow">Destination finder</span>
+        <h2 id="discover-title">Find Your Ideal Surf &amp; Dive Escape</h2>
+        <p class="lede light">Tell us what matters most and when you can travel. We’ll narrow the twenty destinations to the ones that genuinely fit — as planning guidance, never a guarantee.</p>
+      </div>
+      <div class="form-panel reveal">
+        <DiscoverForm />
+      </div>
+    </div>
+  </section>
+
+  <EditorialSection id="season" eyebrow="Seasonal discovery" title="Travel by Season" intro="Find the right ocean destination for the month you want to travel. Compare surf seasons, diving conditions, weather and European holiday timing before you book." tone="sand" split>
+    <div class="reveal"><SeasonalGrid /></div>
+  </EditorialSection>
+
+  <EditorialSection id="guides" eyebrow="Editorial guides" title="Surf, Dive and Freedive Guides" intro="Practical, carefully qualified advice for choosing, timing and planning an ocean-first holiday." split>
+    <ul role="list" class="grid grid-3">
+      {featuredGuides.map((g) => <li class="reveal"><ArticleCard guide={g} /></li>)}
+    </ul>
+    <div class="after reveal"><a class="text-link" href="/guides/">All {guides.length} guides <span aria-hidden="true">→</span></a></div>
+  </EditorialSection>
+
+  <EditorialSection id="compare" eyebrow="Decision support" title="Compare Ocean Escapes" intro="Side-by-side comparisons across twelve criteria — surf, diving, freediving, luxury, water, weather, access, privacy, couples, families, value and overall fit. No universal winners; just a clearer choice." tone="seafoam" split>
+    <ul role="list" class="compare-list">
+      {comparisons.map((c) => {
+        const a = getDestination(c.a); const b = getDestination(c.b);
+        return (
+          <li class="reveal">
+            <a href={`/compare/${c.slug}/`}>
+              <span class="vs"><span>{c.a_label ?? a.name}</span><em>vs</em><span>{c.b_label ?? b.name}</span></span>
+              <span class="short">{c.short_answer}</span>
+              <span class="go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </EditorialSection>
+
+  <EditorialSection id="europe" eyebrow="Planning from Europe" title="European Seasonal Planning" intro="Short-haul Atlantic islands for a long weekend, or long-haul warm water for the winter. Planning notes for travellers across twelve European markets." split>
+    <ul role="list" class="markets">
+      {markets.map((m) => <li><a href={`/europe/${m.slug}/`}>{m.country}<span aria-hidden="true">→</span></a></li>)}
+    </ul>
+  </EditorialSection>
+
+  <CTA seed="home-cta" />
+</BaseLayout>
+
+<style>
+  .intro-grid { display: grid; gap: 2.5rem; }
+  @media (min-width: 960px) { .intro-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 5rem; } }
+  .intro h2 { margin-top: 0.9rem; max-width: 14ch; }
+  .principles { margin-top: 2.5rem; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .principles li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding-block: 1.4rem; border-bottom: 1px solid var(--line); }
+  .pn { font-family: var(--font-display); font-size: 1.3rem; color: var(--teal-ink); line-height: 1.3; }
+  .principles p { color: var(--slate); margin-top: 0.3rem; font-size: 0.95rem; }
+  .after { margin-top: 2.5rem; }
+  .discover-grid { display: grid; gap: 3rem; }
+  @media (min-width: 960px) { .discover-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: center; gap: 5rem; } }
+  .discover-sec h2 { margin-top: 0.9rem; color: var(--on-dark); max-width: 14ch; }
+  .lede.light { color: #cfe0de; margin-top: 1.25rem; }
+  .form-panel { background: var(--shell); color: var(--navy); padding: clamp(1.5rem, 1rem + 2vw, 2.75rem); }
+  .form-panel :global(:focus-visible) { outline-color: var(--ocean-teal); }
+  .form-panel :global(.btn) { --btn-bg: var(--deep-ocean); --btn-fg: var(--shell); border-color: var(--deep-ocean); }
+  .form-panel :global(.btn:hover) { --btn-bg: var(--ocean-teal); border-color: var(--ocean-teal); }
+  .compare-list { border-top: 1px solid rgba(16, 42, 67, 0.2); }
+  .compare-list a { display: grid; gap: 0.5rem 2rem; grid-template-columns: 1fr auto; padding-block: 1.5rem; border-bottom: 1px solid rgba(16, 42, 67, 0.2); color: inherit; text-decoration: none; }
+  @media (min-width: 860px) { .compare-list a { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr) auto; align-items: center; } }
+  .vs { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.05; display: flex; flex-wrap: wrap; gap: 0 0.5rem; align-items: baseline; }
+  .vs em { font-size: 1rem; color: var(--teal-ink); }
+  .short { font-size: 0.92rem; color: #33495c; grid-column: 1 / -1; }
+  @media (min-width: 860px) { .short { grid-column: auto; } }
+  .go { font-size: 1.4rem; color: var(--teal-ink); transition: transform 0.3s var(--ease); grid-row: 1; grid-column: 2; }
+  @media (min-width: 860px) { .go { grid-column: 3; } }
+  .compare-list a:hover .go { transform: translateX(4px); }
+  .compare-list a:hover .vs span { color: var(--teal-ink); }
+  .markets { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); border-top: 1px solid var(--line); }
+  .markets a { display: flex; justify-content: space-between; padding: 1rem 0.25rem; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; font-family: var(--font-display); font-size: var(--step-1); margin-right: 1.5rem; }
+  .markets a:hover { color: var(--teal-ink); }
+</style>

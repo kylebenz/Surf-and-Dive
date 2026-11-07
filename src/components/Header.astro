@@ -1,0 +1,175 @@
+---
+import Logo from './Logo.astro';
+import { NAV } from '../config/site';
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || path.startsWith(href);
+---
+<header class="site-header">
+  <div class="container bar">
+    <a href="/" class="brand" aria-label="Surf and Dive — home">
+      <Logo />
+    </a>
+    <nav class="primary" aria-label="Primary">
+      <ul role="list">
+        {NAV.map((item) => (
+          <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <a class="btn header-cta" href="/destinations/">Explore Destinations</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+      <span class="menu-label">Menu</span>
+      <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
+    </button>
+  </div>
+
+  <div id="site-menu" class="menu-panel dark" hidden>
+    <div class="container menu-inner">
+      <nav aria-label="Mobile">
+        <ul role="list" class="menu-links">
+          {NAV.map((item, i) => (
+            <li style={`--i:${i}`}>
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="menu-foot">
+        <a class="btn" href="/destinations/">Explore Destinations <span class="arrow" aria-hidden="true">→</span></a>
+        <ul role="list" class="menu-secondary">
+          <li><a href="/europe/">Planning from Europe</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 250, 247, 0.94);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
+    min-height: var(--header-h);
+  }
+  .brand { text-decoration: none; margin-right: auto; padding-block: 0.5rem; }
+  .primary { display: none; }
+  .primary ul { display: flex; gap: clamp(0.9rem, 0.2rem + 1.1vw, 1.8rem); }
+  .primary a {
+    position: relative;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--navy);
+    text-decoration: none;
+    padding-block: 0.5rem;
+    white-space: nowrap;
+  }
+  .primary a::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0.15rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease);
+  }
+  .primary a:hover::after, .primary a[aria-current='page']::after { transform: scaleX(1); }
+  .primary a[aria-current='page'] { color: var(--teal-ink); }
+  .header-cta { display: none; min-height: 42px; padding: 0.55rem 1.1rem; font-size: 0.82rem; }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0.5rem 0.25rem 0.5rem 0.75rem;
+    background: none;
+    border: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  @media (max-width: 380px) { .menu-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; } }
+  .menu-icon { display: grid; gap: 5px; width: 22px; }
+  .menu-icon span { display: block; height: 1.5px; background: currentColor; transition: transform 0.3s var(--ease); }
+  .menu-toggle[aria-expanded='true'] .menu-icon span:first-child { transform: translateY(3.25px) rotate(45deg); }
+  .menu-toggle[aria-expanded='true'] .menu-icon span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+
+  @media (min-width: 1180px) {
+    .primary { display: block; }
+    .header-cta { display: inline-flex; }
+    .menu-toggle { display: none; }
+  }
+
+  .menu-panel {
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    overflow-y: auto;
+    padding-block: 2rem 3rem;
+  }
+  .menu-panel[hidden] { display: none; }
+  .menu-inner { display: grid; gap: 2.5rem; min-height: 100%; align-content: space-between; }
+  .menu-links li { border-bottom: 1px solid var(--line-dark); }
+  .menu-links a {
+    display: block;
+    padding: 0.85rem 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 1.4rem + 2.5vw, 2.8rem);
+    line-height: 1.1;
+    text-decoration: none;
+    color: var(--on-dark);
+  }
+  .menu-links a[aria-current='page'] { color: var(--seafoam); font-style: italic; }
+  .menu-foot { display: grid; gap: 1.5rem; }
+  .menu-foot .btn { justify-self: start; }
+  .menu-secondary { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.9rem; }
+  .menu-secondary a { color: var(--on-dark-muted); }
+  @media (prefers-reduced-motion: no-preference) {
+    .menu-panel:not([hidden]) .menu-links li {
+      animation: menu-in 0.6s var(--ease) both;
+      animation-delay: calc(var(--i) * 40ms);
+    }
+  }
+  @keyframes menu-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  :global(body.menu-open) { overflow: hidden; }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const panel = document.getElementById('site-menu');
+  if (toggle && panel) {
+    const label = toggle.querySelector('.menu-label');
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+      document.body.classList.toggle('menu-open', open);
+      if (label) label.textContent = open ? 'Close' : 'Menu';
+      if (open) panel.querySelector<HTMLAnchorElement>('a')?.focus();
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) { setOpen(false); toggle.focus(); }
+      if (e.key === 'Tab' && !panel.hidden) {
+        const focusables = [toggle, ...panel.querySelectorAll<HTMLElement>('a, button')];
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    window.matchMedia('(min-width: 1180px)').addEventListener('change', (m) => { if (m.matches) setOpen(false); });
+  }
+</script>

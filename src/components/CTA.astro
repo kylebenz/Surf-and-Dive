@@ -1,0 +1,31 @@
+---
+import SwellArt from './SwellArt.astro';
+interface Props { title?: string; text?: string; primary?: { label: string; href: string }; secondary?: { label: string; href: string }; seed?: string; }
+const {
+  title = 'Plan Your Next Ocean Escape',
+  text = 'Start with the water. Compare destinations by surf, diving, freediving and season — then choose the stay that makes it exceptional.',
+  primary = { label: 'Explore Destinations', href: '/destinations/' },
+  secondary = { label: 'Browse by Month', href: '/best-by-month/' },
+  seed = 'cta',
+} = Astro.props;
+---
+<section class="cta dark" aria-labelledby={`cta-${seed}`}>
+  <div class="art" aria-hidden="true"><SwellArt seed={seed} lines={12} /></div>
+  <div class="container inner reveal">
+    <span class="eyebrow">Surf and Dive</span>
+    <h2 id={`cta-${seed}`}>{title}</h2>
+    <p>{text}</p>
+    <div class="btn-row">
+      <a class="btn" href={primary.href}>{primary.label} <span class="arrow" aria-hidden="true">→</span></a>
+      {secondary && <a class="btn btn-ghost" href={secondary.href}>{secondary.label}</a>}
+    </div>
+  </div>
+</section>
+<style>
+  .cta { position: relative; overflow: hidden; isolation: isolate; padding-block: clamp(4.5rem, 3.5rem + 5vw, 8rem); }
+  .art { position: absolute; inset: 0; z-index: -1; opacity: 0.45; }
+  .inner { display: grid; gap: 1.25rem; justify-items: start; }
+  h2 { max-width: 16ch; color: var(--on-dark); }
+  p { max-width: 54ch; color: #cfe0de; font-size: var(--step-1); }
+  .btn-row { margin-top: 0.75rem; }
+</style>

@@ -1,0 +1,12 @@
+---
+import DestinationCard from './DestinationCard.astro';
+import type { Destination } from '../data/types';
+interface Props { destinations: Destination[]; headingLevel?: 'h2' | 'h3'; notes?: Record<string, string>; }
+const { destinations, headingLevel = 'h3', notes = {} } = Astro.props;
+---
+<ul role="list" class="dgrid">
+  {destinations.map((d) => <li class="reveal"><DestinationCard destination={d} headingLevel={headingLevel} note={notes[d.slug]} /></li>)}
+</ul>
+<style>
+  .dgrid { display: grid; gap: clamp(1.25rem, 1rem + 1vw, 2rem); grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); }
+</style>

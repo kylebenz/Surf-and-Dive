@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import Notice from '../../components/Notice.astro';
+import { markets } from '../../data/countries';
+import { itemListLd } from '../../utils/seo';
+---
+<BaseLayout
+  title="Luxury Ocean Holidays from Europe | Surf and Dive"
+  description="Planning luxury surf, dive and ocean holidays from the UK, Germany, France, Spain, Italy, the Netherlands, Belgium, Switzerland, Austria and Scandinavia."
+  crumbs={[{ label: 'Europe', href: '/europe/' }]}
+  jsonLd={[itemListLd(markets.map((m) => ({ name: m.landing_concept, href: `/europe/${m.slug}/` })), Astro.site!)]}
+>
+  <header class="page-intro">
+    <div class="container">
+      <span class="eyebrow">Planning from Europe</span>
+      <h1>Ocean Holidays from Europe</h1>
+      <p class="lede">European travellers have a useful advantage: Atlantic surf and diving close to home, and warm-water seasons far away that line up with the European winter. These notes help you plan around your holiday calendar, travel time and the kind of trip you want.</p>
+    </div>
+  </header>
+  <section class="section-tight bg-sand" aria-labelledby="mk">
+    <div class="container">
+      <h2 id="mk" class="sr-only">Markets</h2>
+      <ul role="list" class="mk">
+        {markets.map((m) => (
+          <li class="reveal">
+            <a href={`/europe/${m.slug}/`}>
+              <span class="c">{m.country}</span>
+              <span class="l">{m.landing_concept}</span>
+              <span class="e">{m.editorial_angle}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container narrow">
+      <Notice kind="tip" title="Language editions">
+        <p>Surf and Dive launches in English. German, French, Spanish and Italian editions will follow only once each has been written and reviewed by native-language editors — we do not publish machine-translated travel advice.</p>
+      </Notice>
+    </div>
+  </section>
+  <CTA seed="europe-hub" />
+</BaseLayout>
+<style>
+  .mk { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+  .mk a { display: grid; gap: 0.4rem; height: 100%; padding: 1.75rem; background: var(--shell); color: inherit; text-decoration: none; }
+  .mk a:hover { background: var(--seafoam); }
+  .c { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.05; }
+  .l { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--teal-ink); }
+  .e { font-size: 0.9rem; color: #33495c; }
+</style>

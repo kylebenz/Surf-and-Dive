@@ -1,0 +1,21 @@
+---
+interface Props { id: string; eyebrow?: string; title: string; intro?: string; tone?: 'shell' | 'sand' | 'dark' | 'seafoam'; split?: boolean; tight?: boolean; }
+const { id, eyebrow, title, intro, tone = 'shell', split = false, tight = false } = Astro.props;
+const toneClass = tone === 'sand' ? 'bg-sand' : tone === 'dark' ? 'dark' : tone === 'seafoam' ? 'bg-seafoam' : '';
+---
+<section id={id} class={`${tight ? 'section-tight' : 'section'} ${toneClass}`} aria-labelledby={`${id}-title`}>
+  <div class="container">
+    <div class={`section-head ${split ? 'split' : ''} reveal`}>
+      <div>
+        {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+        <h2 id={`${id}-title`} style={eyebrow ? 'margin-top:0.9rem' : undefined}>{title}</h2>
+      </div>
+      {intro && <p class="lede muted-lede">{intro}</p>}
+    </div>
+    <slot />
+  </div>
+</section>
+<style>
+  .muted-lede { color: #33495c; }
+  :global(.dark) .muted-lede { color: #cfe0de; }
+</style>

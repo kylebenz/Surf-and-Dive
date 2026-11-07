@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import DestinationList from '../../components/DestinationList.astro';
+import GuideList from '../../components/GuideList.astro';
+import Notice from '../../components/Notice.astro';
+import CTA from '../../components/CTA.astro';
+import { markets } from '../../data/countries';
+import { getDestination } from '../../data/destinations';
+import { monthName, getSeason } from '../../data/seasonal';
+import type { Market } from '../../data/types';
+
+export function getStaticPaths() {
+  return markets.map((m) => ({ params: { country: m.slug }, props: { m } }));
+}
+const { m } = Astro.props as { m: Market };
+const others = markets.filter((x) => x.slug !== m.slug);
+---
+<BaseLayout
+  title={m.seo.title}
+  description={m.seo.meta}
+  crumbs={[{ label: 'Europe', href: '/europe/' }, { label: m.country, href: `/europe/${m.slug}/` }]}
+>
+  <Hero size="medium" eyebrow={`From ${m.country}`} title={m.seo.title.replace(' | Surf and Dive', '')} subtitle={m.editorial_angle} seed={`eu-${m.slug}`}>
+    <a class="btn" href="#where">Where to go <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="#when">When to travel</a>
+  </Hero>
+
+  <section class="section" aria-labelledby="intro-t">
+    <div class="container split-layout">
+      <div><span class="eyebrow">For {m.demonym} travellers</span><h2 id="intro-t">Planning an ocean holiday from {m.country}</h2></div>
+      <div class="prose">
+        <p class="lede">{m.intro}</p>
+        <p>We never quote flight times or prices — routes and fares change constantly. Use these notes to shortlist by season and travel style, then check current connections from your nearest airport.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="when" class="section bg-sand" aria-labelledby="when-t">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Seasonal intent</span><h2 id="when-t" class="mt-1">When to travel</h2></div>
+      <dl class="intent">
+        {m.seasonal_intent.map((s) => <div><dt>{s.label}</dt><dd>{s.detail}</dd></div>)}
+      </dl>
+      <p class="mt-2 months-l">Months to start with:</p>
+      <ul role="list" class="mini-list">{m.months.map((mo) => <li><a href={`/best-by-month/${mo}/`}>{monthName(mo)} — {getSeason(mo).campaign}</a></li>)}</ul>
+      <div class="mt-2" style="max-width:820px"><Notice kind="seasonal"><p>School-holiday dates vary by region and year. Seasons are typical patterns, not guarantees — check current conditions for your dates.</p></Notice></div>
+    </div>
+  </section>
+
+  <section id="where" class="section" aria-labelledby="where-t">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Where to go</span><h2 id="where-t" class="mt-1">Destinations to consider</h2></div>
+      <DestinationList items={m.destinations.map((x) => ({ d: getDestination(x.slug), note: x.why }))} />
+      <p class="mt-2 acts">Explore by activity: <a href="/surf/">Surf</a> · <a href="/dive/">Dive</a> · <a href="/freediving/">Freedive</a> · <a href="/luxury-ocean-holidays/">Luxury</a></p>
+    </div>
+  </section>
+
+  <section class="section bg-sand" aria-labelledby="g-t">
+    <div class="container">
+      <h2 id="g-t" style="margin-bottom:2.5rem">Guides for {m.demonym} travellers</h2>
+      <GuideList ids={m.guides} />
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="o-t">
+    <div class="container">
+      <h2 id="o-t" class="h3-like">Other European markets</h2>
+      <ul role="list" class="mini-list">{others.map((o) => <li><a href={`/europe/${o.slug}/`}>{o.country}</a></li>)}</ul>
+    </div>
+  </section>
+  <CTA seed={`cta-eu-${m.slug}`} />
+</BaseLayout>
+<style>
+  .intent { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .intent div { background: var(--sand); padding: 1.5rem; }
+  .intent dt { font-family: var(--font-display); font-size: var(--step-2); margin-bottom: 0.4rem; }
+  .intent dd { font-size: 0.93rem; color: #33495c; }
+  .months-l { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+  .acts { color: #33495c; }
+  .h3-like { font-size: var(--step-2); }
+</style>

@@ -1,0 +1,45 @@
+---
+import type { Comparison } from '../data/types';
+interface Props { comparison: Comparison; aName: string; bName: string; }
+const { comparison: c, aName, bName } = Astro.props;
+const edgeText = (e: string) => e === 'a' ? `Generally favours ${aName}` : e === 'b' ? `Generally favours ${bName}` : e === 'even' ? 'Evenly matched' : 'Depends on your trip';
+---
+<div class="table-wrap" role="region" aria-label={`${aName} vs ${bName} comparison table`} tabindex="0">
+  <table>
+    <caption class="sr-only">{aName} compared with {bName} across twelve criteria</caption>
+    <thead>
+      <tr>
+        <th scope="col" class="crit">Criterion</th>
+        <th scope="col">{aName}</th>
+        <th scope="col">{bName}</th>
+        <th scope="col" class="edge-col">Edge</th>
+      </tr>
+    </thead>
+    <tbody>
+      {c.criteria.map((r) => (
+        <tr>
+          <th scope="row" class="crit">{r.criterion}</th>
+          <td class:list={[{ fav: r.edge === 'a' }]}>{r.a}</td>
+          <td class:list={[{ fav: r.edge === 'b' }]}>{r.b}</td>
+          <td class="edge"><span class={`edge-tag ${r.edge}`}>{edgeText(r.edge)}</span></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<p class="note-small legend">“Generally favours” reflects editorial judgement for a typical luxury ocean traveller — not a universal verdict. Your ability, season and priorities can change the answer.</p>
+<style>
+  .table-wrap { overflow-x: auto; border-top: 1px solid var(--navy); -webkit-overflow-scrolling: touch; }
+  table { width: 100%; min-width: 760px; font-size: 0.9rem; }
+  th, td { text-align: left; vertical-align: top; padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  thead th { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); font-weight: 600; position: sticky; top: 0; background: var(--sand); }
+  thead th:nth-child(2), thead th:nth-child(3) { color: var(--navy); font-family: var(--font-display); text-transform: none; letter-spacing: 0; font-size: 1.25rem; font-weight: 600; }
+  .crit { position: sticky; left: 0; background: var(--sand); width: 8.5rem; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; padding-right: 1.25rem; z-index: 1; }
+  td.fav { color: var(--navy); }
+  td.fav::before { content: '●'; color: var(--ocean-teal); font-size: 0.6rem; margin-right: 0.45rem; vertical-align: 0.15em; }
+  td:not(.fav):not(.edge) { color: #3d5266; }
+  .edge-col { width: 11rem; }
+  .edge-tag { display: inline-block; font-size: 0.74rem; padding: 0.2rem 0.55rem; border: 1px solid var(--line); border-radius: 999px; white-space: nowrap; }
+  .edge-tag.a, .edge-tag.b { border-color: var(--ocean-teal); color: var(--teal-ink); }
+  .legend { margin-top: 1rem; max-width: 70ch; }
+</style>

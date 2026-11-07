@@ -1,0 +1,19 @@
+---
+/**
+ * An image slot within a guide, driven by the article's image guide.
+ * Resolves to /public/images/guides/<slug>/image-<n>.(webp|avif|jpg|png) when present.
+ */
+import ImageSlot from './ImageSlot.astro';
+import { resolveImage } from '../utils/images';
+interface Props {
+  slug: string;
+  index: number;
+  slot: { label: string; kind: 'photo' | 'graphic'; src: string; alt: string; caption?: string; credit?: string };
+  aspect?: string;
+  eager?: boolean;
+  sizes?: string;
+}
+const { slug, index, slot, aspect, eager, sizes } = Astro.props;
+const image = resolveImage({ src: slot.src, dir: `/images/guides/${slug}`, base: `image-${index + 1}`, alt: slot.alt, caption: slot.caption, credit: slot.credit });
+---
+<ImageSlot image={image} label={slot.label} kind={slot.kind} aspect={aspect} eager={eager} sizes={sizes} />

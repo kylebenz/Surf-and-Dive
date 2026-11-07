@@ -1,0 +1,64 @@
+---
+import SwellArt from './SwellArt.astro';
+import type { Destination } from '../data/types';
+import { resolveImage } from '../utils/images';
+import { monthName } from '../data/seasonal';
+interface Props { destination: Destination; size?: 'default' | 'feature'; headingLevel?: 'h2' | 'h3'; note?: string; }
+const { destination: d, size = 'default', headingLevel = 'h3', note } = Astro.props;
+const hero = d.images.find((i) => i.type === 'hero')!;
+const image = resolveImage({ src: hero.src, dir: `/images/destinations/${d.slug}`, base: 'hero', alt: hero.alt });
+const H = headingLevel;
+const months = d.best_months;
+const monthLabel = months.length >= 10 ? 'Year-round' : `${monthName(months[0]).slice(0, 3)} – ${monthName(months[months.length - 1]).slice(0, 3)}`;
+const activities = [
+  { key: 'Surf', v: d.surf.score },
+  { key: 'Dive', v: d.diving.score },
+  { key: 'Freedive', v: d.freediving.score },
+];
+---
+<article class={`dcard ${size}`}>
+  <a href={`/destinations/${d.slug}/`} class="link">
+    <div class="visual">
+      {image ? (
+        <img src={image.src} srcset={image.srcset} sizes="(min-width: 1000px) 33vw, 100vw" alt={image.alt} loading="lazy" decoding="async" />
+      ) : (
+        <div class="art" aria-hidden="true"><SwellArt seed={d.slug} lines={14} /><span class="initial">{d.name}</span></div>
+      )}
+      <span class="region">{d.region}</span>
+    </div>
+    <div class="body">
+      <p class="country">{d.country}</p>
+      <H class="name">{d.name}</H>
+      <p class="pos">{note ?? d.positioning}</p>
+      <dl class="facts">
+        {activities.map((a) => (
+          <div><dt>{a.key}</dt><dd>{a.v}<span class="sr-only"> out of 10</span><span aria-hidden="true">/10</span></dd></div>
+        ))}
+        <div class="season"><dt>Best months</dt><dd>{monthLabel}</dd></div>
+      </dl>
+    </div>
+  </a>
+</article>
+<style>
+  .dcard { height: 100%; }
+  .link { display: grid; grid-template-rows: auto 1fr; height: 100%; color: inherit; text-decoration: none; background: var(--shell); border: 1px solid var(--line-soft); transition: border-color 0.4s var(--ease); }
+  .link:hover { border-color: var(--line); }
+  .visual { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--deep-ocean); }
+  .feature .visual { aspect-ratio: 4 / 5; }
+  .visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .link:hover .visual img { transform: scale(1.035); }
+  .art { position: absolute; inset: 0; background: linear-gradient(170deg, #0d3a48, var(--deep-ocean) 60%, #071f28); transition: transform 1.2s var(--ease); }
+  .link:hover .art { transform: scale(1.03); }
+  .art :global(.swell) { opacity: 0.6; }
+  .initial { position: absolute; left: 1.25rem; bottom: 1rem; font-family: var(--font-display); font-style: italic; font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); color: rgba(216, 240, 234, 0.85); line-height: 1; max-width: 85%; }
+  .region { position: absolute; top: 1rem; left: 1rem; font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--seafoam); background: rgba(8, 43, 54, 0.6); padding: 0.3rem 0.55rem; }
+  .body { padding: 1.25rem 1.25rem 1.4rem; display: grid; gap: 0.5rem; align-content: start; }
+  .country { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); }
+  .name { font-family: var(--font-display); font-weight: 500; font-size: var(--step-3); line-height: 1.05; letter-spacing: -0.01em; }
+  .pos { font-size: 0.92rem; color: var(--slate); line-height: 1.55; }
+  .facts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-top: 0.6rem; padding-top: 0.85rem; border-top: 1px solid var(--line-soft); font-size: 0.78rem; }
+  .facts div { display: flex; gap: 0.35rem; }
+  .facts dt { color: var(--slate); }
+  .facts dd { font-weight: 600; color: var(--navy); }
+  .facts .season { flex-basis: 100%; }
+</style>

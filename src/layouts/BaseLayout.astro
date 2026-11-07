@@ -1,0 +1,110 @@
+---
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE, LOCALES } from '../config/site';
+import { pageTitle, breadcrumbLd, organizationLd, websiteLd, type Crumb } from '../utils/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path for the canonical URL; defaults to the current path. */
+  canonicalPath?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  ogImageAlt?: string;
+  crumbs?: Crumb[];
+  jsonLd?: (Record<string, unknown> | null)[];
+  noindex?: boolean;
+  article?: { published: Date; modified: Date; section?: string };
+  /** Hide the visual breadcrumb bar (JSON-LD is still emitted). */
+  hideCrumbBar?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  ogType = 'website',
+  ogImage = SITE.ogImage,
+  ogImageAlt = 'Surf and Dive — luxury ocean holidays, curated around the water',
+  crumbs = [],
+  jsonLd = [],
+  noindex = false,
+  article,
+  hideCrumbBar = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://www.surfanddive.com');
+const fullTitle = pageTitle(title);
+const canonical = new URL(canonicalPath, site).toString();
+const ogImageUrl = new URL(ogImage, site).toString();
+const isHome = canonicalPath === '/';
+
+const structured = [
+  ...(isHome ? [organizationLd(site), websiteLd(site)] : []),
+  ...(crumbs.length ? [breadcrumbLd([{ label: 'Home', href: '/' }, ...crumbs], site)] : []),
+  ...jsonLd.filter(Boolean),
+];
+
+const alternates = LOCALES.filter((l) => l.enabled);
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large" />}
+    {alternates.length > 0 && alternates.map((l) => (
+      <link rel="alternate" hreflang={l.hreflang} href={new URL(`${l.prefix}${canonicalPath}`, site).toString()} />
+    ))}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={canonical} />}
+
+    <meta name="theme-color" content="#082B36" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {article && <meta property="article:published_time" content={article.published.toISOString()} />}
+    {article && <meta property="article:modified_time" content={article.modified.toISOString()} />}
+    {article?.section && <meta property="article:section" content={article.section} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    {structured.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    {crumbs.length > 0 && !hideCrumbBar && <Breadcrumbs crumbs={crumbs} />}
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/site.ts';
+    </script>
+  </body>
+</html>

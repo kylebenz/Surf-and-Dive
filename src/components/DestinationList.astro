@@ -1,0 +1,30 @@
+---
+/** Compact editorial list: destination name, a one-line reason and a score. */
+import type { Destination, Activity } from '../data/types';
+import { score } from '../data/destinations';
+interface Props { items: { d: Destination; note: string }[]; activity?: Activity; label?: string; }
+const { items, activity, label } = Astro.props;
+---
+<ol role="list" class="dlist">
+  {items.map(({ d, note }) => (
+    <li>
+      <a href={`/destinations/${d.slug}/`}>
+        <span class="name">{d.name}</span>
+        <span class="note">{note}</span>
+        {activity && <span class="sc"><span class="sr-only">{label ?? activity} score </span>{score(d, activity)}<span class="of">/10</span></span>}
+      </a>
+    </li>
+  ))}
+</ol>
+<style>
+  .dlist { border-top: 1px solid var(--line); }
+  a { display: grid; grid-template-columns: 1fr auto; gap: 0.25rem 1.5rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
+  @media (min-width: 760px) { a { grid-template-columns: 14rem 1fr auto; align-items: baseline; } }
+  .name { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.1; }
+  .note { font-size: 0.92rem; color: #3d5266; grid-column: 1 / -1; grid-row: 2; }
+  @media (min-width: 760px) { .note { grid-column: auto; grid-row: auto; } }
+  .sc { font-family: var(--font-display); font-size: 1.4rem; color: var(--teal-ink); }
+  .of { font-size: 0.9rem; color: var(--slate); }
+  a:hover .name { color: var(--teal-ink); }
+  :global(.dark) a { border-color: var(--line-dark); }
+</style>

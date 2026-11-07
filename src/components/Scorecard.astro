@@ -1,0 +1,47 @@
+---
+import type { Destination } from '../data/types';
+interface Props { destination: Destination; }
+const { destination: d } = Astro.props;
+const rows = [
+  { label: 'Surf', score: d.surf.score, context: d.surf.best_for.slice(0, 2).join(' · ') },
+  { label: 'Diving', score: d.diving.score, context: d.diving.marine_life.slice(0, 2).join(' · ') },
+  { label: 'Freediving', score: d.freediving.score, context: d.freediving.locations[0] },
+  { label: 'Luxury', score: d.luxury.score, context: d.luxury.stay_types.slice(0, 2).join(' · ') },
+  { label: 'Scenery', score: d.scenery.score, context: d.scenery.landscape.split(/[,.;]/)[0] },
+];
+const descriptor = (s: number) => (s >= 10 ? 'Exceptional' : s >= 9 ? 'Outstanding' : s >= 8 ? 'Excellent' : s >= 7 ? 'Very good' : 'Good');
+---
+<section class="scorecard" aria-labelledby="scorecard-title">
+  <div class="sc-head">
+    <h2 id="scorecard-title" class="eyebrow">Destination scorecard</h2>
+    <p class="note-small">Editorial positioning scores, not objective rankings. Conditions vary by coast, season, swell, tide, weather and operator.</p>
+  </div>
+  <dl class="rows">
+    {rows.map((r) => (
+      <div class="row">
+        <dt>{r.label}</dt>
+        <dd class="meter">
+          <span class="bar" aria-hidden="true"><span style={`width:${r.score * 10}%`}></span></span>
+          <span class="val"><strong>{r.score}</strong><span class="of">/10</span></span>
+          <span class="desc">{descriptor(r.score)} — {r.context}</span>
+        </dd>
+      </div>
+    ))}
+  </dl>
+</section>
+<style>
+  .scorecard { border-top: 1px solid var(--navy); padding-top: 1.25rem; }
+  .sc-head { display: grid; gap: 0.5rem; margin-bottom: 1.25rem; }
+  .sc-head h2 { font-size: 0.75rem; }
+  .rows { display: grid; }
+  .row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; align-items: baseline; padding-block: 0.95rem; border-bottom: 1px solid var(--line); }
+  dt { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; }
+  .meter { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem 1rem; align-items: center; }
+  .bar { height: 2px; background: var(--line); position: relative; }
+  .bar span { position: absolute; inset: 0 auto 0 0; background: var(--ocean-teal); }
+  .val { font-family: var(--font-display); font-size: 1.6rem; line-height: 1; }
+  .val strong { font-weight: 600; }
+  .of { font-size: 1rem; color: var(--slate); }
+  .desc { grid-column: 1 / -1; font-size: 0.82rem; color: var(--slate); }
+  @media (max-width: 480px) { .row { grid-template-columns: 1fr; gap: 0.4rem; } }
+</style>

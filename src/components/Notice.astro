@@ -1,0 +1,37 @@
+---
+interface Props { kind: 'safety' | 'responsible' | 'tip' | 'seasonal'; title?: string; }
+const { kind, title } = Astro.props;
+const defaults = {
+  safety: 'Ocean safety',
+  responsible: 'Responsible ocean travel',
+  tip: 'Travel tip',
+  seasonal: 'Planning guidance, not a guarantee',
+};
+---
+<aside class={`notice ${kind}`} aria-label={title ?? defaults[kind]}>
+  <span class="mark" aria-hidden="true">
+    {kind === 'safety' && <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4" /><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6" /></svg>}
+    {kind === 'responsible' && <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21c-4-3-7-6.5-7-10.5A7 7 0 0 1 12 3.5a7 7 0 0 1 7 7C19 14.5 16 18 12 21z" /><path d="M12 8v8M9 11l3-3 3 3" /></svg>}
+    {kind === 'tip' && <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12c3-4 6-4 9 0s6 4 9 0" /><path d="M3 17c3-4 6-4 9 0s6 4 9 0" opacity=".5" /></svg>}
+    {kind === 'seasonal' && <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="5" width="16" height="15" rx="1" /><path d="M4 10h16M9 3v4M15 3v4" /></svg>}
+  </span>
+  <div class="content">
+    <p class="title">{title ?? defaults[kind]}</p>
+    <div class="text"><slot /></div>
+  </div>
+</aside>
+<style>
+  .notice { display: grid; grid-template-columns: auto 1fr; gap: 1rem; padding: 1.25rem 1.4rem; border: 1px solid var(--line); background: var(--shell); }
+  .notice.safety { border-left: 3px solid var(--coral); }
+  .notice.responsible { border-left: 3px solid var(--emerald); background: #f3f8f5; }
+  .notice.tip { border-left: 3px solid var(--ocean-teal); }
+  .notice.seasonal { border-left: 3px solid var(--slate); background: var(--sand); }
+  .mark { color: var(--teal-ink); padding-top: 0.15rem; }
+  .safety .mark { color: #b5583c; }
+  .responsible .mark { color: #0b7a57; }
+  .title { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.4rem; }
+  .text { font-size: 0.92rem; line-height: 1.6; color: #2c4256; }
+  .text :global(ul) { padding-left: 1.1rem; margin-top: 0.4rem; }
+  .text :global(li + li) { margin-top: 0.25rem; }
+  .text :global(p + p) { margin-top: 0.5rem; }
+</style>

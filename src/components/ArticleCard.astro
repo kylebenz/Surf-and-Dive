@@ -1,0 +1,41 @@
+---
+import SwellArt from './SwellArt.astro';
+import { resolveImage } from '../utils/images';
+import type { CollectionEntry } from 'astro:content';
+import { readingTime } from '../utils/seo';
+interface Props { guide: CollectionEntry<'guides'>; headingLevel?: 'h2' | 'h3'; layout?: 'stacked' | 'row'; }
+const { guide, headingLevel = 'h3', layout = 'stacked' } = Astro.props;
+const H = headingLevel;
+const first = guide.data.images[0];
+const image = first ? resolveImage({ src: first.src, dir: `/images/guides/${guide.id}`, base: 'image-1', alt: first.alt }) : null;
+const mins = readingTime(guide.body ?? '');
+---
+<article class={`acard ${layout}`}>
+  <a href={`/guides/${guide.id}/`}>
+    <div class="visual">
+      {image
+        ? <img src={image.src} srcset={image.srcset} sizes="(min-width: 1000px) 33vw, 100vw" alt={image.alt} loading="lazy" decoding="async" />
+        : <div class="art" aria-hidden="true"><SwellArt seed={guide.id} tone="sand" lines={12} /><span class="num">{String(guide.data.number).padStart(2, '0')}</span></div>}
+    </div>
+    <div class="body">
+      <p class="meta"><span>{guide.data.category}</span><span aria-hidden="true">·</span><span>{mins} min read</span></p>
+      <H class="title">{guide.data.title}</H>
+      <p class="dek">{guide.data.dek}</p>
+    </div>
+  </a>
+</article>
+<style>
+  .acard a { display: grid; gap: 1rem; color: inherit; text-decoration: none; height: 100%; }
+  .row a { grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr); align-items: start; gap: 1.25rem; }
+  .visual { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--sand); border: 1px solid var(--line-soft); }
+  .visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .art { position: absolute; inset: 0; transition: transform 1.2s var(--ease); }
+  a:hover .art, a:hover img { transform: scale(1.03); }
+  .num { position: absolute; right: 1rem; bottom: 0.6rem; font-family: var(--font-display); font-size: 2.4rem; color: var(--slate); opacity: 0.6; line-height: 1; }
+  .meta { display: flex; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-ink); font-weight: 600; }
+  .title { font-family: var(--font-display); font-weight: 500; font-size: var(--step-2); line-height: 1.12; margin-top: 0.35rem; text-wrap: balance; }
+  a:hover .title { color: var(--teal-ink); }
+  .dek { font-size: 0.9rem; color: var(--slate); margin-top: 0.5rem; line-height: 1.55; }
+  .row .title { font-size: var(--step-1); }
+  .row .dek { display: none; }
+</style>

@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import SeasonalGrid from '../../components/SeasonalGrid.astro';
+import DestinationCard from '../../components/DestinationCard.astro';
+import Notice from '../../components/Notice.astro';
+import GuideList from '../../components/GuideList.astro';
+import CTA from '../../components/CTA.astro';
+import { seasons, MONTHS } from '../../data/seasonal';
+import { destinations, getDestination } from '../../data/destinations';
+import { itemListLd } from '../../utils/seo';
+import type { Season } from '../../data/types';
+
+export function getStaticPaths() {
+  return seasons.map((s) => ({ params: { month: s.month }, props: { s } }));
+}
+const { s } = Astro.props as { s: Season };
+const idx = MONTHS.findIndex((m) => m.slug === s.month);
+const prev = MONTHS[(idx + 11) % 12];
+const next = MONTHS[(idx + 1) % 12];
+const pickSlugs = s.picks.map((p) => p.slug);
+const also = destinations.filter((d) => d.best_months.includes(s.month) && !pickSlugs.includes(d.slug));
+const actLabel: Record<string, string> = { surf: 'Surf', dive: 'Diving', freedive: 'Freediving', luxury: 'Luxury', scenery: 'Scenery' };
+const actHref: Record<string, string> = { surf: '/surf/', dive: '/dive/', freedive: '/freediving/', luxury: '/luxury-ocean-holidays/', scenery: '/destinations/' };
+---
+<BaseLayout
+  title={s.seo.title}
+  description={s.seo.meta}
+  crumbs={[{ label: 'Best by Month', href: '/best-by-month/' }, { label: s.name, href: `/best-by-month/${s.month}/` }]}
+  jsonLd={[itemListLd(s.picks.map((p) => ({ name: getDestination(p.slug).name, href: `/destinations/${p.slug}/` })), Astro.site!)]}
+>
+  <Hero size="medium" eyebrow={`${s.name} · ${s.campaign}`} title={s.headline} subtitle={s.angle} seed={`month-${s.month}`}>
+    <a class="btn" href="#picks">See the destinations <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href={`/destinations/?month=${s.month}`}>Filter all destinations</a>
+  </Hero>
+
+  <section class="section" aria-labelledby="ov-title">
+    <div class="container split-layout">
+      <div><span class="eyebrow">{s.name} overview</span><h2 id="ov-title">The ocean in {s.name}</h2></div>
+      <div class="prose">
+        <p class="lede">{s.intro}</p>
+        <h3>Climate and conditions</h3>
+        <p>{s.climate_note}</p>
+        <h3>For European travellers</h3>
+        <p>{s.european_angle}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="picks" class="section bg-sand" aria-labelledby="picks-title">
+    <div class="container">
+      <div class="section-head split">
+        <div><span class="eyebrow">Best-fit destinations</span><h2 id="picks-title" class="mt-1">Where to go in {s.name}</h2></div>
+        <Notice kind="seasonal"><p>Generally favourable, not guaranteed. Conditions vary by coast and year — check current local conditions before booking.</p></Notice>
+      </div>
+      <ol role="list" class="picks">
+        {s.picks.map((p) => {
+          const d = getDestination(p.slug);
+          return (
+            <li class="reveal">
+              <DestinationCard destination={d} note={p.note} />
+              <ul role="list" class="acts" aria-label="Activities this month">
+                {p.activities.map((a) => <li><a href={actHref[a]}>{actLabel[a]}</a></li>)}
+              </ul>
+            </li>
+          );
+        })}
+      </ol>
+      {s.also_note && <p class="also-note">{s.also_note}</p>}
+    </div>
+  </section>
+
+  {also.length > 0 && (
+    <section class="section-tight" aria-labelledby="also-title">
+      <div class="container">
+        <h2 id="also-title" class="h3-like">Also often in season in {s.name}</h2>
+        <ul role="list" class="mini-list">{also.map((d) => <li><a href={`/destinations/${d.slug}/`}>{d.name}</a></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section" aria-labelledby="mg-title">
+    <div class="container">
+      <h2 id="mg-title" style="margin-bottom:2.5rem">Read next</h2>
+      <GuideList ids={s.guides} />
+    </div>
+  </section>
+
+  <nav class="section-tight bg-sand" aria-label="Other months">
+    <div class="container">
+      <div class="pn">
+        <a href={`/best-by-month/${prev.slug}/`} class="text-link">← {prev.name}</a>
+        <a href={`/best-by-month/${next.slug}/`} class="text-link">{next.name} →</a>
+      </div>
+      <div class="mt-2"><SeasonalGrid compact current={s.month} /></div>
+    </div>
+  </nav>
+
+  <CTA seed={`cta-${s.month}`} title="Plan Your Next Ocean Escape" text={`Shortlisted a destination for ${s.name}? Read its full guide for surf, diving, freediving, luxury and planning notes.`} />
+</BaseLayout>
+<style>
+  .picks { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+  .picks > li { display: grid; grid-template-rows: 1fr auto; gap: 0.75rem; }
+  .acts { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .acts a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; padding: 0.25rem 0.6rem; border: 1px solid var(--ocean-teal); color: var(--teal-ink); text-decoration: none; border-radius: 999px; }
+  .acts a:hover { background: var(--ocean-teal); color: var(--shell); }
+  .also-note { margin-top: 2rem; color: #33495c; max-width: 70ch; font-style: italic; }
+  .h3-like { font-size: var(--step-3); }
+  .pn { display: flex; justify-content: space-between; }
+</style>

@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import EditorialSection from '../components/EditorialSection.astro';
+import DestinationGrid from '../components/DestinationGrid.astro';
+import DestinationList from '../components/DestinationList.astro';
+import GuideList from '../components/GuideList.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import { topFor, getDestination } from '../data/destinations';
+import { faqLd, itemListLd } from '../utils/seo';
+
+const best = topFor('luxury', 10);
+const pick = (slug: string, note: string) => ({ d: getDestination(slug), note });
+
+const pillars = [
+  { t: 'Private islands', p: 'Resorts that occupy their own island make privacy and direct water access part of the format.', l: [['maldives', 'Maldives'], ['seychelles', 'Seychelles'], ['fiji', 'Fiji'], ['mozambique', 'Mozambique']] },
+  { t: 'Overwater and lagoon villas', p: 'Steps from the room into the lagoon; the reef as your view and your morning swim.', l: [['french-polynesia', 'French Polynesia'], ['maldives', 'Maldives']] },
+  { t: 'Villas and design hotels', p: 'Space, character and food that make non-ocean days as rewarding as the water.', l: [['bali-nusa-penida', 'Bali'], ['portugal', 'Portugal'], ['sri-lanka', 'Sri Lanka'], ['madeira', 'Madeira']] },
+  { t: 'Boats and charters', p: 'Fewer transfers, direct access to surf or dive sites when conditions are good, small groups.', l: [['mentawai-islands', 'Mentawai Islands'], ['maldives', 'Maldives'], ['philippines', 'Philippines']] },
+  { t: 'Wellness', p: 'Recovery is part of the performance plan: sleep, massage, food and quiet.', l: [['costa-rica', 'Costa Rica'], ['bali-nusa-penida', 'Bali'], ['mauritius', 'Mauritius']] },
+];
+
+const faqs = [
+  { question: 'What makes an ocean holiday “luxury”?', answer: 'On an ocean holiday, the best upgrades improve your relationship with the water: private boat access, an excellent guide, a room steps from the ocean, flexible scheduling and genuinely good food often matter more than room size.' },
+  { question: 'Are five-star resorts always the best choice?', answer: 'No. A five-star label does not automatically mean the ocean experience is excellent. Look at location, access, service, activity quality and the details that matter to your trip.' },
+  { question: 'How long should a long-haul luxury ocean trip be?', answer: 'Seven to ten nights works well for a focused escape; longer trips make more sense when travel is complex or the itinerary combines multiple islands or regions.' },
+];
+---
+<BaseLayout
+  title="Luxury Ocean Holidays | Surf and Dive"
+  description="Luxury ocean holidays where the water is the centre of the trip: private islands, overwater villas, boats, wellness and the destinations that do it best."
+  crumbs={[{ label: 'Luxury', href: '/luxury-ocean-holidays/' }]}
+  jsonLd={[faqLd(faqs), itemListLd(best.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
+>
+  <Hero size="medium" eyebrow="Luxury" title="Luxury Ocean Holidays" subtitle="Private islands, lagoon villas, boats at your disposal and the quiet to recover — luxury that brings you closer to the water, not further from it." seed="luxury-hub">
+    <a class="btn" href="#luxury-dest">Explore luxury destinations <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="/guides/luxury-ocean-travel-worth-paying-for/">What is worth paying for?</a>
+  </Hero>
+
+  <section class="section" aria-labelledby="lux-intro-title">
+    <div class="container split-layout">
+      <div><span class="eyebrow">Luxury, defined by the water</span><h2 id="lux-intro-title">Adventure by day, restoration by evening</h2></div>
+      <div class="prose">
+        <p class="lede">There are beach holidays, and then there are holidays built around the water. On an ocean-first trip, the beach is not just scenery. It determines where you stay, when you travel, how long you stay and what you do each day.</p>
+        <p>Add a beautiful villa, a good dinner, a spa treatment and a little privacy, and you get something better than a luxury beach holiday. You get a luxury ocean holiday — where accommodation, food, design and wellness exist to enhance the time you spend in the sea.</p>
+      </div>
+    </div>
+  </section>
+
+  <EditorialSection id="pillars" eyebrow="What luxury looks like" title="Five ways to do it well" tone="sand" split intro="We describe styles of stay rather than naming properties we have not independently verified.">
+    <ol role="list" class="pillars">
+      {pillars.map((p, i) => (
+        <li class="reveal">
+          <span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{p.t}</h3>
+            <p>{p.p}</p>
+            <ul role="list" class="mini-list">{p.l.map(([s, n]) => <li><a href={`/destinations/${s}/`}>{n}</a></li>)}</ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </EditorialSection>
+
+  <EditorialSection id="luxury-dest" eyebrow="Top-rated for luxury" title="The most refined ocean destinations" intro="Destinations our editors rate as exceptional for the quality of the stay — always alongside the quality of the water." split>
+    <DestinationGrid destinations={best} />
+  </EditorialSection>
+
+  <EditorialSection id="couples" eyebrow="Couples and honeymoons" title="Romance with real ocean experiences" tone="seafoam" split>
+    <DestinationList activity="luxury" label="Luxury" items={[
+      pick('french-polynesia', 'Overwater villas, lagoons and the most cinematic scenery in the Pacific.'),
+      pick('maldives', 'Privacy, polish and reef immersion — easy to divide the day.'),
+      pick('seychelles', 'Granite islands and private-island seclusion.'),
+      pick('mauritius', 'Polished resorts, calm lagoons and service-led luxury.'),
+      pick('bali-nusa-penida', 'Villas, wellness and variety for mixed-interest couples.'),
+    ]} />
+    <a class="text-link mt-2" href="/guides/best-ocean-destinations-for-couples/">Best ocean destinations for couples <span aria-hidden="true">→</span></a>
+  </EditorialSection>
+
+  <EditorialSection id="lux-guides" eyebrow="Guides" title="Luxury ocean planning">
+    <GuideList ids={['luxury-ocean-travel-worth-paying-for', 'how-to-plan-long-haul-luxury-ocean-trip', 'luxury-ocean-escapes-christmas-new-year', 'best-ocean-destinations-for-couples', 'luxury-surf-resorts-vs-surf-charters', 'luxury-ocean-travel-reef-conservation']} />
+  </EditorialSection>
+
+  <section class="section bg-sand"><div class="container narrow"><FAQ faqs={faqs} title="Luxury ocean holiday questions" /></div></section>
+  <CTA seed="lux-cta" />
+</BaseLayout>
+<style>
+  .pillars { border-top: 1px solid var(--line); }
+  .pillars li { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1rem; padding-block: 1.75rem; border-bottom: 1px solid var(--line); }
+  .n { font-family: var(--font-display); font-size: 1.4rem; color: var(--teal-ink); }
+  .pillars h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--step-3); line-height: 1.1; }
+  .pillars p { margin-top: 0.5rem; color: #33495c; max-width: 60ch; }
+</style>

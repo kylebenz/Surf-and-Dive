@@ -1,0 +1,72 @@
+---
+import Logo from './Logo.astro';
+import { SITE, NAV } from '../config/site';
+import { destinations } from '../data/destinations';
+import { MONTHS } from '../data/seasonal';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer dark">
+  <div class="container">
+    <div class="top">
+      <div class="brand-col">
+        <Logo tone="light" />
+        <p class="line">{SITE.footerLine}</p>
+        <a class="btn btn-ghost" href="/destinations/">Explore Destinations <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <nav class="cols" aria-label="Footer">
+        <div>
+          <h2 class="col-title">Explore</h2>
+          <ul role="list">
+            {NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="col-title">Destinations</h2>
+          <ul role="list" class="two">
+            {destinations.map((d) => <li><a href={`/destinations/${d.slug}/`}>{d.name}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h2 class="col-title">By month</h2>
+          <ul role="list" class="two">
+            {MONTHS.map((m) => <li><a href={`/best-by-month/${m.slug}/`}>{m.name}</a></li>)}
+          </ul>
+          <h2 class="col-title spaced">From Europe</h2>
+          <ul role="list">
+            <li><a href="/europe/">European travel planning</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="col-title">Standards</h2>
+          <ul role="list">
+            <li><a href="/editorial-standards/">Editorial standards</a></li>
+            <li><a href="/responsible-travel/">Responsible travel</a></li>
+            <li><a href="/ocean-safety/">Ocean safety</a></li>
+            <li><a href="/privacy/">Privacy</a></li>
+            <li><a href="/terms/">Terms</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="bottom">
+      <p>© {year} {SITE.name}. Independent editorial guidance. Ocean conditions, seasons and wildlife encounters are never guaranteed — always check current local conditions before you travel.</p>
+    </div>
+  </div>
+</footer>
+<style>
+  .site-footer { padding-block: clamp(3.5rem, 3rem + 3vw, 6rem) 2rem; }
+  .top { display: grid; gap: 3rem; }
+  @media (min-width: 1000px) { .top { grid-template-columns: minmax(0, 0.8fr) minmax(0, 2.2fr); gap: 4rem; } }
+  .brand-col { display: grid; gap: 1.25rem; align-content: start; justify-items: start; }
+  .line { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.25; max-width: 22ch; color: var(--on-dark); }
+  .cols { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); }
+  .col-title { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--seafoam); margin-bottom: 1rem; }
+  .col-title.spaced { margin-top: 2rem; }
+  ul { display: grid; gap: 0.45rem; font-size: 0.9rem; }
+  ul.two { grid-template-columns: 1fr; }
+  a { color: var(--on-dark-muted); text-decoration: none; }
+  a:hover { color: var(--on-dark); text-decoration: underline; }
+  .bottom { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line-dark); font-size: 0.78rem; color: var(--on-dark-muted); max-width: 90ch; }
+</style>

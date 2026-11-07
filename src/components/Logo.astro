@@ -1,0 +1,28 @@
+---
+interface Props { tone?: 'dark' | 'light'; }
+const { tone = 'dark' } = Astro.props;
+---
+<span class={`logo tone-${tone}`} aria-hidden="true">
+  <svg viewBox="0 0 40 24" width="34" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+    <path d="M2 9c4.5-5 8.5-5 13 0s8.5 5 13 0 7-4.5 10-2" />
+    <path d="M2 16h36" opacity=".45" />
+    <path d="M20 16v6" opacity=".45" />
+  </svg>
+  <span class="word">Surf and Dive</span>
+</span>
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--deep-ocean); }
+  .logo.tone-light { color: var(--on-dark); }
+  @media (max-width: 420px) { .word { font-size: 1.08rem; letter-spacing: 0.1em; } .logo svg { width: 28px; } .logo { gap: 0.45rem; } }
+  .logo svg { color: var(--ocean-teal); flex: none; }
+  .logo.tone-light svg { color: var(--seafoam); }
+  .word {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.32rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+  }
+</style>

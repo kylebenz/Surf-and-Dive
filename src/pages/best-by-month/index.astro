@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SeasonalGrid from '../../components/SeasonalGrid.astro';
+import Notice from '../../components/Notice.astro';
+import GuideList from '../../components/GuideList.astro';
+import CTA from '../../components/CTA.astro';
+import { seasons } from '../../data/seasonal';
+import { itemListLd } from '../../utils/seo';
+---
+<BaseLayout
+  title="Best Ocean Destinations by Month | Surf and Dive"
+  description="Where to surf, dive and freedive in every month of the year — seasonal planning guidance for European travellers, from winter sun to autumn swell."
+  crumbs={[{ label: 'Best by Month', href: '/best-by-month/' }]}
+  jsonLd={[itemListLd(seasons.map((s) => ({ name: s.headline, href: `/best-by-month/${s.month}/` })), Astro.site!)]}
+>
+  <header class="page-intro">
+    <div class="container">
+      <span class="eyebrow">Seasonal planner</span>
+      <h1>Travel by Season</h1>
+      <p class="lede">Find the right ocean destination for the month you want to travel. Compare surf seasons, diving conditions, weather and European holiday timing before you book.</p>
+    </div>
+  </header>
+  <section class="section-tight bg-sand" aria-label="Months">
+    <div class="container"><SeasonalGrid /></div>
+  </section>
+  <section class="section" aria-labelledby="year-title">
+    <div class="container">
+      <h2 id="year-title">The ocean year at a glance</h2>
+      <ol role="list" class="year">
+        {seasons.map((s) => (
+          <li>
+            <a href={`/best-by-month/${s.month}/`}>
+              <span class="m">{s.name}</span>
+              <span class="c">{s.campaign}</span>
+              <span class="a">{s.angle}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-3" style="max-width:820px">
+        <Notice kind="seasonal"><p>Seasonal information is planning guidance, not a guarantee. Conditions generally follow these patterns but vary by region, coast and year — always check current local conditions.</p></Notice>
+      </div>
+    </div>
+  </section>
+  <section class="section bg-sand" aria-labelledby="sg-title">
+    <div class="container">
+      <h2 id="sg-title" style="margin-bottom:2.5rem">Seasonal guides</h2>
+      <GuideList ids={['best-winter-sun-surf-holidays-europe', 'best-summer-surf-holidays-europeans', 'best-autumn-ocean-holidays-europe', 'luxury-ocean-escapes-christmas-new-year', 'where-to-surf-january-luxury-ocean-escapes', 'where-to-dive-february-warm-water-luxury']} />
+    </div>
+  </section>
+  <CTA seed="month-hub" />
+</BaseLayout>
+<style>
+  .year { margin-top: 2.5rem; border-top: 1px solid var(--line); }
+  .year a { display: grid; gap: 0.25rem 2rem; padding-block: 1.1rem; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
+  @media (min-width: 800px) { .year a { grid-template-columns: 10rem 14rem 1fr; align-items: baseline; } }
+  .m { font-family: var(--font-display); font-size: var(--step-2); }
+  .c { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--teal-ink); }
+  .a { color: #33495c; }
+  .year a:hover .m { color: var(--teal-ink); }
+</style>

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import { comparisons } from '../../data/comparisons';
+import { getDestination } from '../../data/destinations';
+import { itemListLd } from '../../utils/seo';
+const criteria = ['Surf', 'Diving', 'Freediving', 'Luxury', 'Water', 'Weather', 'Accessibility', 'Privacy', 'Couples', 'Families', 'Value', 'Overall fit'];
+---
+<BaseLayout
+  title="Compare Luxury Ocean Destinations | Surf and Dive"
+  description="Side-by-side comparisons of luxury surf and dive destinations across twelve criteria — Maldives vs Bali, Fiji vs French Polynesia, Azores vs Madeira and more."
+  crumbs={[{ label: 'Compare', href: '/compare/' }]}
+  jsonLd={[itemListLd(comparisons.map((c) => ({ name: c.title, href: `/compare/${c.slug}/` })), Astro.site!)]}
+>
+  <header class="page-intro">
+    <div class="container">
+      <span class="eyebrow">Decision support</span>
+      <h1>Compare Ocean Escapes</h1>
+      <p class="lede">Comparisons should be genuinely useful rather than keyword-stuffed. Every pairing uses the same twelve criteria — and none declares a universal winner. Instead, each explains which destination is better for which traveller.</p>
+      <ul role="list" class="tag-list crit">{criteria.map((c) => <li class="tag">{c}</li>)}</ul>
+    </div>
+  </header>
+  <section class="section-tight bg-sand" aria-labelledby="pairs">
+    <div class="container">
+      <h2 id="pairs" class="sr-only">Comparisons</h2>
+      <ul role="list" class="pairs">
+        {comparisons.map((c) => {
+          const a = getDestination(c.a); const b = getDestination(c.b);
+          return (
+            <li class="reveal">
+              <a href={`/compare/${c.slug}/`}>
+                <span class="names"><span>{c.a_label ?? a.name}</span><em>vs</em><span>{c.b_label ?? b.name}</span></span>
+                <span class="intro">{c.short_answer}</span>
+                <span class="text-link">Compare <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+  <CTA seed="compare-hub" title="Still deciding?" text="Filter all twenty destinations by activity, month and traveller type." primary={{ label: 'Explore Destinations', href: '/destinations/' }} secondary={{ label: 'Browse by Month', href: '/best-by-month/' }} />
+</BaseLayout>
+<style>
+  .crit { margin-top: 2rem; }
+  .pairs { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); }
+  .pairs a { display: grid; gap: 1rem; align-content: start; height: 100%; padding: 2rem; background: var(--shell); border: 1px solid var(--line-soft); color: inherit; text-decoration: none; transition: border-color 0.3s var(--ease); }
+  .pairs a:hover { border-color: var(--ocean-teal); }
+  .names { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.05; display: flex; flex-wrap: wrap; gap: 0 0.5rem; align-items: baseline; }
+  .names em { font-size: 1rem; color: var(--teal-ink); }
+  .intro { color: #33495c; font-size: 0.95rem; }
+  .pairs .text-link { justify-self: start; }
+</style>

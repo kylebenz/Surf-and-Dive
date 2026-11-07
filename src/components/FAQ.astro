@@ -1,0 +1,32 @@
+---
+interface Props { faqs: { question: string; answer: string }[]; title?: string; id?: string; }
+const { faqs, title = 'Frequently asked questions', id = 'faq' } = Astro.props;
+---
+{faqs.length > 0 && (
+  <section class="faq" aria-labelledby={`${id}-title`}>
+    <h2 id={`${id}-title`}>{title}</h2>
+    <div class="items">
+      {faqs.map((f) => (
+        <details>
+          <summary><h3 class="q">{f.question}</h3><span class="icon" aria-hidden="true"></span></summary>
+          <div class="a"><p>{f.answer}</p></div>
+        </details>
+      ))}
+    </div>
+  </section>
+)}
+<style>
+  .faq h2 { font-size: var(--step-4); margin-bottom: 2rem; }
+  .items { border-top: 1px solid var(--line); }
+  details { border-bottom: 1px solid var(--line); }
+  summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.3rem 0; cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+  .q { font-size: var(--step-1); font-weight: 500; }
+  .icon { position: relative; flex: none; width: 16px; height: 16px; }
+  .icon::before, .icon::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; background: var(--ocean-teal); transition: transform 0.35s var(--ease); }
+  .icon::after { transform: rotate(90deg); }
+  details[open] .icon::after { transform: rotate(0deg); }
+  .a { padding-bottom: 1.5rem; max-width: 70ch; color: var(--navy); }
+  .a p { color: #2c4256; }
+  summary:hover .q { color: var(--teal-ink); }
+</style>

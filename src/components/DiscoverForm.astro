@@ -1,0 +1,58 @@
+---
+/**
+ * Editorial discovery entry point. A plain GET form to /destinations/ so it
+ * works without JavaScript; the destination hub reads the parameters and
+ * applies the matching filters.
+ */
+import { MONTHS } from '../data/seasonal';
+interface Props { tone?: 'light' | 'dark'; }
+const { tone = 'light' } = Astro.props;
+const activities = [
+  { v: 'surf', l: 'Surf' },
+  { v: 'dive', l: 'Diving' },
+  { v: 'freedive', l: 'Freediving' },
+  { v: 'luxury', l: 'Luxury' },
+  { v: 'winter-sun', l: 'Winter Sun' },
+];
+---
+<form class={`discover t-${tone}`} action="/destinations/" method="get">
+  <fieldset>
+    <legend>What are you looking for?</legend>
+    <div class="opts">
+      {activities.map((a, i) => (
+        <label class="opt">
+          <input type="radio" name="focus" value={a.v} checked={i === 0} />
+          <span>{a.l}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+  <div class="row">
+    <label class="field">
+      <span class="lbl">When are you travelling?</span>
+      <select name="month">
+        <option value="">Any month</option>
+        {MONTHS.map((m) => <option value={m.slug}>{m.name}</option>)}
+      </select>
+    </label>
+    <button class="btn" type="submit">Find your escape <span class="arrow" aria-hidden="true">→</span></button>
+  </div>
+</form>
+<style>
+  .discover { display: grid; gap: 1.75rem; }
+  fieldset { border: 0; padding: 0; min-width: 0; }
+  legend, .lbl { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.9rem; display: block; }
+  .opts { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .opt { position: relative; }
+  .opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .opt span { display: inline-flex; align-items: center; min-height: 44px; padding: 0.55rem 1.1rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.92rem; transition: all 0.25s var(--ease); background: var(--shell); }
+  .opt input:checked + span { background: var(--deep-ocean); color: var(--shell); border-color: var(--deep-ocean); }
+  .opt input:focus-visible + span { outline: 2px solid var(--ocean-teal); outline-offset: 2px; }
+  .opt:hover span { border-color: var(--navy); }
+  .row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; }
+  .field { flex: 1 1 240px; display: grid; }
+  select { min-height: 48px; padding: 0.6rem 2.5rem 0.6rem 0.9rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--shell) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23102A43' stroke-width='1.4'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 1rem center; appearance: none; }
+  .t-dark legend, .t-dark .lbl { color: var(--seafoam); }
+  .t-dark .opt span { background: transparent; border-color: var(--line-dark); color: var(--on-dark); }
+  .t-dark .opt input:checked + span { background: var(--shell); color: var(--deep-ocean); border-color: var(--shell); }
+</style>

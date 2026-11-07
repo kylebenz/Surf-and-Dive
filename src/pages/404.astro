@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SwellArt from '../components/SwellArt.astro';
+---
+<BaseLayout title="Lost at Sea | Surf and Dive" description="The page you’re looking for has drifted beyond the horizon." noindex>
+  <section class="lost dark">
+    <div class="art" aria-hidden="true"><SwellArt seed="lost-at-sea" lines={20} /></div>
+    <div class="container inner">
+      <span class="eyebrow">404</span>
+      <h1>Lost at Sea?</h1>
+      <p>The page you’re looking for has drifted beyond the horizon.</p>
+      <div class="btn-row">
+        <a class="btn" href="/destinations/">Explore Destinations <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="/">Return home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .lost { position: relative; overflow: hidden; isolation: isolate; min-height: min(80svh, 720px); display: grid; align-items: center; }
+  .art { position: absolute; inset: 0; z-index: -1; opacity: 0.5; }
+  .inner { display: grid; gap: 1.25rem; justify-items: start; padding-block: 5rem; }
+  h1 { color: var(--on-dark); }
+  p { font-size: var(--step-1); color: #cfe0de; max-width: 40ch; }
+</style>

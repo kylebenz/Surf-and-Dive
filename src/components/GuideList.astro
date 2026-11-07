@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from './ArticleCard.astro';
+interface Props { ids: string[]; }
+const { ids } = Astro.props;
+const all = await getCollection('guides');
+const guides = ids.map((id) => all.find((g) => g.id === id)).filter((g): g is NonNullable<typeof g> => Boolean(g));
+---
+<ul role="list" class="grid grid-3">
+  {guides.map((g) => <li class="reveal"><ArticleCard guide={g} /></li>)}
+</ul>

@@ -1,0 +1,42 @@
+---
+import { MONTHS, seasons } from '../data/seasonal';
+import { getDestination } from '../data/destinations';
+interface Props { compact?: boolean; current?: string; }
+const { compact = false, current } = Astro.props;
+---
+<ol role="list" class={`months ${compact ? 'compact' : ''}`}>
+  {MONTHS.map((m, i) => {
+    const s = seasons[i];
+    const names = s.picks.slice(0, compact ? 3 : 4).map((p) => getDestination(p.slug).name);
+    return (
+      <li data-month={m.slug} class:list={[{ active: current === m.slug }]}>
+        <a href={`/best-by-month/${m.slug}/`} aria-current={current === m.slug ? 'page' : undefined}>
+          <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <span class="name">{m.name}</span>
+          <span class="campaign">{s.campaign}</span>
+          {!compact && <span class="dests">{names.join(' · ')}</span>}
+          <span class="now-badge">This month</span>
+        </a>
+      </li>
+    );
+  })}
+</ol>
+<style>
+  .months { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .compact { grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); }
+  li { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  a { position: relative; display: grid; gap: 0.3rem; align-content: start; height: 100%; padding: 1.25rem 1.25rem 1.4rem; color: inherit; text-decoration: none; transition: background 0.35s var(--ease); min-height: 44px; }
+  a:hover { background: var(--shell); }
+  .bg-sand a:hover { background: #efe8dc; }
+  .num { font-size: 0.7rem; color: var(--slate); letter-spacing: 0.1em; }
+  .name { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.1; }
+  .campaign { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--teal-ink); }
+  .dests { font-size: 0.82rem; color: var(--slate); margin-top: 0.4rem; line-height: 1.5; }
+  .now-badge { display: none; position: absolute; top: 1.1rem; right: 1rem; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--deep-ocean); background: var(--seafoam); padding: 0.2rem 0.45rem; }
+  :global(li.is-now) .now-badge { display: inline-block; }
+  .active a { background: var(--deep-ocean); color: var(--on-dark); }
+  .active .campaign { color: var(--seafoam); }
+  .active .num, .active .dests { color: var(--on-dark-muted); }
+  .compact a { padding: 1rem; }
+  .compact .name { font-size: var(--step-1); font-family: var(--font-display); }
+</style>

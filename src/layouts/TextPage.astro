@@ -1,0 +1,27 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { SITE } from '../config/site';
+import { formatDate } from '../utils/seo';
+interface Props { title: string; seoTitle: string; description: string; eyebrow: string; lede: string; path: string; updated?: string; noindex?: boolean; }
+const { title, seoTitle, description, eyebrow, lede, path, updated = SITE.lastReviewed, noindex } = Astro.props;
+---
+<BaseLayout title={seoTitle} description={description} crumbs={[{ label: title, href: path }]} noindex={noindex}>
+  <header class="page-intro">
+    <div class="container narrow">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>{title}</h1>
+      <p class="lede">{lede}</p>
+      <p class="meta-row" style="margin-top:1.5rem">Last updated <time datetime={updated}>{formatDate(updated)}</time></p>
+    </div>
+  </header>
+  <section class="section-tight text-body">
+    <div class="container narrow">
+      <div class="prose"><slot /></div>
+    </div>
+  </section>
+  <slot name="after" />
+</BaseLayout>
+<style>
+  .text-body { padding-top: 0; padding-bottom: var(--section); }
+  .text-body :global(.prose) { max-width: 72ch; }
+</style>

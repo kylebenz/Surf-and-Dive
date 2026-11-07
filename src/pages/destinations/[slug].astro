@@ -1,0 +1,454 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Scorecard from '../../components/Scorecard.astro';
+import DestinationImagePlaceholder from '../../components/DestinationImagePlaceholder.astro';
+import DestinationGrid from '../../components/DestinationGrid.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTA from '../../components/CTA.astro';
+import Notice from '../../components/Notice.astro';
+import { destinations, getDestination } from '../../data/destinations';
+import { MONTHS } from '../../data/seasonal';
+import { comparisons } from '../../data/comparisons';
+import { slotLabel } from '../../data/destinations/_images';
+import { resolveImage } from '../../utils/images';
+import { faqLd, absoluteUrl } from '../../utils/seo';
+import { SITE } from '../../config/site';
+import type { Destination } from '../../data/types';
+
+export function getStaticPaths() {
+  return destinations.map((d) => ({ params: { slug: d.slug }, props: { d } }));
+}
+
+const { d } = Astro.props as { d: Destination };
+const site = Astro.site!;
+const heroSlot = d.images.find((i) => i.type === 'hero')!;
+const heroImage = resolveImage({ src: heroSlot.src, dir: `/images/destinations/${d.slug}`, base: 'hero', alt: heroSlot.alt });
+
+const allGuides = await getCollection('guides');
+const relatedGuides = d.related_articles.map((id) => allGuides.find((g) => g.id === id)).filter(Boolean) as typeof allGuides;
+const relatedDests = d.related_destinations.map(getDestination);
+const destComparisons = comparisons.filter((c) => c.a === d.slug || c.b === d.slug || c.b_also?.includes(d.slug));
+
+const levelLabel = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' } as const;
+const profileLabel: Record<string, string> = {
+  couples: 'Couples', honeymoon: 'Honeymoon', family: 'Families', solo: 'Solo travellers', 'active-luxury': 'Active luxury',
+  'serious-surfer': 'Serious surfers', diver: 'Divers', freediver: 'Freedivers', 'winter-sun': 'Winter sun',
+};
+
+const toc = [
+  ['overview', 'Overview'], ['surf', 'Surf'], ['diving', 'Diving'], ['freediving', 'Freediving'], ['marine-life', 'Marine life'],
+  ['luxury', 'Luxury'], ['best-time', 'Best time'], ['who', 'Who it’s for'], ['itinerary', 'Itinerary'], ['planning', 'Planning'], ['gallery', 'Gallery'], ['faq', 'FAQ'],
+];
+
+const realImages = d.images
+  .map((img) => ({ img, r: resolveImage({ src: img.src, dir: `/images/destinations/${d.slug}`, base: img.type === 'human-experience' ? 'experience' : img.type === 'luxury-stay' ? 'luxury' : img.type, alt: img.alt }) }))
+  .filter((x) => x.r && x.img.alt);
+
+const touristDestination = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristDestination',
+  name: d.name,
+  description: d.overview,
+  url: absoluteUrl(`/destinations/${d.slug}/`, site),
+  touristType: d.traveller_profiles.map((p) => profileLabel[p]),
+  containedInPlace: { '@type': 'Country', name: d.country },
+  ...(realImages.length ? { image: realImages.map((x) => ({ '@type': 'ImageObject', url: absoluteUrl(x.r!.src, site), caption: x.img.caption ?? x.img.alt, ...(x.img.credit ? { creditText: x.img.credit } : {}) })) } : {}),
+  publisher: { '@type': 'Organization', name: SITE.name, url: absoluteUrl('/', site) },
+};
+---
+<BaseLayout
+  title={d.seo.title}
+  description={d.seo.meta}
+  crumbs={[{ label: 'Destinations', href: '/destinations/' }, { label: d.name, href: `/destinations/${d.slug}/` }]}
+  jsonLd={[touristDestination, faqLd(d.faqs)]}
+  ogImage={heroImage?.src}
+  ogImageAlt={heroImage?.alt || undefined}
+>
+  <Hero
+    eyebrow={`${d.region} · ${d.country}`}
+    title={d.hero_headline}
+    subtitle={d.hero_subheadline}
+    image={heroImage}
+    seed={d.slug}
+    slotLabel={slotLabel('hero')}
+  >
+    <a class="btn" href="#best-time">Discover the best season <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="#overview">Read the guide</a>
+  </Hero>
+
+  <nav class="toc" aria-label="On this page">
+    <div class="container">
+      <ul role="list">
+        {toc.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Introduction + scorecard -->
+  <section id="overview" class="section" aria-labelledby="overview-title">
+    <div class="container two-col">
+      <div class="main-col">
+        <span class="eyebrow">Destination guide</span>
+        <h2 id="overview-title" class="mt">Why {d.displayName}</h2>
+        <p class="lede positioning">{d.positioning}</p>
+        <div class="prose overview">
+          <p>{d.overview}</p>
+        </div>
+        <h3 class="sub-h" id="why-visit">Why visit</h3>
+        <ol role="list" class="why">
+          {d.why_visit.map((w, i) => <li><span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><p>{w}</p></li>)}
+        </ol>
+      </div>
+      <aside class="side-col" aria-label={`${d.name} at a glance`}>
+        <Scorecard destination={d} />
+        <dl class="facts">
+          <div><dt>Region</dt><dd>{d.region}</dd></div>
+          <div><dt>Core zones</dt><dd>{d.core_zones.join(', ')}</dd></div>
+          <div><dt>Best for</dt><dd>{d.best_audience}</dd></div>
+          <div><dt>Recommended stay</dt><dd>{d.recommended_duration}</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Surf -->
+  <section id="surf" class="section bg-sand" aria-labelledby="surf-title">
+    <div class="container feature">
+      <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="surf" aspect="4 / 5" /></div>
+      <div class="feature-text">
+        <span class="eyebrow">Surf · {d.surf.score}/10</span>
+        <h2 id="surf-title" class="mt">Surfing in {d.displayName}</h2>
+        <p class="body-copy">{d.surf.notes}</p>
+        <dl class="spec">
+          <div><dt>Breaks</dt><dd><ul role="list" class="tag-list">{d.surf.spots.map((s) => <li class="tag">{s}</li>)}</ul></dd></div>
+          <div><dt>Skill levels</dt><dd>{d.surf.levels.map((l) => levelLabel[l]).join(' · ')}</dd></div>
+          <div><dt>Best for</dt><dd>{d.surf.best_for.join(' · ')}</dd></div>
+          <div><dt>Season</dt><dd>{d.surf.season}</dd></div>
+        </dl>
+        <a class="text-link" href="/surf/">Compare luxury surf destinations <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diving -->
+  <section id="diving" class="section" aria-labelledby="diving-title">
+    <div class="container feature reverse">
+      <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="dive" aspect="4 / 5" /></div>
+      <div class="feature-text">
+        <span class="eyebrow">Diving · {d.diving.score}/10</span>
+        <h2 id="diving-title" class="mt">Diving in {d.displayName}</h2>
+        <p class="body-copy">{d.diving.notes}</p>
+        <dl class="spec">
+          <div><dt>Signature sites</dt><dd><ul role="list" class="tag-list">{d.diving.sites.map((s) => <li class="tag">{s}</li>)}</ul></dd></div>
+          <div><dt>Season</dt><dd>{d.diving.season}</dd></div>
+        </dl>
+        <a class="text-link" href="/dive/">Compare luxury dive destinations <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Freediving -->
+  <section id="freediving" class="section bg-sand" aria-labelledby="freediving-title">
+    <div class="container feature">
+      <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="freedive" aspect="4 / 5" /></div>
+      <div class="feature-text">
+        <span class="eyebrow">Freediving · {d.freediving.score}/10</span>
+        <h2 id="freediving-title" class="mt">Freediving and underwater exploration</h2>
+        <p class="body-copy">{d.freediving.notes}</p>
+        <dl class="spec">
+          <div><dt>Where</dt><dd><ul role="list" class="tag-list">{d.freediving.locations.map((s) => <li class="tag">{s}</li>)}</ul></dd></div>
+        </dl>
+        <Notice kind="safety">
+          <p>Never freedive alone. Train with qualified instructors, use a trained buddy, avoid hyperventilation and never compete with depth or breath-hold. <a href="/guides/ocean-safety-freediving-buddy-systems/">Read our freediving safety guide</a>.</p>
+        </Notice>
+        <a class="text-link" href="/freediving/">Explore freediving holidays <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marine life -->
+  <section id="marine-life" class="section" aria-labelledby="marine-title">
+    <div class="container feature reverse">
+      <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="marine-life" aspect="4 / 5" /></div>
+      <div class="feature-text">
+        <span class="eyebrow">Marine life</span>
+        <h2 id="marine-title" class="mt">What lives in the water</h2>
+        <ul role="list" class="species">
+          {d.diving.marine_life.map((m) => <li>{m}</li>)}
+        </ul>
+        <p class="body-copy">{d.marine_life_notes}</p>
+        <Notice kind="responsible">
+          <p>Never touch coral or marine wildlife, never feed or chase animals, and follow marine-protected-area rules. Choose operators who put animal welfare first. <a href="/responsible-travel/">Our responsible travel principles</a>.</p>
+        </Notice>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury -->
+  <section id="luxury" class="section dark" aria-labelledby="luxury-title">
+    <div class="container feature">
+      <div class="feature-media reveal"><DestinationImagePlaceholder destination={d} type="luxury-stay" aspect="4 / 5" /></div>
+      <div class="feature-text">
+        <span class="eyebrow">Luxury · {d.luxury.score}/10</span>
+        <h2 id="luxury-title" class="mt">The luxury experience</h2>
+        <p class="lede light">{d.luxury.angle}</p>
+        <div class="lux-cols">
+          <div>
+            <h3 class="mini-h">Where to stay</h3>
+            <ul role="list" class="dash">{d.luxury.stay_types.map((s) => <li>{s}</li>)}</ul>
+          </div>
+          <div>
+            <h3 class="mini-h">Experiences</h3>
+            <ul role="list" class="dash">{d.luxury.experiences.map((s) => <li>{s}</li>)}</ul>
+          </div>
+        </div>
+        <p class="note-small">Surf and Dive does not take payment for recommendations. We describe accommodation types rather than naming properties we have not independently verified.</p>
+        <a class="text-link" href="/luxury-ocean-holidays/">Explore luxury ocean holidays <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best time + seasonal conditions -->
+  <section id="best-time" class="section" aria-labelledby="best-time-title">
+    <div class="container">
+      <div class="section-head split">
+        <div>
+          <span class="eyebrow">Best time to visit</span>
+          <h2 id="best-time-title" class="mt">When to go</h2>
+        </div>
+        <p class="lede">{d.european_seasonal_angle}</p>
+      </div>
+      <ol role="list" class="calendar" aria-label={`Typically favoured months for ${d.displayName}`}>
+        {MONTHS.map((m) => {
+          const good = d.best_months.includes(m.slug);
+          return (
+            <li class:list={[{ good }]} data-month={m.slug}>
+              <a href={`/best-by-month/${m.slug}/`}>
+                <span class="mname">{m.short}</span>
+                <span class="mstate">{good ? 'Favoured' : '—'}</span>
+                <span class="sr-only">{good ? `${m.name}: typically a favoured month` : `${m.name}: not among the typically favoured months`}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+      <h3 class="sub-h" id="seasonal-conditions">Seasonal conditions</h3>
+      <dl class="conditions">
+        {d.seasonal_conditions.map((c) => <div><dt>{c.label}</dt><dd>{c.detail}</dd></div>)}
+      </dl>
+      <Notice kind="seasonal">
+        <p>Seasonal patterns are planning guidance, not guarantees. Conditions vary by coast, swell, wind, tide and year — always check current local conditions and operator advice before you book.</p>
+      </Notice>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section id="who" class="section bg-seafoam" aria-labelledby="who-title">
+    <div class="container">
+      <div class="section-head split">
+        <div><span class="eyebrow">Traveller fit</span><h2 id="who-title" class="mt">Who {d.displayName} is for</h2></div>
+        <ul role="list" class="tag-list">{d.traveller_profiles.map((p) => <li class="tag">{profileLabel[p]}</li>)}</ul>
+      </div>
+      <dl class="audience">
+        {d.audience_notes.map((a) => <div class:list={[{ not: a.profile.startsWith('Not ideal') }]}><dt>{a.profile}</dt><dd>{a.detail}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Itinerary -->
+  <section id="itinerary" class="section" aria-labelledby="itin-title">
+    <div class="container narrowish">
+      <span class="eyebrow">Sample itinerary</span>
+      <h2 id="itin-title" class="mt">A sample ocean itinerary</h2>
+      <p class="muted itin-note">An illustrative shape for a first trip — adjust around swell, visibility and your own pace. Always leave flexibility for the ocean.</p>
+      <ol role="list" class="itinerary">
+        {d.itinerary.map((day) => (
+          <li class="reveal">
+            <span class="days">{day.days}</span>
+            <div><h3>{day.title}</h3><p>{day.detail}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Planning -->
+  <section id="planning" class="section bg-sand" aria-labelledby="planning-title">
+    <div class="container two-col planning">
+      <div>
+        <span class="eyebrow">Planning information</span>
+        <h2 id="planning-title" class="mt">Before you book</h2>
+        <p class="lede">{d.recommended_duration}</p>
+      </div>
+      <ul role="list" class="checklist">
+        {d.planning_notes.map((n) => <li>{n}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="section" aria-labelledby="gallery-title">
+    <div class="container">
+      <div class="section-head split">
+        <div><span class="eyebrow">Image storytelling</span><h2 id="gallery-title" class="mt">{d.name} in pictures</h2></div>
+        <p class="muted">Coastline, people, culture and the moment that defines the destination — the ocean as protagonist.</p>
+      </div>
+      <div class="gallery">
+        <div class="g1 reveal"><DestinationImagePlaceholder destination={d} type="landscape" aspect="16 / 10" sizes="(min-width: 1000px) 66vw, 100vw" /></div>
+        <div class="g2 reveal"><DestinationImagePlaceholder destination={d} type="human-experience" aspect="4 / 5" sizes="(min-width: 1000px) 33vw, 100vw" /></div>
+        <div class="g3 reveal"><DestinationImagePlaceholder destination={d} type="culture" aspect="4 / 5" sizes="(min-width: 1000px) 33vw, 100vw" /></div>
+        <div class="g4 reveal"><DestinationImagePlaceholder destination={d} type="signature" aspect="16 / 10" sizes="(min-width: 1000px) 66vw, 100vw" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-sand" aria-label="Frequently asked questions">
+    <div class="container narrowish"><FAQ faqs={d.faqs} title={`${d.name}: frequently asked questions`} /></div>
+  </section>
+
+  <!-- Related -->
+  <section class="section" aria-labelledby="related-title">
+    <div class="container">
+      <div class="section-head split">
+        <div><span class="eyebrow">Keep exploring</span><h2 id="related-title" class="mt">Related destinations</h2></div>
+        <p class="muted">Similar water, a similar season or a natural alternative to {d.displayName}.</p>
+      </div>
+      <DestinationGrid destinations={relatedDests} />
+      {destComparisons.length > 0 && (
+        <div class="comparisons">
+          <h3 class="mini-h dark-text">Compare</h3>
+          <ul role="list">
+            {destComparisons.map((c) => <li><a class="text-link" href={`/compare/${c.slug}/`}>{c.title} <span aria-hidden="true">→</span></a></li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section bg-sand" aria-labelledby="guides-title">
+    <div class="container">
+      <div class="section-head"><div><span class="eyebrow">Editorial</span><h2 id="guides-title" class="mt">Related guides</h2></div></div>
+      <ul role="list" class="grid grid-3">
+        {relatedGuides.map((g) => <li><ArticleCard guide={g} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CTA
+    seed={`${d.slug}-cta`}
+    title="Plan Your Next Ocean Escape"
+    text={`Ready to plan ${d.displayName}? Check the best months, compare alternatives and read our planning guides before you book.`}
+    primary={{ label: 'Browse by Month', href: '/best-by-month/' }}
+    secondary={{ label: 'Explore Destinations', href: '/destinations/' }}
+  />
+
+  <p class="container updated note-small">Last reviewed {new Date(SITE.lastReviewed).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })} by the {SITE.editor}. Operational details change — please verify access rules, regulations and conditions before travel. See our <a href="/editorial-standards/">editorial standards</a>.</p>
+</BaseLayout>
+
+<style>
+  .mt { margin-top: 0.9rem; }
+  .toc { position: sticky; top: var(--header-h); z-index: 20; background: rgba(250, 250, 247, 0.96); border-bottom: 1px solid var(--line-soft); backdrop-filter: blur(6px); }
+  .toc ul { display: flex; gap: 1.5rem; overflow-x: auto; scrollbar-width: none; padding-block: 0.85rem; }
+  .toc ul::-webkit-scrollbar { display: none; }
+  .toc a { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--slate); text-decoration: none; white-space: nowrap; }
+  .toc a:hover { color: var(--navy); }
+
+  .two-col { display: grid; grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+  @media (min-width: 1000px) { .two-col { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 5rem; } }
+  .positioning { margin-top: 1.5rem; font-family: var(--font-display); font-size: var(--step-2); line-height: 1.3; }
+  .overview { margin-top: 1.75rem; }
+  .sub-h { margin-top: 3rem; margin-bottom: 1rem; font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal-ink); }
+  .why { border-top: 1px solid var(--line); }
+  .why li { display: grid; grid-template-columns: 2.75rem 1fr; gap: 0.75rem; padding-block: 1.1rem; border-bottom: 1px solid var(--line); }
+  .why .n { font-family: var(--font-display); color: var(--teal-ink); font-size: 1.2rem; line-height: 1.5; }
+  .side-col { display: grid; gap: 2rem; align-content: start; }
+  @media (min-width: 1000px) { .side-col { position: sticky; top: calc(var(--header-h) + 4.5rem); } }
+  .facts { display: grid; }
+  .facts div { padding-block: 0.8rem; border-bottom: 1px solid var(--line); }
+  .facts dt { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); font-weight: 600; }
+  .facts dd { font-size: 0.92rem; margin-top: 0.2rem; }
+
+  .feature { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+  .spec :global(.tag) { white-space: normal; }
+  @media (min-width: 900px) {
+    .feature { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 4.5rem; }
+    .feature.reverse .feature-media { order: 2; }
+    .feature-media { position: sticky; top: calc(var(--header-h) + 5rem); }
+  }
+  .feature-text { display: grid; gap: 1.5rem; align-content: start; justify-items: start; }
+  .feature-text > * { margin: 0; }
+  .feature-text h2 { margin-top: -0.5rem; }
+  .body-copy { max-width: 62ch; }
+  .spec { display: grid; width: 100%; border-top: 1px solid var(--line); }
+  .spec div { display: grid; gap: 0.4rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+  @media (min-width: 640px) { .spec div { grid-template-columns: 9rem 1fr; gap: 1.25rem; } }
+  .spec dt { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--slate); padding-top: 0.2rem; }
+  .spec dd { font-size: 0.94rem; }
+  .species { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 0; width: 100%; border-top: 1px solid var(--line); }
+  .species li { padding: 0.8rem 0; border-bottom: 1px solid var(--line); font-family: var(--font-display); font-size: 1.25rem; margin-right: 1rem; }
+
+  .dark .lede.light { color: #d3e3e1; }
+  .lux-cols { display: grid; gap: 2rem; width: 100%; }
+  @media (min-width: 640px) { .lux-cols { grid-template-columns: 1fr 1fr; } }
+  .mini-h { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--seafoam); margin-bottom: 0.75rem; }
+  .mini-h.dark-text { color: var(--teal-ink); }
+  .dash li { padding: 0.55rem 0; border-bottom: 1px solid var(--line-dark); font-size: 0.95rem; }
+  .dark :global(.placeholder) { background: #0d3a47; border-color: var(--line-dark); color: var(--on-dark-muted); }
+  .dark :global(.placeholder .ph-label) { color: var(--on-dark); }
+  .dark :global(.placeholder .ph-kicker), .dark :global(.placeholder .ph-note) { color: var(--on-dark-muted); }
+  .dark :global(.placeholder .ph-icon) { color: var(--seafoam); }
+  .dark :global(.placeholder::before) { border-color: rgba(216, 240, 234, 0.18); }
+
+  .calendar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); margin-bottom: 3rem; }
+  @media (min-width: 560px) { .calendar { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  @media (min-width: 900px) { .calendar { grid-template-columns: repeat(12, minmax(0, 1fr)); } }
+  .calendar li { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .calendar a { display: grid; gap: 0.25rem; padding: 0.9rem 0.6rem; text-decoration: none; color: var(--slate); min-height: 72px; }
+  .calendar .mname { font-family: var(--font-display); font-size: 1.3rem; color: var(--navy); }
+  .calendar .mstate { font-size: 0.62rem; overflow-wrap: anywhere; letter-spacing: 0.1em; text-transform: uppercase; }
+  .calendar .good a { background: var(--deep-ocean); color: var(--seafoam); }
+  .calendar .good .mname { color: var(--on-dark); }
+  .calendar a:hover { outline: 1px solid var(--ocean-teal); outline-offset: -1px; }
+  :global(.calendar li.is-now) a { box-shadow: inset 0 -3px 0 var(--coral); }
+  .conditions { display: grid; gap: 0; border-top: 1px solid var(--line); margin-bottom: 2rem; }
+  .conditions div { display: grid; gap: 0.35rem; padding-block: 1.1rem; border-bottom: 1px solid var(--line); }
+  @media (min-width: 720px) { .conditions div { grid-template-columns: 12rem 1fr; gap: 2rem; } }
+  .conditions dt { font-weight: 600; }
+
+  .audience { display: grid; gap: 1px; background: rgba(16, 42, 67, 0.15); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); border: 1px solid rgba(16, 42, 67, 0.15); }
+  .audience div { background: var(--seafoam); padding: 1.5rem; }
+  .audience dt { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.15; margin-bottom: 0.5rem; }
+  .audience dd { font-size: 0.93rem; color: #2c4256; }
+  .audience .not { background: #e6f2ee; }
+  .audience .not dt { font-style: italic; color: #33495c; }
+
+  .narrowish { max-width: 980px; }
+  .itin-note { margin-top: 1rem; max-width: 60ch; }
+  .itinerary { margin-top: 2.5rem; border-top: 1px solid var(--line); }
+  .itinerary li { display: grid; gap: 0.5rem 2rem; padding-block: 1.5rem; border-bottom: 1px solid var(--line); }
+  @media (min-width: 720px) { .itinerary li { grid-template-columns: 9rem 1fr; } }
+  .days { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--teal-ink); padding-top: 0.35rem; }
+  .itinerary h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--step-2); }
+  .itinerary p { margin-top: 0.4rem; color: #33495c; max-width: 62ch; }
+
+  .planning .lede { margin-top: 1.25rem; }
+  .checklist { border-top: 1px solid var(--line); }
+  .checklist li { position: relative; padding: 1rem 0 1rem 2rem; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+  .checklist li::before { content: ''; position: absolute; left: 0; top: 1.3rem; width: 12px; height: 7px; border-left: 1.5px solid var(--ocean-teal); border-bottom: 1.5px solid var(--ocean-teal); transform: rotate(-45deg); }
+
+  .gallery { display: grid; gap: 1.25rem; }
+  @media (min-width: 900px) {
+    .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: 'g1 g1 g2' 'g3 g4 g4'; gap: 1.5rem; }
+    .g1 { grid-area: g1; } .g2 { grid-area: g2; } .g3 { grid-area: g3; } .g4 { grid-area: g4; }
+    .g1, .g4 { display: grid; }
+    .g1 :global(.slot), .g4 :global(.slot) { height: 100%; }
+    .g1 :global(.slot.placeholder), .g4 :global(.slot.placeholder), .g1 :global(.frame), .g4 :global(.frame) { aspect-ratio: auto !important; height: 100%; }
+  }
+
+  .comparisons { margin-top: 3rem; display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: baseline; }
+  .comparisons ul { display: flex; flex-wrap: wrap; gap: 1rem 2rem; }
+  .updated { padding-block: 2rem; }
+</style>

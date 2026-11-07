@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import EditorialSection from '../components/EditorialSection.astro';
+import DestinationGrid from '../components/DestinationGrid.astro';
+import DestinationList from '../components/DestinationList.astro';
+import SeasonTable from '../components/SeasonTable.astro';
+import GuideList from '../components/GuideList.astro';
+import Notice from '../components/Notice.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import { destinations, topFor, getDestination } from '../data/destinations';
+import { faqLd, itemListLd } from '../utils/seo';
+
+const best = topFor('surf', 10);
+const beginner = destinations.filter((d) => d.surf.levels.includes('beginner'));
+const advanced = topFor('surf', 9).filter((d) => d.surf.levels.includes('advanced'));
+const pick = (slug: string, note: string) => ({ d: getDestination(slug), note });
+
+const faqs = [
+  { question: 'What is the best luxury surf destination in the world?', answer: 'There is no universal winner. The best destination depends on surf ability, season, preferred water temperature, travel time and the type of luxury you want. Compare destinations by the conditions that matter to you.' },
+  { question: 'Where can Europeans find warm-water surf in winter?', answer: 'The Maldives, Sri Lanka, parts of Indonesia, Costa Rica, the Canary Islands, Mauritius and other Indian Ocean or tropical destinations can be considered depending on the month and desired surf conditions.' },
+  { question: 'Is a surf resort or a surf charter better?', answer: 'A resort gives you a comfortable base and suits couples, families and mixed-interest trips. A charter gives you mobility to chase the swell and suits dedicated surf groups. Ask which option would still make you happy if the surf went flat for two days.' },
+  { question: 'How long should a luxury surf trip be?', answer: 'Four to seven nights works for short-haul Atlantic destinations. For long-haul trips, seven to fourteen nights gives you time to recover from travel and catch more than one swell.' },
+];
+---
+<BaseLayout
+  title="Luxury Surf Holidays | Surf and Dive"
+  description="Luxury surf holidays compared by wave character, season, skill level, water temperature and the quality of the stay — from Fiji and Bali to Portugal and the Maldives."
+  crumbs={[{ label: 'Surf', href: '/surf/' }]}
+  jsonLd={[faqLd(faqs), itemListLd(best.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
+>
+  <Hero size="medium" eyebrow="Surf" title="Luxury Surf Holidays" subtitle="Reef passes, Atlantic points and warm beach breaks — matched to your level, your season and a place worth returning to after the session." seed="surf-hub">
+    <a class="btn" href="#best-surf">Best surf destinations <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="#seasons">Surf seasons</a>
+  </Hero>
+
+  <section class="section" aria-labelledby="surf-intro-title">
+    <div class="container split-layout">
+      <div><span class="eyebrow">Surf travel, properly planned</span><h2 id="surf-intro-title">Build the trip around the wave</h2></div>
+      <div class="prose">
+        <p class="lede">Luxury surf travel is not simply about finding a good wave. It is about building the right trip around the wave: the right season, the right coastline, the right level of surf, the right guide or boat access, and a place worth returning to after the session.</p>
+        <p>This page helps you compare high-quality surf destinations by wave character, season, water temperature, accommodation and overall experience. Start with your ability, then the month, then the destination — and only then the hotel.</p>
+        <p>Each destination guide covers breaks, skill levels, seasonality, access and surf culture, along with what luxury actually looks like there.</p>
+      </div>
+    </div>
+  </section>
+
+  <EditorialSection id="best-surf" eyebrow="Best destinations" title="The best luxury surf destinations" intro="Destinations where surf quality is exceptional and the holiday around it is too. Scores are editorial positioning, not a guarantee of waves." tone="sand" split>
+    <DestinationGrid destinations={best} />
+  </EditorialSection>
+
+  <EditorialSection id="seasons" eyebrow="Surf seasons" title="When to surf where" intro="The same coastline can be excellent in one season and wrong in another. These are typical windows, drawn from our seasonal matrix — always verify current swell and wind forecasts." split>
+    <SeasonTable activity="surf" caption="Surf destinations typically worth considering, by month" />
+  </EditorialSection>
+
+  <section class="section bg-seafoam" aria-labelledby="levels-title">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Skill levels</span><h2 id="levels-title" class="mt-1">Beginner and advanced surf destinations</h2><p>Famous does not mean beginner-friendly. Match the wave to your ability — honestly.</p></div>
+      <div class="cols-2">
+        <div>
+          <h3>For beginners</h3>
+          <p class="muted">Sandy-bottom beach breaks, qualified schools and comfortable recovery. Many of these destinations also hold advanced waves — choose your spot carefully.</p>
+          <ul role="list" class="mini-list">
+            {beginner.map((d) => <li><a href={`/destinations/${d.slug}/`}>{d.name}</a></li>)}
+          </ul>
+          <a class="text-link mt-1" href="/guides/best-luxury-surf-destinations-beginners/">Beginner surf guide <span aria-hidden="true">→</span></a>
+        </div>
+        <div>
+          <h3>For advanced surfers</h3>
+          <p class="muted">Reef passes, points and powerful beach breaks that reward experience — and still demand local knowledge.</p>
+          <ul role="list" class="mini-list">
+            {advanced.map((d) => <li><a href={`/destinations/${d.slug}/`}>{d.name}</a></li>)}
+          </ul>
+          <a class="text-link mt-1" href="/guides/best-luxury-surf-destinations-advanced-surfers/">Advanced surf guide <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <EditorialSection id="resorts" eyebrow="Where to stay" title="Luxury surf resorts, villas and charters" intro="Luxury on a surf trip is practical: a room close to the break, a guide who knows the tide, boat access when conditions are good, and somewhere quiet to recover." split>
+    <div class="cols-2">
+      <div class="prose">
+        <h3>Resorts and villas</h3>
+        <p>A resort or villa gives you a base. It suits couples, families and anyone who wants spa, dining and land-based comfort around the sessions. <a href="/destinations/maldives/">The Maldives</a>, <a href="/destinations/fiji/">Fiji</a> and <a href="/destinations/bali-nusa-penida/">Bali</a> are strong examples.</p>
+      </div>
+      <div class="prose">
+        <h3>Charters</h3>
+        <p>A charter gives you mobility to chase the forecast and fewer transfers. It suits dedicated surf groups — particularly in <a href="/destinations/mentawai-islands/">the Mentawai Islands</a> and the Maldives. <a href="/guides/luxury-surf-resorts-vs-surf-charters/">Resorts vs charters, compared</a>.</p>
+      </div>
+    </div>
+  </EditorialSection>
+
+  <EditorialSection id="partners" eyebrow="Surf + non-surfer" title="Surf trips that work for both of you" intro="If the surfer could not surf tomorrow, would the other person still have a great day? These destinations pass the test." tone="sand" split>
+    <DestinationList items={[
+      pick('bali-nusa-penida', 'Food, wellness, culture and villas around every session.'),
+      pick('portugal', 'Surf towns, seafood, Lisbon and Sintra within reach.'),
+      pick('madeira', 'Hiking, viewpoints, spa days and refined hotels.'),
+      pick('costa-rica', 'Rainforest, wildlife, yoga and wellness.'),
+      pick('maldives', 'Lagoon, spa and house reef while the surfer takes the boat.'),
+    ]} />
+    <a class="text-link mt-2" href="/guides/choose-surf-destination-non-surfer-partner/">How to choose for a non-surfer partner <span aria-hidden="true">→</span></a>
+  </EditorialSection>
+
+  <EditorialSection id="europe" eyebrow="European planning" title="Surf seasons for European travellers" intro="European surfers can choose between Atlantic surf close to home and warm water far away. The trick is matching the month to the coast." split>
+    <div class="cols-2">
+      <div class="prose">
+        <h3>Short-haul</h3>
+        <p><a href="/destinations/portugal/">Portugal</a> works almost year-round, with autumn often a sweet spot. <a href="/destinations/canary-islands/">The Canaries</a> and <a href="/destinations/madeira/">Madeira</a> are Europe’s winter-sun surf answer — a four- or five-night escape can be worthwhile.</p>
+      </div>
+      <div class="prose">
+        <h3>Long-haul</h3>
+        <p>For the European winter: <a href="/destinations/maldives/">the Maldives</a>, <a href="/destinations/sri-lanka/">Sri Lanka</a> and <a href="/destinations/costa-rica/">Costa Rica</a>. For the European summer: <a href="/destinations/bali-nusa-penida/">Bali</a>, <a href="/destinations/fiji/">Fiji</a> and <a href="/destinations/mentawai-islands/">the Mentawais</a>. Stay at least seven to ten nights.</p>
+      </div>
+    </div>
+    <div class="mt-3">
+      <Notice kind="safety">
+        <p>Reef breaks, currents and large surf deserve local knowledge. Surf within your ability, use local guides at unfamiliar breaks and follow lifeguard advice. <a href="/guides/ocean-safety-luxury-surf-travellers/">Read our surf safety guide</a>.</p>
+      </Notice>
+    </div>
+  </EditorialSection>
+
+  <EditorialSection id="surf-guides" eyebrow="Guides" title="Surf planning guides" tone="sand">
+    <GuideList ids={['best-luxury-surf-holidays-europeans', 'how-to-choose-luxury-surf-holiday', 'how-many-days-luxury-surf-trip', 'surf-trip-packing-list-luxury-ocean', 'best-winter-sun-surf-holidays-europe', 'portugal-vs-indonesia-luxury-surf']} />
+  </EditorialSection>
+
+  <section class="section"><div class="container narrow"><FAQ faqs={faqs} title="Surf holiday questions" /></div></section>
+
+  <CTA seed="surf-cta" />
+</BaseLayout>

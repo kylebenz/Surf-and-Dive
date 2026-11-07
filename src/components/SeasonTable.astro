@@ -1,0 +1,43 @@
+---
+import type { Activity } from '../data/types';
+import { seasons } from '../data/seasonal';
+import { getDestination } from '../data/destinations';
+interface Props { activity: Activity; caption: string; }
+const { activity, caption } = Astro.props;
+const rows = seasons.map((s) => ({
+  month: s.name,
+  slug: s.month,
+  picks: s.picks.filter((p) => p.activities.includes(activity)).map((p) => getDestination(p.slug)),
+}));
+---
+<div class="table-wrap" role="region" aria-label={caption} tabindex="0">
+  <table>
+    <caption class="sr-only">{caption}</caption>
+    <thead><tr><th scope="col">Month</th><th scope="col">Typically worth considering</th></tr></thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr data-month={r.slug}>
+          <th scope="row"><a href={`/best-by-month/${r.slug}/`}>{r.month}</a></th>
+          <td>
+            {r.picks.length
+              ? r.picks.map((d, i) => <>{i > 0 && <span class="sep" aria-hidden="true"> · </span>}<a href={`/destinations/${d.slug}/`}>{d.name}</a></>)
+              : <span class="muted">See the month guide for alternatives</span>}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<style>
+  .table-wrap { overflow-x: auto; border-top: 1px solid var(--navy); }
+  table { width: 100%; font-size: 0.95rem; min-width: 480px; }
+  th, td { text-align: left; padding: 0.9rem 1rem 0.9rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); font-weight: 600; }
+  tbody th { width: 9rem; font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; }
+  tbody th a { color: var(--navy); text-decoration: none; }
+  tbody th a:hover { color: var(--teal-ink); }
+  td a { color: var(--navy); }
+  td a:hover { color: var(--teal-ink); }
+  .sep { color: var(--line); }
+  :global(tr.is-now) th::after { content: 'now'; margin-left: 0.5rem; font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--seafoam); padding: 0.1rem 0.35rem; vertical-align: middle; }
+</style>
