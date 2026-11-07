@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import ActivityCard from '../components/ActivityCard.astro';
+import ActivityRow from '../components/ActivityRow.astro';
 import DestinationGrid from '../components/DestinationGrid.astro';
 import SeasonalGrid from '../components/SeasonalGrid.astro';
 import ArticleCard from '../components/ArticleCard.astro';
@@ -74,8 +74,8 @@ const activities = [
   </section>
 
   <EditorialSection id="experiences" eyebrow="Choose your ocean experience" title="Choose Your Ocean Experience" intro="Six ways into the same idea: a holiday built around exceptional water." tone="sand" split>
-    <ul role="list" class="grid grid-3">
-      {activities.map((a, i) => <li class="reveal"><ActivityCard {...a} index={i + 1} /></li>)}
+    <ul role="list" class="alternating">
+      {activities.map((a, i) => <li class="reveal"><ActivityRow {...a} index={i + 1} /></li>)}
     </ul>
   </EditorialSection>
 
@@ -167,4 +167,9 @@ const activities = [
   .markets { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); border-top: 1px solid var(--line); }
   .markets a { display: flex; justify-content: space-between; padding: 1rem 0.25rem; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; font-family: var(--font-display); font-size: var(--step-1); margin-right: 1.5rem; }
   .markets a:hover { color: var(--teal-ink); }
+  /* Alternating layout: visual left / text right, then swapped on every other row. */
+  .alternating { display: grid; gap: clamp(3rem, 2rem + 4vw, 6rem); }
+  @media (min-width: 800px) {
+    .alternating > li:nth-child(even) :global(.visual) { order: 2; }
+  }
 </style>
