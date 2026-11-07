@@ -11,7 +11,26 @@ export const SITE = {
   lastReviewed: '2026-11-06',
   published: '2026-11-06',
   ogImage: '/og/surf-and-dive-default.png',
+  /** Square raster logo for structured data (Google prefers PNG over SVG). */
+  logo: '/logo.png',
 } as const;
+
+/**
+ * Analytics. Both load only after the visitor accepts analytics cookies.
+ *
+ * - gtmId: Google Tag Manager container. Configure GA4 and any other tags
+ *   inside GTM. Override with PUBLIC_GTM_ID; set it to an empty value to disable.
+ * - ga4Id: optional direct GA4 tag (PUBLIC_GA4_ID). Leave empty when GA4 is
+ *   set up inside GTM, or every page view is counted twice.
+ *
+ * When both are empty, no analytics code or cookie banner is output.
+ */
+const env = (v: string | undefined, fallback = '') => (v ?? fallback).trim();
+export const ANALYTICS = {
+  gtmId: env(import.meta.env.PUBLIC_GTM_ID as string | undefined, 'GTM-PN3PMB7H'),
+  ga4Id: env(import.meta.env.PUBLIC_GA4_ID as string | undefined),
+} as const;
+export const ANALYTICS_ENABLED = Boolean(ANALYTICS.gtmId || ANALYTICS.ga4Id);
 
 export const NAV = [
   { label: 'Destinations', href: '/destinations/' },

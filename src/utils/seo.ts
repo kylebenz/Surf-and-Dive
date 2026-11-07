@@ -12,10 +12,11 @@ export function pageTitle(title: string): string {
 
 export type Crumb = { label: string; href: string };
 
-export function breadcrumbLd(crumbs: Crumb[], site: URL | string) {
+export function breadcrumbLd(crumbs: Crumb[], site: URL | string, id?: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    ...(id ? { '@id': id } : {}),
     itemListElement: crumbs.map((c, i) => ({
       '@type': 'ListItem',
       position: i + 1,
@@ -45,8 +46,83 @@ export function organizationLd(site: URL | string) {
     '@id': absoluteUrl('/#organization', site),
     name: SITE.name,
     url: absoluteUrl('/', site),
-    logo: absoluteUrl('/favicon.svg', site),
+    logo: {
+      '@type': 'ImageObject',
+      '@id': absoluteUrl('/#logo', site),
+      url: absoluteUrl(SITE.logo, site),
+      width: 512,
+      height: 512,
+      caption: SITE.name,
+    },
+    image: { '@id': absoluteUrl('/#logo', site) },
     description: SITE.description,
+  };
+}
+
+/** Reference to the site-wide Organization node, for publisher/author fields. */
+export const organizationRef = (site: URL | string) => ({ '@id': absoluteUrl('/#organization', site) });
+
+/** WebPage node for every indexable page; ties the page to the WebSite and its breadcrumb. */
+export function webPageLd(opts: {
+  site: URL | string;
+  url: string;
+  name: string;
+  description: string;
+  image: string;
+  type?: string;
+  breadcrumbId?: string;
+  published?: Date;
+  modified?: Date;
+}) {
+  const { site, url, name, description, image, type = 'WebPage', breadcrumbId, published, modified } = opts;
+  return {
+    '@context': 'https://schema.org',
+    '@type': type,
+    '@id': `${url}#webpage`,
+    url,
+    name,
+    description,
+    inLanguage: 'en-GB',
+    isPartOf: { '@id': absoluteUrl('/#website', site) },
+    publisher: organizationRef(site),
+    primaryImageOfPage: { '@type': 'ImageObject', url: image },
+    ...(breadcrumbId ? { breadcrumb: { '@id': breadcrumbId } } : {}),
+    ...(published ? { datePublished: published.toISOString() } : {}),
+    ...(modified ? { dateModified: modified.toISOString() } : {}),
+  };
+}
+
+/** Article node (blog posts, comparison pages). */
+export function articleLd(opts: {
+  site: URL | string;
+  url: string;
+  type?: 'Article' | 'BlogPosting';
+  headline: string;
+  description: string;
+  image: string;
+  published: Date;
+  modified: Date;
+  section?: string;
+  keywords?: string[];
+  author?: string;
+}) {
+  const { site, url, type = 'Article', headline, description, image, published, modified, section, keywords, author = SITE.editor } = opts;
+  return {
+    '@context': 'https://schema.org',
+    '@type': type,
+    '@id': `${url}#article`,
+    headline: headline.length > 110 ? `${headline.slice(0, 107)}...` : headline,
+    description,
+    image: [image],
+    datePublished: published.toISOString(),
+    dateModified: modified.toISOString(),
+    inLanguage: 'en-GB',
+    mainEntityOfPage: { '@id': `${url}#webpage` },
+    isPartOf: { '@id': absoluteUrl('/#website', site) },
+    author: { '@type': 'Organization', name: author, url: absoluteUrl('/about/', site) },
+    publisher: organizationRef(site),
+    ...(section ? { articleSection: section } : {}),
+    ...(keywords?.length ? { keywords: keywords.join(', ') } : {}),
   };
 }
 
@@ -57,7 +133,7 @@ export function websiteLd(site: URL | string) {
     '@id': absoluteUrl('/#website', site),
     name: SITE.name,
     url: absoluteUrl('/', site),
-    inLanguage: 'en',
+    inLanguage: 'en-GB',
     publisher: { '@id': absoluteUrl('/#organization', site) },
   };
 }

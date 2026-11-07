@@ -10,7 +10,7 @@ import CTA from '../../components/CTA.astro';
 import { getDestination } from '../../data/destinations';
 import { getComparison } from '../../data/comparisons';
 import { monthName } from '../../data/seasonal';
-import { faqLd, absoluteUrl, formatDate, readingTime } from '../../utils/seo';
+import { faqLd, articleLd, absoluteUrl, formatDate, readingTime } from '../../utils/seo';
 import { resolveImage } from '../../utils/images';
 import { SITE } from '../../config/site';
 import type { Month } from '../../data/types';
@@ -38,21 +38,20 @@ const mins = readingTime(guide.body ?? '');
 const [heroSlot, ...restSlots] = data.images;
 const heroImg = heroSlot ? resolveImage({ src: heroSlot.src, dir: `/images/blog/${guide.id}`, base: 'image-1', alt: heroSlot.alt }) : null;
 
-const articleLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
+const pageUrl = absoluteUrl(`/blog/${guide.id}/`, site);
+const postLd = articleLd({
+  site,
+  url: pageUrl,
+  type: 'BlogPosting',
   headline: data.title,
   description: data.description,
-  datePublished: data.publishDate.toISOString(),
-  dateModified: data.updatedDate.toISOString(),
-  inLanguage: 'en',
-  mainEntityOfPage: absoluteUrl(`/blog/${guide.id}/`, site),
-  author: { '@type': 'Organization', name: data.author, url: absoluteUrl('/about/', site) },
-  publisher: { '@type': 'Organization', name: SITE.name, url: absoluteUrl('/', site), logo: { '@type': 'ImageObject', url: absoluteUrl('/favicon.svg', site) } },
-  keywords: data.keywords.join(', '),
-  articleSection: data.category,
-  ...(heroImg && heroSlot.alt ? { image: [absoluteUrl(heroImg.src, site)] } : {}),
-};
+  image: absoluteUrl(heroImg?.src ?? SITE.ogImage, site),
+  published: data.publishDate,
+  modified: data.updatedDate,
+  section: data.category,
+  keywords: data.keywords,
+  author: data.author,
+});
 ---
 <BaseLayout
   title={data.seoTitle}
@@ -61,7 +60,7 @@ const articleLd = {
   ogImage={heroImg?.src}
   ogImageAlt={heroImg?.alt || undefined}
   crumbs={[{ label: 'Blog', href: '/blog/' }, { label: data.title, href: `/blog/${guide.id}/` }]}
-  jsonLd={[articleLd, faqLd(data.faqs)]}
+  jsonLd={[postLd, faqLd(data.faqs)]}
   article={{ published: data.publishDate, modified: data.updatedDate, section: data.category }}
 >
   <article class="article">

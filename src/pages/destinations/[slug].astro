@@ -14,7 +14,7 @@ import { MONTHS } from '../../data/seasonal';
 import { comparisons } from '../../data/comparisons';
 import { slotLabel } from '../../data/destinations/_images';
 import { resolveImage } from '../../utils/images';
-import { faqLd, absoluteUrl } from '../../utils/seo';
+import { faqLd, absoluteUrl, organizationRef } from '../../utils/seo';
 import { SITE } from '../../config/site';
 import type { Destination } from '../../data/types';
 
@@ -56,7 +56,7 @@ const touristDestination = {
   touristType: d.traveller_profiles.map((p) => profileLabel[p]),
   containedInPlace: { '@type': 'Country', name: d.country },
   ...(realImages.length ? { image: realImages.map((x) => ({ '@type': 'ImageObject', url: absoluteUrl(x.r!.src, site), caption: x.img.caption ?? x.img.alt, ...(x.img.credit ? { creditText: x.img.credit } : {}) })) } : {}),
-  publisher: { '@type': 'Organization', name: SITE.name, url: absoluteUrl('/', site) },
+  publisher: organizationRef(site),
 };
 ---
 <BaseLayout
