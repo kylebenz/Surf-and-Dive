@@ -70,6 +70,8 @@ const {
   .has-image:hover .frame :global(img) { transform: scale(1.025); }
   figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--slate); line-height: 1.5; }
   .credit { color: var(--slate); }
+  /* Readable captions and credits on dark sections. */
+  :global(.dark) figcaption, :global(.dark) .credit { color: var(--on-dark-muted); }
 
   .placeholder {
     display: grid;

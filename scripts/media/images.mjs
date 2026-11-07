@@ -91,8 +91,7 @@ export function suggestAlt(key) {
   return titleCase(name);
 }
 
-export function readSidecar(file) {
-  const p = file.replace(/\.[^.]+$/, '.json');
+const readJson = (p) => {
   if (!fs.existsSync(p)) return {};
   try {
     return JSON.parse(fs.readFileSync(p, 'utf8'));
@@ -100,6 +99,24 @@ export function readSidecar(file) {
     console.warn(`[media] Ignoring invalid JSON in ${path.relative(process.cwd(), p)}: ${e.message}`);
     return {};
   }
+};
+
+export function readSidecar(file) {
+  return readJson(file.replace(/\.[^.]+$/, '.json'));
+}
+
+/**
+ * Folder defaults: a _defaults.json in any folder (e.g. media/destinations/maldives/_defaults.json
+ * with { "credit": "Photo courtesy of Visit Maldives" }) applies to every image in that folder and
+ * its subfolders. Nearer folders win; an image's own sidecar wins over all of them.
+ */
+export function readDefaults(file, mediaRoot) {
+  const dirs = [];
+  for (let d = path.dirname(file); d.startsWith(mediaRoot); d = path.dirname(d)) {
+    dirs.unshift(d);
+    if (d === mediaRoot) break;
+  }
+  return Object.assign({}, ...dirs.map((d) => readJson(path.join(d, '_defaults.json'))));
 }
 
 /** Widths to generate for an original of width `w`: standard steps it can fill, plus its own width if smaller than the cap. */
@@ -211,12 +228,14 @@ export async function processImages({ root = process.cwd(), writeSidecars = fals
   for (const { file, rel, key, rec, hash, cacheDir, bytes } of jobs) {
     if (!rec) continue;
 
-    const side = readSidecar(file);
+    // Empty values ("credit": "") never override a folder default.
+    const filled = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== '' && v != null));
+    const side = { ...filled(readDefaults(file, p.media)), ...filled(readSidecar(file)) };
     const suggested = suggestAlt(key);
     if (writeSidecars && !fs.existsSync(file.replace(/\.[^.]+$/, '.json'))) {
       const stub = { title: titleCase(key.split('/').pop()), alt: suggested, caption: '', credit: '' };
       fs.writeFileSync(file.replace(/\.[^.]+$/, '.json'), JSON.stringify(stub, null, 2) + '\n');
-      Object.assign(side, stub);
+      Object.assign(side, filled(stub));
       log(`[media] created media/${key}.json; edit its title and alt text to describe the photograph`);
     }
 

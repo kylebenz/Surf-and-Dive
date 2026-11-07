@@ -22,6 +22,8 @@ AI-generated images to depict real resorts, waves, reefs or wildlife encounters.
 
    Destination slots: `hero`, `surf`, `dive`, `freedive`, `marine-life`, `landscape`,
    `experience`, `culture`, `luxury`, `signature`.
+   Extra destination photos go in `destinations/<slug>/more/`. Every destination with four
+   or more photos gets a "View all photos" button that opens them all full screen.
 
 2. **Title and alt text.** Next to each photo, a `<name>.json` file holds its text:
 
@@ -40,6 +42,16 @@ AI-generated images to depict real resorts, waves, reefs or wildlife encounters.
    actually shows. `focus` (optional) keeps the important part in view when the photo is
    cropped, as horizontal % and vertical %. The title also becomes part of the file name
    (good for image search).
+
+   **Credit for a whole country:** a `_defaults.json` in a folder applies to every photo in it
+   (and its subfolders), e.g. `destinations/maldives/_defaults.json`:
+
+   ```json
+   { "credit": "Photo courtesy of Visit Maldives" }
+   ```
+
+   The credit shows under each photo, in the corner of the hero and destination cards, in the
+   full-screen viewer and in the page's structured data. A photo's own `credit` overrides it.
 
 3. **Commit.** The next build optimises it. Check status with `npm run images:report`,
    which lists every slot, its sizes and any alt text still to write.
