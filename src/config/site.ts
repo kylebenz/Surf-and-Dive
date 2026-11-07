@@ -27,7 +27,7 @@ export const SITE = {
  */
 const env = (v: string | undefined, fallback = '') => (v ?? fallback).trim();
 export const ANALYTICS = {
-  gtmId: env(import.meta.env.PUBLIC_GTM_ID as string | undefined, 'GTM-PN3PMB7H'),
+  gtmId: env(import.meta.env.PUBLIC_GTM_ID as string | undefined, 'GTM-NWN96HQ3'),
   ga4Id: env(import.meta.env.PUBLIC_GA4_ID as string | undefined),
 } as const;
 export const ANALYTICS_ENABLED = Boolean(ANALYTICS.gtmId || ANALYTICS.ga4Id);
