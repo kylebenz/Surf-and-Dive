@@ -88,12 +88,27 @@ const { gtmId = '', ga4Id = '' } = Astro.props;
     };
 
     var show = function (on) { if (banner) banner.hidden = !on; };
+    var announce = function (value) {
+      document.dispatchEvent(new CustomEvent('sd:consent', { detail: value }));
+    };
+    // Returning visitors: third-party tags wait until the page has loaded and the main thread
+    // is idle, so they never compete with the page's own rendering (LCP) or input (INP).
+    var afterLoad = function (fn) {
+      var idle = function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 3000 });
+        else setTimeout(fn, 200);
+      };
+      if (document.readyState === 'complete') idle();
+      else addEventListener('load', idle, { once: true });
+    };
 
     var choose = function (value) {
       write(value);
       show(false);
+      announce(value);
       if (value === 'granted') {
-        load();
+        // Yield first so the banner disappears in the next frame (fast interaction).
+        setTimeout(load, 0);
       } else {
         window.gtag('consent', 'update', { analytics_storage: 'denied' });
         clearCookies();
@@ -101,7 +116,7 @@ const { gtmId = '', ga4Id = '' } = Astro.props;
     };
 
     var stored = read();
-    if (stored === 'granted') load();
+    if (stored === 'granted') afterLoad(load);
     else if (stored !== 'denied') show(true);
 
     if (banner) {
@@ -118,6 +133,13 @@ const { gtmId = '', ga4Id = '' } = Astro.props;
       }
     });
   })();
+</script>
+
+<script>
+  // Real-user Core Web Vitals (LCP, INP, CLS, FCP, TTFB), sent to the dataLayer as
+  // "web_vitals" events for GTM/GA4. Only with analytics consent; the library loads lazily.
+  import { startVitals } from '../scripts/vitals';
+  startVitals();
 </script>
 
 <style>

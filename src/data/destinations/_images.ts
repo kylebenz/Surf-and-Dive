@@ -25,10 +25,11 @@ export const slotFile = (type: ImageSlotType) =>
  *
  * `src` and `alt` start empty on purpose. To publish photography either:
  *  1. drop a file named after the slot (hero.webp, surf.webp, …) into
- *     /public/images/destinations/<slug>/. It is picked up automatically, or
- *  2. set `src` explicitly here.
- * In both cases add an `alt` that describes the actual photograph, plus an
- * optional `caption` and `credit`. Run `npm run images:report` to audit.
+ *     media/destinations/<slug>/ (any size; it is optimised automatically), or
+ *  2. set `src` to another media key (path inside /media without the extension).
+ * Alt text, title, caption and credit go in the sidecar media/.../<file>.json (created
+ * automatically by `npm run media`), or here, which takes precedence. Run
+ * `npm run images:report` to audit.
  */
 export function destinationImages(
   slug: string,

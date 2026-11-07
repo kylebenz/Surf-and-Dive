@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import { readdirSync } from 'node:fs';
+import media from './src/integrations/media.mjs';
 
 // The canonical production origin. Set SITE_URL in the build environment
 // (e.g. SITE_URL=https://www.example.com) before launch — every canonical URL,
@@ -19,12 +20,15 @@ const redirects = {
 };
 
 export default defineConfig({
+  integrations: [media()],
   redirects,
   site: SITE_URL,
   trailingSlash: 'always',
   build: {
     format: 'directory',
-    inlineStylesheets: 'auto',
+    // All CSS is inlined: each page needs only ~5-10 KB (compressed), and inlining removes
+    // the render-blocking stylesheet round trips (measured ~0.9 s on slow mobile).
+    inlineStylesheets: 'always',
   },
   compressHTML: true,
   prefetch: {

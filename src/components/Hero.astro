@@ -1,5 +1,6 @@
 ---
 import SwellArt from './SwellArt.astro';
+import Picture from './Picture.astro';
 import type { ResolvedImage } from '../utils/images';
 interface Props {
   eyebrow?: string;
@@ -16,7 +17,7 @@ const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = '
 <section class={`hero dark ${size} ${align}`} aria-labelledby="hero-title">
   <div class="media" aria-hidden={image ? undefined : 'true'}>
     {image ? (
-      <img src={image.src} srcset={image.srcset} sizes="100vw" alt={image.alt} fetchpriority="high" decoding="sync" />
+      <Picture image={image} sizes="100vw" priority />
     ) : (
       <div class="art">
         <SwellArt seed={seed} lines={22} />
@@ -50,7 +51,7 @@ const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = '
   .hero.medium { min-height: min(58svh, 560px); }
   .hero.center { align-items: center; }
   .media { position: absolute; inset: 0; z-index: -1; }
-  .media img { width: 100%; height: 100%; object-fit: cover; }
+  .media :global(img) { width: 100%; height: 100%; object-fit: cover; }
   .art {
     position: absolute; inset: 0;
     background:
@@ -72,8 +73,11 @@ const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = '
   .slot-note span { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(216, 240, 234, 0.55); }
   @media (prefers-reduced-motion: no-preference) {
     .hero-in { animation: hero-rise 1.1s var(--ease) both; animation-delay: calc(var(--d) * 110ms + 80ms); }
+    /* The headline is usually the LCP element: an opacity fade would delay LCP, so it only rises. */
+    h1.hero-in { animation-name: hero-rise-solid; animation-delay: 0ms; }
     .art :global(.swell) { animation: swell-fade 2.4s var(--ease) both; }
   }
   @keyframes hero-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes hero-rise-solid { from { transform: translateY(10px); } to { transform: none; } }
   @keyframes swell-fade { from { opacity: 0; } to { opacity: 0.55; } }
 </style>

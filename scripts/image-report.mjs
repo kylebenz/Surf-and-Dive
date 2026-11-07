@@ -1,43 +1,42 @@
-// Audits all destination and guide image slots: filled / empty / missing alt.
+// npm run images:report
+// Audits every image slot: filled or empty, alt text status, original size and what is delivered.
 import fs from 'node:fs';
 import path from 'node:path';
+import { processImages } from './media/images.mjs';
 
+const { manifest, warnings } = await processImages({ log: () => {} });
 const root = process.cwd();
-const pub = path.join(root, 'public');
-const EXT = ['.avif', '.webp', '.jpg', '.jpeg', '.png'];
-const SLOTS = [
-  ['hero', 'hero'], ['surf', 'surf'], ['dive', 'dive'], ['freedive', 'freedive'], ['marine-life', 'marine-life'],
-  ['landscape', 'landscape'], ['human-experience', 'experience'], ['culture', 'culture'], ['luxury-stay', 'luxury'], ['signature', 'signature'],
-];
-const find = (dir, base) => EXT.map((e) => path.join(dir, base + e)).find((p) => fs.existsSync(p));
+const SLOTS = ['hero', 'surf', 'dive', 'freedive', 'marine-life', 'landscape', 'experience', 'culture', 'luxury', 'signature'];
+const mb = (n) => (n / 1048576).toFixed(1) + ' MB';
+const kb = (n) => Math.round(n / 1024) + ' KB';
+const describe = (e) => {
+  const avif = e.variants.avif ?? [];
+  const phone = avif.find((v) => v.w >= 1080) ?? avif[avif.length - 1];
+  const alt = e.altIsSuggestion ? 'ALT NEEDS WRITING' : 'alt ok';
+  return `${e.width}×${e.height}, original ${mb(e.originalBytes)} → phone ${phone ? kb(phone.bytes) : '?'} AVIF · ${alt}`;
+};
 
-let total = 0, filled = 0, missingAlt = 0;
+let total = 0, filled = 0, needAlt = 0;
+console.log('\nDESTINATION IMAGE SLOTS (media/destinations/<slug>/<slot>.jpg)\n');
 const destDir = path.join(root, 'src/data/destinations');
-const files = fs.readdirSync(destDir).filter((f) => f.endsWith('.ts') && !f.startsWith('_') && f !== 'index.ts');
-console.log('\nDESTINATION IMAGE SLOTS\n');
-for (const f of files.sort()) {
+for (const f of fs.readdirSync(destDir).filter((x) => x.endsWith('.ts') && !x.startsWith('_') && x !== 'index.ts').sort()) {
   const src = fs.readFileSync(path.join(destDir, f), 'utf8');
   const slug = /slug: '([^']+)'/.exec(src)?.[1];
-  const block = src.slice(src.indexOf('destinationImages('));
   console.log(`■ ${slug}`);
-  for (const [type, file] of SLOTS) {
+  for (const slot of SLOTS) {
     total++;
-    const brief = new RegExp(`['"]?${type}['"]?: '([^']*)'`).exec(block)?.[1] ?? '';
-    const altSet = new RegExp(`${type.includes('-') ? `'${type}'` : type}: \\{[^}]*alt: '[^']+`).test(block);
-    const hit = find(path.join(pub, 'images/destinations', slug), file);
-    if (hit) { filled++; if (!altSet) missingAlt++; }
-    const state = hit ? (altSet ? 'FILLED     ' : 'FILLED (!) ') : 'empty      ';
-    console.log(`   ${state} ${file.padEnd(12)} ${hit ? path.relative(pub, hit) : ''}${hit && !altSet ? '  ← add alt text' : ''}${!hit ? `  brief: ${brief}` : ''}`);
+    const e = manifest[`destinations/${slug}/${slot}`];
+    if (e) { filled++; if (e.altIsSuggestion) needAlt++; }
+    console.log(`   ${e ? 'FILLED' : 'empty '}  ${slot.padEnd(12)} ${e ? describe(e) : ''}`);
   }
 }
-console.log(`\nDestinations: ${filled}/${total} slots filled, ${missingAlt} filled without alt text.`);
+console.log(`\nDestinations: ${filled}/${total} slots filled.`);
 
-const gDir = path.join(root, 'src/content/guides');
-let gTotal = 0, gFilled = 0;
-for (const f of fs.readdirSync(gDir).filter((x) => x.endsWith('.md'))) {
-  const slug = f.replace(/\.md$/, '');
-  const fm = fs.readFileSync(path.join(gDir, f), 'utf8').split('---')[1];
-  const n = (fm.match(/- \{ label:/g) || []).length;
-  for (let i = 1; i <= n; i++) { gTotal++; if (find(path.join(pub, 'images/blog', slug), `image-${i}`)) gFilled++; }
+const other = Object.values(manifest).filter((e) => !e.key.startsWith('destinations/'));
+if (other.length) {
+  console.log('\nOTHER IMAGES\n');
+  for (const e of other) { if (e.altIsSuggestion) needAlt++; console.log(`   ${e.key.padEnd(50)} ${describe(e)}`); }
 }
-console.log(`Guides: ${gFilled}/${gTotal} image slots filled.\n`);
+if (needAlt) console.log(`\n${needAlt} image(s) still use the suggested alt text. Edit "alt" in the image's .json file (media/...) to describe the actual photograph.`);
+for (const w of warnings) console.log(`warning: ${w}`);
+console.log('');

@@ -39,7 +39,7 @@ for (const file of pages) {
   if (!rel.startsWith('/404') && !/<link rel="canonical"/.test(html)) problems.push(`${rel}: missing canonical`);
   if (title) titles.set(title, [...(titles.get(title) || []), rel]);
   if (desc) descs.set(desc, [...(descs.get(desc) || []), rel]);
-  for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\balt=/.test(m[0])) problems.push(`${rel}: <img> without alt`);
+  for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\salt(=|[\s>])/.test(m[0])) problems.push(`${rel}: <img> without alt`);
   for (const m of html.matchAll(/href="(\/[^"]*)"/g)) {
     links++;
     if (!exists(m[1])) problems.push(`${rel}: broken internal link ${m[1]}`);

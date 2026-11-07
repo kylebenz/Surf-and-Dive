@@ -1,0 +1,58 @@
+---
+/**
+ * The one way to render a photograph on this site.
+ *
+ * - <picture> with AVIF and WebP sources and a JPEG/PNG fallback, each with srcset, so the
+ *   browser picks the smallest file for the viewport, layout (`sizes`) and pixel density.
+ * - Intrinsic width/height are always set, so space is reserved before the image loads (no CLS).
+ * - Loading is decided by importance, not left to chance:
+ *     priority → the page's LCP image: eager, fetchpriority="high". Only one per page;
+ *                any further `priority` image is downgraded to `eager` with a build warning.
+ *     eager    → above the fold but not the LCP element: eager, normal priority.
+ *     default  → lazy, decoded off the main thread.
+ * - The dominant colour fills the box while the image loads.
+ */
+import type { ResolvedImage } from '../utils/images';
+
+interface Props {
+  image: ResolvedImage;
+  /** How wide the image is rendered in the layout. Be specific: it decides which file is downloaded. */
+  sizes: string;
+  priority?: boolean;
+  eager?: boolean;
+  class?: string;
+  /** Overrides the image's alt text (e.g. decorative use: ""). */
+  alt?: string;
+}
+
+const { image, sizes, eager = false, class: cls, alt = image.alt } = Astro.props;
+let { priority = false } = Astro.props;
+
+const locals = Astro.locals as Record<string, unknown>;
+if (priority) {
+  if (locals.__lcpImage) {
+    console.warn(`[media] ${Astro.url.pathname}: more than one priority image ("${image.key}"); only "${locals.__lcpImage}" keeps fetchpriority=high.`);
+    priority = false;
+  } else {
+    locals.__lcpImage = image.key;
+  }
+}
+const loading = priority || eager ? 'eager' : 'lazy';
+const style = [`background-color:${image.color}`, image.focus && `object-position:${image.focus}`].filter(Boolean).join(';');
+---
+<picture>
+  {image.sources.map((s) => <source type={s.type} srcset={s.srcset} sizes={sizes} />)}
+  <img
+    src={image.src}
+    srcset={image.srcset}
+    sizes={sizes}
+    width={image.width}
+    height={image.height}
+    alt={alt}
+    loading={loading}
+    decoding={priority ? undefined : 'async'}
+    fetchpriority={priority ? 'high' : undefined}
+    class={cls}
+    style={style}
+  />
+</picture>

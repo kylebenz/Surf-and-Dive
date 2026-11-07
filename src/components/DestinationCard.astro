@@ -1,12 +1,13 @@
 ---
 import SwellArt from './SwellArt.astro';
 import type { Destination } from '../data/types';
+import Picture from './Picture.astro';
 import { resolveImage } from '../utils/images';
 import { monthName } from '../data/seasonal';
 interface Props { destination: Destination; size?: 'default' | 'feature'; headingLevel?: 'h2' | 'h3'; note?: string; }
 const { destination: d, size = 'default', headingLevel = 'h3', note } = Astro.props;
 const hero = d.images.find((i) => i.type === 'hero')!;
-const image = resolveImage({ src: hero.src, dir: `/images/destinations/${d.slug}`, base: 'hero', alt: hero.alt });
+const image = resolveImage({ src: hero.src, dir: `destinations/${d.slug}`, base: 'hero', alt: hero.alt });
 const H = headingLevel;
 const months = d.best_months;
 const monthLabel = months.length >= 10 ? 'Year-round' : `${monthName(months[0]).slice(0, 3)} to ${monthName(months[months.length - 1]).slice(0, 3)}`;
@@ -20,7 +21,7 @@ const activities = [
   <a href={`/destinations/${d.slug}/`} class="link">
     <div class="visual">
       {image ? (
-        <img src={image.src} srcset={image.srcset} sizes="(min-width: 1000px) 33vw, 100vw" alt={image.alt} loading="lazy" decoding="async" />
+        <Picture image={image} sizes="(min-width: 1320px) 420px, (min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw" />
       ) : (
         <div class="art" aria-hidden="true"><SwellArt seed={d.slug} lines={14} /><span class="initial">{d.name}</span></div>
       )}
@@ -45,8 +46,8 @@ const activities = [
   .link:hover { border-color: var(--line); }
   .visual { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--deep-ocean); }
   .feature .visual { aspect-ratio: 4 / 5; }
-  .visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
-  .link:hover .visual img { transform: scale(1.035); }
+  .visual :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .link:hover .visual :global(img) { transform: scale(1.035); }
   .art { position: absolute; inset: 0; background: linear-gradient(170deg, #0d3a48, var(--deep-ocean) 60%, #071f28); transition: transform 1.2s var(--ease); }
   .link:hover .art { transform: scale(1.03); }
   .art :global(.swell) { opacity: 0.6; }

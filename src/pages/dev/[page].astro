@@ -1,0 +1,62 @@
+---
+/**
+ * Media test page: every media component on one page, for Lighthouse CI and the
+ * cross-browser tests. Only built when MEDIA_TEST_PAGE=1 (CI generates synthetic
+ * fixtures with scripts/test/fixtures.mjs first). Never part of the public site.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Video from '../../components/Video.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import LazyEmbed from '../../components/LazyEmbed.astro';
+import Gallery from '../../components/Gallery.astro';
+import AffiliateCTA from '../../components/AffiliateCTA.astro';
+import AffiliateLink from '../../components/AffiliateLink.astro';
+import DestinationImagePlaceholder from '../../components/DestinationImagePlaceholder.astro';
+import { getDestination } from '../../data/destinations';
+
+export function getStaticPaths() {
+  return process.env.MEDIA_TEST_PAGE === '1' ? [{ params: { page: 'media' } }] : [];
+}
+const fiji = getDestination('fiji');
+---
+<BaseLayout title="Media test page" description="Every media component on one page, for automated performance and browser tests." noindex>
+  <section class="hero-video">
+    <Video name="swell-loop" mode="background" priority aspect="4 / 3" sizes="100vw" label="Swell lines rolling towards a reef" />
+    <div class="container overlay"><h1>Media test page</h1></div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container prose">
+      <h2>Article image</h2>
+      <p>Below the fold: lazy-loaded, responsive, intrinsic dimensions.</p>
+      <DestinationImagePlaceholder destination={fiji} type="surf" aspect="4 / 3" sizes="(min-width: 1000px) 60vw, 100vw" />
+      <p>A plain affiliate link: <AffiliateLink href="https://partner.example/?aid=1" partner="Example Partner">check availability</AffiliateLink>.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <h2>Gallery</h2>
+      <Gallery title="Fiji in pictures" folder="gallery/fiji" />
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container stack">
+      <h2>Video player</h2>
+      <Video name="reef-drift" label="Drifting over a reef" />
+      <h2>YouTube facade</h2>
+      <VideoEmbed provider="youtube" id="aqz-KE-bpKQ" title="Test video" poster="videos/reef-drift-poster" />
+      <h2>Map (load on click)</h2>
+      <LazyEmbed title="Map of Fiji" src="https://www.openstreetmap.org/export/embed.html?bbox=176.9,-18.4,178.8,-17.2" aspect="4 / 3" provider="OpenStreetMap" />
+      <h2>Affiliate recommendation</h2>
+      <AffiliateCTA partner="Example Partner" href="https://partner.example/?aid=2" title="A private-island resort" text="Overwater villas, a house reef and a dive centre on the beach." image="destinations/fiji/landscape" price="From about €900 a night" />
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .hero-video { position: relative; }
+  .overlay { position: absolute; left: 0; right: 0; bottom: 2rem; color: var(--on-dark); }
+  .overlay h1 { color: var(--on-dark); }
+  .stack { display: grid; gap: 1.5rem; }
+</style>

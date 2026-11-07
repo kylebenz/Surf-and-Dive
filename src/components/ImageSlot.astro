@@ -4,12 +4,16 @@
  * designed placeholder when it has not. Never renders a broken image or a
  * placeholder pretending to be a photograph.
  */
+import Picture from './Picture.astro';
 import type { ResolvedImage } from '../utils/images';
 interface Props {
   image: ResolvedImage | null;
   label: string;
   /** CSS aspect-ratio, e.g. "4 / 3" */
   aspect?: string;
+  /** The page's LCP image: eager + fetchpriority=high (one per page). */
+  priority?: boolean;
+  /** Above the fold but not the LCP element. */
   eager?: boolean;
   sizes?: string;
   kind?: 'photo' | 'graphic';
@@ -20,6 +24,7 @@ const {
   image,
   label,
   aspect = '4 / 3',
+  priority = false,
   eager = false,
   sizes = '(min-width: 1000px) 50vw, 100vw',
   kind = 'photo',
@@ -30,15 +35,7 @@ const {
 {image ? (
   <figure class={`slot has-image ${cls}`}>
     <div class="frame" style={`aspect-ratio:${aspect}`}>
-      <img
-        src={image.src}
-        srcset={image.srcset}
-        sizes={image.srcset ? sizes : undefined}
-        alt={image.alt}
-        loading={eager ? 'eager' : 'lazy'}
-        decoding={eager ? 'sync' : 'async'}
-        fetchpriority={eager ? 'high' : undefined}
-      />
+      <Picture image={image} sizes={sizes} priority={priority} eager={eager} />
     </div>
     {showCaption && (image.caption || image.credit) && (
       <figcaption>
@@ -65,12 +62,12 @@ const {
 <style>
   .slot { position: relative; width: 100%; margin: 0; }
   .frame { position: relative; overflow: hidden; background: var(--sand-deep); }
-  .frame img {
+  .frame :global(img) {
     width: 100%; height: 100%;
     object-fit: cover;
     transition: transform 1.2s var(--ease);
   }
-  .has-image:hover .frame img { transform: scale(1.025); }
+  .has-image:hover .frame :global(img) { transform: scale(1.025); }
   figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--slate); line-height: 1.5; }
   .credit { color: var(--slate); }
 
