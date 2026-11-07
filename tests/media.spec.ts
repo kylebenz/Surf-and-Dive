@@ -29,6 +29,17 @@ async function cls(page: Page): Promise<number | null> {
   );
 }
 
+/** Scrolls down in steps with standard DOM scrolling (mouse wheel events do not exist in mobile Safari). */
+async function scrollDown(page: Page, px: number) {
+  for (let y = 0; y < px; y += 600) {
+    await page.evaluate(() => window.scrollBy(0, 600));
+    await page.waitForTimeout(60);
+  }
+}
+
+/** Phone-sized viewport (tablets legitimately get larger files for their larger, high-density screens). */
+const isPhone = (page: Page) => (page.viewportSize()?.width ?? 1000) < 600;
+
 const hasTestPage = async (page: Page) => (await page.goto('/dev/media/'))?.ok() ?? false;
 
 test('pages are visually stable and the headline is visible immediately', async ({ page }) => {
@@ -37,7 +48,7 @@ test('pages are visually stable and the headline is visible immediately', async 
     // The LCP headline must not start invisible (an opacity animation delays LCP).
     const opacity = await page.locator('h1').first().evaluate((el) => getComputedStyle(el).opacity);
     expect(Number(opacity), `${path} h1 opacity at load`).toBeGreaterThan(0.5);
-    await page.mouse.wheel(0, 3000);
+    await scrollDown(page, 3000);
     await page.waitForTimeout(600);
     const shift = await cls(page);
     if (shift !== null) expect(shift, `${path} CLS`).toBeLessThan(0.1);
@@ -56,12 +67,12 @@ test('every image reserves its space and only the LCP image is high priority', a
   }
 });
 
-test('phones never download desktop-sized images', async ({ page, isMobile }) => {
-  test.skip(!isMobile, 'phone-only check');
+test('phones never download desktop-sized images', async ({ page }) => {
+  test.skip(!isPhone(page), 'phone-only check');
   const urls = track(page);
   await page.goto('/destinations/fiji/');
   await page.waitForLoadState('load');
-  await page.mouse.wheel(0, 6000);
+  await scrollDown(page, 6000);
   await page.waitForTimeout(800);
   const big = urls.filter((u) => /\/_media\/.*-(1600|2000)\.(avif|webp|jpg|png)$/.test(u));
   expect(big, 'no 1600px+ files on a phone').toEqual([]);
@@ -122,7 +133,7 @@ test.describe('media components', () => {
     await expect(gallery.locator('.thumb').first()).toBeFocused();
   });
 
-  test('player video loads nothing until play, then a rendition that fits', async ({ page, isMobile }) => {
+  test('player video loads nothing until play, then a rendition that fits', async ({ page }) => {
     const urls = track(page);
     test.skip(!(await hasTestPage(page)), 'build with MEDIA_TEST_PAGE=1 and fixtures');
     const player = page.locator('[data-sd-video="player"]');
@@ -132,7 +143,7 @@ test.describe('media components', () => {
     await player.locator('.play').click();
     await expect(player.locator('video source')).not.toHaveCount(0);
     const src = await player.locator('video source').first().getAttribute('src');
-    if (isMobile) expect(src, 'phone gets ≤720p').toMatch(/\/(480|720)\./);
+    if (isPhone(page)) expect(src, 'phone gets ≤720p').toMatch(/\/(480|720)\./);
   });
 
   test('background video respects reduced motion', async ({ browser }) => {
@@ -148,7 +159,7 @@ test.describe('media components', () => {
   test('YouTube and map embeds load only on request', async ({ page }) => {
     const urls = track(page);
     test.skip(!(await hasTestPage(page)), 'build with MEDIA_TEST_PAGE=1 and fixtures');
-    await page.mouse.wheel(0, 8000);
+    await scrollDown(page, 8000);
     await page.waitForTimeout(500);
     expect(urls.filter((u) => /youtube|ytimg|openstreetmap/.test(u))).toEqual([]);
     await expect(page.locator('iframe')).toHaveCount(0);
