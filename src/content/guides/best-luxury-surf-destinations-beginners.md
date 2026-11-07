@@ -51,4 +51,4 @@ Cloudbreak is not a beginner destination, but the Mamanuca Islands contain other
 
 ## What to book
 
-Look for small-group lessons, qualified instructors, beginner-friendly beaches and accommodation close enough that you can surf without turning every session into a logistics project. Before you go, read our [surf safety guide](/guides/ocean-safety-luxury-surf-travellers/).
+Look for small-group lessons, qualified instructors, beginner-friendly beaches and accommodation close enough that you can surf without turning every session into a logistics project. Before you go, read our [surf safety blog post](/guides/ocean-safety-luxury-surf-travellers/).

@@ -21,7 +21,7 @@ const rows = seasons.map((s) => ({
           <td>
             {r.picks.length
               ? r.picks.map((d, i) => <>{i > 0 && <span class="sep" aria-hidden="true"> · </span>}<a href={`/destinations/${d.slug}/`}>{d.name}</a></>)
-              : <span class="muted">See the month guide for alternatives</span>}
+              : <span class="muted">See the month page for alternatives</span>}
           </td>
         </tr>
       ))}

@@ -103,11 +103,11 @@ const activities = [
     <div class="reveal"><SeasonalGrid /></div>
   </EditorialSection>
 
-  <EditorialSection id="guides" eyebrow="Editorial guides" title="Surf, Dive and Freedive Guides" intro="Practical, carefully qualified advice for choosing, timing and planning an ocean-first holiday." split>
+  <EditorialSection id="guides" eyebrow="From the blog" title="Surf, Dive and Freedive Blog" intro="Practical, carefully qualified advice for choosing, timing and planning an ocean-first holiday." split>
     <ul role="list" class="grid grid-3">
       {featuredGuides.map((g) => <li class="reveal"><ArticleCard guide={g} /></li>)}
     </ul>
-    <div class="after reveal"><a class="text-link" href="/guides/">All {guides.length} guides <span aria-hidden="true">→</span></a></div>
+    <div class="after reveal"><a class="text-link" href="/guides/">All {guides.length} blog posts <span aria-hidden="true">→</span></a></div>
   </EditorialSection>
 
   <EditorialSection id="compare" eyebrow="Decision support" title="Compare Ocean Escapes" intro="Side-by-side comparisons across twelve criteria, from surf and diving to privacy, families and value. There are no universal winners, just a clearer choice." tone="seafoam" split>

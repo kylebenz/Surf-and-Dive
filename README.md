@@ -39,7 +39,7 @@ tells visitors the enquiry service is not yet connected. See `.env.example`.
 | `/surf/`, `/dive/`, `/freediving/`, `/luxury-ocean-holidays/` | `src/pages/*.astro` |
 | `/best-by-month/` + 12 months | `src/data/seasonal.ts` |
 | `/compare/` + 5 comparisons | `src/data/comparisons.ts` |
-| `/guides/` + 32 guides | `src/content/guides/*.md` |
+| `/guides/` (labelled "Blog") + 32 blog posts | `src/content/guides/*.md` |
 | `/europe/` + 12 markets | `src/data/countries.ts` |
 | `/about/`, `/contact/`, `/editorial-standards/`, `/responsible-travel/`, `/ocean-safety/`, `/privacy/`, `/terms/`, `404` | `src/pages/` |
 | `/sitemap.xml`, `/robots.txt` | `src/pages/*.ts` |

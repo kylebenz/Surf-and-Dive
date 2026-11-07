@@ -28,7 +28,7 @@ faqs:
 
 Freediving is a beautiful way to experience the ocean: quiet, unhurried and close to marine life. It is also an activity where small mistakes can have serious consequences. The answer is not fear; it is training, a trained buddy and conservative decisions.
 
-This guide does not replace instruction. It explains the principles you will hear from every good instructor, so you can recognise a responsible operator and plan a safer trip.
+This post does not replace instruction. It explains the principles you will hear from every good instructor, so you can recognise a responsible operator and plan a safer trip.
 
 ## Never freedive alone
 
@@ -70,4 +70,4 @@ Keep your distance from animals, never touch coral or wildlife and never chase e
 
 The best freediving holiday is the one where you come home with better technique and better memories, not a dramatic story about how close you came to trouble.
 
-*This guide is general information, not a substitute for training, a qualified instructor or local safety advice.*
+*This blog post is general information, not a substitute for training, a qualified instructor or local safety advice.*

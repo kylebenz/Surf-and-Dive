@@ -60,14 +60,14 @@ const articleLd = {
   ogType="article"
   ogImage={heroImg?.src}
   ogImageAlt={heroImg?.alt || undefined}
-  crumbs={[{ label: 'Guides', href: '/guides/' }, { label: data.title, href: `/guides/${guide.id}/` }]}
+  crumbs={[{ label: 'Blog', href: '/guides/' }, { label: data.title, href: `/guides/${guide.id}/` }]}
   jsonLd={[articleLd, faqLd(data.faqs)]}
   article={{ published: data.publishDate, modified: data.updatedDate, section: data.category }}
 >
   <article class="article">
     <header class="a-head">
       <div class="container narrow-head">
-        <p class="eyebrow">{data.category} · Guide {String(data.number).padStart(2, '0')}</p>
+        <p class="eyebrow">Blog · {data.category}</p>
         <h1>{data.title}</h1>
         <p class="dek">{data.dek}</p>
         <div class="meta-row byline">
@@ -83,13 +83,13 @@ const articleLd = {
     </header>
 
     <div class="container a-body">
-      <aside class="a-aside" aria-label="About this guide">
+      <aside class="a-aside" aria-label="About this blog post">
         <div class="sticky">
-          <p class="mini-h">About this guide</p>
+          <p class="mini-h">About this post</p>
           <p class="note-small">Written for a European traveller who wants the ocean to be more than scenery: understand the destination, understand the trade-offs, then choose the experience that actually fits the trip.</p>
           <p class="mini-h mt">Destinations</p>
           <ul role="list" class="aside-links">{dests.map((d) => <li><a href={`/destinations/${d.slug}/`}>{d.name}</a></li>)}</ul>
-          <p class="mini-h mt">Activity guides</p>
+          <p class="mini-h mt">Activity pages</p>
           <ul role="list" class="aside-links">{data.activities.map((a) => <li><a href={activityMeta[a].href}>{activityMeta[a].label}</a></li>)}</ul>
           {data.months.length > 0 && <>
             <p class="mini-h mt">Months</p>
@@ -145,7 +145,7 @@ const articleLd = {
             <Notice kind="safety"><p>Surf within your ability, ask local guides about reefs, currents and tides, and follow lifeguard advice where available. <a href="/guides/ocean-safety-luxury-surf-travellers/">Surf safety</a>.</p></Notice>
           )}
           <Notice kind="seasonal" title="Editorial note">
-            <p>Facts about ocean conditions, seasonal patterns, wildlife, access and operators should be verified before travel. The ocean is dynamic, and no guide can promise waves, visibility or wildlife encounters.</p>
+            <p>Facts about ocean conditions, seasonal patterns, wildlife, access and operators should be verified before travel. The ocean is dynamic, and no blog post can promise waves, visibility or wildlife encounters.</p>
           </Notice>
         </div>
 
@@ -168,14 +168,14 @@ const articleLd = {
 
   <section class="section" aria-labelledby="rd-t">
     <div class="container">
-      <h2 id="rd-t" class="r-title">Destinations in this guide</h2>
+      <h2 id="rd-t" class="r-title">Destinations in this post</h2>
       <ul role="list" class="grid grid-3">{dests.slice(0, 3).map((d) => <li class="reveal"><DestinationCard destination={d} /></li>)}</ul>
     </div>
   </section>
 
   <section class="section bg-sand" aria-labelledby="rg-t">
     <div class="container">
-      <h2 id="rg-t" class="r-title">Related guides</h2>
+      <h2 id="rg-t" class="r-title">Related blog posts</h2>
       <ul role="list" class="grid grid-3">{related.map((g) => <li class="reveal"><ArticleCard guide={g} /></li>)}</ul>
     </div>
   </section>

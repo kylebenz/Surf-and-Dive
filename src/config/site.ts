@@ -20,7 +20,7 @@ export const NAV = [
   { label: 'Freedive', href: '/freediving/' },
   { label: 'Luxury', href: '/luxury-ocean-holidays/' },
   { label: 'Best by Month', href: '/best-by-month/' },
-  { label: 'Guides', href: '/guides/' },
+  { label: 'Blog', href: '/guides/' },
   { label: 'Compare', href: '/compare/' },
 ] as const;
 

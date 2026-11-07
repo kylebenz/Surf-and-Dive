@@ -162,7 +162,7 @@ export const seasons: Season[] = [
       { slug: 'mentawai-islands', note: 'Core season.', activities: ['surf'] },
       { slug: 'sri-lanka', note: 'East-coast season at Arugam Bay.', activities: ['surf'] },
     ],
-    also_note: 'Spain’s and France’s Atlantic coasts also offer summer surf, especially for learners. These will be covered in future Surf and Dive guides.',
+    also_note: 'Spain’s and France’s Atlantic coasts also offer summer surf, especially for learners. These will be covered in future Surf and Dive blog posts.',
     guides: ['best-summer-surf-holidays-europeans', 'portugal-vs-indonesia-luxury-surf', 'luxury-surf-resorts-vs-surf-charters'],
     seo: { title: 'Where to Surf and Dive in July | Surf and Dive', meta: 'Where to go in July for summer surf and diving: Portugal, Bali, Fiji, Hawaii, the Azores, the Mentawais and Sri Lanka’s east coast.' },
   },
