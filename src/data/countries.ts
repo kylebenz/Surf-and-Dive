@@ -61,7 +61,7 @@ export const markets: Market[] = [
     months: ['february', 'march', 'april', 'july', 'october'],
     guides: ['how-to-choose-luxury-diving-holiday', 'best-luxury-diving-holidays-world', 'combine-surfing-diving-one-holiday'],
     search_terms: ['Luxus Surf und Tauchreisen', 'Tauchurlaub Luxus', 'Surf Reise Luxus'],
-    seo: { title: 'Luxury Surf & Dive Holidays from Germany | Surf and Dive', meta: 'Luxury surf and dive holidays for travellers from Germany: premium diving in the Maldives and Philippines, Azores nature, Canary Islands winter sun and timing advice.' },
+    seo: { title: 'Luxury Surf & Dive Holidays from Germany | Surf and Dive', meta: 'Luxury surf and dive holidays from Germany: premium diving in the Maldives and Philippines, Azores nature, Canary Islands winter sun and timing advice.' },
   },
   {
     slug: 'france',
@@ -115,7 +115,7 @@ export const markets: Market[] = [
     months: ['january', 'march', 'april', 'august', 'october'],
     guides: ['best-winter-sun-surf-holidays-europe', 'best-luxury-surf-destinations-beginners', 'maldives-vs-bali-luxury-surf-dive'],
     search_terms: ['vacaciones de surf y buceo de lujo', 'viajes de surf de lujo', 'vacaciones buceo lujo'],
-    seo: { title: 'Luxury Surf & Dive Holidays from Spain | Surf and Dive', meta: 'Luxury surf and dive holidays for travellers from Spain, from Canary Islands winter sun to Costa Rica, Mexico, Bali and the Maldives, with when to go and what to expect.' },
+    seo: { title: 'Luxury Surf & Dive Holidays from Spain | Surf and Dive', meta: 'Luxury surf and dive holidays from Spain, from Canary Islands winter sun to Costa Rica, Mexico, Bali and the Maldives, with when to go and what to expect.' },
   },
   {
     slug: 'italy',
@@ -222,7 +222,7 @@ export const markets: Market[] = [
     months: ['february', 'april', 'june', 'september', 'december'],
     guides: ['how-to-plan-long-haul-luxury-ocean-trip', 'luxury-ocean-travel-worth-paying-for', 'how-many-days-luxury-surf-trip'],
     search_terms: ['luxury surf holidays from Switzerland', 'luxury diving holidays'],
-    seo: { title: 'Luxury Surf & Dive Holidays from Switzerland | Surf and Dive', meta: 'Luxury surf and dive holidays for Swiss travellers: long-haul planning, premium service and the best seasons for the Maldives, French Polynesia, Fiji and Portugal.' },
+    seo: { title: 'Luxury Surf & Dive Holidays from Switzerland | Surf and Dive', meta: 'Luxury surf and dive holidays for Swiss travellers: long-haul planning, premium service and the best seasons for the Maldives, French Polynesia and Fiji.' },
   },
   {
     slug: 'austria',
@@ -274,7 +274,7 @@ export const markets: Market[] = [
     months: ['january', 'february', 'march', 'november', 'december'],
     guides: ['best-winter-sun-surf-holidays-europe', 'where-to-surf-january-luxury-ocean-escapes', 'where-to-dive-february-warm-water-luxury'],
     search_terms: ['winter sun surf holidays', 'luxury diving holidays', 'premium ocean escapes'],
-    seo: { title: 'Winter Sun Surf & Dive Holidays from Sweden | Surf and Dive', meta: 'Winter-sun surf and dive holidays for Swedish travellers in Sri Lanka, the Maldives, the Philippines and the Canary Islands, with advice on when to go and how to plan.' },
+    seo: { title: 'Winter Sun Surf & Dive Holidays from Sweden | Surf and Dive', meta: 'Winter-sun surf and dive holidays for Swedish travellers in Sri Lanka, the Maldives, the Philippines and the Canary Islands, with when to go and how to plan.' },
   },
   {
     slug: 'norway',

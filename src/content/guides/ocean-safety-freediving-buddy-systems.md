@@ -2,7 +2,7 @@
 number: 32
 title: "Ocean Safety: Freediving, Buddy Systems and Local Conditions"
 seoTitle: "Freediving Safety: Buddy Systems & Local Conditions | Surf and Dive"
-description: "Responsible freediving safety for travellers: never freedive alone, use a trained buddy, avoid hyperventilation and depth competition, and respect local conditions."
+description: "Freediving safety for travellers: never freedive alone, use a trained buddy, avoid hyperventilation and depth competition, and respect local conditions."
 category: Safety
 primaryKeyword: freediving safety
 keywords: ["freediving safety", "freediving buddy system", "freediving holiday safety", "responsible freediving"]
