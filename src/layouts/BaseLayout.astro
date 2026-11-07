@@ -8,7 +8,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Analytics from '../components/Analytics.astro';
-import { SITE, LOCALES, ANALYTICS } from '../config/site';
+import { SITE, LOCALES, ANALYTICS, ANALYTICS_ENABLED } from '../config/site';
 import { pageTitle, breadcrumbLd, organizationLd, websiteLd, webPageLd, type Crumb } from '../utils/seo';
 
 interface Props {
@@ -125,7 +125,7 @@ const alternates = LOCALES.filter((l) => l.enabled);
       <slot />
     </main>
     <Footer />
-    {ANALYTICS.ga4Id && <Analytics id={ANALYTICS.ga4Id} />}
+    {ANALYTICS_ENABLED && <Analytics gtmId={ANALYTICS.gtmId} ga4Id={ANALYTICS.ga4Id} />}
     <script>
       import '../scripts/site.ts';
     </script>

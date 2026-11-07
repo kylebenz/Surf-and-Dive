@@ -30,8 +30,9 @@ Optionally set `PUBLIC_CONTACT_ENDPOINT` to any service that accepts JSON POSTs
 (Formspree, Basin, a serverless function…). Without it, the contact form validates but
 tells visitors the enquiry service is not yet connected. See `.env.example`.
 
-Set `PUBLIC_GA4_ID` (your GA4 Measurement ID, `G-XXXXXXXXXX`) to turn on Google
-Analytics. Without it, no analytics code or cookie banner is output.
+Analytics: Google Tag Manager container `GTM-PN3PMB7H` is built in (override with
+`PUBLIC_GTM_ID`, or set it empty to disable). `PUBLIC_GA4_ID` adds a direct GA4 tag;
+leave it empty when GA4 is configured inside GTM, or page views are counted twice.
 
 ## What's inside (99 pages)
 
@@ -59,11 +60,12 @@ Analytics. Without it, no analytics code or cookie banner is output.
   `@id`, plus a `BreadcrumbList`. Blog posts add `BlogPosting`, comparisons add `Article`,
   destinations add `TouristDestination`, and hubs add `ItemList` and `FAQPage`. Helpers
   live in `src/utils/seo.ts`; the site-wide nodes are added in `src/layouts/BaseLayout.astro`.
-- **Google Analytics 4** (`src/components/Analytics.astro`): loads only after the visitor
-  clicks Accept on the cookie banner (Google Consent Mode v2, defaults denied). Decline is
+- **Google Tag Manager / GA4** (`src/components/Analytics.astro`): GTM (and the optional
+  direct GA4 tag) load only after the visitor clicks Accept on the cookie banner (Google
+  Consent Mode v2, defaults denied). Add GA4 as a tag inside GTM. Decline is
   as easy as Accept, "Cookie settings" in the footer reopens the banner, and withdrawing
   consent removes the `_ga` cookies. Google signals and ad personalisation are off. The
-  privacy policy switches to describe analytics automatically when `PUBLIC_GA4_ID` is set.
+  privacy policy describes analytics automatically whenever GTM or GA4 is enabled.
 
 ## Google Search Console
 
@@ -132,5 +134,5 @@ Motion is subtle, progressive (content is visible without JS) and disabled under
 - [ ] Have privacy and terms reviewed and completed with the operator's legal details.
 - [ ] Re-verify seasonal, access and regulatory details (see guide source notes).
 - [ ] Verify the domain in Search Console and submit `/sitemap.xml`.
-- [ ] Set `PUBLIC_GA4_ID` in Vercel to turn on Google Analytics (consent banner included).
+- [ ] In GTM, add a Google tag with the GA4 Measurement ID (trigger: Initialization - All Pages) and publish.
 - [ ] Final human editorial review.

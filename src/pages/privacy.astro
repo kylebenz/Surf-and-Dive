@@ -1,7 +1,8 @@
 ---
 import TextPage from '../layouts/TextPage.astro';
-import { ANALYTICS } from '../config/site';
-const analytics = Boolean(ANALYTICS.ga4Id);
+import { ANALYTICS, ANALYTICS_ENABLED } from '../config/site';
+const analytics = ANALYTICS_ENABLED;
+const viaGtm = Boolean(ANALYTICS.gtmId);
 ---
 <TextPage title="Privacy Policy" seoTitle="Privacy Policy | Surf and Dive" description="How Surf and Dive handles personal data, cookies and contact-form enquiries." eyebrow="Legal" lede="A plain-language summary of what this website collects and why." path="/privacy/">
   <p><em>This policy describes the website as currently built. It should be reviewed by a qualified adviser, and updated with the operator’s legal entity and contact details, before public launch, particularly to meet UK GDPR and EU GDPR requirements.</em></p>
@@ -9,7 +10,7 @@ const analytics = Boolean(ANALYTICS.ga4Id);
   {analytics ? (
     <>
       <p><strong>Browsing.</strong> We do not use advertising trackers. Fonts and our own scripts are served from this website. Your browser may store technical data locally (for example, cached files and your cookie choice); this is not shared with us.</p>
-      <p><strong>Analytics (only with your consent).</strong> If you click “Accept” on the cookie banner, we use Google Analytics 4, provided by Google, to understand how the website is used: pages viewed, approximate location (country or city), device and browser type, and how you arrived. Google Analytics sets cookies named <code>_ga</code> and <code>_ga_*</code>, which last up to two years. Google Analytics 4 does not log or store IP addresses. Data may be processed by Google outside the UK and EU under its standard contractual clauses. We do not use this data for advertising, and Google signals and ad personalisation are not enabled. If you decline, Google Analytics is not loaded and no analytics cookies are set.</p>
+      <p><strong>Analytics (only with your consent).</strong> If you click “Accept” on the cookie banner, we use {viaGtm ? 'Google Tag Manager to load Google Analytics 4' : 'Google Analytics 4'}, provided by Google, to understand how the website is used: pages viewed, approximate location (country or city), device and browser type, and how you arrived. Google Analytics sets cookies named <code>_ga</code> and <code>_ga_*</code>, which last up to two years. Google Analytics 4 does not log or store IP addresses. Data may be processed by Google outside the UK and EU under its standard contractual clauses. We do not use this data for advertising{viaGtm ? '' : ', and Google signals and ad personalisation are not enabled'}. If you decline, {viaGtm ? 'Google Tag Manager and Google Analytics are' : 'Google Analytics is'} not loaded and no analytics cookies are set.</p>
       <p><strong>Changing your mind.</strong> Use “Cookie settings” in the website footer at any time to accept or withdraw consent. Withdrawing consent stops analytics and removes the analytics cookies from this website.</p>
     </>
   ) : (

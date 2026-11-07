@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { SITE, NAV, ANALYTICS } from '../config/site';
+import { SITE, NAV, ANALYTICS_ENABLED } from '../config/site';
 import { destinations } from '../data/destinations';
 import { MONTHS } from '../data/seasonal';
 const year = new Date().getFullYear();
@@ -46,7 +46,7 @@ const year = new Date().getFullYear();
             <li><a href="/ocean-safety/">Ocean safety</a></li>
             <li><a href="/privacy/">Privacy</a></li>
             <li><a href="/terms/">Terms</a></li>
-            {ANALYTICS.ga4Id && <li><button type="button" class="link-btn" data-cookie-settings>Cookie settings</button></li>}
+            {ANALYTICS_ENABLED && <li><button type="button" class="link-btn" data-cookie-settings>Cookie settings</button></li>}
           </ul>
         </div>
       </nav>
