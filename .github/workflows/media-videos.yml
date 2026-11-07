@@ -1,0 +1,43 @@
+# Upload a video to media/videos/ (e.g. via GitHub's "Add file → Upload files") and this
+# workflow converts it into web-ready MP4/WebM renditions, a poster frame and a
+# <name>.video.json description, then commits them to the same branch.
+# Commits made with the workflow token do not re-trigger workflows, so there is no loop.
+name: 'Media: videos'
+
+on:
+  push:
+    paths:
+      - 'media/videos/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: media-videos-${{ github.ref }}
+
+jobs:
+  transcode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install ffmpeg
+        run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+      - run: npm run media:video
+      - name: Commit optimised videos
+        run: |
+          git add public/videos media/videos
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Optimise uploaded videos for the web"
+          git push

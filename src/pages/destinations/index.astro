@@ -193,7 +193,9 @@ const seasonTypes = [
       }
       return Number(a.dataset.index) - Number(b.dataset.index);
     });
-    sorted.forEach((li) => list.appendChild(li));
+    // Move cards only when the order actually changes: re-inserting 20 cards forces the
+    // browser to restyle, lay out and repaint all of them (long main-thread tasks on phones).
+    if (sorted.some((li, i) => li !== items[i])) list.append(...sorted);
     if (count) count.textContent = shown === items.length ? `Showing all ${items.length} destinations` : `${shown} of ${items.length} destinations match`;
     if (empty) empty.hidden = shown !== 0;
     if (updateUrl) {
@@ -215,6 +217,7 @@ const seasonTypes = [
     form.addEventListener('change', () => apply());
     form.addEventListener('submit', (e) => { e.preventDefault(); apply(); });
     form.addEventListener('reset', () => setTimeout(() => apply(), 0));
-    apply(false);
+    // The server-rendered list is already the unfiltered view; only re-filter for a filtered URL.
+    if ([...params.keys()].length) apply(false);
   }
 </script>

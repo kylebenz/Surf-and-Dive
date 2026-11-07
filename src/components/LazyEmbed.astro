@@ -1,0 +1,85 @@
+---
+/**
+ * Any third-party embed (map, booking or affiliate widget, social post, review widget)
+ * without its JavaScript on page load.
+ *
+ * The embed's markup sits inside a <template>, so the browser does not fetch anything
+ * from the third party until the visitor asks for it (load="click", the default) or it
+ * scrolls near the viewport (load="visible", for embeds that must show without a click).
+ * The box keeps a fixed aspect ratio or height, so nothing moves when the embed appears.
+ *
+ * Usage:
+ *   <LazyEmbed title="Map of North Malé Atoll" src="https://www.google.com/maps/embed?pb=..." aspect="4 / 3" />
+ *   <LazyEmbed title="Check availability" label="Show availability" height={520}>
+ *     <div id="widget"></div><script is:inline src="https://partner.example/widget.js"></script>
+ *   </LazyEmbed>
+ */
+interface Props {
+  /** Accessible title of the embed (also used as the iframe title). */
+  title: string;
+  /** iframe URL. Omit to embed the slot content instead. */
+  src?: string;
+  /** Reserved shape, e.g. "16 / 9". */
+  aspect?: string;
+  /** Reserved height in px, for widgets with a fixed height. */
+  height?: number;
+  load?: 'click' | 'visible';
+  /** Button text for load="click". */
+  label?: string;
+  /** Who serves the embed, shown before loading, e.g. "Google Maps". */
+  provider?: string;
+  class?: string;
+}
+const { title, src, aspect, height, load = 'click', label = `Load ${title.toLowerCase()}`, provider, class: cls = '' } = Astro.props;
+const box = height ? `min-height:${height}px` : `aspect-ratio:${aspect ?? '16 / 9'}`;
+---
+<div class={`sd-embed ${cls}`} style={box} data-sd-embed={load}>
+  <template>
+    {src ? <iframe src={src} title={title} loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe> : <slot />}
+  </template>
+  <div class="ph">
+    {load === 'click' ? (
+      <button type="button" class="btn btn-ghost">{label}</button>
+    ) : (
+      <span class="loading">Loading {title.toLowerCase()}…</span>
+    )}
+    {provider && <p class="note">Loads content from {provider}.</p>}
+  </div>
+</div>
+
+<script>
+  function activate(box: HTMLElement) {
+    const tpl = box.querySelector('template');
+    if (!tpl) return;
+    const frag = tpl.content.cloneNode(true) as DocumentFragment;
+    // Scripts cloned from a template do not run; re-create them so widgets initialise.
+    frag.querySelectorAll('script').forEach((old) => {
+      const s = document.createElement('script');
+      for (const a of Array.from(old.attributes)) s.setAttribute(a.name, a.value);
+      s.text = old.text;
+      old.replaceWith(s);
+    });
+    box.querySelector('.ph')?.remove();
+    tpl.remove();
+    box.append(frag);
+    box.classList.add('is-loaded');
+    (box.querySelector('iframe') as HTMLElement | null)?.focus();
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => { if (e.isIntersecting) { io.unobserve(e.target); activate(e.target as HTMLElement); } }),
+    { rootMargin: '300px 0px' },
+  );
+  document.querySelectorAll<HTMLElement>('[data-sd-embed]').forEach((box) => {
+    if (box.dataset.sdEmbed === 'visible') io.observe(box);
+    else box.querySelector('button')?.addEventListener('click', () => activate(box), { once: true });
+  });
+</script>
+
+<style>
+  .sd-embed { position: relative; width: 100%; background: var(--sand); border: 1px solid var(--line); overflow: hidden; }
+  .ph { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 0.75rem; padding: 1rem; text-align: center; }
+  .note, .loading { font-size: 0.8rem; color: var(--slate); }
+  .sd-embed :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .sd-embed.is-loaded { background: transparent; }
+</style>

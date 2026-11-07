@@ -15,8 +15,12 @@ npm run dev        # http://localhost:4321
 npm run build      # static output in dist/
 npm run preview    # serve dist/
 npm run qa         # post-build checks: titles, meta, H1s, canonicals, links, alt, brand
-npm run images:report    # status of all 200 destination + 160 guide image slots
-npm run images:optimize  # responsive WebP variants for supplied photography
+npm run media            # optimise new photos now + create their title/alt files
+npm run media:video      # convert videos in media/videos/ (needs ffmpeg; CI does it on upload)
+npm run images:report    # every image slot: filled, sizes, alt text still to write
+npm run perf:budget      # performance budget for every page (also runs after each build)
+npm run test:browsers    # loading/layout/media tests: iPhone, iPad, Android, Safari, Chrome, Firefox
+npm run perf:lighthouse  # Lighthouse CI, mobile + desktop, against dist/
 ```
 
 Set the production origin before building (used for canonicals, Open Graph, sitemap and
@@ -106,11 +110,55 @@ The blog moved from `/guides/` to `/blog/`. Every old address is redirected:
   301 on hosts that support them. For other hosts, add an equivalent rule:
   `/guides/*` → `/blog/:splat` (301).
 
-## Photography
+## Photography and video
 
 All 200 destination image slots (20 × 10) and every guide image slot start **empty** and render
-as intentional, labelled placeholders, never stock or AI imagery. Drop correctly named files
-into `public/images/…` and they appear automatically. See `public/images/README.md`.
+as intentional, labelled placeholders, never stock or AI imagery. Upload full-size originals to
+`media/` and they are optimised and placed automatically. See `media/README.md` (author guide).
+
+## Performance (Core Web Vitals)
+
+Targets, mobile first: **LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1**. They are engineering targets
+checked continuously, not guarantees: field results depend on visitors' devices and networks.
+
+**Media pipeline** (`scripts/media/images.mjs`, run by `src/integrations/media.mjs` before every
+build and live in `npm run dev`). Every original in `media/` becomes AVIF + WebP + JPEG/PNG at
+480/768/1200/1600/2000 px (never upscaled), EXIF-rotated, metadata stripped, sRGB, content-hashed
+descriptive file names in `/_media/`, with width, height, aspect ratio and dominant colour in a
+manifest. Encodes are cached by content hash (`node_modules/.cache/surf-and-dive-media`), so only
+new photos cost build time (~2 s each). Videos: `scripts/media/videos.mjs` → 480/720/1080p
+MP4 + WebM, ≤ 30 fps, fast-start, poster frame through the image pipeline.
+
+**Delivery rules built into the components**
+
+- `Picture`: `<picture>` with `srcset`/`sizes`, intrinsic `width`/`height` (no CLS), dominant
+  colour while loading. `priority` (one per page, enforced) = eager + `fetchpriority="high"` for
+  the LCP image; everything else lazy. No image preload: the hero `<img>` is early in the HTML,
+  so the preload scanner finds it without one.
+- Video, YouTube/Vimeo, maps, widgets and galleries load nothing heavy until needed (see
+  `media/README.md`). Background video starts after page load, only in view, never with
+  reduced motion or Save-Data. Affiliate links are plain links (`rel="sponsored"`).
+- All CSS is inlined (~5–10 KB per page, no render-blocking requests); the two above-the-fold
+  fonts are preloaded, the rest load on demand with `font-display: swap`.
+- GTM loads only after consent and, for returning visitors, after page load when the main
+  thread is idle. Real-user LCP/INP/CLS/FCP/TTFB are pushed to the dataLayer as `web_vitals`
+  events (consent only). In GTM: a Custom Event trigger `web_vitals` and a GA4 event tag with
+  parameters `metric_name`, `metric_value`, `metric_rating`, `metric_id`.
+- Caching (`vercel.json`): hashed `/_astro/`, `/_media/`, `/videos/` are immutable for a year;
+  HTML revalidates on every deploy. Vercel serves everything from its CDN with Brotli.
+
+**Regression protection**
+
+- After every build the budget (`scripts/perf-budget.mjs`) checks each page: HTML ≤ 60 KB, CSS ≤
+  20 KB, JS ≤ 20 KB (compressed), ≤ 250 KB of images before scroll, ≤ 15 initial requests, every
+  `<img>` sized, ≤ 1 high-priority image, no third-party scripts/iframes/stylesheets in HTML,
+  videos `preload="none"`, no duplicate GA4. Warnings locally; failures in CI.
+- GitHub **Performance** workflow (every pull request): strict budget, Lighthouse CI mobile and
+  desktop (median of 3 runs; LCP ≤ 2.5 s, CLS ≤ 0.1, TBT ≤ 200 ms, performance ≥ 90) on one page
+  per template, and Playwright tests on iPhone/iPad Safari (WebKit), Android Chrome, desktop
+  Safari, Chrome and Firefox. CI builds a hidden `/dev/media/` page (`MEDIA_TEST_PAGE=1`) with
+  synthetic fixtures so galleries, video, embeds and affiliate boxes are measured too.
+- New page template (itinerary, hotel, activity, ...)? Add one URL to `lighthouserc.cjs`.
 
 ## Languages
 
@@ -129,10 +177,11 @@ Motion is subtle, progressive (content is visible without JS) and disabled under
 ## Before launch
 
 - [ ] Set `SITE_URL` to the real domain.
-- [ ] Commission or license photography; add alt text, captions and credits.
+- [ ] Commission or license photography; upload to `media/` and write alt text, captions and credits.
 - [ ] Connect `PUBLIC_CONTACT_ENDPOINT`.
 - [ ] Have privacy and terms reviewed and completed with the operator's legal details.
 - [ ] Re-verify seasonal, access and regulatory details (see guide source notes).
 - [ ] Verify the domain in Search Console and submit `/sitemap.xml`.
 - [ ] In GTM, add a Google tag with the GA4 Measurement ID (trigger: Initialization - All Pages) and publish.
+- [ ] In GTM, add the `web_vitals` event (see Performance) and watch field LCP/INP/CLS in GA4 and Search Console's Core Web Vitals report.
 - [ ] Final human editorial review.

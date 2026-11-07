@@ -42,7 +42,7 @@ export type DestinationImage = {
   id: string;
   slot: number;
   type: ImageSlotType;
-  /** Public path, e.g. /images/destinations/maldives/hero.webp. Empty until photography is supplied. */
+  /** Optional media key overriding the slot convention, e.g. "destinations/maldives/hero-alt". */
   src: string;
   /** Must describe the actual photograph once supplied. Empty while the slot is empty. */
   alt: string;

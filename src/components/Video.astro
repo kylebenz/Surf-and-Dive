@@ -1,0 +1,139 @@
+---
+/**
+ * Self-hosted video that never costs page-load performance.
+ *
+ * - Nothing but the optimised poster (a responsive AVIF/WebP <picture>) loads with the page;
+ *   the <video> has preload="none" and no sources until they are needed.
+ * - mode="background": muted, looping ambient video. Starts only when scrolled into view,
+ *   pauses when scrolled away, and never plays with prefers-reduced-motion or Save-Data.
+ * - mode="player": click to play, with native controls.
+ * - The rendition is chosen for the rendered size and connection: a phone gets 480p/720p,
+ *   never 1080p it cannot show. 4K is never delivered.
+ * - Space is reserved with the video's aspect ratio, so nothing shifts when it loads.
+ *
+ * Videos are prepared with `npm run media:video` (see media/README.md).
+ */
+import Picture from './Picture.astro';
+import { getVideo } from '../utils/video';
+
+interface Props {
+  /** File name in media/videos/ without the extension. */
+  name: string;
+  mode?: 'background' | 'player';
+  /** Accessible description of the video. Defaults to the title in its sidecar JSON. */
+  label?: string;
+  /** Rendered width, for choosing the poster file. */
+  sizes?: string;
+  /** Poster is the page's LCP element (e.g. a video hero). */
+  priority?: boolean;
+  /** CSS aspect-ratio to crop to (background video); defaults to the video's own. */
+  aspect?: string;
+  class?: string;
+}
+const { name, mode = 'player', sizes = '(min-width: 1320px) 1320px, 100vw', priority = false, aspect, class: cls = '' } = Astro.props;
+const video = getVideo(name);
+if (!video) console.warn(`[media] Video "${name}" not found. Add media/videos/${name}.mp4 and run npm run media:video.`);
+const label = Astro.props.label ?? video?.title ?? name;
+const ratio = aspect ?? (video ? `${video.width} / ${video.height}` : '16 / 9');
+---
+{video && (
+  <div class={`sd-video ${mode} ${cls}`} style={`aspect-ratio:${ratio}`} data-sd-video={mode} data-renditions={JSON.stringify(video.renditions)}>
+    {video.poster && <Picture image={video.poster} sizes={sizes} priority={priority} alt="" class="poster" />}
+    <video
+      preload="none"
+      playsinline
+      muted={mode === 'background'}
+      loop={mode === 'background'}
+      aria-label={label}
+      width={video.width}
+      height={video.height}
+    ></video>
+    {mode === 'player' && (
+      <button type="button" class="play" aria-label={`Play video: ${label}`}>
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg>
+      </button>
+    )}
+  </div>
+)}
+
+<script>
+  type R = { p: number; width: number; height: number; sources: { src: string; type: string }[] };
+
+  const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+  const constrained = () => Boolean(conn?.saveData) || /(^|-)2g|3g/.test(conn?.effectiveType ?? '');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  /** Smallest rendition that covers the rendered size at up to 2x density (or the smallest on slow connections). */
+  function pick(box: HTMLElement, list: R[]): R {
+    if (constrained()) return list[0];
+    const need = Math.min(window.devicePixelRatio || 1, 2) * Math.max(box.clientWidth, box.clientHeight * (list[0].width / list[0].height));
+    return list.find((r) => r.width >= need * 0.9) ?? list[list.length - 1];
+  }
+
+  function attach(box: HTMLElement, video: HTMLVideoElement) {
+    if (video.dataset.ready) return;
+    const r = pick(box, JSON.parse(box.dataset.renditions || '[]'));
+    for (const s of r.sources) {
+      const el = document.createElement('source');
+      el.src = s.src;
+      el.type = s.type;
+      video.append(el);
+    }
+    video.dataset.ready = '1';
+    video.load();
+  }
+
+  const show = (box: HTMLElement) => box.classList.add('is-playing');
+
+  function setup(box: HTMLElement) {
+    const video = box.querySelector('video')!;
+    video.addEventListener('playing', () => show(box), { once: true });
+
+    if (box.dataset.sdVideo === 'background') {
+      if (reduceMotion.matches || constrained()) return; // poster only
+      // Wait for the page (and its LCP poster) to finish loading before fetching any video.
+      if (document.readyState !== 'complete') {
+        addEventListener('load', () => setTimeout(() => setup(box), 0), { once: true });
+        return;
+      }
+      const io = new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) {
+            attach(box, video);
+            video.play().catch(() => {});
+          } else if (video.dataset.ready) video.pause();
+        },
+        { rootMargin: '200px 0px' },
+      );
+      io.observe(box);
+      return;
+    }
+
+    box.querySelector('.play')?.addEventListener('click', () => {
+      video.controls = true;
+      attach(box, video);
+      show(box);
+      video.play().catch(() => {});
+      video.focus();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-sd-video]').forEach(setup);
+</script>
+
+<style>
+  .sd-video { position: relative; overflow: hidden; background: var(--deep-ocean); }
+  .sd-video :global(.poster), .sd-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .sd-video video { opacity: 0; transition: opacity 0.6s var(--ease); }
+  .sd-video.is-playing video { opacity: 1; }
+  .player video { object-fit: contain; background: #000; }
+  .play {
+    position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer;
+    background: rgba(8, 43, 54, 0.72); color: var(--shell); border: 1px solid rgba(243, 247, 245, 0.6);
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .play:hover { background: var(--deep-ocean); transform: scale(1.04); }
+  .play:focus-visible { outline: 2px solid var(--seafoam); outline-offset: 3px; }
+  .is-playing .play { display: none; }
+</style>

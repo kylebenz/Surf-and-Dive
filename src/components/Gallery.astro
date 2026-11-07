@@ -1,0 +1,168 @@
+---
+/**
+ * Photo gallery: small thumbnails first, full-size only on demand.
+ *
+ * - Thumbnails are lazy-loaded, sized for the grid (a phone downloads ~480px files).
+ * - Larger images load only when the visitor opens one, at the size the screen needs,
+ *   and only the image being viewed is requested.
+ * - The viewer is a native <dialog> (focus, Escape and screen readers handled by the browser),
+ *   with arrow keys and swipe. Its frame takes each photo's aspect ratio, and the already-
+ *   loaded thumbnail is shown underneath until the large file arrives, so nothing jumps.
+ *
+ * Usage: <Gallery title="Fiji in pictures" folder="gallery/fiji" />  (every image in media/gallery/fiji)
+ *    or: <Gallery title="..." items={['destinations/fiji/surf', { key: 'gallery/fiji/03', caption: '...' }]} />
+ */
+import Picture from './Picture.astro';
+import { getImage, listMedia, type ResolvedImage } from '../utils/images';
+
+type Item = string | { key: string; alt?: string; caption?: string; credit?: string };
+interface Props {
+  title: string;
+  folder?: string;
+  items?: Item[];
+  class?: string;
+}
+const { title, folder, items = [], class: cls = '' } = Astro.props;
+const list: Item[] = folder ? [...listMedia(folder), ...items] : items;
+const images = list
+  .map((it) => (typeof it === 'string' ? getImage(it) : getImage(it.key, it)))
+  .filter((x): x is ResolvedImage => Boolean(x));
+const full = images.map((img) => ({
+  sources: img.sources,
+  srcset: img.srcset,
+  src: img.src,
+  w: img.width,
+  h: img.height,
+  alt: img.alt,
+  caption: [img.caption, img.credit].filter(Boolean).join(' · '),
+}));
+---
+{images.length > 0 && (
+  <section class={`sd-gallery ${cls}`} aria-label={title} data-sd-gallery>
+    <ul role="list" class="grid">
+      {images.map((img, i) => (
+        <li>
+          <button type="button" class="thumb" data-i={i} aria-label={`Open photo ${i + 1} of ${images.length}: ${img.alt}`}>
+            <Picture image={img} sizes="(min-width: 1000px) 25vw, (min-width: 640px) 33vw, 50vw" alt="" />
+          </button>
+        </li>
+      ))}
+    </ul>
+    <script type="application/json" set:html={JSON.stringify(full)} />
+    <dialog class="viewer" aria-label={title}>
+      <figure>
+        <div class="frame"></div>
+        <figcaption><span class="cap"></span><span class="count"></span></figcaption>
+      </figure>
+      <button type="button" class="nav prev" aria-label="Previous photo">‹</button>
+      <button type="button" class="nav next" aria-label="Next photo">›</button>
+      <button type="button" class="close" aria-label="Close">×</button>
+    </dialog>
+  </section>
+)}
+
+<script>
+  type Full = { sources: { type: string; srcset: string }[]; srcset: string; src: string; w: number; h: number; alt: string; caption: string };
+
+  document.querySelectorAll<HTMLElement>('[data-sd-gallery]').forEach((g) => {
+    const data: Full[] = JSON.parse(g.querySelector('script[type="application/json"]')!.textContent || '[]');
+    const dialog = g.querySelector('dialog')!;
+    const frame = dialog.querySelector<HTMLElement>('.frame')!;
+    // The viewer's <picture> is created on first open, so nothing is requested before then.
+    const picture = document.createElement('picture');
+    const avif = document.createElement('source');
+    const webp = document.createElement('source');
+    const img = document.createElement('img');
+    avif.type = 'image/avif';
+    webp.type = 'image/webp';
+    for (const s of [avif, webp]) s.sizes = '100vw';
+    img.sizes = '100vw';
+    img.decoding = 'async';
+    picture.append(avif, webp, img);
+    const cap = dialog.querySelector('.cap')!;
+    const count = dialog.querySelector('.count')!;
+    const thumbs = Array.from(g.querySelectorAll<HTMLButtonElement>('.thumb'));
+    let index = 0;
+    let opener: HTMLElement | null = null;
+
+    function show(i: number) {
+      index = (i + data.length) % data.length;
+      const d = data[index];
+      const thumb = thumbs[index].querySelector('img');
+      // Reserve the photo's shape and paint the cached thumbnail while the large file loads.
+      if (!picture.isConnected) frame.append(picture);
+      frame.style.setProperty('--r', String(d.w / d.h));
+      frame.style.backgroundImage = thumb?.currentSrc ? `url("${thumb.currentSrc}")` : '';
+      const set = (el: HTMLSourceElement, type: string) => {
+        const s = d.sources.find((x) => x.type === type);
+        if (s) el.srcset = s.srcset; else el.removeAttribute('srcset');
+      };
+      set(avif, 'image/avif');
+      set(webp, 'image/webp');
+      img.width = d.w;
+      img.height = d.h;
+      img.srcset = d.srcset;
+      img.src = d.src;
+      img.alt = d.alt;
+      cap.textContent = d.caption;
+      count.textContent = `${index + 1} / ${data.length}`;
+    }
+
+    thumbs.forEach((t) =>
+      t.addEventListener('click', () => {
+        opener = t;
+        show(Number(t.dataset.i));
+        dialog.showModal();
+      }),
+    );
+    dialog.querySelector('.prev')!.addEventListener('click', () => show(index - 1));
+    dialog.querySelector('.next')!.addEventListener('click', () => show(index + 1));
+    dialog.querySelector('.close')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => opener?.focus());
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') show(index + 1);
+      if (e.key === 'ArrowLeft') show(index - 1);
+    });
+    let x0: number | null = null;
+    dialog.addEventListener('pointerdown', (e) => { x0 = e.clientX; });
+    dialog.addEventListener('pointerup', (e) => {
+      if (x0 !== null && Math.abs(e.clientX - x0) > 50) show(index + (e.clientX < x0 ? 1 : -1));
+      x0 = null;
+    });
+  });
+</script>
+
+<style>
+  .grid { display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1000px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .thumb { display: block; width: 100%; aspect-ratio: 1; padding: 0; border: 0; cursor: zoom-in; overflow: hidden; background: var(--sand-deep); }
+  .thumb :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
+  .thumb:hover :global(img) { transform: scale(1.03); }
+  .thumb:focus-visible { outline: 2px solid var(--ocean-teal); outline-offset: 2px; }
+
+  .viewer { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(4, 22, 28, 0.96); color: var(--on-dark); }
+  .viewer::backdrop { background: rgba(4, 22, 28, 0.8); }
+  .viewer[open] { display: grid; place-items: center; }
+  figure { margin: 0; display: grid; justify-items: center; gap: 0.75rem; padding: 3.5rem 1rem 1.5rem; max-width: 100%; }
+  /* Largest box with the photo's aspect ratio (--r) that fits the screen. */
+  .frame {
+    --r: 1.5;
+    aspect-ratio: var(--r);
+    width: min(calc(100vw - 2rem), 1600px, calc((100vh - 8rem) * var(--r)));
+    width: min(calc(100vw - 2rem), 1600px, calc((100dvh - 8rem) * var(--r)));
+    background-size: cover; background-position: center;
+  }
+  .frame :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  figcaption { display: flex; gap: 1.5rem; justify-content: space-between; width: 100%; max-width: 1600px; font-size: 0.85rem; color: var(--on-dark-muted); }
+  .nav, .close {
+    position: absolute; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 50%;
+    background: rgba(243, 247, 245, 0.08); color: var(--on-dark); font-size: 1.8rem; line-height: 1; cursor: pointer;
+  }
+  .nav:hover, .close:hover { background: rgba(243, 247, 245, 0.18); }
+  .nav:focus-visible, .close:focus-visible { outline: 2px solid var(--seafoam); outline-offset: 2px; }
+  .prev { left: 0.75rem; top: 50%; translate: 0 -50%; }
+  .next { right: 0.75rem; top: 50%; translate: 0 -50%; }
+  .close { right: 0.75rem; top: 0.75rem; }
+</style>

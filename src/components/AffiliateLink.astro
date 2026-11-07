@@ -1,0 +1,28 @@
+---
+/**
+ * An affiliate link is just a link: no partner JavaScript, no widget, nothing to block
+ * rendering, and it keeps working if every third-party script fails.
+ *
+ * rel="sponsored" tells search engines it is a paid link. Clicks can be measured in
+ * Google Tag Manager with a built-in "Click - Just Links" trigger on the data-affiliate
+ * attribute, so no tracking code is needed here.
+ *
+ * Usage: <AffiliateLink href="https://partner.example/?aid=123" partner="Booking.com">Check availability</AffiliateLink>
+ */
+interface Props {
+  href: string;
+  /** Partner name, for analytics (data-affiliate) and the accessible description. */
+  partner: string;
+  class?: string;
+  /** Open in a new tab (default true, the norm for booking links). */
+  newTab?: boolean;
+}
+const { href, partner, class: cls, newTab = true } = Astro.props;
+---
+<a
+  href={href}
+  class={cls}
+  rel={newTab ? 'sponsored noopener' : 'sponsored'}
+  target={newTab ? '_blank' : undefined}
+  data-affiliate={partner}
+><slot />{newTab && <span class="sr-only"> (opens {partner} in a new tab)</span>}</a>

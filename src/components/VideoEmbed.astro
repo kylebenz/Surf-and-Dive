@@ -1,0 +1,88 @@
+---
+/**
+ * YouTube or Vimeo video as a lightweight facade.
+ *
+ * The page loads only a poster (from the media pipeline) and a play button. The provider's
+ * player, with its ~1 MB of JavaScript, loads only when the visitor presses play. Nothing is
+ * requested from YouTube or Vimeo before that, so there is no tracking or cookie either.
+ *
+ * Usage: <VideoEmbed provider="youtube" id="dQw4w9WgXcQ" title="Surfing Cloudbreak" poster="videos/cloudbreak-poster" />
+ */
+import Picture from './Picture.astro';
+import { getImage } from '../utils/images';
+
+interface Props {
+  provider: 'youtube' | 'vimeo';
+  id: string;
+  title: string;
+  /** Media key of a poster image (recommended: a still from the video in media/videos/). */
+  poster?: string;
+  /** Start time in seconds. */
+  start?: number;
+  sizes?: string;
+  class?: string;
+}
+const { provider, id, title, poster, start, sizes = '(min-width: 1320px) 1320px, 100vw', class: cls = '' } = Astro.props;
+const image = poster ? getImage(poster) : null;
+const src =
+  provider === 'youtube'
+    ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&playsinline=1&rel=0${start ? `&start=${start}` : ''}`
+    : `https://player.vimeo.com/video/${encodeURIComponent(id)}?autoplay=1&dnt=1${start ? `#t=${start}s` : ''}`;
+const origin = provider === 'youtube' ? 'https://www.youtube-nocookie.com' : 'https://player.vimeo.com';
+const name = provider === 'youtube' ? 'YouTube' : 'Vimeo';
+---
+<div class={`sd-vembed ${cls}`} data-sd-vembed={src} data-origin={origin} data-title={title}>
+  {image ? <Picture image={image} sizes={sizes} alt="" class="poster" /> : <div class="poster blank" aria-hidden="true"></div>}
+  <button type="button" class="play" aria-label={`Play video: ${title}`}>
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg>
+  </button>
+  <p class="meta"><span class="t">{title}</span><span class="p">Plays from {name}</span></p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-sd-vembed]').forEach((box) => {
+    const btn = box.querySelector('button')!;
+    // Warm up the connection only once the visitor shows intent.
+    const warm = () => {
+      if (box.dataset.warm) return;
+      box.dataset.warm = '1';
+      const l = document.createElement('link');
+      l.rel = 'preconnect';
+      l.href = box.dataset.origin!;
+      document.head.append(l);
+    };
+    box.addEventListener('pointerenter', warm, { once: true });
+    btn.addEventListener('focus', warm, { once: true });
+    btn.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = box.dataset.sdVembed!;
+      f.title = box.dataset.title!;
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      box.replaceChildren(f);
+      box.classList.add('is-playing');
+      f.focus();
+    });
+  });
+</script>
+
+<style>
+  .sd-vembed { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--deep-ocean); }
+  .sd-vembed :global(.poster), .sd-vembed :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+  .blank { background: linear-gradient(170deg, #0d3a48, var(--deep-ocean) 60%, #071f28); }
+  .play {
+    position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer;
+    background: rgba(8, 43, 54, 0.72); color: var(--shell); border: 1px solid rgba(243, 247, 245, 0.6);
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .play:hover { background: var(--deep-ocean); transform: scale(1.04); }
+  .play:focus-visible { outline: 2px solid var(--seafoam); outline-offset: 3px; }
+  .meta {
+    position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; gap: 1rem;
+    padding: 2.5rem 1rem 0.85rem; font-size: 0.82rem; color: var(--on-dark);
+    background: linear-gradient(transparent, rgba(8, 43, 54, 0.85)); pointer-events: none;
+  }
+  .meta .p { color: var(--on-dark-muted); white-space: nowrap; }
+</style>

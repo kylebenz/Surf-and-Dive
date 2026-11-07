@@ -16,7 +16,7 @@ import { markets } from '../data/countries';
 import { resolveImage } from '../utils/images';
 import { itemListLd } from '../utils/seo';
 
-const heroImage = resolveImage({ dir: '/images/home', base: 'hero', alt: '' });
+const heroImage = resolveImage({ dir: 'home', base: 'hero' });
 const featured = featuredSlugs.map(getDestination);
 const guides = (await getCollection('guides')).sort((a, b) => a.data.number - b.data.number);
 const featuredGuideIds = [

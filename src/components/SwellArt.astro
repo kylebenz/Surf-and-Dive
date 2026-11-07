@@ -5,11 +5,15 @@ const { seed, tone = 'dark', lines = 18, class: cls = '' } = Astro.props;
 const { paths, width, height } = swellPaths(seed, { lines });
 ---
 <svg class={`swell s-${tone} ${cls}`} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-  {paths.map((d, i) => <path d={d} style={`--o:${(0.25 + (i % 5) * 0.12).toFixed(2)}`} />)}
+  {paths.map((d) => <path d={d} />)}
 </svg>
 <style>
   .swell { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
-  .swell path { stroke-opacity: var(--o); vector-effect: non-scaling-stroke; }
+  .swell path { stroke-opacity: 0.25; vector-effect: non-scaling-stroke; }
+  .swell path:nth-child(5n + 2) { stroke-opacity: 0.37; }
+  .swell path:nth-child(5n + 3) { stroke-opacity: 0.49; }
+  .swell path:nth-child(5n + 4) { stroke-opacity: 0.61; }
+  .swell path:nth-child(5n + 5) { stroke-opacity: 0.73; }
   .swell.s-dark { stroke: #5fb7b4; }
   .swell.s-sand { stroke: #b9ad97; }
   .swell.s-seafoam { stroke: #6fb3a5; }

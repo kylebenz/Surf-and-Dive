@@ -1,7 +1,7 @@
 ---
 /**
  * An image slot within a guide, driven by the article's image guide.
- * Resolves to /public/images/blog/<slug>/image-<n>.(webp|avif|jpg|png) when present.
+ * Resolves to media/blog/<slug>/image-<n>.(jpg|png|webp|avif|tif) when present.
  */
 import ImageSlot from './ImageSlot.astro';
 import { resolveImage } from '../utils/images';
@@ -10,10 +10,11 @@ interface Props {
   index: number;
   slot: { label: string; kind: 'photo' | 'graphic'; src: string; alt: string; caption?: string; credit?: string };
   aspect?: string;
+  priority?: boolean;
   eager?: boolean;
   sizes?: string;
 }
-const { slug, index, slot, aspect, eager, sizes } = Astro.props;
-const image = resolveImage({ src: slot.src, dir: `/images/blog/${slug}`, base: `image-${index + 1}`, alt: slot.alt, caption: slot.caption, credit: slot.credit });
+const { slug, index, slot, aspect, priority, eager, sizes } = Astro.props;
+const image = resolveImage({ src: slot.src, dir: `blog/${slug}`, base: `image-${index + 1}`, alt: slot.alt, caption: slot.caption, credit: slot.credit });
 ---
-<ImageSlot image={image} label={slot.label} kind={slot.kind} aspect={aspect} eager={eager} sizes={sizes} />
+<ImageSlot image={image} label={slot.label} kind={slot.kind} aspect={aspect} priority={priority} eager={eager} sizes={sizes} />
