@@ -11,6 +11,7 @@
  *
  * Usage: <Gallery title="Fiji in pictures" folder="gallery/fiji" />  (every image in media/gallery/fiji)
  *    or: <Gallery title="..." items={['destinations/fiji/surf', { key: 'gallery/fiji/03', caption: '...' }]} />
+ *    or: <Gallery title="..." items={[...]} trigger="View all 10 photos" />  (a button instead of thumbnails)
  */
 import Picture from './Picture.astro';
 import { getImage, listMedia, type ResolvedImage } from '../utils/images';
@@ -20,9 +21,11 @@ interface Props {
   title: string;
   folder?: string;
   items?: Item[];
+  /** Show one button with this label instead of a thumbnail grid (for photos already on the page). */
+  trigger?: string;
   class?: string;
 }
-const { title, folder, items = [], class: cls = '' } = Astro.props;
+const { title, folder, items = [], trigger, class: cls = '' } = Astro.props;
 const list: Item[] = folder ? [...listMedia(folder), ...items] : items;
 const images = list
   .map((it) => (typeof it === 'string' ? getImage(it) : getImage(it.key, it)))
@@ -39,15 +42,19 @@ const full = images.map((img) => ({
 ---
 {images.length > 0 && (
   <section class={`sd-gallery ${cls}`} aria-label={title} data-sd-gallery>
-    <ul role="list" class="grid">
-      {images.map((img, i) => (
-        <li>
-          <button type="button" class="thumb" data-i={i} aria-label={`Open photo ${i + 1} of ${images.length}: ${img.alt}`}>
-            <Picture image={img} sizes="(min-width: 1000px) 25vw, (min-width: 640px) 33vw, 50vw" alt="" />
-          </button>
-        </li>
-      ))}
-    </ul>
+    {trigger ? (
+      <button type="button" class="thumb open-all btn btn-ghost" data-i="0" aria-haspopup="dialog">{trigger}</button>
+    ) : (
+      <ul role="list" class="grid">
+        {images.map((img, i) => (
+          <li>
+            <button type="button" class="thumb" data-i={i} aria-label={`Open photo ${i + 1} of ${images.length}: ${img.alt}`}>
+              <Picture image={img} sizes="(min-width: 1000px) 25vw, (min-width: 640px) 33vw, 50vw" alt="" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    )}
     <script type="application/json" set:html={JSON.stringify(full)} />
     <dialog class="viewer" aria-label={title}>
       <figure>
@@ -88,7 +95,7 @@ const full = images.map((img) => ({
     function show(i: number) {
       index = (i + data.length) % data.length;
       const d = data[index];
-      const thumb = thumbs[index].querySelector('img');
+      const thumb = thumbs[index]?.querySelector('img');
       // Reserve the photo's shape and paint the cached thumbnail while the large file loads.
       if (!picture.isConnected) frame.append(picture);
       frame.style.setProperty('--r', String(d.w / d.h));
@@ -137,7 +144,8 @@ const full = images.map((img) => ({
   .grid { display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (min-width: 640px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (min-width: 1000px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .thumb { display: block; width: 100%; aspect-ratio: 1; padding: 0; border: 0; cursor: zoom-in; overflow: hidden; background: var(--sand-deep); }
+  .open-all { width: auto; aspect-ratio: auto; cursor: pointer; }
+  .thumb:not(.open-all) { display: block; width: 100%; aspect-ratio: 1; padding: 0; border: 0; cursor: zoom-in; overflow: hidden; background: var(--sand-deep); }
   .thumb :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
   .thumb:hover :global(img) { transform: scale(1.03); }
   .thumb:focus-visible { outline: 2px solid var(--ocean-teal); outline-offset: 2px; }

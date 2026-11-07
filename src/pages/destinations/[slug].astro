@@ -13,7 +13,9 @@ import { destinations, getDestination } from '../../data/destinations';
 import { MONTHS } from '../../data/seasonal';
 import { comparisons } from '../../data/comparisons';
 import { slotLabel } from '../../data/destinations/_images';
-import { resolveImage } from '../../utils/images';
+import { resolveImage, getImage, listMedia } from '../../utils/images';
+import Gallery from '../../components/Gallery.astro';
+import { IMAGE_SLOTS } from '../../data/destinations/_images';
 import { faqLd, absoluteUrl, organizationRef } from '../../utils/seo';
 import { SITE } from '../../config/site';
 import type { Destination } from '../../data/types';
@@ -26,6 +28,13 @@ const { d } = Astro.props as { d: Destination };
 const site = Astro.site!;
 const heroSlot = d.images.find((i) => i.type === 'hero')!;
 const heroImage = resolveImage({ src: heroSlot.src, dir: `destinations/${d.slug}`, base: 'hero', alt: heroSlot.alt });
+
+// Every photo of this destination (the ten slots, then any extras in media/destinations/<slug>/more/),
+// browsable full screen from the gallery section.
+const allPhotos = [
+  ...IMAGE_SLOTS.map((s) => `destinations/${d.slug}/${s.file}`).filter((k) => getImage(k)),
+  ...listMedia(`destinations/${d.slug}/more`),
+];
 
 const allGuides = await getCollection('guides');
 const relatedGuides = d.related_articles.map((id) => allGuides.find((g) => g.id === id)).filter(Boolean) as typeof allGuides;
@@ -302,6 +311,11 @@ const touristDestination = {
         <div class="g3 reveal"><DestinationImagePlaceholder destination={d} type="culture" aspect="4 / 5" sizes="(min-width: 1000px) 33vw, 100vw" /></div>
         <div class="g4 reveal"><DestinationImagePlaceholder destination={d} type="signature" aspect="16 / 10" sizes="(min-width: 1000px) 66vw, 100vw" /></div>
       </div>
+      {allPhotos.length >= 4 && (
+        <div class="all-photos">
+          <Gallery title={`${d.name}: all photos`} items={allPhotos} trigger={`View all ${allPhotos.length} photos`} />
+        </div>
+      )}
     </div>
   </section>
 
@@ -440,12 +454,18 @@ const touristDestination = {
   .checklist li::before { content: ''; position: absolute; left: 0; top: 1.3rem; width: 12px; height: 7px; border-left: 1.5px solid var(--ocean-teal); border-bottom: 1.5px solid var(--ocean-teal); transform: rotate(-45deg); }
 
   .gallery { display: grid; gap: 1.25rem; }
+  .all-photos { margin-top: 2rem; display: flex; justify-content: center; }
   @media (min-width: 900px) {
     .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: 'g1 g1 g2' 'g3 g4 g4'; gap: 1.5rem; }
     .g1 { grid-area: g1; } .g2 { grid-area: g2; } .g3 { grid-area: g3; } .g4 { grid-area: g4; }
     .g1, .g4 { display: grid; }
     .g1 :global(.slot), .g4 :global(.slot) { height: 100%; }
-    .g1 :global(.slot.placeholder), .g4 :global(.slot.placeholder), .g1 :global(.frame), .g4 :global(.frame) { aspect-ratio: auto !important; height: 100%; }
+    .g1 :global(.slot.placeholder), .g4 :global(.slot.placeholder) { aspect-ratio: auto !important; height: 100%; }
+    /* Photo fills the cell above its credit line, so the credit never overlaps the next row. */
+    .g1 :global(.slot.has-image), .g4 :global(.slot.has-image) { display: flex; flex-direction: column; }
+    .g1 :global(.frame), .g4 :global(.frame) { aspect-ratio: auto !important; flex: 1 1 auto; min-height: 0; height: auto; }
+    /* The wide photos take their height from the row (set by the portrait photos), so the edges line up. */
+    .g1 :global(.frame img), .g4 :global(.frame img) { position: absolute; inset: 0; }
   }
 
   .comparisons { margin-top: 3rem; display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: baseline; }
