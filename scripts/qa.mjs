@@ -5,7 +5,8 @@ import path from 'node:path';
 
 const dist = path.join(process.cwd(), 'dist');
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
-const pages = walk(dist).filter((f) => f.endsWith('.html'));
+// Search-engine verification files (e.g. google*.html) are plain text, not pages.
+const pages = walk(dist).filter((f) => f.endsWith('.html') && !/^google[0-9a-f]+\.html$/.test(path.basename(f)));
 const problems = [];
 const titles = new Map(), descs = new Map();
 const exists = (href) => {
@@ -29,6 +30,11 @@ for (const file of pages) {
   const h1s = (html.match(/<h1[\s>]/g) || []).length;
   if (!title) problems.push(`${rel}: missing <title>`);
   if (!desc) problems.push(`${rel}: missing meta description`);
+  if (desc) {
+    // Bing Webmaster Tools flags descriptions outside 25-160 characters as an error.
+    const len = desc.replace(/&(#\d+|#x[0-9a-f]+|\w+);/gi, '_').length;
+    if (len < 25 || len > 160) problems.push(`${rel}: meta description is ${len} characters (keep 25-160)`);
+  }
   if (h1s !== 1) problems.push(`${rel}: ${h1s} <h1> elements`);
   if (!rel.startsWith('/404') && !/<link rel="canonical"/.test(html)) problems.push(`${rel}: missing canonical`);
   if (title) titles.set(title, [...(titles.get(title) || []), rel]);

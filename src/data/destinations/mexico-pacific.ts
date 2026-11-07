@@ -104,7 +104,7 @@ export const mexicoPacific: Destination = {
 
   seo: {
     title: 'Mexico Pacific Luxury Surf Holidays | Punta Mita, Baja & Oaxaca',
-    meta: 'Plan a luxury Mexico Pacific surf holiday: Punta Mita points, Sayulita, Puerto Escondido, Baja and refined resorts, with seasons explained for European travellers.',
+    meta: 'Plan a luxury Mexico Pacific surf holiday: Punta Mita, Sayulita, Puerto Escondido, Baja and refined resorts, with seasons explained for European travellers.',
     primary_keywords: ['Mexico luxury surf holiday', 'Punta Mita surf'],
     secondary_keywords: ['Puerto Escondido surf', 'Sayulita surf', 'Baja surf', 'Mexico surf season'],
   },

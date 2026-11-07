@@ -26,7 +26,7 @@ const faqs = [
 ---
 <BaseLayout
   title="Luxury Surf Holidays | Surf and Dive"
-  description="Luxury surf holidays compared by wave character, season, skill level, water temperature and the quality of the stay, from Fiji and Bali to Portugal and the Maldives."
+  description="Luxury surf holidays compared by wave character, season, skill level, water temperature and the quality of the stay, from Fiji and Bali to Portugal."
   crumbs={[{ label: 'Surf', href: '/surf/' }]}
   jsonLd={[faqLd(faqs), itemListLd(best.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
 >

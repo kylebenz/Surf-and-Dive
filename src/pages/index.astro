@@ -40,7 +40,7 @@ const activities = [
 ---
 <BaseLayout
   title={`Surf and Dive | ${SITE.tagline}`}
-  description="Discover exceptional surf, diving and freediving destinations paired with beautiful places to stay, thoughtful experiences and the best seasons to travel from Europe."
+  description="Exceptional surf, diving and freediving destinations paired with beautiful places to stay, thoughtful experiences and the best seasons to travel from Europe."
   jsonLd={[itemListLd(featured.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
 >
   <Hero

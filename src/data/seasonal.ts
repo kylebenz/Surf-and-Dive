@@ -42,7 +42,7 @@ export const seasons: Season[] = [
     ],
     also_note: 'Selected areas of Thailand and Indonesia can also work in January depending on the coast. Check regional conditions carefully.',
     guides: ['where-to-surf-january-luxury-ocean-escapes', 'best-winter-sun-surf-holidays-europe', 'canary-islands-vs-madeira-winter-sun'],
-    seo: { title: 'Where to Surf and Dive in January | Surf and Dive', meta: 'Where to go in January for warm-water surf, diving and luxury: the Maldives, Sri Lanka, Madeira, the Canaries and more: planning guidance for European travellers.' },
+    seo: { title: 'Where to Surf and Dive in January | Surf and Dive', meta: 'Where to go in January for warm-water surf, diving and luxury: the Maldives, Sri Lanka, Madeira, the Canaries and more, for European travellers.' },
   },
   {
     month: 'february',
