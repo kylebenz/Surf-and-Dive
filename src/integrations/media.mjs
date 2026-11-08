@@ -4,11 +4,13 @@
 //   optimised (cached by content hash, so only new or changed photos are encoded).
 // - In dev, adding or editing a file in /media re-runs the pipeline and reloads the page,
 //   and sidecar stubs (<name>.json with title and alt text) are created for new images.
-// - After every build, the performance budget runs over /dist (scripts/perf-budget.mjs).
+// - After every build, the performance budget runs over /dist (scripts/perf-budget.mjs), and the
+//   IndexNow page fingerprints are written (scripts/indexnow.mjs) so only changed pages get submitted.
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { processImages, paths } from '../../scripts/media/images.mjs';
 import { runBudget } from '../../scripts/perf-budget.mjs';
+import { writeManifest } from '../../scripts/indexnow.mjs';
 
 export default function media() {
   let root = process.cwd();
@@ -45,6 +47,8 @@ export default function media() {
         server.watcher.on('unlink', onChange);
       },
       'astro:build:done': async ({ dir, logger }) => {
+        const indexed = writeManifest(fileURLToPath(dir));
+        logger.info(`IndexNow: fingerprinted ${indexed} indexable pages`);
         const ok = runBudget({ dist: fileURLToPath(dir), log: (m) => logger.info(m), warn: (m) => logger.warn(m) });
         if (!ok && process.env.PERF_BUDGET_STRICT === '1') {
           throw new Error('Performance budget exceeded (PERF_BUDGET_STRICT=1). See the warnings above.');
