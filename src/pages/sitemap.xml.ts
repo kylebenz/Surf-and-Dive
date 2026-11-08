@@ -7,7 +7,7 @@ import { markets } from '../data/countries';
 import { SITE } from '../config/site';
 
 export const GET: APIRoute = async ({ site }) => {
-  const base = site ?? new URL('https://www.surfanddive.com');
+  const base = site ?? new URL('https://surfanddive.com');
   const guides = await getCollection('guides');
   const lastmod = SITE.lastReviewed;
   const entries: { path: string; lastmod: string; priority: string; changefreq: string }[] = [
