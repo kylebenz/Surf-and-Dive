@@ -80,10 +80,12 @@ sitemap). How it works:
 - The key file `public/518bec9702d805a3d53be5998658c92d.txt` proves ownership (keys are public by design).
 - Every build writes `/indexnow-manifest.json`: a fingerprint of each indexable page (the same 98
   pages as the sitemap; redirects, noindex and test pages are left out).
-- The **IndexNow** GitHub workflow runs when Vercel reports a successful production deployment. It
-  finds the live address (`https://surfanddive.com` or `https://www.surfanddive.com`, or the
-  `SITE_ORIGIN` repository variable), checks the key file, compares fingerprints with the last run
-  and submits only what changed. The first run submits every page once.
+- The **IndexNow** GitHub workflow runs on every push to the production branch. It finds the live
+  address (`https://surfanddive.com` or `https://www.surfanddive.com`, or the `SITE_ORIGIN`
+  repository variable), waits until the live site serves that commit (each build records its
+  commit in the manifest; up to 20 minutes), checks the key file, compares fingerprints with the
+  last run and submits only what changed. The first run submits every page once. It works with
+  any host, whether or not the host reports deployments to GitHub.
 - To resubmit everything: Actions → IndexNow → Run workflow → tick "all".
 - It warns in the run log if the canonical URLs (from `SITE_URL`) use a different host than the live
   site, e.g. www vs non-www. Fix that by setting `SITE_URL` in Vercel to the live address.
