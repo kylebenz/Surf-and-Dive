@@ -1,14 +1,16 @@
-# IndexNow: after every successful Vercel production deploy, tell Bing (and the other IndexNow
-# search engines) exactly which pages were added, changed or removed. See scripts/indexnow.mjs.
+# IndexNow: after every production deploy, tell Bing (and the other IndexNow search engines)
+# exactly which pages were added, changed or removed. See scripts/indexnow.mjs.
 #
-# Runs automatically from the deployment statuses Vercel reports to GitHub. To submit every page
-# by hand: Actions → IndexNow → Run workflow (tick "all").
+# Runs on every push to the production branch, waits until the live site serves that commit (up
+# to 20 minutes), then submits. This works with any host, whether or not it reports deployments
+# to GitHub. To submit every page by hand: Actions → IndexNow → Run workflow (tick "all").
 # If the live address is not https://surfanddive.com or https://www.surfanddive.com, set the
 # repository variable SITE_ORIGIN (Settings → Secrets and variables → Actions → Variables).
 name: IndexNow
 
 on:
-  deployment_status:
+  push:
+    branches: [claude/friendly-turing-64bgzr]
   workflow_dispatch:
     inputs:
       all:
@@ -22,11 +24,8 @@ concurrency:
 
 jobs:
   submit:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.deployment_status.state == 'success' && startsWith(github.event.deployment.environment, 'Production'))
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -39,7 +38,11 @@ jobs:
           key: indexnow-${{ github.run_id }}
           restore-keys: indexnow-
       - name: Submit changed pages
-        run: node scripts/indexnow.mjs submit --previous .indexnow/previous.json --out .indexnow/previous.json ${{ inputs.all && '--all' || '' }}
+        run: >-
+          node scripts/indexnow.mjs submit
+          --previous .indexnow/previous.json --out .indexnow/previous.json
+          ${{ github.event_name == 'push' && format('--wait-for {0}', github.sha) || '' }}
+          ${{ inputs.all && '--all' || '' }}
         env:
           SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
       - uses: actions/cache/save@v4
