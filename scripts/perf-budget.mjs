@@ -50,7 +50,9 @@ function candidateBytes(dist, srcset, px) {
 }
 
 export function auditPage(dist, file) {
-  const html = fs.readFileSync(file, 'utf8');
+  // Markup inside <template> (lazy ads, embeds) is inert until inserted on demand, so it is not
+  // part of the page load: leave it out of every check.
+  const html = fs.readFileSync(file, 'utf8').replace(/<template[\s\S]*?<\/template>/g, '');
   const rel = '/' + path.relative(dist, file).split(path.sep).join('/').replace(/index\.html$/, '');
   const errors = [], warnings = [];
   const m = { page: rel };
@@ -84,7 +86,7 @@ export function auditPage(dist, file) {
     } else js += s[2];
   }
   m.jsKB = kb(jsBytes + (js.trim() ? br(Buffer.from(js)) : 0));
-  if (/<iframe\b/i.test(html.replace(/<template[\s\S]*?<\/template>/g, ''))) errors.push('<iframe> in the initial HTML: use LazyEmbed or VideoEmbed so it loads on demand');
+  if (/<iframe\b/i.test(html)) errors.push('<iframe> in the initial HTML: use LazyEmbed or VideoEmbed so it loads on demand');
 
   // Preloads
   const preloads = [...html.matchAll(/<link\b[^>]*rel=["']?preload[^>]*>/g)].map((x) => x[0]);

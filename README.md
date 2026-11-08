@@ -71,6 +71,28 @@ leave it empty when GA4 is configured inside GTM, or page views are counted twic
   consent removes the `_ga` cookies. Google signals and ad personalisation are off. The
   privacy policy describes analytics automatically whenever GTM or GA4 is enabled.
 
+## Ads and affiliate banners
+
+Reserved ad spaces are built into the templates and configured in `src/config/ads.ts`. A slot
+left empty renders nothing, so the site looks exactly the same until you use it.
+
+| Placement | Where | Size |
+| --- | --- | --- |
+| `home-mid` | Homepage, after "Choose Your Ocean Experience" | 970×250 desktop, 728×90 tablet, 300×250 phone |
+| `article-rail` | Blog posts, sticky right-hand rail (1280px+ screens) | 300×600 |
+| `article-inline` | Blog posts, after the article text | 300×250 |
+| `destination-top` / `-mid` / `-end` | Destination pages: after the overview, after luxury, before the FAQ | 970×250 / 728×90 / 300×250 |
+
+- **Affiliate banner:** upload the image to `media/ads/` and set e.g.
+  `'article-rail': { type: 'banner', image: 'ads/villa-deals', href: 'https://…', partner: 'Booking.com', alt: '…' }`.
+  The image is optimised like every photo and linked with `rel="sponsored"`.
+- **Ad network / partner code** (AdSense etc.): `{ type: 'html', html: '<ins …></ins><script …></script>' }`.
+  It is inserted only when the slot scrolls near the screen, after the page has loaded.
+- Every slot reserves its size in advance (no layout shift) and is labelled "Advertisement".
+- Preview all slots as labelled frames: `PUBLIC_ADS_PREVIEW=1 npm run build`.
+- Ad networks that use cookies or personalised ads need a consent tool (for Google AdSense in the
+  EU/UK, a Google-certified CMP), and the privacy policy must name them, before going live.
+
 ## IndexNow (Bing and other search engines)
 
 Bing, Yandex, Seznam and Naver are told about new, changed and removed pages within minutes of

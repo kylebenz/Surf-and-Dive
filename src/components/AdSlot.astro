@@ -1,0 +1,89 @@
+---
+/**
+ * A reserved advertising space. Renders nothing unless the placement has a creative in
+ * src/config/ads.ts (or ad preview mode is on), so empty slots never affect the layout.
+ *
+ * - The box has its size reserved before anything loads, so ads never push content around.
+ * - Labelled "Advertisement"; affiliate banners link with rel="sponsored".
+ * - Ad network / partner code sits in a <template> and is inserted only when the slot comes
+ *   near the screen: no third-party script runs during page load.
+ */
+import Picture from './Picture.astro';
+import { ADS, adShown, type Placement } from '../config/ads';
+import { getImage } from '../utils/images';
+
+interface Props {
+  placement: Placement;
+  size: 'billboard' | 'rectangle' | 'halfpage';
+  class?: string;
+}
+const { placement, size, class: cls = '' } = Astro.props;
+const creative = ADS.slots[placement];
+const banner = creative?.type === 'banner' ? getImage(creative.image) : null;
+if (creative?.type === 'banner' && !banner) console.warn(`[ads] ${placement}: banner image "${creative.image}" not found in media/.`);
+const label = { billboard: '970×250 · 728×90 · 300×250', rectangle: '300×250', halfpage: '300×600' }[size];
+const sizes = { billboard: '(min-width: 1024px) 970px, (min-width: 768px) 728px, 300px', rectangle: '300px', halfpage: '300px' }[size];
+---
+{adShown(placement) && (
+  <aside class={`ad ad-${size} ${cls}`} aria-label="Advertisement" data-ad={placement}>
+    <span class="ad-label">Advertisement</span>
+    {banner && creative?.type === 'banner' ? (
+      <a class="ad-banner" href={creative.href} rel="sponsored noopener" target="_blank" data-affiliate={creative.partner}>
+        <Picture image={banner} sizes={sizes} alt={creative.alt} />
+      </a>
+    ) : creative?.type === 'html' ? (
+      <div class="ad-box reserve" data-ad-lazy>
+        <template set:html={creative.html} />
+      </div>
+    ) : (
+      <div class="ad-box reserve preview"><span>{placement}<br />{label}</span></div>
+    )}
+  </aside>
+)}
+{creative?.type === 'html' && (
+  <script is:inline>
+    (function () {
+      if (window.__sdAds) return;
+      window.__sdAds = true;
+      var load = function (box) {
+        var tpl = box.querySelector('template');
+        if (!tpl) return;
+        var frag = tpl.content.cloneNode(true);
+        // Scripts cloned from a template do not run; re-create them so the ad code initialises.
+        frag.querySelectorAll('script').forEach(function (old) {
+          var s = document.createElement('script');
+          for (var i = 0; i < old.attributes.length; i++) s.setAttribute(old.attributes[i].name, old.attributes[i].value);
+          s.text = old.text;
+          old.replaceWith(s);
+        });
+        tpl.remove();
+        box.append(frag);
+      };
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); load(e.target); } });
+      }, { rootMargin: '400px 0px' });
+      var start = function () { document.querySelectorAll('[data-ad-lazy]').forEach(function (b) { io.observe(b); }); };
+      // Never compete with the page's own loading: start after load.
+      if (document.readyState === 'complete') start(); else addEventListener('load', start, { once: true });
+    })();
+  </script>
+)}
+
+<style>
+  .ad { display: grid; justify-items: center; gap: 0.4rem; margin-inline: auto; width: 100%; contain: layout; }
+  .ad-label { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--slate); }
+  .ad-banner { display: block; width: 100%; }
+  .ad-banner :global(img) { width: 100%; height: auto; }
+  .ad-box { width: 100%; overflow: hidden; }
+  .ad-box.preview { display: grid; place-items: center; text-align: center; background: repeating-linear-gradient(-45deg, var(--sand), var(--sand) 10px, var(--sand-deep) 10px, var(--sand-deep) 20px); border: 1px dashed var(--line); color: var(--slate); font-size: 0.75rem; letter-spacing: 0.06em; }
+
+  /* Reserved sizes (standard IAB units). */
+  .ad-billboard { max-width: 336px; }
+  .ad-billboard .reserve { min-height: 250px; }
+  @media (min-width: 768px) { .ad-billboard { max-width: 728px; } .ad-billboard .reserve { min-height: 90px; } }
+  @media (min-width: 1024px) { .ad-billboard { max-width: 970px; } .ad-billboard .reserve { min-height: 250px; } }
+  .ad-rectangle { max-width: 300px; }
+  .ad-rectangle .reserve { min-height: 250px; }
+  .ad-halfpage { max-width: 300px; }
+  .ad-halfpage .reserve { min-height: 600px; }
+</style>
