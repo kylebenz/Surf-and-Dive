@@ -45,7 +45,7 @@ const {
   hideCrumbBar = false,
 } = Astro.props;
 
-const site = Astro.site ?? new URL('https://www.surfanddive.com');
+const site = Astro.site ?? new URL('https://surfanddive.com');
 const fullTitle = pageTitle(title);
 const canonical = new URL(canonicalPath, site).toString();
 const ogImageUrl = new URL(ogImage, site).toString();

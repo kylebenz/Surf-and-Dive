@@ -77,7 +77,7 @@ Bing, Yandex, Seznam and Naver are told about new, changed and removed pages wit
 each production deploy, instead of waiting to re-crawl (Google does not use IndexNow; it reads the
 sitemap). How it works:
 
-- The key file `public/518bec9702d805a3d53be5998658c92d.txt` proves ownership (keys are public by design).
+- The key file `public/6d0c85f42fdd4302affe6d1e93637a5f.txt` proves ownership (keys are public by design).
 - Every build writes `/indexnow-manifest.json`: a fingerprint of each indexable page (the same 98
   pages as the sitemap; redirects, noindex and test pages are left out).
 - The **IndexNow** GitHub workflow runs on every push to the production branch. It finds the live

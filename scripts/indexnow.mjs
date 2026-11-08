@@ -22,7 +22,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
-export const KEY = '518bec9702d805a3d53be5998658c92d';
+export const KEY = '6d0c85f42fdd4302affe6d1e93637a5f';
 export const MANIFEST = 'indexnow-manifest.json';
 const CANDIDATES = ['https://surfanddive.com', 'https://www.surfanddive.com'];
 const ENDPOINT = process.env.INDEXNOW_ENDPOINT || 'https://api.indexnow.org/indexnow';
