@@ -15,6 +15,8 @@ import { comparisons } from '../../data/comparisons';
 import { slotLabel, slotFile } from '../../data/destinations/_images';
 import { resolveImage, getImage, listMedia } from '../../utils/images';
 import Gallery from '../../components/Gallery.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { adShown } from '../../config/ads';
 import { IMAGE_SLOTS } from '../../data/destinations/_images';
 import { faqLd, absoluteUrl, organizationRef } from '../../utils/seo';
 import { SITE } from '../../config/site';
@@ -135,6 +137,8 @@ const touristDestination = {
     </div>
   </section>
 
+  {adShown('destination-top') && <div class="ad-band"><div class="container"><AdSlot placement="destination-top" size="billboard" /></div></div>}
+
   <!-- Surf -->
   <section id="surf" class="section bg-sand" aria-labelledby="surf-title">
     <div class={`container feature${shape('surf')}`}>
@@ -231,6 +235,8 @@ const touristDestination = {
       </div>
     </div>
   </section>
+
+  {adShown('destination-mid') && <div class="ad-band"><div class="container"><AdSlot placement="destination-mid" size="billboard" /></div></div>}
 
   <!-- Best time + seasonal conditions -->
   <section id="best-time" class="section" aria-labelledby="best-time-title">
@@ -335,6 +341,7 @@ const touristDestination = {
     </div>
   </section>
 
+  {adShown('destination-end') && <div class="ad-band"><div class="container"><AdSlot placement="destination-end" size="billboard" /></div></div>}
   <section class="section bg-sand" aria-label="Frequently asked questions">
     <div class="container narrowish"><FAQ faqs={d.faqs} title={`${d.name}: frequently asked questions`} /></div>
   </section>

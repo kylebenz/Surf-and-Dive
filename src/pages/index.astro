@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ActivityRow from '../components/ActivityRow.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { adShown } from '../config/ads';
 import DestinationGrid from '../components/DestinationGrid.astro';
 import SeasonalGrid from '../components/SeasonalGrid.astro';
 import ArticleCard from '../components/ArticleCard.astro';
@@ -78,6 +80,7 @@ const activities = [
       {activities.map((a, i) => <li class="reveal"><ActivityRow {...a} index={i + 1} /></li>)}
     </ul>
   </EditorialSection>
+  {adShown('home-mid') && <div class="ad-band"><div class="container"><AdSlot placement="home-mid" size="billboard" /></div></div>}
 
   <EditorialSection id="destinations" eyebrow="Featured destinations" title="The World's Most Compelling Ocean Destinations" intro="A curated collection of destinations where the ocean is the reason to travel, with the accommodation, food, wellness and local experiences to make the journey worth taking." split>
     <DestinationGrid destinations={featured} />
