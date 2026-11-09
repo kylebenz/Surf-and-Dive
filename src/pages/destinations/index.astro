@@ -202,13 +202,15 @@ const seasonTypes = [
       const params = new URLSearchParams();
       for (const [k, v] of fd.entries()) if (v) params.set(k, String(v));
       const qs = params.toString();
-      history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+      // Filters live after "#": search engines ignore it, so filtered views never become extra URLs.
+      history.replaceState(null, '', location.pathname + (qs ? `#${qs}` : ''));
     }
   }
 
   if (form) {
-    // Restore state from the URL (links from the homepage finder and seasonal pages).
-    const params = new URLSearchParams(location.search);
+    // Restore state from the URL: "#month=may" (seasonal pages) or "?month=may" (the homepage
+    // finder form without JavaScript, and older links). A "?" address is tidied to the "#" form.
+    const params = new URLSearchParams(location.hash.slice(1) || location.search);
     params.forEach((value, key) => {
       const field = form.elements.namedItem(key);
       if (field instanceof RadioNodeList) field.value = value;
@@ -218,6 +220,6 @@ const seasonTypes = [
     form.addEventListener('submit', (e) => { e.preventDefault(); apply(); });
     form.addEventListener('reset', () => setTimeout(() => apply(), 0));
     // The server-rendered list is already the unfiltered view; only re-filter for a filtered URL.
-    if ([...params.keys()].length) apply(false);
+    if ([...params.keys()].length) apply(location.search !== '');
   }
 </script>
