@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { processImages, paths } from '../../scripts/media/images.mjs';
 import { runBudget } from '../../scripts/perf-budget.mjs';
 import { writeManifest } from '../../scripts/indexnow.mjs';
+import { addImagesToSitemap } from '../../scripts/image-sitemap.mjs';
 
 export default function media() {
   let root = process.cwd();
@@ -47,6 +48,8 @@ export default function media() {
         server.watcher.on('unlink', onChange);
       },
       'astro:build:done': async ({ dir, logger }) => {
+        const images = addImagesToSitemap(fileURLToPath(dir));
+        logger.info(`Sitemap: listed ${images} photos for Google Images`);
         const indexed = writeManifest(fileURLToPath(dir));
         logger.info(`IndexNow: fingerprinted ${indexed} indexable pages`);
         const ok = runBudget({ dist: fileURLToPath(dir), log: (m) => logger.info(m), warn: (m) => logger.warn(m) });

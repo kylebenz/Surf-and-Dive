@@ -56,7 +56,7 @@ const full = images.map((img) => ({
               <Picture
                 image={img}
                 sizes={layout === 'justified' ? '(min-width: 1000px) 45vw, (min-width: 640px) 60vw, 100vw' : '(min-width: 1000px) 25vw, (min-width: 640px) 33vw, 50vw'}
-                alt=""
+                alt={img.alt}
               />
             </button>
           </li>

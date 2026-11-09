@@ -58,6 +58,8 @@ const galleryPhotos = [
 ---
 <BaseLayout
   title={`Surf and Dive | ${SITE.tagline}`}
+  ogImage={heroImage?.src}
+  ogImageAlt={heroImage?.alt}
   description="Exceptional surf, diving and freediving destinations paired with beautiful places to stay, thoughtful experiences and the best seasons to travel from Europe."
   jsonLd={[itemListLd(featured.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
 >
