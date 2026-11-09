@@ -11,10 +11,13 @@ interface Props {
   size?: 'full' | 'large' | 'medium';
   slotLabel?: string;
   align?: 'bottom' | 'center';
+  /** "centered": text centred over the photo with a thin rule under the title and a wave-shaped bottom edge. */
+  layout?: 'left' | 'centered';
 }
-const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = 'large', slotLabel, align = 'bottom' } = Astro.props;
+const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = 'large', slotLabel, align = 'bottom', layout = 'left' } = Astro.props;
+const centered = layout === 'centered';
 ---
-<section class={`hero dark ${size} ${align}`} aria-labelledby="hero-title">
+<section class={`hero dark ${size} ${centered ? 'center centered' : align}`} aria-labelledby="hero-title">
   <div class="media" aria-hidden={image ? undefined : 'true'}>
     {image ? (
       <>
@@ -38,9 +41,15 @@ const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = '
   <div class="container content">
     {eyebrow && <p class="eyebrow hero-in" style="--d:0">{eyebrow}</p>}
     <h1 id="hero-title" class="hero-in" style="--d:1">{title}</h1>
+    {centered && <span class="rule hero-in" style="--d:2" aria-hidden="true"></span>}
     {subtitle && <p class="sub hero-in" style="--d:2">{subtitle}</p>}
     <div class="actions hero-in" style="--d:3"><slot /></div>
   </div>
+  {centered && (
+    <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M0 52C180 88 360 92 560 62S900 6 1100 22s260 52 340 40V90H0Z" />
+    </svg>
+  )}
   {image?.credit && <p class="photo-credit">{image.credit}</p>}
   {!image && slotLabel && (
     <p class="slot-note container"><span>Image slot · {slotLabel} · Photography to be added</span></p>
@@ -100,6 +109,30 @@ const { eyebrow, title, subtitle, image = null, seed = 'surf-and-dive', size = '
     }
   }
   .lines :global(.swell) { opacity: 1; }
+
+  /* Centred layout (homepage): text centred over the photo, a thin rule under the title, and a
+     wave-shaped bottom edge. The overlay is darkest behind the centred text (measured for WCAG AA). */
+  .centered { text-align: center; }
+  .centered .content { display: grid; justify-items: center; padding-block: clamp(5rem, 4rem + 5vw, 8rem) clamp(6rem, 5rem + 5vw, 9.5rem); }
+  .centered h1 { margin-inline: auto; max-width: 20ch; }
+  .centered .sub { margin-inline: auto; max-width: 52ch; }
+  .centered .actions { justify-content: center; }
+  .rule { display: block; width: min(30rem, 72%); height: 1px; margin-top: 1.75rem; background: rgba(243, 247, 245, 0.7); }
+  .centered .sub { margin-top: 1.5rem; }
+  .centered .scrim.photo {
+    background:
+      radial-gradient(ellipse 75% 65% at 50% 52%, rgba(14, 38, 46, 0.78) 0%, rgba(14, 38, 46, 0.64) 55%, rgba(14, 38, 46, 0.45) 100%),
+      linear-gradient(180deg, rgba(14, 38, 46, 0.25) 0%, rgba(14, 38, 46, 0) 30%);
+  }
+  @media (min-width: 1024px) {
+    .centered .scrim.photo {
+      background:
+        radial-gradient(ellipse 60% 70% at 50% 52%, rgba(14, 38, 46, 0.8) 0%, rgba(14, 38, 46, 0.62) 55%, rgba(14, 38, 46, 0.32) 100%),
+        linear-gradient(180deg, rgba(14, 38, 46, 0.25) 0%, rgba(14, 38, 46, 0) 30%);
+    }
+  }
+  .centered .lines { display: none; }
+  .wave { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(28px, 2rem + 3vw, 84px); fill: var(--shell); z-index: 1; }
   .content { padding-block: clamp(5rem, 4rem + 6vw, 9rem) clamp(3rem, 2.5rem + 3vw, 5.5rem); }
   h1 { max-width: 17ch; color: var(--on-dark); }
   .medium h1 { font-size: var(--step-4); max-width: 22ch; }
