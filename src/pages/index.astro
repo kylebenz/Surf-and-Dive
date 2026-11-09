@@ -2,7 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import ActivityRow from '../components/ActivityRow.astro';
+import Picture from '../components/Picture.astro';
+import SwellArt from '../components/SwellArt.astro';
+import Gallery from '../components/Gallery.astro';
 import AdSlot from '../components/AdSlot.astro';
 import { adShown } from '../config/ads';
 import DestinationGrid from '../components/DestinationGrid.astro';
@@ -15,7 +17,7 @@ import { SITE } from '../config/site';
 import { destinations, featuredSlugs, getDestination } from '../data/destinations';
 import { comparisons } from '../data/comparisons';
 import { markets } from '../data/countries';
-import { resolveImage } from '../utils/images';
+import { resolveImage, getImage } from '../utils/images';
 import { itemListLd } from '../utils/seo';
 
 const heroImage = resolveImage({ dir: 'home', base: 'hero' });
@@ -31,14 +33,28 @@ const featuredGuideIds = [
 ];
 const featuredGuides = featuredGuideIds.map((id) => guides.find((g) => g.id === id)!);
 
+// "Choose Your Ocean Experience" photo grid. Each tile uses one of our own photos; European
+// Ocean Escapes keeps the brand artwork until there is a photo from a European destination.
 const activities = [
-  { title: 'Surf Holidays', text: 'Reef passes, Atlantic points and warm beach breaks, matched to your level and season.', href: '/surf/', seed: 'act-surf' },
-  { title: 'Diving Holidays', text: 'Walls, channels, wrecks and marine life, with the logistics that make repeated dives a pleasure.', href: '/dive/', seed: 'act-dive' },
-  { title: 'Freediving Escapes', text: 'Clear, calm water and qualified local support for responsible breath-hold exploration.', href: '/freediving/', seed: 'act-free' },
-  { title: 'Luxury Island Holidays', text: 'Private islands, overwater villas and lagoon-side spas where the ocean stays centre stage.', href: '/luxury-ocean-holidays/', seed: 'act-lux' },
-  { title: 'Winter Sun', text: 'Warm water and settled weather when Europe is at its coldest, short-haul or long.', href: '/blog/best-winter-sun-surf-holidays-europe/', seed: 'act-winter' },
-  { title: 'European Ocean Escapes', text: 'Portugal, Madeira, the Azores and the Canaries: serious ocean time without a long-haul flight.', href: '/europe/', seed: 'act-europe' },
-];
+  { title: 'Surf Holidays', href: '/surf/', seed: 'act-surf', image: 'destinations/bali-nusa-penida/more/02-surfing-the-barrel' },
+  { title: 'Diving Holidays', href: '/dive/', seed: 'act-dive', image: 'destinations/maldives/dive' },
+  { title: 'Freediving Escapes', href: '/freediving/', seed: 'act-free', image: 'destinations/bali-nusa-penida/freedive' },
+  { title: 'Luxury Island Holidays', href: '/luxury-ocean-holidays/', seed: 'act-lux', image: 'destinations/maldives/luxury' },
+  { title: 'Winter Sun', href: '/blog/best-winter-sun-surf-holidays-europe/', seed: 'act-winter', image: 'destinations/maldives/more/03-floating-in-the-lagoon' },
+  { title: 'European Ocean Escapes', href: '/europe/', seed: 'act-europe', image: '' },
+].map((a) => ({ ...a, photo: a.image ? getImage(a.image) : null }));
+
+const introPhoto = getImage('destinations/bali-nusa-penida/more/01-diamond-beach-from-the-cliff');
+const galleryPhotos = [
+  'destinations/maldives/landscape',
+  'destinations/bali-nusa-penida/signature',
+  'destinations/maldives/experience',
+  'destinations/bali-nusa-penida/landscape',
+  'destinations/maldives/culture',
+  'destinations/bali-nusa-penida/more/06-nusa-lembongan-coast',
+  'destinations/maldives/signature',
+  'destinations/bali-nusa-penida/experience',
+].filter((k) => getImage(k));
 ---
 <BaseLayout
   title={`Surf and Dive | ${SITE.tagline}`}
@@ -46,7 +62,8 @@ const activities = [
   jsonLd={[itemListLd(featured.map((d) => ({ name: d.name, href: `/destinations/${d.slug}/` })), Astro.site!)]}
 >
   <Hero
-    size="full"
+    size="large"
+    layout="centered"
     eyebrow="Surf · Dive · Freedive"
     title="Luxury Ocean Holidays, Curated Around the Water"
     subtitle="Discover exceptional surf, diving and freediving destinations paired with beautiful places to stay, thoughtful experiences and the best seasons to travel from Europe."
@@ -59,25 +76,44 @@ const activities = [
   </Hero>
 
   <section class="section intro" aria-labelledby="intro-title">
-    <div class="container intro-grid">
-      <div class="reveal">
-        <span class="eyebrow">The Surf and Dive approach</span>
-        <h2 id="intro-title">Where Extraordinary Water Meets Exceptional Travel</h2>
+    <div class="container">
+      <div class="intro-split">
+        {introPhoto && (
+          <div class="intro-media reveal" style={`aspect-ratio:${introPhoto.width} / ${introPhoto.height}`}>
+            <Picture image={introPhoto} sizes="(min-width: 960px) 40vw, 100vw" />
+          </div>
+        )}
+        <div class="intro-copy reveal">
+          <span class="eyebrow">The Surf and Dive approach</span>
+          <h2 id="intro-title">Where Extraordinary Water Meets Exceptional Travel</h2>
+          <p class="lede">From powerful reef breaks and warm tropical lagoons to volcanic Atlantic coastlines and remote island reefs, explore destinations selected for the quality of the ocean experience, and the quality of the holiday around it.</p>
+          <a class="btn" href="/about/">About Surf and Dive <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
       </div>
-      <div class="intro-copy reveal">
-        <p class="lede">From powerful reef breaks and warm tropical lagoons to volcanic Atlantic coastlines and remote island reefs, explore destinations selected for the quality of the ocean experience, and the quality of the holiday around it.</p>
-        <ol role="list" class="principles">
-          <li><span class="pn">01</span><div><h3>The water leads</h3><p>We start with wave quality, reef structure, marine life and visibility, then look at where to stay.</p></div></li>
-          <li><span class="pn">02</span><div><h3>Season before destination</h3><p>The same coastline can be perfect in one month and wrong in another. Timing comes first.</p></div></li>
-          <li><span class="pn">03</span><div><h3>Honest, careful guidance</h3><p>No fake reviews, no invented prices, no guaranteed waves or wildlife. Just useful judgement.</p></div></li>
-        </ol>
-      </div>
+      <ol role="list" class="principles reveal">
+        <li><span class="pn">01</span><h3>The water leads</h3><p>We start with wave quality, reef structure, marine life and visibility, then look at where to stay.</p></li>
+        <li><span class="pn">02</span><h3>Season before destination</h3><p>The same coastline can be perfect in one month and wrong in another. Timing comes first.</p></li>
+        <li><span class="pn">03</span><h3>Honest, careful guidance</h3><p>No fake reviews, no invented prices, no guaranteed waves or wildlife. Just useful judgement.</p></li>
+      </ol>
     </div>
   </section>
 
   <EditorialSection id="experiences" eyebrow="Choose your ocean experience" title="Choose Your Ocean Experience" intro="Six ways into the same idea: a holiday built around exceptional water." tone="sand" split>
-    <ul role="list" class="alternating">
-      {activities.map((a, i) => <li class="reveal"><ActivityRow {...a} index={i + 1} /></li>)}
+    <ul role="list" class="xp-grid">
+      {activities.map((a, i) => (
+        <li class="reveal">
+          <a class="xp" href={a.href}>
+            <div class="xp-media">
+              {a.photo ? <Picture image={a.photo} sizes="(min-width: 900px) 30vw, (min-width: 560px) 50vw, 100vw" alt="" /> : <div class="xp-art" aria-hidden="true"><SwellArt seed={a.seed} lines={12} /></div>}
+            </div>
+            <div class="xp-cap">
+              <span class="xp-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{a.title}</h3>
+              <span class="xp-go" aria-hidden="true">Explore →</span>
+            </div>
+          </a>
+        </li>
+      ))}
     </ul>
   </EditorialSection>
   {adShown('home-mid') && <div class="ad-band"><div class="container"><AdSlot placement="home-mid" size="billboard" /></div></div>}
@@ -136,17 +172,32 @@ const activities = [
     </ul>
   </EditorialSection>
 
+  {galleryPhotos.length > 0 && (
+    <section class="section gallery-sec" aria-labelledby="gallery-title">
+      <div class="container">
+        <h2 id="gallery-title" class="g-title">Ocean moments gallery</h2>
+        <Gallery title="Ocean moments gallery" items={galleryPhotos} />
+      </div>
+    </section>
+  )}
+
   <CTA seed="home-cta" />
 </BaseLayout>
 
 <style>
-  .intro-grid { display: grid; gap: 2.5rem; }
-  @media (min-width: 960px) { .intro-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 5rem; } }
-  .intro h2 { margin-top: 0.9rem; max-width: 14ch; }
-  .principles { margin-top: 2.5rem; display: grid; gap: 0; border-top: 1px solid var(--line); }
-  .principles li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding-block: 1.4rem; border-bottom: 1px solid var(--line); }
-  .pn { font-family: var(--font-display); font-size: 1.3rem; color: var(--teal-ink); line-height: 1.3; }
-  .principles p { color: var(--slate); margin-top: 0.3rem; font-size: 0.95rem; }
+  /* Intro: photo left, text right, three principles in a row below (reference layout). */
+  .intro-split { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 960px) { .intro-split { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(3rem, 2rem + 4vw, 6rem); } }
+  .intro-media { overflow: hidden; background: var(--sand-deep); }
+  .intro-media :global(img) { width: 100%; height: 100%; }
+  .intro-copy { display: grid; gap: 1.25rem; justify-items: start; }
+  .intro h2 { max-width: 16ch; }
+  .principles { margin-top: clamp(3rem, 2rem + 3vw, 5rem); display: grid; gap: 2rem; }
+  @media (min-width: 760px) { .principles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2rem, 1rem + 3vw, 4rem); } }
+  .principles li { display: grid; gap: 0.45rem; align-content: start; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  .pn { font-family: var(--font-display); font-size: 1.1rem; color: var(--teal-ink); line-height: 1; }
+  .principles h3 { font-family: var(--font-body); font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+  .principles p { color: var(--slate); font-size: 0.95rem; line-height: 1.6; }
   .after { margin-top: 2.5rem; }
   .discover-grid { display: grid; gap: 3rem; }
   @media (min-width: 960px) { .discover-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: center; gap: 5rem; } }
@@ -170,9 +221,27 @@ const activities = [
   .markets { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); border-top: 1px solid var(--line); }
   .markets a { display: flex; justify-content: space-between; padding: 1rem 0.25rem; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; font-family: var(--font-display); font-size: var(--step-1); margin-right: 1.5rem; }
   .markets a:hover { color: var(--teal-ink); }
-  /* Alternating layout: visual left / text right, then swapped on every other row. */
-  .alternating { display: grid; gap: clamp(3rem, 2rem + 4vw, 6rem); }
-  @media (min-width: 800px) {
-    .alternating > li:nth-child(even) :global(.visual) { order: 2; }
-  }
+
+  /* "Choose Your Ocean Experience": photo grid, small title inside each image. */
+  .xp-grid { display: grid; gap: clamp(0.5rem, 0.3rem + 0.8vw, 1rem); grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 560px) { .xp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 900px) { .xp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .xp { position: relative; display: block; aspect-ratio: 1; overflow: hidden; color: var(--on-dark); text-decoration: none; background: var(--deep-ocean); isolation: isolate; }
+  .xp-media { position: absolute; inset: 0; z-index: -1; transition: transform 1.2s var(--ease); }
+  .xp-media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .xp-art { position: absolute; inset: 0; background: linear-gradient(170deg, #0d3a48, var(--deep-ocean) 60%, #071f28); }
+  .xp-art :global(.swell) { opacity: 0.5; }
+  /* Gradient keeps the white title readable on any photo. */
+  .xp::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8, 31, 38, 0) 40%, rgba(8, 31, 38, 0.55) 70%, rgba(8, 31, 38, 0.85) 100%); }
+  .xp-cap { position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 0.2rem; padding: clamp(1rem, 0.8rem + 0.8vw, 1.5rem); }
+  .xp-num { font-family: var(--font-display); font-size: 0.95rem; color: var(--seafoam); }
+  .xp h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.75rem); line-height: 1.1; color: var(--on-dark); text-shadow: 0 1px 12px rgba(4, 22, 28, 0.35); }
+  .xp-go { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--seafoam); opacity: 0; transform: translateY(4px); transition: opacity 0.3s var(--ease), transform 0.3s var(--ease); }
+  .xp:hover .xp-media, .xp:focus-visible .xp-media { transform: scale(1.04); }
+  .xp:hover .xp-go, .xp:focus-visible .xp-go { opacity: 1; transform: none; }
+  .xp:focus-visible { outline: 2px solid var(--ocean-teal); outline-offset: 3px; }
+  @media (hover: none) { .xp-go { opacity: 1; transform: none; } }
+
+  /* Gallery (reference: small title with a hairline, then a square grid). */
+  .g-title { font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; color: var(--navy); padding-bottom: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
 </style>

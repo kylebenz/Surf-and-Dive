@@ -29,6 +29,21 @@ const ENDPOINT = process.env.INDEXNOW_ENDPOINT || 'https://api.indexnow.org/inde
 
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
 
+/**
+ * What search engines care about on a page: its text, links, images, title, description and
+ * structured data. Styling and script changes (inlined CSS, bundle hashes, layout tweaks) are left
+ * out, so a design change does not resubmit every page as "changed".
+ */
+export function contentOf(html) {
+  return html
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/g, '')
+    .replace(/<script(?![^>]*application\/ld\+json)[^>]*>[\s\S]*?<\/script>/g, '')
+    .replace(/<template[\s\S]*?<\/template>/g, '')
+    .replace(/\s(class|style|data-astro-cid-[\w-]+|data-[\w-]+)(="[^"]*")?/g, '')
+    .replace(/\/_astro\/[^"'\s)]+/g, '/_astro/')
+    .replace(/\s+/g, ' ');
+}
+
 /** Fingerprints every indexable page in dist (skips redirects, noindex pages and verification files). */
 export function writeManifest(dist) {
   const pages = {};
@@ -36,7 +51,7 @@ export function writeManifest(dist) {
     const html = fs.readFileSync(f, 'utf8');
     if (/http-equiv="refresh"/.test(html) || /<meta name="robots" content="noindex/.test(html)) continue;
     const rel = '/' + path.relative(dist, f).split(path.sep).join('/').replace(/index\.html$/, '');
-    pages[rel] = crypto.createHash('sha1').update(html).digest('hex').slice(0, 16);
+    pages[rel] = crypto.createHash('sha1').update(contentOf(html)).digest('hex').slice(0, 16);
   }
   const sorted = Object.fromEntries(Object.entries(pages).sort(([a], [b]) => a.localeCompare(b)));
   const env = process.env;
