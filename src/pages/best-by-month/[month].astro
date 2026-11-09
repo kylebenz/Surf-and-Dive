@@ -31,7 +31,7 @@ const actHref: Record<string, string> = { surf: '/surf/', dive: '/dive/', freedi
 >
   <Hero size="medium" eyebrow={`${s.name} · ${s.campaign}`} title={s.headline} subtitle={s.angle} seed={`month-${s.month}`}>
     <a class="btn" href="#picks">See the destinations <span class="arrow" aria-hidden="true">→</span></a>
-    <a class="btn btn-ghost" href={`/destinations/?month=${s.month}`}>Filter all destinations</a>
+    <a class="btn btn-ghost" href={`/destinations/#month=${s.month}`}>Filter all destinations</a>
   </Hero>
 
   <section class="section" aria-labelledby="ov-title">
